@@ -37,7 +37,7 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={'btn'}
+      className={'btn btn-secondary'}
       {...props}
     >
       {label}
