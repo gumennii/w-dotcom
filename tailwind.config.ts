@@ -57,6 +57,9 @@ export default {
           ".btn-primary": {
             "text-transform": "capitalize",
           },
+          ".btn[disabled]": {
+            "color": "#ffffff",
+          },
           ".btn-primary[disabled]": {
             "background-color": "#6B6B6B",
           },
@@ -76,6 +79,7 @@ export default {
           ".btn-outline[disabled]": {
             "color": "#6B6B6B",
             "border": "1px solid #6B6B6B",
+            "background-color": "transparent",
           },
           ".btn-accent[disabled]": {
             "background-color": "#24a840b3",
