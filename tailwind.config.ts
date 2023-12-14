@@ -32,10 +32,10 @@ export default {
           "accent-content":
             "#ffffff" /* Foreground content color to use on accent color */,
 
-          // neutral: "#3d4451" /* Neutral color */,
-          // "neutral-focus": "#2a2e37" /* Neutral color - focused */,
-          // "neutral-content":
-          //   "#ffffff" /* Foreground content color to use on neutral color */,
+          neutral: "#6B6B6B" /* Neutral color */,
+          "neutral-focus": "#6B6B6B" /* Neutral color - focused */,
+          "neutral-content":
+            "#ffffff" /* Foreground content color to use on neutral color */,
 
           // "base-100":
           //   "#ffffff" /* Base color of page, used for blank backgrounds */,
@@ -50,18 +50,21 @@ export default {
           error: "#d61f1f" /* Error */,
 
           "--rounded-btn": ".5rem",
+
           ".btn": {
             "text-transform": "uppercase",
           },
           ".btn-primary": {
-            "background-color": "#081D3C",
             "text-transform": "capitalize",
           },
-          ".btn-primary:hover": {
-            "background-color": "#081121",
+          ".btn-primary[disabled]": {
+            "background-color": "#6B6B6B",
           },
           ".btn-secondary": {
             "border-radius": "2rem",
+          },
+          ".btn-secondary[disabled]": {
+            "background-color": "#ec612ab3",
           },
           ".btn-outline": {
             "border-radius": "2.5rem",
@@ -70,7 +73,21 @@ export default {
             "background-color": "#081d3c33",
             "color": "#081121",
           },
-
+          ".btn-outline[disabled]": {
+            "color": "#6B6B6B",
+            "border": "1px solid #6B6B6B",
+          },
+          ".btn-accent[disabled]": {
+            "background-color": "#24a840b3",
+          },
+          ".btn-icon": {
+            "border-radius": "100%",
+            "padding": ".5rem",
+            "height": "auto"
+          },
+          ".btn-outline.btn-icon svg path": {
+            "stroke": "#081121",
+          }
           // We can add another font to the component by simply setting the property
           // fontFamily: "Inter",
         },

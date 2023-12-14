@@ -25,10 +25,33 @@ export const Primary: Story = {
   },
 };
 
+export const Solid: Story = {
+  args: {
+    variant: "solid",
+    label: "Button",
+  },
+};
+
 export const Large: Story = {
   args: {
     size: "large",
     label: "Button",
+  },
+};
+
+
+export const Outlined: Story = {
+  args: {
+    variant: "outlined",
+    label: "Button",
+  },
+};
+
+export const Icon: Story = {
+  args: {
+    variant: "accent",
+    label: "",
+    icon: true,
   },
 };
 
@@ -39,14 +62,24 @@ export const Disabled: Story = {
   },
 };
 
-export const Outlined: Story = {
+
+export const DisabledSolid: Story = {
   args: {
-    variant: "outlined",
-    label: "Delete now",
+    variant: "solid",
+    label: "Button",
+    disabled: true,
   },
 };
 
-const variants = ["default", "solid", "outlined", "icon"];
+export const DisabledOutlined: Story = {
+  args: {
+    variant: "outlined",
+    label: "Button",
+    disabled: true,
+  },
+};
+
+const variants = ["default", "solid", "outlined", "accent"];
 const sizes = ["default", "large"];
 
 export const Examples: Story = {
