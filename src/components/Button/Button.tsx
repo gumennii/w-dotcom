@@ -4,7 +4,7 @@ interface ButtonProps {
   /**
    * Button variant
    */
-  variant?: "solid" | "outlined";
+  variant?: "solid" | "outlined" | "default" | "icon";
   /**
    * How large should the button be?
    */
@@ -29,15 +29,17 @@ const sizeMap = {
 };
 
 const variantMap = {
-  solid: "",
-  outlined: "btn-outline btn-neutral",
+  default: "btn-primary",
+  solid: "btn-secondary",
+  outlined: "btn-outline",
+  icon: "btn-accent rounded-full",
 };
 
 /**
  * Primary UI component for user interaction
  */
 export const Button = ({
-  variant = "solid",
+  variant = "default",
   size = "regular",
   label,
   ...props
@@ -45,7 +47,7 @@ export const Button = ({
   return (
     <button
       type="button"
-      className={`btn uppercase ${variantMap[variant]} ${sizeMap[size]}`}
+      className={`btn ${variantMap[variant]} ${sizeMap[size]}`}
       {...props}
     >
       {label}
