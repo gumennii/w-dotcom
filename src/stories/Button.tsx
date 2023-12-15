@@ -1,5 +1,5 @@
-import React from 'react';
-import './button.css';
+import React from "react";
+import "./button.css";
 
 interface ButtonProps {
   /**
@@ -13,7 +13,7 @@ interface ButtonProps {
   /**
    * How large should the button be?
    */
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   /**
    * Button contents
    */
@@ -29,17 +29,13 @@ interface ButtonProps {
  */
 export const Button = ({
   primary = false,
-  size = 'medium',
+  size = "medium",
   backgroundColor,
   label,
   ...props
 }: ButtonProps) => {
   return (
-    <button
-      type="button"
-      className={'btn btn-secondary'}
-      {...props}
-    >
+    <button type="button" className={"btn btn-secondary"} {...props}>
       {label}
     </button>
   );
