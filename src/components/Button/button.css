@@ -1,0 +1,42 @@
+.btn {
+  text-transform: uppercase;
+}
+.btn-primary {
+  text-transform: capitalize;
+  background-color: #081d3c;
+}
+.btn[disabled] {
+  color: #ffffff;
+}
+.btn-primary[disabled] {
+  background-color: #6b6b6b;
+}
+.btn-secondary {
+  border-radius: 2rem;
+}
+.btn-secondary[disabled] {
+  background-color: #ec612ab3;
+}
+.btn-outline {
+  border-radius: 2.5rem;
+}
+.btn-outline:hover {
+  background-color: #081d3c33;
+  color: #081121;
+}
+.btn-outline[disabled] {
+  color: #6b6b6b;
+  border: 1px solid #6b6b6b;
+  background-color: transparent;
+}
+.btn-accent[disabled] {
+  background-color: #24a840b3;
+}
+.btn-icon {
+  border-radius: 100%;
+  padding: 0.5rem;
+  height: auto;
+}
+.btn-outline.btn-icon svg path {
+  stroke: #081121;
+}
