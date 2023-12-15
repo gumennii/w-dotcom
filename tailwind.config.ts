@@ -23,6 +23,7 @@ export default {
           ...colors,
           ...button,
 
+          "--rounded-btn": ".5rem",
           // We can add another font to the component by simply setting the property
           // fontFamily: "Inter",
         },
