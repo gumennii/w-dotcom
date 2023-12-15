@@ -37,7 +37,7 @@ export const button = {
   },
   ".btn-icon": {
     "border-radius": theme.borderRadius.full,
-    padding: theme.spacing["0.5"],
+    padding: theme.spacing["2"],
     height: "auto",
   },
   ".btn-outline.btn-icon svg path": {
