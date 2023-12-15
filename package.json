@@ -7,10 +7,12 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
+    "lint:es": "eslint ./src",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "pretty": "prettier ./src --write"
+    "pretty": "prettier ./src --write",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.7.1",
@@ -40,6 +42,7 @@
     "daisyui": "^4.4.19",
     "eslint": "^8.54.0",
     "eslint-plugin-storybook": "^0.6.15",
+    "husky": "^8.0.3",
     "postcss": "^8.4.31",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",
