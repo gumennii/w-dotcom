@@ -33,7 +33,7 @@ export default {
             "#ffffff" /* Foreground content color to use on accent color */,
 
           neutral: "#101010" /* Neutral color */,
-          "neutral-focus": "#61636B" /* Neutral color - focused */,
+          "neutral-focus": "#6B6B6B" /* Neutral color - focused */,
           "neutral-content":
             "#ffffff" /* Foreground content color to use on neutral color */,
 
@@ -51,47 +51,6 @@ export default {
 
           "--rounded-btn": ".5rem",
 
-          ".btn": {
-            "text-transform": "uppercase",
-          },
-          ".btn-primary": {
-            "text-transform": "capitalize",
-          },
-          ".btn[disabled]": {
-            "color": "#ffffff",
-          },
-          ".btn-primary[disabled]": {
-            "background-color": "#6B6B6B",
-          },
-          ".btn-secondary": {
-            "border-radius": "2rem",
-          },
-          ".btn-secondary[disabled]": {
-            "background-color": "#ec612ab3",
-          },
-          ".btn-outline": {
-            "border-radius": "2.5rem",
-          },
-          ".btn-outline:hover": {
-            "background-color": "#081d3c33",
-            "color": "#081121",
-          },
-          ".btn-outline[disabled]": {
-            "color": "#6B6B6B",
-            "border": "1px solid #6B6B6B",
-            "background-color": "transparent",
-          },
-          ".btn-accent[disabled]": {
-            "background-color": "#24a840b3",
-          },
-          ".btn-icon": {
-            "border-radius": "100%",
-            "padding": ".5rem",
-            "height": "auto"
-          },
-          ".btn-outline.btn-icon svg path": {
-            "stroke": "#081121",
-          }
           // We can add another font to the component by simply setting the property
           // fontFamily: "Inter",
         },

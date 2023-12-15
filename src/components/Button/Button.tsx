@@ -1,37 +1,24 @@
 import React from "react";
 
-interface ButtonProps {
-  /**
-   * Button variant
-   */
-  variant?: "solid" | "outlined" | "default" | "accent";
-  /**
-   * How large should the button be?
-   */
-  size?: "regular" | "large";
-  /**
-   * Button contents
-   */
-  label: string;
+import "./button.css";
 
+export interface ButtonProps {
+  variant?: "solid" | "outlined" | "default" | "accent";
+  size?: "regular" | "large" | "small";
+  children: string;
   icon?: boolean;
-  /**
-   * Optional click handler
-   */
   onClick?: () => void;
-  /**
-   * Disabled button state
-   */
   disabled?: boolean;
 }
 
 const sizeMap = {
   regular: "",
   large: "btn-lg",
+  small: "btn-sm",
 };
 
 const variantMap = {
-  default: "btn-primary bg-primary-focus hover:bg-primary",
+  default: "btn-primary hover:bg-primary",
   solid: "btn-secondary",
   outlined: "btn-outline",
   accent: "btn-accent",
@@ -44,18 +31,31 @@ export const Button = ({
   variant = "default",
   size = "regular",
   icon,
-  label,
+  children,
   ...props
 }: ButtonProps) => {
-  return (
-    <button
-      type="button"
-      className={`btn ${variantMap[variant]} ${sizeMap[size]} ${icon ? "btn-icon" : null}`}
-      {...props}
-    >
-      {icon ? <Icon /> : label}
-    </button>
-  );
+  if (icon) {
+    return (
+      <button
+        type="button"
+        className={`btn ${variantMap[variant]} ${sizeMap[size]} btn-icon`}
+        {...props}
+      >
+        {<Icon />}
+      </button>
+    );
+  } else {
+    return (
+      <button
+        type="button"
+        className={`btn ${variantMap[variant]} ${sizeMap[size]}`}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+  
 };
 
 const Icon = () => {
