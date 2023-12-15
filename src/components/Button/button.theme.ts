@@ -1,5 +1,5 @@
 import theme from "tailwindcss/defaultTheme";
-import { colors } from "~/styles/theme/colors.theme";
+import { colors } from "../../styles/theme/colors.theme";
 
 export const button = {
   ".btn": {
@@ -37,7 +37,7 @@ export const button = {
   },
   ".btn-icon": {
     "border-radius": theme.borderRadius.full,
-    padding: theme.spacing[2],
+    padding: theme.spacing["0.5"],
     height: "auto",
   },
   ".btn-outline.btn-icon svg path": {

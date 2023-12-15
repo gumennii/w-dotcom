@@ -1,8 +1,8 @@
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
-import { button } from "~/components/Button/button.theme";
-import { colors } from "~/styles/theme/colors.theme";
+import { button } from "./src/components/Button/button.theme";
+import { colors } from "./src/styles/theme/colors.theme";
 
 import daisyui from "daisyui";
 
