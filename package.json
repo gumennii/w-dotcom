@@ -11,10 +11,12 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build -o ./docs",
     "format": "prettier ./src --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "publish": "uniform canvas composition push ./uniform-data/composition --state published"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.7.1",
+    "@uniformdev/canvas-next-rsc": "^19.91.0",
     "next": "^14.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
