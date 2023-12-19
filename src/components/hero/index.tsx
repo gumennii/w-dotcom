@@ -1,8 +1,8 @@
 import {
-  ComponentProps,
+  type ComponentProps,
   UniformText,
 } from "@uniformdev/canvas-next-rsc/component";
-import { Parameters, Slots } from "./props";
+import { type Parameters, type Slots } from "./props";
 
 export const HeroComponent = ({
   component,

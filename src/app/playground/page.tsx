@@ -1,6 +1,6 @@
 import {
   UniformPlayground,
-  UniformPlaygroundProps,
+  type UniformPlaygroundProps,
 } from "@uniformdev/canvas-next-rsc";
 import { resolveComponent } from "../../canvas";
 
