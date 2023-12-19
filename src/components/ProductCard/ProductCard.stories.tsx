@@ -12,17 +12,12 @@ export default {
   tags: ["autodocs"],
 } as Meta;
 
-const image = {
-  src: '/image/product-card.jpg',
-  alt: 'Product',
-};
-
 export const Default: Story<ProductCardProps> = (args) => {
   return (
     <ProductCard {...args}>
       <ProductCard.Image
-        src={image.src}
-        alt={image.alt}
+        src="https://placehold.co/400?text=Product+Image&font=roboto"
+        alt="Product Name"
       />
       <ProductCard.Body>
         <ProductCard.Title tag="h2">Product Name</ProductCard.Title>
