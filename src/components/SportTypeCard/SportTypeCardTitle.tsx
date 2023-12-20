@@ -15,7 +15,7 @@ export const SportTypeCardTitle = React.forwardRef<
     <Tag
       {...props}
       className={cn(
-        "text-center text-[33px] font-bold uppercase leading-[42.90px]",
+        "text-center text-[2.063rem] font-bold uppercase leading-[2.681rem]",
         className,
       )}
       ref={ref}
