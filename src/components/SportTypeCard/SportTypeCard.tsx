@@ -1,16 +1,13 @@
-import React from "react";
-import {
-  SportTypeCardTitle,
-  type SportTypeCardTitleProps as TitleProps,
-} from "./SportTypeCardTitle";
-
+import Link from "next/link";
+import React, { ReactNode } from "react";
 import cn from "~/utils/style";
 
-export type SportTypeCardTitleProps = TitleProps;
-
-export type SportTypeCardProps = React.HTMLAttributes<HTMLDivElement> & {
+export interface SportTypeCardProps {
   variant?: "vertical" | "horizontal";
-};
+  path: string;
+  children: ReactNode;
+  className: string;
+}
 
 const variantMap = {
   vertical:
@@ -18,19 +15,21 @@ const variantMap = {
   horizontal: "p-4 rounded-2xl shadow flex justify-center items-center gap-4",
 };
 
-const SportTypeCard = React.forwardRef<HTMLDivElement, SportTypeCardProps>(
-  ({ className, variant = "vertical", ...props }, ref): JSX.Element => {
-    return (
-      <div
-        aria-label="Sport type card"
-        {...props}
-        className={cn(variantMap[variant], className)}
-        ref={ref}
-      />
-    );
-  },
-);
-
-export default Object.assign(SportTypeCard, {
-  Title: SportTypeCardTitle,
-});
+export const SportTypeCard = ({
+  className,
+  variant = "vertical",
+  path,
+  children,
+  ...props
+}: SportTypeCardProps): JSX.Element => {
+  return (
+    <Link
+      aria-label="Sport type card"
+      {...props}
+      href={path}
+      className={cn(variantMap[variant], className)}
+    >
+      {children}
+    </Link>
+  );
+};

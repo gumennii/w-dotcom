@@ -1,7 +1,10 @@
 import React from "react";
 import type { StoryFn as Story, Meta } from "@storybook/react";
 
-import SportTypeCard, { type SportTypeCardProps } from ".";
+// import SportTypeCard, { type SportTypeCardProps } from ".";
+import { SportTypeCard, type SportTypeCardProps } from "./SportTypeCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFootball } from "@fortawesome/free-solid-svg-icons";
 
 export default {
   title: "Data Display/SportTypeCard",
@@ -14,39 +17,27 @@ export default {
 
 export const Default: Story<SportTypeCardProps> = (args) => {
   return (
-    <SportTypeCard {...args} className="bg-[#EC612A]">
-      <IconPlaceholder />
-      <SportTypeCard.Title className="text-white">
+    <SportTypeCard {...args} path="/" className="bg-secondary text-white">
+      <FontAwesomeIcon icon={faFootball} className="h-10 w-10 p-1" />
+      <span className="text-center text-4xl font-bold uppercase">
         Flag Football
-      </SportTypeCard.Title>
+      </span>
     </SportTypeCard>
   );
 };
 
 export const Horizontal: Story<SportTypeCardProps> = (args) => {
   return (
-    <SportTypeCard {...args} className="bg-[#EC612A]" variant="horizontal">
-      <IconPlaceholder />
-      <SportTypeCard.Title className="text-white">
-        Flag Football
-      </SportTypeCard.Title>
-    </SportTypeCard>
-  );
-};
-
-const IconPlaceholder = () => {
-  return (
-    <svg
-      width="49"
-      height="49"
-      viewBox="0 0 49 49"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+    <SportTypeCard
+      {...args}
+      path="/"
+      variant="horizontal"
+      className="bg-secondary text-white"
     >
-      <path
-        d="M42.8145 18.3789C42.7624 23.1706 41.6686 27.4414 39.5332 31.1914C37.3978 34.9414 34.4551 37.9102 30.7051 40.0977C26.9551 42.2852 22.6322 43.4049 17.7363 43.457C14.5592 43.457 12.1634 43.2227 10.5488 42.7539C8.98633 42.3372 7.91862 41.8164 7.3457 41.1914C6.77279 40.5664 6.43424 39.9935 6.33008 39.4727C5.70508 37.4935 5.34049 34.681 5.23633 31.0352C5.28841 26.2435 6.38216 21.9727 8.51758 18.2227C10.653 14.4727 13.5957 11.5039 17.3457 9.31641C21.0957 7.12891 25.4447 6.00911 30.3926 5.95703C32.528 6.00911 34.3509 6.16536 35.8613 6.42578C37.3197 6.6862 38.3092 6.89453 38.8301 7.05078C38.8301 7.10286 38.8561 7.12891 38.9082 7.12891C40.3665 7.54557 41.304 8.48307 41.7207 9.94141C42.3457 11.9206 42.7103 14.7331 42.8145 18.3789ZM10.2363 38.6914C12.2676 39.2122 14.2988 39.5247 16.3301 39.6289L9.14258 32.4414C9.24674 34.2122 9.42904 35.6706 9.68945 36.8164C9.89779 38.0143 10.0801 38.6393 10.2363 38.6914ZM21.4082 39.3945C25.2103 38.7695 28.3353 37.5195 30.7832 35.6445C33.2311 33.7695 35.0801 31.6081 36.3301 29.1602C37.6322 26.7122 38.4395 24.3424 38.752 22.0508L26.7207 10.0195C22.9186 10.6445 19.7936 11.8945 17.3457 13.7695C14.8978 15.6445 13.0488 17.806 11.7988 20.2539C10.4967 22.7018 9.68945 25.0716 9.37695 27.3633L21.4082 39.3945ZM31.7988 9.78516L38.9863 16.9727C38.8822 15.2018 38.7259 13.7435 38.5176 12.5977C38.2572 11.3997 38.0488 10.7747 37.8926 10.7227C35.8613 10.2018 33.8301 9.88932 31.7988 9.78516ZM22.4238 21.3477L27.4238 26.2695C27.6842 26.5299 27.8145 26.8164 27.8145 27.1289C27.7103 27.9102 27.2936 28.3268 26.5645 28.3789C26.252 28.3789 25.9655 28.2487 25.7051 27.9883L20.7051 22.9883C20.4447 22.7279 20.3145 22.4414 20.3145 22.1289C20.3665 21.3997 20.7832 20.9831 21.5645 20.8789C21.877 20.931 22.1634 21.0872 22.4238 21.3477ZM18.6738 25.0977L23.6738 30.0195C23.9342 30.2799 24.0645 30.5664 24.0645 30.8789C23.9603 31.6602 23.5436 32.0768 22.8145 32.1289C22.502 32.1289 22.2155 31.9987 21.9551 31.7383L16.9551 26.7383C16.6947 26.4779 16.5645 26.1914 16.5645 25.8789C16.6165 25.1497 17.0332 24.7331 17.8145 24.6289C18.127 24.681 18.4134 24.8372 18.6738 25.0977ZM25.3145 17.1289C25.627 17.181 25.9134 17.3112 26.1738 17.5195L31.1738 22.5195C31.4342 22.7799 31.5645 23.0664 31.5645 23.3789C31.4603 24.1602 31.0436 24.5768 30.3145 24.6289C30.002 24.6289 29.7155 24.4987 29.4551 24.2383L24.4551 19.2383C24.1947 18.9779 24.0645 18.6914 24.0645 18.3789C24.1165 17.6497 24.5332 17.2331 25.3145 17.1289Z"
-        fill="white"
-      />
-    </svg>
+      <FontAwesomeIcon icon={faFootball} className="h-10 w-10 p-1 " />
+      <span className="text-center text-4xl font-bold uppercase">
+        Flag Football
+      </span>
+    </SportTypeCard>
   );
 };
