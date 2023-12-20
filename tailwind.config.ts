@@ -14,6 +14,12 @@ export default {
       fontFamily: {
         sans: ["Roboto", ...fontFamily.sans],
       },
+      colors: {
+        'primary': colors.primary,
+        'secondary': colors.secondary,
+        'focus-btn': colors["primary-focus"],
+        'focus-text': colors["neutral-focus"],
+      },
     },
   },
   daisyui: {
