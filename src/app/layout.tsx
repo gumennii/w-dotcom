@@ -1,6 +1,12 @@
 import { UniformContext } from "@uniformdev/canvas-next-rsc";
-import "~/styles/globals.css";
 import { Inter } from "next/font/google";
+
+// import Font Awesome CSS
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
+import "~/styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

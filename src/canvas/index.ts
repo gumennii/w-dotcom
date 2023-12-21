@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   type ResolveComponentFunction,
   type ComponentProps,
@@ -5,7 +6,8 @@ import {
 } from "@uniformdev/canvas-next-rsc/component";
 
 export const resolveComponent: ResolveComponentFunction = ({ component }) => {
-  let componentType: React.ComponentType<ComponentProps<any>> | null =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const componentType: React.ComponentType<ComponentProps<any>> | null =
     DefaultNotImplementedComponent;
 
   // todo: add logic to resolve components here
