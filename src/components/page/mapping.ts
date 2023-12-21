@@ -1,4 +1,4 @@
-import { type ResolveComponentResultWithType } from "@/uniform/models";
+import { type ResolveComponentResultWithType } from "~/uniform/models";
 import { PageComponent } from "./index";
 
 export const pageMapping: ResolveComponentResultWithType = {

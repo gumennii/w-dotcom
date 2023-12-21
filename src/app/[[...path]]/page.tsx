@@ -1,22 +1,22 @@
 import {
+  UniformComposition,
   PageParameters,
   retrieveRoute,
-  UniformComposition,
 } from "@uniformdev/canvas-next-rsc";
-import { resolveComponent } from "../../canvas";
+import { resolveComponent } from "~/uniform/resolve";
 
-// Uncomment to statically render routes at build time
+// Uncomment this to enable static site generation mode
 // export { generateStaticParams } from '@uniformdev/canvas-next-rsc';
 
-export default async function Home(props: PageParameters) {
+export const runtime = "edge";
+
+export default async function HomePage(props: PageParameters) {
   const route = await retrieveRoute(props);
   return (
     <UniformComposition
       {...props}
-      resolveComponent={resolveComponent}
       route={route}
-      // this is the setting for SSR and Edge-side rendering
-      // for the static mode (SSG) use mode="static"
+      resolveComponent={resolveComponent}
       mode="server"
     />
   );
