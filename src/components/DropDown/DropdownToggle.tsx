@@ -1,17 +1,16 @@
-import React from 'react';
+import React from "react";
 
-import { Button, type ButtonProps } from '../Button';
+import { Button, type ButtonProps } from "../Button";
 
 export type DropdownToggleProps = Omit<
   React.LabelHTMLAttributes<HTMLLabelElement>,
-  'color'
-> &
- {
-    color?: ButtonProps["variant"]
-    size?: ButtonProps["size"]
-    button?: boolean
-    disabled?: boolean
-    children: string
+  "color"
+> & {
+  color?: ButtonProps["variant"];
+  size?: ButtonProps["size"];
+  button?: boolean;
+  disabled?: boolean;
+  children: string;
 };
 
 const DropdownToggle = ({
@@ -26,11 +25,7 @@ const DropdownToggle = ({
   return (
     <label tabIndex={0} className={className} {...props}>
       {button ? (
-        <Button
-          variant={color}
-          size={size}
-          disabled={disabled}
-        >
+        <Button variant={color} size={size} disabled={disabled}>
           {children}
         </Button>
       ) : (

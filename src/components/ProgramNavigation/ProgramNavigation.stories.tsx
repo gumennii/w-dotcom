@@ -1,14 +1,13 @@
-import React from 'react';
-import type { StoryFn as Story, Meta } from '@storybook/react';
+import React from "react";
+import type { StoryFn as Story, Meta } from "@storybook/react";
 
-import ProgramNavigation, { type ProgramNavigationProps } from '.';
+import ProgramNavigation, { type ProgramNavigationProps } from ".";
 
 export default {
-  title: 'Navigation/ProgramNavigation',
+  title: "Navigation/ProgramNavigation",
   component: ProgramNavigation,
   parameters: {
     layout: "fullscreen",
-    
   },
 } as Meta;
 
