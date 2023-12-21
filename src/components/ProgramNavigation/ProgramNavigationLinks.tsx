@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import cn from "~/utils/style";
 import Link from "next/link";
-import Select from "../Select";
+import Dropdown from "../DropDown";
 
 type TProgramNavigationLink = {
   href: string;
   name: string;
 };
 
-export type ProgramNavigationLinkProps = React.HTMLAttributes<HTMLDivElement> & {
+export type ProgramNavigationLinksProps = React.HTMLAttributes<HTMLDivElement> & {
   links: TProgramNavigationLink[];
 };
 
-const ProgramNavigationLink = React.forwardRef<HTMLDivElement, ProgramNavigationLinkProps>(
+const ProgramNavigationLinks = React.forwardRef<HTMLDivElement, ProgramNavigationLinksProps>(
   ({ className, links, ...props }, ref): JSX.Element => {
     return (
       <div
@@ -23,7 +23,7 @@ const ProgramNavigationLink = React.forwardRef<HTMLDivElement, ProgramNavigation
         )}
         ref={ref}
       >
-        <ProgramSelect links={links} />
+        <ProgramDropdown links={links} />
         {links.map((link, index) => (
           <Link
             key={`${link.href}_${index}`}
@@ -41,27 +41,23 @@ const ProgramNavigationLink = React.forwardRef<HTMLDivElement, ProgramNavigation
   },
 );
 
-type ProgramSelectProps = {
+type ProgramDropdownProps = {
   links: TProgramNavigationLink[];
 };
 
-const ProgramSelect = ({ links }: ProgramSelectProps) => {
-  const [value, setValue] = useState('default')
+const ProgramDropdown = ({ links }: ProgramDropdownProps) => {
   return (
     <div className="md:hidden">
-      <Select
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-      >
-        <Select.Option value={'default'} disabled>
-          Pages
-        </Select.Option>
-        {links.map((item) => (
-          <Select.Option value={item.name}>{item.name}</Select.Option>
-        ))}
-      </Select>
+      <Dropdown>
+        <Dropdown.Toggle>Click</Dropdown.Toggle>
+        <Dropdown.Menu className="w-52">
+          {links.map((link) => (
+            <Dropdown.Item anchor href={link.href}>{link.name}</Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
     </div>
   );
 };
 
-export default ProgramNavigationLink;
+export default ProgramNavigationLinks;

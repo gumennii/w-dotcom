@@ -3,7 +3,7 @@ import cn from "~/utils/style";
 
 import ProgramNavigationBody, { type ProgramNavigationBodyProps as BodyProps } from "./ProgramNavigationContent";
 import ProgramNavigationAction, { type ProgramNavigationActionProps as ActionProps } from "./ProgramNavigationAction";
-import ProgramNavigationLink, { type ProgramNavigationLinkProps as LinkProps } from "./ProgramNavigationLink";
+import ProgramNavigationLinks, { type ProgramNavigationLinksProps as LinkProps } from "./ProgramNavigationLinks";
 
 export type ProgramNavigationBodyProps = BodyProps;
 export type ProgramNavigationActionProps = ActionProps;
@@ -30,5 +30,5 @@ const ProgramNavigation = React.forwardRef<HTMLDivElement, ProgramNavigationProp
 export default Object.assign(ProgramNavigation, {
   Actions: ProgramNavigationAction,
   Body: ProgramNavigationBody,
-  Link: ProgramNavigationLink,
+  Links: ProgramNavigationLinks,
 });

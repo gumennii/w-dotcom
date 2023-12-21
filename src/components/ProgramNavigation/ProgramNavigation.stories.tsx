@@ -31,7 +31,7 @@ export const Default: Story<ProgramNavigationProps> = (arg) => {
   return (
     <ProgramNavigation {...arg}>
       <ProgramNavigation.Body>
-        <ProgramNavigation.Link links={testLinks} />
+        <ProgramNavigation.Links links={testLinks} />
         <ProgramNavigation.Actions>REGISTER NOW</ProgramNavigation.Actions>
       </ProgramNavigation.Body>
     </ProgramNavigation>
