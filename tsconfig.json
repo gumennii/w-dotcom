@@ -11,7 +11,8 @@
 
     /* Strictness */
     "strict": true,
-    "noUncheckedIndexedAccess": true,
+    // "noUncheckedIndexedAccess": true,
+    "forceConsistentCasingInFileNames": true,
     "checkJs": true,
 
     /* Bundled projects */
