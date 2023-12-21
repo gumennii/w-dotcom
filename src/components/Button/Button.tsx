@@ -1,6 +1,8 @@
+import classNames from "classnames";
 import React from "react";
 
 export interface ButtonProps {
+  text?: string;
   variant?: "solid" | "outlined" | "default" | "accent";
   size?: "regular" | "large" | "small";
   children: string;
@@ -26,6 +28,7 @@ const variantMap = {
  * Primary UI component for user interaction
  */
 export const Button = ({
+  text,
   variant = "default",
   size = "regular",
   icon,
@@ -46,10 +49,10 @@ export const Button = ({
     return (
       <button
         type="button"
-        className={`btn ${variantMap[variant]} ${sizeMap[size]}`}
+        className={classNames("btn", variantMap[variant], sizeMap[size])}
         {...props}
       >
-        {children}
+        {text ?? children}
       </button>
     );
   }

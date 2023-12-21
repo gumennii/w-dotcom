@@ -13,7 +13,7 @@ export const HeroComponent = ({
       <UniformText
         component={component}
         context={context}
-        parameterId="title"
+        parameterId="titleA"
         as="h1"
         className="title"
         placeholder="Enter hero title"
@@ -21,7 +21,29 @@ export const HeroComponent = ({
       <UniformText
         component={component}
         context={context}
-        parameterId="description"
+        parameterId="titleB"
+        as="h2"
+        className="title"
+        placeholder="Enter hero title"
+      />
+      <UniformText
+        component={component}
+        context={context}
+        parameterId="highlightedText"
+        className="description"
+        placeholder="Enter hero description"
+      />
+      <UniformText
+        component={component}
+        context={context}
+        parameterId="subtext"
+        className="description"
+        placeholder="Enter hero description"
+      />
+      <UniformText
+        component={component}
+        context={context}
+        parameterId="button"
         className="description"
         placeholder="Enter hero description"
       />
