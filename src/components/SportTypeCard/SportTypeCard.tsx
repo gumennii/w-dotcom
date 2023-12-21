@@ -1,34 +1,33 @@
+import React, { PropsWithChildren, ReactNode } from "react";
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import cn from "~/utils/style";
 
 export interface SportTypeCardProps {
-  variant?: "vertical" | "horizontal";
   path: string;
-  children: ReactNode;
+  icon: IconDefinition;
   className: string;
 }
 
-const variantMap = {
-  vertical:
-    "px-8 py-8 rounded-2xl shadow flex flex-col justify-center items-center gap-2",
-  horizontal: "p-4 rounded-2xl shadow flex justify-center items-center gap-4",
-};
-
 export const SportTypeCard = ({
-  className,
-  variant = "vertical",
   path,
+  icon,
+  className,
   children,
   ...props
-}: SportTypeCardProps): JSX.Element => {
+}: PropsWithChildren<SportTypeCardProps>): JSX.Element => {
   return (
     <Link
       aria-label="Sport type card"
       {...props}
       href={path}
-      className={cn(variantMap[variant], className)}
+      className={cn(
+        "flex items-center justify-center gap-4 rounded-2xl p-4 shadow lg:flex-col lg:gap-2 lg:p-8",
+        className,
+      )}
     >
+      <FontAwesomeIcon icon={icon} className="h-10 w-10 p-1" />
       {children}
     </Link>
   );

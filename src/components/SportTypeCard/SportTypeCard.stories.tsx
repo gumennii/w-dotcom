@@ -1,10 +1,8 @@
 import React from "react";
 import type { StoryFn as Story, Meta } from "@storybook/react";
+import { faBaseball, faFootball } from "@fortawesome/free-solid-svg-icons";
 
-// import SportTypeCard, { type SportTypeCardProps } from ".";
 import { SportTypeCard, type SportTypeCardProps } from "./SportTypeCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFootball } from "@fortawesome/free-solid-svg-icons";
 
 export default {
   title: "Data Display/SportTypeCard",
@@ -17,8 +15,12 @@ export default {
 
 export const Default: Story<SportTypeCardProps> = (args) => {
   return (
-    <SportTypeCard {...args} path="/" className="bg-secondary text-white">
-      <FontAwesomeIcon icon={faFootball} className="h-10 w-10 p-1" />
+    <SportTypeCard
+      {...args}
+      path="/"
+      icon={faFootball}
+      className="bg-secondary text-white"
+    >
       <span className="text-center text-4xl font-bold uppercase">
         Flag Football
       </span>
@@ -31,13 +33,10 @@ export const Horizontal: Story<SportTypeCardProps> = (args) => {
     <SportTypeCard
       {...args}
       path="/"
-      variant="horizontal"
+      icon={faBaseball}
       className="bg-secondary text-white"
     >
-      <FontAwesomeIcon icon={faFootball} className="h-10 w-10 p-1 " />
-      <span className="text-center text-4xl font-bold uppercase">
-        Flag Football
-      </span>
+      <span className="text-center text-4xl font-bold uppercase">Baseball</span>
     </SportTypeCard>
   );
 };
