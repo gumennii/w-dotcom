@@ -2,15 +2,14 @@ import React, { forwardRef } from "react";
 import cn from "~/utils/style";
 
 // import { IComponentBaseProps } from "../types";
-import CollapseTitle from "./CollapseTitle";
-import CollapseContent from "./CollapseContent";
+import AccordionCollapseTitle from "./AccordionCollapseTitle";
+import AccordionCollapseContent from "./AccordionCollapseContent";
 
 export type AccordionProps = Omit<
   React.HTMLAttributes<HTMLInputElement>,
   "type"
 > & {
   name?: string;
-  //   icon?: "arrow" | "plus";
 };
 
 const Accordion = forwardRef<HTMLInputElement, AccordionProps>(
@@ -20,7 +19,7 @@ const Accordion = forwardRef<HTMLInputElement, AccordionProps>(
         className={cn(
           "collapse",
           "collapse-arrow",
-          "max-w-7xl rounded-none border-b border-neutral-300 bg-transparent",
+          "max-w-sm rounded-none border-b border-neutral-300 bg-transparent sm:max-w-lg lg:max-w-4xl",
           className,
         )}
       >
@@ -34,6 +33,6 @@ const Accordion = forwardRef<HTMLInputElement, AccordionProps>(
 Accordion.displayName = "Accordion";
 
 export default Object.assign(Accordion, {
-  Title: CollapseTitle,
-  Content: CollapseContent,
+  Title: AccordionCollapseTitle,
+  Content: AccordionCollapseContent,
 });
