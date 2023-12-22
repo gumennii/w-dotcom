@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=<https://uniform.app/schemas/json-schema/component-definition/v1.json>
+$schema: https://uniform.app/schemas/json-schema/component-definition/v1.json
+id: button
+name: Button
+icon: image-text
+parameters:
+  - id: text
+    name: Text
+    type: text
+    helpText: Button text
+    typeConfig: null
+    localizable: true
+  - id: variant
+    name: Variant
+    type: select
+    helpText: Button variant
+    typeConfig:
+      options:
+        - text: solid
+          value: solid
+        - text: outlined
+          value: outlined
+        - text: default
+          value: default
+        - text: accent
+          value: accent
+      required: false
+    localizable: false
+  - id: size
+    name: Size
+    type: select
+    helpText: Button size
+    typeConfig:
+      options:
+        - text: regular
+          value: regular
+        - text: large
+          value: large
+        - text: small
+          value: small
+    localizable: false
+  - id: disabled
+    name: Disabled
+    type: checkbox
+    helpText: Button disabled state
+    typeConfig: null
+    localizable: false
+categoryId: cc3dbedb-9ffd-4268-8cdf-2c18d5857762
+useTeamPermissions: true
+slots: []
+canBeComposition: false
+created: '2023-10-04T15:01:19.966139+00:00'
+updated: '2023-12-21T18:02:21.47551+00:00'
+variants:
+  - id: button
+    name: Button
