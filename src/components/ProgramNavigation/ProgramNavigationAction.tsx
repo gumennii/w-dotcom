@@ -1,6 +1,5 @@
 import React from "react";
-// import cn from "~/utils/style";
-import { Button } from "../Button";
+import Button from "../Button";
 
 export type ProgramNavigationActionProps =
   React.HTMLAttributes<HTMLDivElement> & {

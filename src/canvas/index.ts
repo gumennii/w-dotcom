@@ -1,3 +1,8 @@
+import './Accordion';
+import './AccordionItem';
+
+export { default as Accordion } from './Accordion';
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   type ResolveComponentFunction,
