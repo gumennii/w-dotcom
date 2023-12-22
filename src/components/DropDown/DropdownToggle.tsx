@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, type ButtonProps } from "../Button";
+import  Button, { type ButtonProps } from "../Button";
 
 export type DropdownToggleProps = Omit<
   React.LabelHTMLAttributes<HTMLLabelElement>,

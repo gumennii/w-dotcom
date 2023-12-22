@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=<https://uniform.app/schemas/json-schema/component-definition/v1.json>
+$schema: https://uniform.app/schemas/json-schema/component-definition/v1.json
+id: flex
+name: Flex
+icon: screen
+parameters:
+  - id: alignitems
+    name: alignItems
+    type: select
+    helpText: Flex align items
+    typeConfig:
+      options:
+        - text: start
+          value: start
+        - text: center
+          value: center
+        - text: end
+          value: end
+    localizable: false
+useTeamPermissions: true
+slots:
+  - id: slots
+    name: Slots
+    allowedComponents: []
+    allowAllComponents: true
+    inheritAllowedComponents: false
+    patternsInAllowedComponents: false
+canBeComposition: true
+created: '2023-12-21T18:33:54.495257+00:00'
+updated: '2023-12-21T19:03:06.663624+00:00'
