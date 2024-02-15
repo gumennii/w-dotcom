@@ -16,7 +16,7 @@ const inter = Inter({
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} style={{ scrollBehavior: "smooth" }}>
       <body>
         <section className="min-h-screen">
           <Header />

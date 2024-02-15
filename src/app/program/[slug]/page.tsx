@@ -31,7 +31,13 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       </ProgramNavigation>
 
       <Container maxWidth={MaxWidth.Small} className="mt-14 mb-8">
-        <Image src={`https:${coverImage.fields.file?.url}`} width={900} height={420} alt="Priority Registration" />
+        <Image
+          src={`https:${coverImage.fields.file?.url}`}
+          width={900}
+          height={420}
+          alt="Priority Registration"
+          link="#registration"
+        />
         <div className="prose season">
           <Markdown content={{ json: seasonDescription }} />
         </div>
