@@ -1,0 +1,36 @@
+.prose.note {
+  max-width: 100%;
+}
+.prose.note h3 {
+  margin-top: 1rem;
+}
+.prose.note h3 b {
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  font-weight: 700;
+}
+.prose.note ul li {
+  padding-left: 0;
+}
+.prose.note ul li::marker {
+  color: #081121;
+}
+.prose.note ul li p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+@media (max-width: 1024px) {
+  .prose.note h3 {
+    margin-bottom: 0;
+  }
+  .prose.note h3 b {
+    font-size: 1.1rem;
+    line-height: 1.25rem;
+    font-weight: 800;
+  }
+  .prose.note ul li p {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}

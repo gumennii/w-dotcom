@@ -4,23 +4,39 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "setup": "node ./lib/setup.js"
+    "setup": "node ./lib/setup.js",
+    "lint": "next lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,css,scss}\"",
+    "types:contentful": "export $(cat .env | awk '!/^\\s*#/' | awk '!/^\\s*$/'); cf-content-types-generator --spaceId $CONTENTFUL_SPACE_ID --token $CONTENTFUL_MANAGEMENT_TOKEN -o src/types/contentful -X && prettier --write src/types/contentful"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.17.1",
     "@contentful/rich-text-types": "^16.2.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@tailwindcss/typography": "0.5.9",
     "@types/node": "^20.5.0",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "10.4.15",
+    "classnames": "^2.5.1",
+    "clsx": "^2.1.0",
+    "contentful": "^10.6.21",
     "contentful-import": "^9.0.4",
     "date-fns": "2.30.0",
     "next": "latest",
     "postcss": "8.4.31",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-player": "^2.14.1",
+    "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "cf-content-types-generator": "^2.14.0",
+    "daisyui": "^4.6.3",
+    "eslint-config-next": "^14.1.0",
+    "prettier": "3.2.5"
   }
 }

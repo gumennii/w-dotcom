@@ -1,0 +1,34 @@
+.prose.season {
+  max-width: 100%;
+}
+.prose.season h2 {
+  margin-top: 2rem;
+}
+.prose.season h2 b {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+}
+
+.prose.season p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .prose.season h2 b {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  .prose.season p {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .prose.season h2 b {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
