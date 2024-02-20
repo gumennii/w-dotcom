@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import { getTypographyClass } from "@/utils/styling";
 
-type TestBlockProps = {
+export type TextProps = {
   type: Types.TypographyType;
   children: React.ReactNode;
   className?: string;
 };
 
-export const Text = ({ type, children, className }: TestBlockProps) => {
+export const Text = ({ type, children, className }: TextProps) => {
   if (type === "h1" || type === "h2" || type === "h3") {
     return <h2 className={classNames(getTypographyClass(type), className)}>{children}</h2>;
   } else if (type === "h4" || type === "h5") {

@@ -1,0 +1,41 @@
+name: Format the code using Prettier
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: read
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  # This workflow contains a single job called "format"
+  format:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+      
+      # Install NPM dependencies
+      - name: Install Prettier package only (to enforce workflow performance and speed)
+        run: |
+          mv package.json package.json.tmp
+          npm install --no-package-lock --no-save --quiet prettier
+          mv package.json.tmp package.json
+      
+      # Run format script
+      - name: Run Prettier format script
+        run: npm run format
+
+      # Commit formatted files to active branch
+      - name: Commit formatted code to your branch
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Apply Prettier code formatting
+          branch: ${{ github.head_ref }}

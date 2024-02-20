@@ -1,7 +1,7 @@
 import { Banner, Container, Divider } from "@/components";
-import { RegistrationListing } from "@/components/PageModules";
-import { type TDivision } from "@/components/PageModules/RegistrationListiongModule/RegistrationListing";
-import ProgramNavigation from "@/components/ProgramNavigation";
+import { RegistrationListing } from "@/modules";
+import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
+import ProgramNavigation from "@/modules/ProgramNavigation";
 import Table from "@/components/Table/Table";
 import { getPage } from "@/lib/getPage";
 import { Markdown } from "@/lib/markdown";

@@ -3,7 +3,7 @@ import { FC, useCallback, useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { PlayButton } from "./PlayButon";
 
-type VideoProps = {
+export type VideoProps = {
   url: string;
   loop?: boolean;
   controls?: boolean;

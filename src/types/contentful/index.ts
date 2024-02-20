@@ -1,5 +1,4 @@
 export type { TypeAboutNlsModule, TypeAboutNlsModuleFields, TypeAboutNlsModuleSkeleton } from "./TypeAboutNlsModule";
-export type { TypeAuthor, TypeAuthorFields, TypeAuthorSkeleton } from "./TypeAuthor";
 export type { TypeCarousel, TypeCarouselFields, TypeCarouselSkeleton } from "./TypeCarousel";
 export type { TypeCarouselModule, TypeCarouselModuleFields, TypeCarouselModuleSkeleton } from "./TypeCarouselModule";
 export type { TypeHomePage, TypeHomePageFields, TypeHomePageSkeleton } from "./TypeHomePage";
@@ -89,7 +88,6 @@ export type {
   TypePartnershipsModuleFields,
   TypePartnershipsModuleSkeleton,
 } from "./TypePartnershipsModule";
-export type { TypePost, TypePostFields, TypePostSkeleton } from "./TypePost";
 export type { TypeProgramTopic, TypeProgramTopicFields, TypeProgramTopicSkeleton } from "./TypeProgramTopic";
 export type { TypeSiteLocations, TypeSiteLocationsFields, TypeSiteLocationsSkeleton } from "./TypeSiteLocations";
 export type {

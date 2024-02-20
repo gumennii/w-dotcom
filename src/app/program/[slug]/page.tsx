@@ -1,6 +1,6 @@
-import { GeneralProgramOperation, RegistrationListing } from "@/components/PageModules";
-import { type TDivision } from "@/components/PageModules/RegistrationListiongModule/RegistrationListing";
-import ProgramNavigation from "@/components/ProgramNavigation";
+import { GeneralProgramOperation, RegistrationListing } from "@/modules";
+import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
+import ProgramNavigation from "@/modules/ProgramNavigation";
 import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
@@ -8,6 +8,7 @@ import { Container, Banner, Image, Divider } from "@/components";
 import { Asset } from "contentful";
 import { Document } from "@contentful/rich-text-types";
 import { Markdown } from "@/lib/markdown";
+import { SingUp } from "@/modules";
 
 export default async function ProgramPage({ params }: { params: { slug: string } }) {
   const content = await getPage({
@@ -50,6 +51,16 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         programType={content.fields.programType as string}
         slug={params.slug as string}
       />
+
+      <Divider className="m-auto max-w-4xl my-4 lg:my-8" />
+
+      <Container maxWidth={MaxWidth.Small}>
+        <SingUp
+          title="Want news and updates?"
+          descriprion="Sign up for our newsletter to stay up to date."
+          className="rounded-md bg-primary"
+        />
+      </Container>
 
       <Divider className="m-auto max-w-4xl mt-4 lg:mt-8" />
 

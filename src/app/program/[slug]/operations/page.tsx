@@ -1,8 +1,8 @@
-import { Banner, Container, Divider, LeagueOperations } from "@/components";
-import { RegistrationListing } from "@/components/PageModules";
-import { type TDivision } from "@/components/PageModules/RegistrationListiongModule/RegistrationListing";
-import Profile from "@/components/Profile";
-import ProgramNavigation from "@/components/ProgramNavigation";
+import { Banner, Container, Divider } from "@/components";
+import { LeagueOperations, RegistrationListing } from "@/modules";
+import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
+import Profile from "@/modules/Profile";
+import ProgramNavigation from "@/modules/ProgramNavigation";
 import { getPage } from "@/lib/getPage";
 import { TypeModuleSiteDirector, TypeTopicSiteDirector } from "@/types/contentful";
 import { getProgramNavigationLinks } from "@/utils/navigation";

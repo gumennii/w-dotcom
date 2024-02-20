@@ -3,7 +3,7 @@ import ContentfulImage from "@/lib/contentful-image";
 import classNames from "classnames";
 import Link from "next/link";
 
-type ImageProps = {
+export type ImageProps = {
   src?: string;
   width: number;
   height: number;
