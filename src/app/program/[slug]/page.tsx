@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { GeneralProgramOperation, RegistrationListing } from "@/modules";
 import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
 import ProgramNavigation from "@/modules/ProgramNavigation";
@@ -8,14 +9,19 @@ import { Container, Banner, Image, Divider } from "@/components";
 import { Asset } from "contentful";
 import { Document } from "@contentful/rich-text-types";
 import { Markdown } from "@/lib/markdown";
-import { SingUp } from "@/modules";
+import { Subscribe } from "@/modules";
+import { TypeMarketingPageProgram } from "@/types/contentful";
 
 export default async function ProgramPage({ params }: { params: { slug: string } }) {
-  const content = await getPage({
+  const content = (await getPage({
     pageContentType: "marketingPageProgram",
     slug: params.slug,
     locale: "en-US",
-  });
+  })) as TypeMarketingPageProgram<undefined, string>;
+
+  if (!content || !content.fields) {
+    return notFound();
+  }
 
   const coverImage = content.fields.coverImage as Asset;
   const seasonDescription = content.fields.seasonDescription as Document;
@@ -55,7 +61,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       <Divider className="m-auto max-w-4xl my-4 lg:my-8" />
 
       <Container maxWidth={MaxWidth.Small}>
-        <SingUp
+        <Subscribe
           title="Want news and updates?"
           descriprion="Sign up for our newsletter to stay up to date."
           className="rounded-md bg-primary"
@@ -75,6 +81,16 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           price={content.fields.price as number}
         />
       </Container>
+
+      <div className="bg-[#0F2344]">
+        <Container maxWidth={MaxWidth.Large}>
+          <Subscribe
+            title="Stay Tuned For Updates"
+            descriprion="Stay informed about our Flag Football program at Alhambra High School! Subscribe to our offseason newsletter for exclusive updates, thrilling highlights, and insider insights."
+            variant="wide"
+          />
+        </Container>
+      </div>
     </>
   );
 }

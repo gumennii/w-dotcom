@@ -1,34 +1,29 @@
-import { Banner, Container, Divider } from "@/components";
-import { LeagueOperations, RegistrationListing } from "@/modules";
+import { notFound } from "next/navigation";
+import { Banner, Container, Divider, Text } from "@/components";
+import { RegistrationListing } from "@/modules";
 import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
 import Profile from "@/modules/Profile";
 import ProgramNavigation from "@/modules/ProgramNavigation";
 import { getPage } from "@/lib/getPage";
-import { TypeModuleSiteDirector, TypeTopicSiteDirector } from "@/types/contentful";
+import { TypeMarketingPageProgram, TypePeople } from "@/types/contentful";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
-import { Asset } from "contentful";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
 
 export default async function OperationsPage({ params }: { params: { slug: string } }) {
-  const content = await getPage({
+  const content = (await getPage({
     pageContentType: "marketingPageProgram",
     slug: params.slug,
     locale: "en-US",
-  });
+  })) as TypeMarketingPageProgram<undefined, string>;
 
-  const siteDirectorData = content.fields.siteDirector as TypeModuleSiteDirector<undefined, string>;
-  const siteDirectorDetails = siteDirectorData.fields.siteDirectorDetails as TypeTopicSiteDirector<undefined, string>;
+  if (!content || !content.fields) {
+    return notFound();
+  }
 
-  const { siteDirectorName, siteDirectorBio, siteDirectorPhoto } = siteDirectorDetails.fields;
-
-  const siteDirectorPhotoAsset = siteDirectorPhoto as Asset;
-
-  const profileData = {
-    title: "Site Director",
-    content: siteDirectorBio,
-    name: siteDirectorName,
-    imagePath: siteDirectorPhotoAsset.fields.file?.url as string,
-  };
+  const siteDirectorData = content.fields.siteDirector as TypePeople<undefined, string>;
+  const leagueOperations = content.fields.leagueOperations as Document;
 
   return (
     <>
@@ -41,16 +36,23 @@ export default async function OperationsPage({ params }: { params: { slug: strin
         </ProgramNavigation.Body>
       </ProgramNavigation>
 
-      <LeagueOperations />
-
-      <Container maxWidth={MaxWidth.Small} className="flex flex-col gap-y-14 my-14">
-        <Profile {...profileData} />
+      <Container maxWidth={MaxWidth.Small}>
+        <Text type="h2" className="mt-10 mb-8">
+          League Operations
+        </Text>
+        <div className="prose season">{documentToReactComponents(leagueOperations)}</div>
       </Container>
 
-      <Divider className="m-auto max-w-4xl mt-4 lg:mt-8" />
+      <Divider className="max-w-4xl m-auto mt-4 lg:mt-8" />
+
+      <Container maxWidth={MaxWidth.Small} className="flex flex-col gap-y-14 my-14">
+        <Profile title="Site Director" contents={siteDirectorData} />
+      </Container>
+
+      <Divider className="max-w-4xl m-auto mt-4 lg:mt-8" />
 
       <Container maxWidth={MaxWidth.Small} className="flex flex-col my-14">
-        <h2 className="font-bold text-2xl mb-6 md:text-3xl lg:text-4xl" id="registration">
+        <h2 className="mb-6 text-2xl font-bold md:text-3xl lg:text-4xl" id="registration">
           Registration Listing
         </h2>
         <RegistrationListing

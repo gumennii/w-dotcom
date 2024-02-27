@@ -7,7 +7,7 @@
     "setup": "node ./lib/setup.js",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,css,scss}\"",
-    "types:contentful": "export $(cat .env | awk '!/^\\s*#/' | awk '!/^\\s*$/'); cf-content-types-generator --spaceId $CONTENTFUL_SPACE_ID --token $CONTENTFUL_MANAGEMENT_TOKEN -o src/types/contentful -X && prettier --write src/types/contentful",
+    "types:contentful": "export $(cat .env.local | awk '!/^\\s*#/' | awk '!/^\\s*$/'); cf-content-types-generator --spaceId $CONTENTFUL_SPACE_ID --token $CONTENTFUL_MANAGEMENT_TOKEN -o src/types/contentful -X && prettier --write src/types/contentful",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

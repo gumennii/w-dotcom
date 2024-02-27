@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
-import { Footer, Header } from "@/components";
+import Navigation from "@/components/navigation/Navigation";
 
 export const metadata = {
   title: "Next Level Sport",
@@ -18,9 +18,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.variable} style={{ scrollBehavior: "smooth" }}>
       <body>
         <section className="min-h-screen">
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <Navigation>
+            <main>
+              <div className="min-h-screen">{children}</div>
+            </main>
+          </Navigation>
         </section>
       </body>
     </html>

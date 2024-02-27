@@ -10,3 +10,4 @@ export { Logo } from "./Logo";
 export { Container } from "./Container";
 export { Video, type VideoProps } from "./Video";
 export { Text, type TextProps } from "./Text";
+export { Modal, type ModalProps } from "./Modal";

@@ -4,6 +4,7 @@ import { Image, Container } from "@/components";
 import { MaxWidth } from "@/utils/styling";
 import { Asset } from "contentful";
 import { meta } from "./_metadata";
+import { notFound } from "next/navigation";
 
 export const metadata = meta;
 
@@ -34,6 +35,10 @@ export default async function Page() {
     slug: "2024-advanced-volleyball-tracy-hs",
     locale: "en-US",
   });
+
+  if (!content) {
+    return notFound();
+  }
 
   const coverImage = content.fields.coverImage as Asset;
 

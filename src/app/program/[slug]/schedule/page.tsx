@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { Banner, Container, Divider } from "@/components";
 import { RegistrationListing } from "@/modules";
 import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
@@ -7,6 +8,7 @@ import { getPage } from "@/lib/getPage";
 import { Markdown } from "@/lib/markdown";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
+import { TypeMarketingPageProgram } from "@/types/contentful";
 
 type Schedule = {
   week: string;
@@ -14,11 +16,15 @@ type Schedule = {
 };
 
 export default async function SchedulePage({ params }: { params: { slug: string } }) {
-  const content = await getPage({
+  const content = (await getPage({
     pageContentType: "marketingPageProgram",
     slug: params.slug,
     locale: "en-US",
-  });
+  })) as TypeMarketingPageProgram<undefined, string>;
+
+  if (!content || !content.fields) {
+    return notFound();
+  }
 
   const divisionsList = content.fields.divisions as TDivision[];
   const scheduleList = content.fields.schedule as Schedule[];
