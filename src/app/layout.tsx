@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import Navigation from "@/components/navigation/Navigation";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata = {
   title: "Next Level Sport",
@@ -24,6 +25,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </main>
           </Navigation>
         </section>
+
+        <SpeedInsights />
       </body>
     </html>
   );
