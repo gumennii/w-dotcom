@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import Navigation from "@/components/navigation/Navigation";
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <SpeedInsights />
         </AmplitudeContextProvider>
       </body>
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_GTM_ID ?? ""} />
     </html>
   );
 }
