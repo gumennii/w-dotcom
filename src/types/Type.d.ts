@@ -9,7 +9,7 @@ declare namespace Types {
 
   type AvailableBorderRadius = "none" | "small" | "medium" | "large" | "full";
 
-  type TypographyType = "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "q";
+  type TypographyType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "q";
 
-  type AvailableModalMaxWidth = "none" | "small" | "medium" | "large" | "xLarge";
+  type AvailableModalMaxWidth = "none" | "small" | "medium" | "large" | "xLarge" | "2xLarge";
 }

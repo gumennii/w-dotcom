@@ -29,7 +29,7 @@ const TableData: FC<Props> = ({ data, size, hideColumns = [], equalColumns }) =>
             if (hideColumns.indexOf(headCell) === -1) {
               return (
                 <th
-                  className="bg-base-200 text-primary text-base uppercase font-semibold md:text-lg lg:text-xl"
+                  className="bg-base-200 text-primary text-base uppercase font-semibold leading-normal lg:text-lg"
                   key={`head-${i}-${id}`}
                 >
                   {headCell}
@@ -48,7 +48,7 @@ const TableData: FC<Props> = ({ data, size, hideColumns = [], equalColumns }) =>
             {Object.keys(data[row]).map((cell, j) => {
               if (hideColumns.indexOf(cell) === -1) {
                 return (
-                  <td key={`cell-${j}-${id}`} className="text-sm lg:text-base">
+                  <td key={`cell-${j}-${id}`} className="text-sm leading-normal">
                     {data[row][cell]}
                   </td>
                 );

@@ -30,7 +30,7 @@ export const RegistrationListing = ({ programName, programType, divisions, price
   return (
     <Table textAlign={"center"}>
       <Table.Head>
-        <Table.Cell isHead align="left">
+        <Table.Cell isHead align="left" className="pl-7">
           Division
         </Table.Cell>
         <Table.Cell isHead>Price</Table.Cell>
@@ -49,7 +49,7 @@ export const RegistrationListing = ({ programName, programType, divisions, price
               />
             </Table.Cell>
 
-            <Table.Cell className="text-sm lg:text-base lg:w-36">${price}</Table.Cell>
+            <Table.Cell className="font-semibold text-sm lg:text-base lg:w-36">${price}</Table.Cell>
 
             <Table.Cell className="lg:w-52">
               <Button

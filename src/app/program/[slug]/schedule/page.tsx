@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Banner, Container, Divider } from "@/components";
+import { Banner, Container, Divider, Text } from "@/components";
 import { RegistrationListing } from "@/modules";
 import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
 import ProgramNavigation from "@/modules/ProgramNavigation";
@@ -54,9 +54,11 @@ export default async function SchedulePage({ params }: { params: { slug: string 
         </ProgramNavigation.Body>
       </ProgramNavigation>
 
-      <Container maxWidth={MaxWidth.Small} className="flex flex-col gap-y-14 my-14">
+      <Container maxWidth={MaxWidth.Small} className="flex flex-col gap-y-8 my-14">
         <div>
-          <h2 className="font-bold text-2xl mb-6 md:text-3xl lg:text-4xl">Practice & Game Times</h2>
+          <Text type="h2" className="mb-6">
+            Practice & Game Times
+          </Text>
 
           <Table textAlign={"center"} data={gameTimesTableData} />
 
@@ -68,7 +70,9 @@ export default async function SchedulePage({ params }: { params: { slug: string 
         </div>
 
         <div>
-          <h2 className="font-bold text-2xl mb-6 md:text-3xl lg:text-4xl">Game Schedule</h2>
+          <Text type="h2" className="mb-6">
+            Game Schedule
+          </Text>
 
           <Table textAlign={"left"} data={scheduleTableData} equalColumns={false} />
 
@@ -80,7 +84,7 @@ export default async function SchedulePage({ params }: { params: { slug: string 
         </div>
 
         <div>
-          <h2 className="font-bold text-2xl mb-6 md:text-3xl lg:text-4xl" id="registration">
+          <h2 className="font-sant font-bold text-xl md:text-2xl lg:text-3xl mb-4" id="registration">
             Registration Listing
           </h2>
           <RegistrationListing

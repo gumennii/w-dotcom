@@ -37,7 +37,7 @@ export default async function OperationsPage({ params }: { params: { slug: strin
       </ProgramNavigation>
 
       <Container maxWidth={MaxWidth.Small}>
-        <Text type="h2" className="mt-10 mb-8">
+        <Text type="h2" className="mt-10 mb-6">
           League Operations
         </Text>
         <div className="prose season">{documentToReactComponents(leagueOperations)}</div>
@@ -45,14 +45,14 @@ export default async function OperationsPage({ params }: { params: { slug: strin
 
       <Divider className="max-w-4xl m-auto mt-4 lg:mt-8" />
 
-      <Container maxWidth={MaxWidth.Small} className="flex flex-col gap-y-14 my-14">
+      <Container maxWidth={MaxWidth.Small} className="flex flex-col gap-y-8 my-8">
         <Profile title="Site Director" contents={siteDirectorData} />
       </Container>
 
       <Divider className="max-w-4xl m-auto mt-4 lg:mt-8" />
 
-      <Container maxWidth={MaxWidth.Small} className="flex flex-col my-14">
-        <h2 className="mb-6 text-2xl font-bold md:text-3xl lg:text-4xl" id="registration">
+      <Container maxWidth={MaxWidth.Small} className="flex flex-col mt-8 mb-14">
+        <h2 className="font-sant font-bold text-xl md:text-2xl lg:text-3xl mb-4" id="registration">
           Registration Listing
         </h2>
         <RegistrationListing

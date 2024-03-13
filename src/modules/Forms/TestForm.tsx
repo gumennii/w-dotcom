@@ -3,18 +3,19 @@
 import { useState, FormEvent } from "react";
 import classNames from "classnames";
 import { Text, Button } from "@/components";
+import Select, { SelectOption } from "@/components/Select";
 import Link from "next/link";
 
-export type SubscribeProps = {
+export type TestFormProps = {
   title: string;
   descriprion: string;
   className?: string;
-  variant?: "tight" | "wide" | "modal";
 };
 
-export const Subscribe = ({ title, descriprion, className, variant = "tight" }: SubscribeProps) => {
+export const TestForm = ({ title, descriprion, className }: TestFormProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [select, setSelect] = useState<string>("default");
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,48 +46,46 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight" }: 
   return (
     <div
       className={classNames(
-        "w-full flex flex-col gap-y-4 justify-between items-center lg:gap-y-6",
-        variant === "wide" ? "lg:flex-row sm:py-16 sm:px-4 md:px-8 lg:px-4 xl:px-0" : "",
-        variant === "modal" ? "text-primary p-0" : "text-white py-8 px-4 sm:p-10",
+        "w-full flex flex-col gap-y-4 justify-between items-center lg:gap-y-6 p-8 text-white",
         className
       )}
     >
-      <div className={classNames("w-full", variant === "wide" ? "lg:w-[38%] lg:pl-2 xl:w-[36%]" : "")}>
-        <Text type={variant === "modal" ? "h4" : "h2"} className={variant === "modal" ? "mb-1" : "mb-2 sm:mb-4"}>
-          {title}
-        </Text>
+      <div className="w-full text-center">
+        <Text type="h2">{title}</Text>
         <Text type="p">{descriprion}</Text>
       </div>
-      <div className={classNames("w-full", variant === "wide" ? "lg:w-[58%] xl:w-[60%]" : "")}>
-        <form
-          onSubmit={onSubmit}
-          className={classNames(
-            "flex flex-col gap-y-4 justify-between items-center md:gap-4",
-            variant === "modal" ? "md:flex-col" : "md:flex-row"
-          )}
-        >
-          <div
-            className={classNames("flex flex-col gap-4 w-full", variant === "modal" ? "sm:flex-col" : "sm:flex-row")}
-          >
-            <input type="text" name="name" placeholder="Your Name" className="p-4 rounded w-full text-primary shadow" />
+      <div className="w-full">
+        <form onSubmit={onSubmit} className="flex flex-col gap-y-4 justify-between items-center md:gap-4 md:flex-col">
+          <div className="flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-4 w-full md:flex-row">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                className="p-4 rounded-md w-full text-primary shadow"
+              />
+              <Select value={select} onChange={event => setSelect(event.target.value)} className="rounded-md w-full">
+                <SelectOption value={"default"}>Participant Grade Level</SelectOption>
+                <SelectOption value={"Level1"}>Level 1</SelectOption>
+                <SelectOption value={"Level2"}>Level 2</SelectOption>
+                <SelectOption value={"Level3"}>Level 3</SelectOption>
+              </Select>
+            </div>
             <input
               type="email"
               name="email"
               placeholder="Your Email"
-              className="p-4 rounded w-full text-primary shadow"
+              className="p-4 rounded-md w-full text-primary shadow"
             />
           </div>
           <Button
             style="secondary"
             copy={isLoading ? "Loading" : "Sign up"}
             rounded
-            className={classNames(
-              isLoading ? "pointer-events-none opacity-50" : "",
-              variant === "modal" ? "w-full" : "w-full md:w-auto"
-            )}
+            className={classNames(isLoading ? "pointer-events-none opacity-50" : "", "w-full")}
           />
         </form>
-        <div className="mt-4">
+        <div className="mt-4 text-center">
           {errorMsg ? (
             <Text type="p" className="text-error">
               {errorMsg}

@@ -2,38 +2,44 @@
   max-width: 100%;
 }
 .prose.season h2 {
+  font-family: "Roboto", sans-serif;
+  font-size: 2.041rem;
+  line-height: 130%;
   margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 .prose.season h4 {
-  font-size: 1.5rem;
+  font-size: 1.215rem;
+  line-height: 130%;
   margin-top: 1em;
   margin-bottom: 0.25em;
 }
 .prose.season h2 b {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 2.041rem;
+  line-height: 130%;
   font-weight: 700;
 }
 
 .prose.season p {
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 140%;
+  color: #081121;
 }
 
 @media (max-width: 1024px) {
+  .prose.season h2,
   .prose.season h2 b {
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: 1.793rem;
   }
   .prose.season p {
     font-size: 0.875rem;
-    line-height: 1.25rem;
   }
 }
 
 @media (max-width: 768px) {
+  .prose.season h2,
   .prose.season h2 b {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+    font-size: 1.575rem;
   }
 }

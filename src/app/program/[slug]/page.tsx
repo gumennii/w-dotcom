@@ -5,11 +5,12 @@ import ProgramNavigation from "@/modules/ProgramNavigation";
 import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
-import { Container, Banner, Image, Divider } from "@/components";
+import { Container, Banner, Image, Divider, InteractiveModal } from "@/components";
 import { Asset } from "contentful";
 import { Document } from "@contentful/rich-text-types";
 import { Markdown } from "@/lib/markdown";
 import { Subscribe } from "@/modules";
+import { TestForm } from "@/modules/Forms";
 import { TypeMarketingPageProgram } from "@/types/contentful";
 
 export default async function ProgramPage({ params }: { params: { slug: string } }) {
@@ -28,6 +29,12 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
   return (
     <>
+      <InteractiveModal position={50} maxWidth="2xLarge" className="bg-[#0F2344] rounded-xl">
+        <TestForm
+          title="Stay in The Game"
+          descriprion="Sign up for our Flag Football Program at Alhambra High School Offseason Newsletter to stay up to date."
+        />
+      </InteractiveModal>
       <Banner programName={content.fields.programName as string} programType={content.fields.programType as string} />
 
       <ProgramNavigation>
@@ -64,14 +71,14 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <Subscribe
           title="Want news and updates?"
           descriprion="Sign up for our newsletter to stay up to date."
-          className="rounded-md bg-primary"
+          className="rounded-2xl bg-[#051227]"
         />
       </Container>
 
       <Divider className="m-auto max-w-4xl mt-4 lg:mt-8" />
 
-      <Container maxWidth={MaxWidth.Small} className="flex flex-col my-14">
-        <h2 className="text-primary text-3xl font-bold mb-4" id="registration">
+      <Container maxWidth={MaxWidth.Small} className="flex flex-col my-8">
+        <h2 className="font-sant font-bold text-xl md:text-2xl lg:text-3xl mb-4" id="registration">
           Registration Listing
         </h2>
         <RegistrationListing
@@ -83,7 +90,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       </Container>
 
       <div className="bg-[#0F2344]">
-        <Container maxWidth={MaxWidth.Large}>
+        <Container maxWidth={MaxWidth.Footer}>
           <Subscribe
             title="Stay Tuned For Updates"
             descriprion="Stay informed about our Flag Football program at Alhambra High School! Subscribe to our offseason newsletter for exclusive updates, thrilling highlights, and insider insights."

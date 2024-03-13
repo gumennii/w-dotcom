@@ -11,3 +11,4 @@ export { Container } from "./Container";
 export { Video, type VideoProps } from "./Video";
 export { Text, type TextProps } from "./Text";
 export { Modal, type ModalProps } from "./Modal";
+export { InteractiveModal, type InteractiveModalProps } from "./InteractiveModal";

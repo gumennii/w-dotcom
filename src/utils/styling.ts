@@ -18,6 +18,7 @@ export enum MaxWidth {
   Large = "Large",
   Medium = "Medium",
   Small = "Small",
+  Footer = "Footer",
   None = "None",
 }
 
@@ -110,6 +111,8 @@ export const getMaxWidth = (width?: MaxWidth) => {
       return "max-w-full";
     case MaxWidth.None:
       return "";
+    case MaxWidth.Footer:
+      return "m-auto max-w-screen-lg";
     default:
       return "";
   }
@@ -118,19 +121,19 @@ export const getMaxWidth = (width?: MaxWidth) => {
 export const getButtonClass = (style?: Types.ButtonStyles) => {
   switch (style) {
     case "primary":
-      return "btn-primary text-white normal-case";
+      return "btn-primary text-white normal-case text-sm font-roboto";
     case "secondary":
-      return "btn-secondary text-white";
+      return "btn-secondary text-white text-sm font-roboto";
     case "accent":
-      return "btn-accent";
+      return "btn-accent text-sm font-roboto";
     case "ghost":
-      return "btn-ghost";
+      return "btn-ghost text-sm font-roboto";
     case "link":
       return "btn-link";
     case "outline":
-      return "btn-outline text-primary border-primary";
+      return "btn-outline text-primary border-primary text-sm font-roboto";
     default:
-      return "btn-primary";
+      return "btn-primary text-sm font-roboto";
   }
 };
 
@@ -191,21 +194,23 @@ export const getButtonAnimationClass = (style: Types.ButtonStyles, animationType
 export const getTypographyClass = (style?: Types.TypographyType) => {
   switch (style) {
     case "h1":
-      return "font-bold text-3xl italic uppercase md:text-4xl lg:text-5xl";
+      return "font-roboto leading-normal font-bold text-3xl italic uppercase md:text-4xl lg:text-5xl";
     case "h2":
-      return "font-bold text-2xl md:text-3xl lg:text-4xl";
+      return "font-sant leading-normal font-bold text-xl md:text-2xl lg:text-3xl";
     case "h3":
-      return "font-semibold text-xl md:text-2xl lg:text-3xl";
+      return "font-sant leading-normal font-semibold text-lg md:text-xl lg:text-2xl";
     case "h4":
-      return "font-semibold text-lg md:text-xl lg:text-2xl";
+      return "font-sant leading-normal font-semibold text-base md:text-lg lg:text-xl";
     case "h5":
-      return "font-semibold text-sm lg:text-base";
+      return "font-semibold leading-normal text-sm md:text-base lg:text-lg";
+    case "h6":
+      return "font-normal leading-normal text-sm md:text-base lg:text-lg";
     case "p":
-      return "font-normal text-sm lg:text-base";
+      return "font-normal leading-normal text-sx md:text-sm lg:text-base";
     case "q":
-      return "font-medium text-lg italic md:text-xl lg:text-2xl";
+      return "font-sant leading-normal font-medium text-lg italic md:text-xl lg:text-2xl";
     default:
-      return "font-normal text-base";
+      return "font-normal leading-normal text-[0.878rem] md:text-sx lg:text-sm";
   }
 };
 
@@ -219,6 +224,8 @@ export const getModalMaxWidth = (maxWidth: Types.AvailableModalMaxWidth) => {
       return "max-w-lg";
     case "xLarge":
       return "max-w-xl";
+    case "2xLarge":
+      return "max-w-2xl";
     default:
       return "max-w-max";
   }

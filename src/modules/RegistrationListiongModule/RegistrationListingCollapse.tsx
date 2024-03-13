@@ -26,23 +26,25 @@ const RegistrationListingCollapse = ({
 
   return (
     <Collapse open={open} onOpen={onOpen} onClose={onClose}>
-      <Collapse.Title className="text-xl font-medium cursor-pointer">
+      <Collapse.Title className="leading-normal text-sm lg:text-base font-semibold cursor-pointer">
         {programType} {division.Location} • {division.divisionName}
-        <p className="text-sm lg:text-base font-normal">Registration closes on: {division.registrationEnd}</p>
-        <p className="text-sm lg:text-base font-normal">
+        <p className="leading-normal text-xs lg:text-sm font-normal">
+          Registration closes on: {division.registrationEnd}
+        </p>
+        <p className="leading-normal text-xs lg:text-sm font-normal">
           Season dates: {division.seasonStart} to {division.seasonEnd}
         </p>
-        <p className="text-base underline font-normal">{toggleText}</p>
+        <p className="leading-normal text-xs lg:text-sm underline font-normal">{toggleText}</p>
       </Collapse.Title>
       <Collapse.Content>
-        <p className="text-sm lg:text-base">
+        <p className="leading-normal text-xs lg:text-sm">
           {division.divisionName} - {programName}
         </p>
-        <ul className="list-disc list-inside ml-3">
-          <li className="text-sm lg:text-base">
+        <ul className="leading-normal list-disc list-inside ml-3">
+          <li className="leading-normal text-xs lg:text-sm">
             {division.divisionName} - {programName}
           </li>
-          <li className="text-sm lg:text-base">
+          <li className="leading-normal text-xs lg:text-sm">
             Maximum of {division.divisionMaxPlayers} players ({division.divisionTeamCount} Teams,{" "}
             {division.divisionTeamSize} players per team)
           </li>

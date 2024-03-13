@@ -14,11 +14,11 @@ export const GeneralProgramOperation = ({ coverVideo, programType, slug }: Gener
   return (
     <Container maxWidth={MaxWidth.Small}>
       <Video url={coverVideo} />
-      <Text type="h3" className="my-4">
+      <Text type="h2" className="mt-8 mb-4">
         General Program Operation and Additional Information
       </Text>
       <div className="flex flex-col justify-between items-center gap-y-4 md:flex-row">
-        <Text type="p" className="w-full md:w-[70%]">
+        <Text type="h6" className="w-full md:w-[70%]">
           {`Review the general program operations, program information and philosophies of the Next Level ${programType}
           program`}
         </Text>

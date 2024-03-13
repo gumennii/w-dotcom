@@ -10,9 +10,13 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Roboto", ...fontFamily.sans],
+        roboto: ["Roboto Condensed", "sans-serif"],
       },
       width: {
         "screen-xl": "1440px",
+      },
+      maxWidth: {
+        "screen-lg": "1312px",
       },
       blur: {
         xs: "2px",
@@ -21,6 +25,16 @@ export default {
         primary: "#081121",
         secondary: "#EC612A",
         accent: "#24A840",
+      },
+      fontSize: {
+        sx: "0.937rem",
+        sm: "1rem",
+        base: "1.067rem",
+        lg: "1.215rem",
+        xl: "1.575rem",
+        "2xl": "1.793rem",
+        "3xl": "2.041rem",
+        "4xl": "2.479rem",
       },
     },
   },

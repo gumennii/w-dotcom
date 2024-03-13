@@ -29,10 +29,10 @@ const ProgramNavigationLinks = React.forwardRef<HTMLDivElement, ProgramNavigatio
             className={cn(
               `${
                 link.href === pathname
-                  ? "bg-primary font-medium text-white opacity-90 pointer-events-none"
+                  ? "bg-[#0e2344] font-medium text-white pointer-events-none"
                   : "bg-inherit font-normal text-primary hover:bg-secondary hover:text-white"
               }`,
-              "mr-1 hidden h-11 items-center justify-center rounded-lg px-4 text-lg md:inline-flex"
+              "mr-1 hidden h-11 items-center justify-center rounded-lg px-4 text-base md:inline-flex"
             )}
           >
             {link.name}
@@ -60,7 +60,7 @@ const ProgramDropdown = ({ links }: ProgramDropdownProps) => {
               anchor
               href={link.href}
               key={link.href}
-              className={link.href === pathname ? "bg-primary text-white opacity-90 pointer-events-none" : ""}
+              className={link.href === pathname ? "bg-[#0e2344] text-white pointer-events-none" : ""}
             >
               {link.name}
             </Dropdown.Item>

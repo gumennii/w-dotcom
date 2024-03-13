@@ -128,7 +128,9 @@ export const Header = ({ children }: PropsWithChildren) => {
                                   }
                                 }}
                               >
-                                <Link href={menuItem.href}>{menuItem.name}</Link>
+                                <Link href={menuItem.href} className="text-base">
+                                  {menuItem.name}
+                                </Link>
                               </button>
                               {menuItem.menu && (
                                 <ul
