@@ -36,6 +36,9 @@ export default {
         "3xl": "2.041rem",
         "4xl": "2.479rem",
       },
+      lineHeight: {
+        normal: "130%",
+      },
     },
   },
   future: {

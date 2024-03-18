@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import cn from "@/utils/cn";
+import "@/styles/nestedDropdown.css";
 
 export type DrawerProps = React.HTMLAttributes<HTMLDivElement> & {
   side: ReactNode;
@@ -33,7 +34,7 @@ const Drawer = ({
     <div aria-expanded={open} {...props} className={classes}>
       <input type="checkbox" className={cn("drawer-toggle", toggleClassName)} checked={open} readOnly />
       <div className={cn("drawer-content", contentClassName)}>{children}</div>
-      <div className={cn("drawer-side overflow-x-hidden lg:hidden", sideClassName)}>
+      <div className={cn("drawer-side overflow-x-hidden mobile-menu-button", sideClassName)}>
         <label className={cn("drawer-overlay", overlayClassName)} onClick={onClickOverlay}></label>
         {side}
       </div>

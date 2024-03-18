@@ -2,6 +2,7 @@ import { FC } from "react";
 import ContentfulImage from "@/lib/contentful-image";
 import classNames from "classnames";
 import Link from "next/link";
+import cn from "@/utils/cn";
 
 export type ImageProps = {
   src?: string;
@@ -10,29 +11,38 @@ export type ImageProps = {
   alt?: string;
   link?: string;
   borderRadius?: Types.AvailableBorderRadius;
+  className?: string;
 };
 
-export const Image: FC<ImageProps> = ({ src = "/image_not.png", width, height, alt, link, borderRadius = "large" }) => {
+export const Image: FC<ImageProps> = ({
+  src = "/image_not.png",
+  width,
+  height,
+  alt,
+  link,
+  borderRadius = "large",
+  className,
+}) => {
   return (
     <>
       {link ? (
         <Link
           href={link}
-          className={classNames("block w-full relative h-max max-w-max", getBorderRadius(borderRadius))}
+          className={cn("block w-full relative h-max max-w-max", getBorderRadius(borderRadius), className)}
         >
           <ContentfulImage
             alt={alt ?? "image"}
-            className={classNames("object-cover h-full bg-slate-400", getBorderRadius(borderRadius))}
+            className={cn("object-cover h-full bg-slate-400", getBorderRadius(borderRadius))}
             height={height}
             width={width}
             src={src}
           />
         </Link>
       ) : (
-        <div className={classNames("w-full relative h-max max-w-max", getBorderRadius(borderRadius))}>
+        <div className={cn("w-full relative h-max max-w-max", getBorderRadius(borderRadius), className)}>
           <ContentfulImage
             alt={alt ?? "image"}
-            className={classNames("object-cover h-full bg-slate-400", getBorderRadius(borderRadius))}
+            className={cn("object-cover h-full", getBorderRadius(borderRadius))}
             height={height}
             width={width}
             src={src}

@@ -3,6 +3,9 @@
 import { FC, ReactNode, useState, useEffect, useCallback } from "react";
 import classNames from "classnames";
 import { getModalMaxWidth } from "@/utils/styling";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { hasCookie, setCookie } from "cookies-next";
 
 export type InteractiveModalProps = {
   maxWidth: Types.AvailableModalMaxWidth;
@@ -19,9 +22,18 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
   position,
   className,
 }) => {
+  const [showForm, setShowForm] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [display, setDisplay] = useState(true);
+
+  useEffect(() => {
+    setShowForm(hasCookie("showTestingForm"));
+  }, []);
+
+  useEffect(() => {
+    setDisplay(!hasCookie("displayForm"));
+  }, []);
 
   const onToggleModal = useCallback(() => {
     setShowModal(prev => !prev);
@@ -52,8 +64,20 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
     if (scrollPercentage >= position && display) {
       setShowModal(true);
       setDisplay(false);
+      setCookie("displayForm", "true", {
+        maxAge: 60 * 60 * 24,
+      });
     }
-  }, [scrollPercentage]);
+  }, [display, position, scrollPercentage]);
+
+  const testPassed = () => {
+    setShowForm(true);
+    setCookie("showTestingForm", "true", {});
+  };
+
+  if (showForm) {
+    return null;
+  }
 
   return (
     <div>
@@ -66,7 +90,7 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
       >
         <div className={classNames("modal-box p-0", getModalMaxWidth(maxWidth), className)}>
           <div onClick={onToggleModal} className="btn btn-circle btn-ghost btn-md absolute right-4 top-4 text-white">
-            ✕
+            <FontAwesomeIcon icon={faXmark} size="xl" />
           </div>
           {children}
         </div>

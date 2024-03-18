@@ -11,4 +11,6 @@ export { Container } from "./Container";
 export { Video, type VideoProps } from "./Video";
 export { Text, type TextProps } from "./Text";
 export { Modal, type ModalProps } from "./Modal";
+export { default, type SportTypeCardProps } from "./SportTypeCard";
 export { InteractiveModal, type InteractiveModalProps } from "./InteractiveModal";
+export { CookieConsent } from "./CookieConsent";

@@ -8,6 +8,7 @@ import { faChevronRight, faLocationDot } from "@fortawesome/free-solid-svg-icons
 import { genereateRandomId } from "@/utils/navigation";
 import useWindowSize from "@/hooks/windowResize";
 import { MaxWidth } from "@/utils/styling";
+import cn from "@/utils/cn";
 import { Container } from "../Container";
 import { Button } from "../Button";
 import { Logo } from "../Logo";
@@ -70,7 +71,7 @@ export const Header = ({ children }: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    if (visible && width > 1024) {
+    if (visible && width > 1180) {
       toggleHideMobileMenu();
     }
   });
@@ -87,15 +88,15 @@ export const Header = ({ children }: PropsWithChildren) => {
       <div className="border border-solid border-white text-primary lg:px-8">
         <Container maxWidth={MaxWidth.Large}>
           <div className="navbar p-0 relative">
-            <div className="flex items-center justify-between w-full lg:justify-start">
+            <div className="flex items-center justify-between w-full navbar-menu">
               <Link href={homeButton?.href ? homeButton?.href : "#"} className="mr-1 cursor-pointer">
                 <Logo />
               </Link>
-              <div className="flex-none lg:hidden z-30">
+              <div className="flex-none mobile-menu-button z-30">
                 <label
                   htmlFor="mobile-menu-1"
                   onClick={toggleShowMobileMenu}
-                  className="btn btn-ghost px-0 hover:bg-transparent lg:hidden"
+                  className="btn btn-ghost px-0 hover:bg-transparent min-[1180px]:hidden"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -108,20 +109,20 @@ export const Header = ({ children }: PropsWithChildren) => {
                   </svg>
                 </label>
               </div>
-              <div className="hidden w-full justify-center lg:flex items-center">
+              <div className="navbar-links w-full justify-center items-center max-h-16">
                 <ul className="menu menu-horizontal items-center shrink-0 gap-1 p-0 px-1">
                   {menu?.length > 0 &&
                     menu.map((menuItem, i) => {
                       const key = genereateRandomId(`${menuItem.name}_${i}`);
                       return (
-                        <li key={key} className="group inline-block">
+                        <li key={key} className="group inline-block z-30">
                           {menuItem.name !== "Home" && (
                             <>
                               <button
                                 aria-haspopup="true"
                                 aria-controls="menu"
                                 tabIndex={i}
-                                className="outline-none focus:outline-none menu-link lg:p-2 lg:my-4 cursor-pointer"
+                                className="outline-none focus:outline-none menu-link lg:px-2 lg:my-3 cursor-pointer"
                                 onKeyDown={e => {
                                   if (e.key === "Enter") {
                                     push(menuItem.href ? menuItem.href : "#");
@@ -136,7 +137,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                 <ul
                                   id="menu"
                                   aria-hidden="true"
-                                  className="bg-white rounded-lg max-h-[45.25rem] shadow-md transform scale-0 focus-within:scale-100 group-hover:scale-100 absolute mt-1 transition duration-400 ease-in-out origin-top min-w-60 py-2 px-0 z-10"
+                                  className="bg-white rounded-lg max-h-[45.25rem] shadow-md transform scale-0 focus-within:scale-100 group-hover:scale-100 absolute mt-2 transition duration-400 ease-in-out origin-top min-w-60 py-2 px-0 z-10"
                                 >
                                   {menuItem.menu.map((item: MenuItem, j) => {
                                     const key = genereateRandomId(`${item.name}_${j}`);
@@ -148,7 +149,9 @@ export const Header = ({ children }: PropsWithChildren) => {
                                           aria-haspopup="true"
                                           tabIndex={i}
                                           aria-controls={item.name}
-                                          className="w-full flex outline-none focus:outline-none"
+                                          className={cn("w-full flex outline-none focus:outline-none", {
+                                            "pointer-events-none": !item.href || item.href === "#",
+                                          })}
                                         >
                                           <Link href={item.href ? item.href : "#"} className="flex w-full">
                                             <div className="w-full flex items-center justify-between gap-6">
@@ -178,7 +181,9 @@ export const Header = ({ children }: PropsWithChildren) => {
                                                     aria-haspopup="true"
                                                     tabIndex={i}
                                                     aria-controls={subItem.name}
-                                                    className="w-full flex outline-none focus:outline-none"
+                                                    className={cn("w-full flex outline-none focus:outline-none", {
+                                                      "pointer-events-none": !subItem.href || subItem.href === "#",
+                                                    })}
                                                   >
                                                     <Link
                                                       href={subItem.href ? subItem.href : "#"}
@@ -243,7 +248,7 @@ export const Header = ({ children }: PropsWithChildren) => {
               </div>
             </div>
 
-            <div className="hidden lg:flex gap-4">
+            <div className="navbar-links gap-4">
               {/* Desktop Locations Dropdown */}
               <details className="dropdown">
                 <summary tabIndex={8} className="flex items-center justify-center p-1 hover:cursor-pointer relative">

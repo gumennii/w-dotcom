@@ -2,6 +2,7 @@ import React, { FC } from "react";
 import Link from "next/link";
 import cn from "@/utils/cn";
 import ContentfulImage from "@/lib/contentful-image";
+import { Text } from "@/components";
 
 export interface Logo {
   imagePath: string;
@@ -21,11 +22,11 @@ const LogoCloud: FC<LogoCloudProps> = ({ title, logos, className, ...props }) =>
       aria-label="Logo Cloud"
       {...props}
       className={cn(
-        "flex flex-col lg:flex-row items-center lg:justify-between gap-x-6 gap-y-8 py-16 px-8 md:px-6 lg:px-8 text-primary",
+        "flex flex-col lg:flex-row items-center lg:justify-between gap-x-6 gap-y-8 py-16 text-primary",
         className
       )}
     >
-      <h2 className="text-2xl md:text-3xl lg:text-3xl font-bold">{title}</h2>
+      <Text type="h2">{title}</Text>
       <div className="flex gap-x-4 md:gap-x-8 lg:gap-x-16 items-center">
         {logos.map((logo: Logo) => {
           const { linkPath, imagePath, altText } = logo;

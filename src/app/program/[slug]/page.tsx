@@ -29,7 +29,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
   return (
     <>
-      <InteractiveModal position={50} maxWidth="2xLarge" className="bg-[#0F2344] rounded-xl">
+      <InteractiveModal position={50} maxWidth="2xLarge" className="bg-[#051227] rounded-xl">
         <TestForm
           title="Stay in The Game"
           descriprion="Sign up for our Flag Football Program at Alhambra High School Offseason Newsletter to stay up to date."

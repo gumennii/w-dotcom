@@ -17,3 +17,24 @@ li > button svg {
 li:hover > button svg {
   transform: rotate(-270deg);
 }
+
+.mobile-menu-button {
+  @media (min-width: 1180px) {
+    display: none;
+  }
+}
+.navbar-links {
+  @media (max-width: 1180px) {
+    display: none;
+  }
+
+  @media (min-width: 1180px) {
+    display: flex;
+  }
+}
+
+.navbar-menu {
+  @media (min-width: 1180px) {
+    justify-content: start;
+  }
+}

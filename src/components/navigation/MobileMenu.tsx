@@ -52,7 +52,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
                   <label
                     htmlFor="mobile-menu-1"
                     onClick={toggleHideSide}
-                    className="btn btn-ghost px-0 hover:bg-transparent lg:hidden"
+                    className="btn btn-ghost px-0 hover:bg-transparent"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
