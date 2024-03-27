@@ -1,9 +1,9 @@
-import { Container } from "@/components";
-import { MaxWidth } from "@/utils/styling";
+import Link from "next/link";
 import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getYear } from "date-fns";
-import Link from "next/link";
+import { MaxWidth } from "@/utils/styling";
+import { Container } from "@/components";
 
 export const Footer = () => (
   <div className="bg-primary px-4">

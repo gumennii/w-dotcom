@@ -6,7 +6,7 @@ export { Divider } from "./Divider";
 export { Footer } from "./navigation/Footer";
 export { Header } from "./navigation/Header";
 export { Image, type ImageProps } from "./Image";
-export { Logo } from "./Logo";
+// export { Logo } from "./Icons/Logo";
 export { Container } from "./Container";
 export { Video, type VideoProps } from "./Video";
 export { Text, type TextProps } from "./Text";

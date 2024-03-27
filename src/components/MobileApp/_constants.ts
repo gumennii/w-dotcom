@@ -1,6 +1,7 @@
 export type AppsLinks = {
+  key?: string;
   href?: string;
-  src: string;
+  src?: string;
   alt: string;
   width?: number;
   height?: number;
@@ -8,13 +9,13 @@ export type AppsLinks = {
 
 export const defaultAppsLinks: AppsLinks[] = [
   {
+    key: "appStore",
     href: "#",
-    src: "/icons/app-store.svg",
     alt: "App Store",
   },
   {
+    key: "googlePlay",
     href: "#",
-    src: "/icons/google-play.svg",
     alt: "Google Play",
   },
 ];

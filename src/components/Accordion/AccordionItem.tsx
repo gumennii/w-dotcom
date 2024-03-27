@@ -2,6 +2,8 @@
 
 import { FC, useCallback, useState } from "react";
 import classNames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
 type AccordionItemProps = {
   title: string;
@@ -22,23 +24,9 @@ export const AccordionItem: FC<AccordionItemProps> = ({ title, description, clas
         <p className="text-start text-primary">{title}</p>
         <div className="flex items-center">
           {isOpened ? (
-            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M7.50013 0L0 7.13651L1.95843 9L7.5 3.7271L13.0416 9L15 7.13651L7.50013 0Z"
-                fill="#d4d4d4"
-              />
-            </svg>
+            <FontAwesomeIcon icon={faAngleUp} color="#d4d4d4" />
           ) : (
-            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M7.49987 9L15 1.86349L13.0416 0L7.5 5.2729L1.95843 0L0 1.86349L7.49987 9Z"
-                fill="#d4d4d4"
-              />
-            </svg>
+            <FontAwesomeIcon icon={faAngleDown} color="#d4d4d4" className="mt-1" />
           )}
         </div>
       </button>

@@ -4,19 +4,20 @@ import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faChevronRight, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { genereateRandomId } from "@/utils/navigation";
 import useWindowSize from "@/hooks/windowResize";
 import { MaxWidth } from "@/utils/styling";
 import cn from "@/utils/cn";
 import { Container } from "../Container";
 import { Button } from "../Button";
-import { Logo } from "../Logo";
+import { Logo } from "../Icons";
 import { infoNavigationItems, menu } from "./menu";
 import MenuDropdown from "../Menu/MenuDropdown";
 import Drawer from "./Drawer";
 import MobileMenu from "./MobileMenu";
 import "@/styles/nestedDropdown.css";
+import { BarsMenuIcon } from "../Icons";
 
 type MenuItem = {
   name: string;
@@ -98,15 +99,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                   onClick={toggleShowMobileMenu}
                   className="btn btn-ghost px-0 hover:bg-transparent min-[1180px]:hidden"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                  </svg>
+                  <BarsMenuIcon className="h-8 w-8" />
                 </label>
               </div>
               <div className="navbar-links w-full justify-center items-center max-h-16">
@@ -253,15 +246,7 @@ export const Header = ({ children }: PropsWithChildren) => {
               <details className="dropdown">
                 <summary tabIndex={8} className="flex items-center justify-center p-1 hover:cursor-pointer relative">
                   <FontAwesomeIcon icon={faLocationDot} className="mr-1 w-4 h-4" />
-                  <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-                    <path
-                      d="M13.1673 6.85352L8.50065 11.5202L3.83398 6.85352"
-                      stroke="#818389"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <FontAwesomeIcon icon={faAngleDown} color="#818389" className="mt-0.5" />
                 </summary>
                 <ul
                   tabIndex={8}

@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import cn from "@/utils/cn";
 import { Image, Text } from "@/components";
+import { AppStoreIcon, GooglePlayIcon } from "../Icons";
 
 import { AppsLinks, defaultAppsLinks, desktopImages, tabletAndMobileImages } from "./_constants";
 import useWindowSize from "@/hooks/windowResize";
@@ -14,6 +15,16 @@ export type MobileAppProps = React.HTMLAttributes<HTMLDivElement> & {
   title?: string;
   subtitle?: string;
   appsLinks?: AppsLinks[];
+};
+
+type TStoresIcons = {
+  appStore: JSX.Element;
+  googlePlay: JSX.Element;
+};
+
+const appsLinksIconsMap: TStoresIcons = {
+  appStore: <AppStoreIcon />,
+  googlePlay: <GooglePlayIcon />,
 };
 
 const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
@@ -87,10 +98,11 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
             </Text>
             <div className={`flex gap-x-4 `}>
               {appsLinks?.map(link => {
+                const linkIcon = link.key as keyof TStoresIcons;
                 return (
                   <button key={link.alt}>
                     <Link href={link.href ?? "#"} target="_blank">
-                      <Image src={link.src} alt={link.alt} width={180} height={50} borderRadius="small" />
+                      {appsLinksIconsMap[linkIcon]}
                     </Link>
                   </button>
                 );

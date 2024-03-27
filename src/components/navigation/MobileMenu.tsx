@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { genereateRandomId } from "@/utils/navigation";
 import { menu } from "./menu";
-import { Logo } from "../Logo";
+import { Logo } from "../Icons";
 import MenuDropdown from "../Menu/MenuDropdown";
 import { Button } from "../Button";
+import { BarsMenuIcon } from "../Icons";
 
 type MenuItem = {
   name: string;
@@ -54,15 +55,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
                     onClick={toggleHideSide}
                     className="btn btn-ghost px-0 hover:bg-transparent"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-8 w-8"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
-                    </svg>
+                    <BarsMenuIcon className="h-8 w-8" />
                   </label>
                 </div>
               )}
@@ -143,15 +136,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
         <details className="dropdown absolute w-full left-0">
           <summary tabIndex={1} className="flex pl-6 items-center justify-start py-4 hover:cursor-pointer">
             <FontAwesomeIcon icon={faLocationDot} className="mr-1 w-4 h-4" />
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
-              <path
-                d="M13.1673 6.85352L8.50065 11.5202L3.83398 6.85352"
-                stroke="#818389"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <FontAwesomeIcon icon={faAngleDown} color="#818389" className="mt-0.5" />
           </summary>
           <ul
             tabIndex={1}
