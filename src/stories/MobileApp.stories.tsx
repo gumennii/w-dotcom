@@ -1,7 +1,7 @@
 import type { StoryFn as Story, Meta } from "@storybook/react";
 
-import MobileApp, { MobileAppProps } from "../components/MobileApp";
-import { AppsLinks } from "../components/MobileApp/_constants";
+import MobileApp, { MobileAppProps } from "../components/modules/MobileApp";
+import { AppsLinks } from "../components/modules/MobileApp/_constants";
 
 const appsLinks: AppsLinks[] = [
   {

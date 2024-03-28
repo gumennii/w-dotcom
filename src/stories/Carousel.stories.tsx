@@ -1,8 +1,7 @@
 import React from "react";
 import { StoryFn as Story, Meta } from "@storybook/react";
 
-import Carousel, { CarouselProps } from "../components/Carousel";
-import { Button } from "../components/Button";
+import { Carousel, CarouselProps, Button } from "@/components/ui";
 
 export default {
   title: "Data Display/Carousel",

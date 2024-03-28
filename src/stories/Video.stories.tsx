@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Video, VideoProps } from "@/components";
-import { Container } from "@/components";
+import { Video, VideoProps } from "@/components/ui";
+import { Container } from "@/components/ui";
 import { MaxWidth } from "@/utils/styling";
 
 const meta: Meta<typeof Video> = {

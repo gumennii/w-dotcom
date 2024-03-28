@@ -1,7 +1,7 @@
 import type { StoryFn as Story, Meta } from "@storybook/react";
 
-import Collapse, { type CollapseProps } from "@/components/Collapse";
-import { Container } from "@/components";
+import Collapse, { type CollapseProps } from "@/components/ui/Collapse";
+import { Container } from "@/components/ui";
 import { MaxWidth } from "@/utils/styling";
 
 export default {

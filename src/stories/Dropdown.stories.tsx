@@ -1,6 +1,5 @@
+import { Dropdown, DropdownProps } from "@/components/ui";
 import type { StoryFn as Story, Meta } from "@storybook/react";
-
-import Dropdown, { type DropdownProps } from "@/components/DropDown";
 
 export default {
   title: "Actions/Dropdown",

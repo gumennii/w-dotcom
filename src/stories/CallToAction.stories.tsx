@@ -1,6 +1,6 @@
 import type { StoryFn as Story, Meta } from "@storybook/react";
-import CallToAction, { CallToActionProps } from "../modules/CallToAction/CallToAction";
-import { images } from "../modules/CallToAction/_constants";
+import { images } from "../components/modules/CallToAction/_constants";
+import { CallToAction, type CallToActionProps } from "@/components/modules";
 
 const argTypes = {
   introText: { control: "text" },

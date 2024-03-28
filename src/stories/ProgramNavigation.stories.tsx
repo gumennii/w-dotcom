@@ -1,7 +1,7 @@
 import type { StoryFn as Story, Meta } from "@storybook/react";
 
-import ProgramNavigation, { type ProgramNavigationProps } from "@/modules/ProgramNavigation";
 import { getProgramNavigationLinks } from "@/utils/navigation";
+import { ProgramNavigation, type ProgramNavigationProps } from "@/components/modules";
 
 export default {
   title: "Modules/Program Navigation",

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Banner } from "@/components";
+import { Banner } from "@/components/ui";
 
 const meta = {
   title: "Modules/Banner",

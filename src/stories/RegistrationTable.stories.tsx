@@ -1,8 +1,8 @@
 import type { StoryFn as Story, Meta } from "@storybook/react";
 
-import { RegistrationListing, type RegistrationListingProps } from "@/modules";
-import { Container } from "@/components";
 import { MaxWidth } from "@/utils/styling";
+import { RegistrationListing, type RegistrationListingProps } from "@/components/modules";
+import { Container } from "@/components/ui";
 
 export default {
   title: "Modules/Registration Table",

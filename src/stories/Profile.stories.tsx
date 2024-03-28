@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Profile from "@/modules/Profile";
+import { Profile } from "@/components/modules";
 
 const meta = {
   title: "Modules/Profile",

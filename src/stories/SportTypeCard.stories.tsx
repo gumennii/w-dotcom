@@ -1,8 +1,8 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Container } from "@/components";
-import SportTypeCard, { SportTypeCardProps } from "@/components/SportTypeCard";
 import { MaxWidth } from "@/utils/styling";
+import { Container } from "@/components/ui";
+import { SportTypeCard, type SportTypeCardProps } from "@/components/modules";
 
 const meta: Meta<typeof SportTypeCard> = {
   title: "Data Display/SportTypeCard",

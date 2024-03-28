@@ -1,17 +1,20 @@
 import { notFound } from "next/navigation";
-import { GeneralProgramOperation, RegistrationListing } from "@/modules";
-import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
-import ProgramNavigation from "@/modules/ProgramNavigation";
 import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
-import { Container, Banner, Image, Divider, InteractiveModal } from "@/components";
 import { Asset } from "contentful";
 import { Document } from "@contentful/rich-text-types";
 import { Markdown } from "@/lib/markdown";
-import { Subscribe } from "@/modules";
-import { TestForm } from "@/modules/Forms";
 import { TypeMarketingPageProgram } from "@/types/contentful";
+import { Container, Banner, Image, Divider, InteractiveModal } from "@/components/ui";
+import {
+  GeneralProgramOperation,
+  ProgramNavigation,
+  RegistrationListing,
+  TestForm,
+  Subscribe,
+  type TDivision,
+} from "@/components/modules";
 
 export default async function ProgramPage({ params }: { params: { slug: string } }) {
   const content = (await getPage({

@@ -1,14 +1,11 @@
 import { notFound } from "next/navigation";
-import { Banner, Container, Divider, Text } from "@/components";
-import { RegistrationListing } from "@/modules";
-import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
-import ProgramNavigation from "@/modules/ProgramNavigation";
-import Table from "@/components/Table/Table";
 import { getPage } from "@/lib/getPage";
 import { Markdown } from "@/lib/markdown";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
 import { TypeMarketingPageProgram } from "@/types/contentful";
+import { Banner, Container, Divider, Table, Text } from "@/components/ui";
+import { ProgramNavigation, RegistrationListing, TDivision } from "@/components/modules";
 
 type Schedule = {
   week: string;

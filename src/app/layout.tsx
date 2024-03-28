@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import Navigation from "@/components/navigation/Navigation";
 import AmplitudeContextProvider from "@/providers/amplitude";
+import { Navigation } from "@/components/modules";
 
 export const metadata = {
   title: "Next Level Sport",

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { GeneralProgramOperation } from "@/modules";
+import { GeneralProgramOperation } from "@/components/modules";
 
 const meta = {
   title: "Modules/Program Operation Info",

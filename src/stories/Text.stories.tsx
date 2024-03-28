@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Text, TextProps } from "@/components";
-import { Container } from "@/components";
+import { Text, TextProps } from "@/components/ui";
+import { Container } from "@/components/ui";
 import { MaxWidth } from "@/utils/styling";
 
 const meta: Meta<typeof Text> = {

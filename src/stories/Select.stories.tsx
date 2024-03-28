@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import type { StoryFn as Story, Meta } from "@storybook/react";
-
-import Select, { type SelectProps } from "@/components/Select";
+import { Select, SelectProps } from "@/components/ui";
 
 const { Option } = Select;
 

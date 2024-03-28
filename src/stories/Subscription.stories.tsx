@@ -1,9 +1,8 @@
 import type { StoryFn as Story, Meta } from "@storybook/react";
 
-import { Subscribe, type SubscribeProps } from "@/modules";
-import { Container, Modal } from "@/components";
 import { MaxWidth } from "@/utils/styling";
-import { TestForm, TestFormProps } from "@/modules/Forms";
+import { Subscribe, type SubscribeProps, TestForm, type TestFormProps } from "@/components/modules";
+import { Container, Modal } from "@/components/ui";
 
 export default {
   title: "Modules/Subscribe Forms",

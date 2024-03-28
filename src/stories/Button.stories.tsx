@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, ButtonProps } from "@/components";
-import { Container } from "@/components";
+import { Button, ButtonProps } from "@/components/ui";
+import { Container } from "@/components/ui";
 import { MaxWidth } from "@/utils/styling";
 
 const buttonStyleOptions = ["primary", "secondary", "accent", "ghost", "outline", "link"];

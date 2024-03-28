@@ -1,15 +1,12 @@
 import { notFound } from "next/navigation";
-import { Banner, Container, Divider, Text } from "@/components";
-import { RegistrationListing } from "@/modules";
-import { type TDivision } from "@/modules/RegistrationListiongModule/RegistrationListing";
-import Profile from "@/modules/Profile";
-import ProgramNavigation from "@/modules/ProgramNavigation";
 import { getPage } from "@/lib/getPage";
 import { TypeMarketingPageProgram, TypePeople } from "@/types/contentful";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
+import { Banner, Container, Divider, Text } from "@/components/ui";
+import { RegistrationListing, Profile, ProgramNavigation, TDivision } from "@/components/modules";
 
 export default async function OperationsPage({ params }: { params: { slug: string } }) {
   const content = (await getPage({

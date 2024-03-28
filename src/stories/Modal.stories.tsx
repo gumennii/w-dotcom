@@ -1,6 +1,6 @@
 import type { StoryFn as Story, Meta } from "@storybook/react";
 
-import { Modal, type ModalProps } from "@/components";
+import { Modal, type ModalProps } from "@/components/ui";
 
 export default {
   title: "Actions/Modal",

@@ -1,14 +1,18 @@
 import { notFound } from "next/navigation";
-import LogoCloud from "@/components/LogoCloud";
 import { getPage } from "@/lib/getPage";
 import { MaxWidth } from "@/utils/styling";
-import { TypeMarketingPageProgram, TypeModuleCTA, TypeWebsiteHomePage } from "@/types/contentful";
 import { Asset } from "contentful";
 import { meta } from "./_metadata";
-import { Container, Divider, Video, Text } from "@/components";
-import { CallToAction, HomePageCarousel, ProgramCards } from "@/modules";
-import MobileApp from "@/components/MobileApp";
-import { CookieConsent } from "@/components";
+import { TypeMarketingPageProgram, TypeModuleCTA, TypeWebsiteHomePage } from "@/types/contentful";
+import { Container, Divider, Video, Text } from "@/components/ui";
+import {
+  CallToAction,
+  HomePageCarousel,
+  LogoCloud,
+  MobileApp,
+  ProgramCards,
+  CookieConsent,
+} from "@/components/modules";
 
 export const metadata = meta;
 

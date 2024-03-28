@@ -1,5 +1,4 @@
-import Table, { TableProps } from "@/components/Table/Table";
-import { Button } from "@/components";
+import { Table, TableProps } from "@/components/ui";
 import type { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Table> = {
