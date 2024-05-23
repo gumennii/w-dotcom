@@ -82,7 +82,7 @@ export const Header = ({ children }: PropsWithChildren) => {
       side={<MobileMenu locations={locationsMenuList} toggleHideSide={toggleHideMobileMenu} />}
       end
     >
-      <div className="border border-solid border-white text-primary lg:px-8">
+      <div className="border border-solid border-white text-primary lg:px-8 fixed w-full bg-white z-[100]">
         <Container maxWidth={MaxWidth.Large}>
           <div className="navbar p-0 relative">
             <div className="flex items-center justify-between w-full navbar-menu">
