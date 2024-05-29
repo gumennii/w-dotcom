@@ -23,11 +23,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <AmplitudeContextProvider>
           <section className="min-h-screen">
-            <Navigation>
-              <main className="pt-16">
-                <div className="min-h-screen">{children}</div>
-              </main>
-            </Navigation>
+            <main>
+              <div className="min-h-screen">{children}</div>
+            </main>
           </section>
 
           <SpeedInsights />
