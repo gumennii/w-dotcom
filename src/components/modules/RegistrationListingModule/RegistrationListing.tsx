@@ -48,12 +48,12 @@ export const RegistrationListing = ({ programName, programType, divisions, price
                       $315.00
                     </span>
                     <span>
-                      <FontAwesomeIcon icon={faUser} className="mr-1 w-6 h-6 text-gray-500" />
+                      <FontAwesomeIcon icon={faUser} className="mr-1 w-3 h-3 text-gray-500" />
 
                       {division.divisionMaxPlayers} players
                     </span>
                     <span>
-                      <FontAwesomeIcon icon={faUsers} className="mr-1 w-6 h-6 text-gray-500" />
+                      <FontAwesomeIcon icon={faUsers} className="mr-1 w-3 h-3 text-gray-500" />
 
                       {division.divisionTeamCount} teams
                     </span>
