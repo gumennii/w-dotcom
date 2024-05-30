@@ -1,7 +1,11 @@
 "use client";
 
-import { Button, Table } from "@/components/ui";
+import { Button, Table, Divider, Container } from "@/components/ui";
 import RegistrationListingCollapse from "./RegistrationListingCollapse";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
+
+// import { RegistrationCard } from "@/components/modules";
 
 export type TDivision = {
   id: number;
@@ -27,40 +31,48 @@ export interface RegistrationListingProps {
 
 export const RegistrationListing = ({ programName, programType, divisions, price }: RegistrationListingProps) => {
   return (
-    <Table textAlign={"center"}>
-      <Table.Head>
-        <Table.Cell isHead align="left" className="pl-7">
-          Division
-        </Table.Cell>
-        <Table.Cell isHead>Price</Table.Cell>
-        <Table.Cell isHead></Table.Cell>
-      </Table.Head>
 
-      <Table.Body>
-        {divisions.map((division, i) => (
-          <Table.Row key={division.scDivisionId}>
-            <Table.Cell align="left">
-              <RegistrationListingCollapse
-                division={division}
-                programName={programName}
-                programType={programType}
-                open={i === 0 ? true : false}
-              />
-            </Table.Cell>
+    <>
+      <div className="flex flex-col gap-4">
+        {
+          divisions.map((division, i) => (
+            <>
+              <div className="border p-4 flex flex-col sm:flex-row justify-between gap-2 rounded-md shadow-sm">
+                <div className="flex flex-col gap-2">
+                  <h1 className="font-bold">{division.divisionName}</h1>
+                  <span>
+                    Starts on {division.seasonStart} and ends on {division.seasonEnd}
+                  </span>
+                  <div className="flex flex-row gap-3">
+                    <span className="font-bold">
+                      $315.00
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faUser} className="mr-1 w-6 h-6 text-gray-500" />
 
-            <Table.Cell className="font-semibold text-sm lg:text-base lg:w-36">${price}</Table.Cell>
+                      {division.divisionMaxPlayers} players
+                    </span>
+                    <span>
+                      <FontAwesomeIcon icon={faUsers} className="mr-1 w-6 h-6 text-gray-500" />
 
-            <Table.Cell className="lg:w-52">
-              <Button
-                rounded
-                style="secondary"
-                copy="Register"
-                href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
-              />
-            </Table.Cell>
-          </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
+                      {division.divisionTeamCount} teams
+                    </span>
+                  </div>
+                </div>
+                <Divider className="border-dashed sm:hidden block" />
+                <div className="flex flex-row sm:flex-col justify-between items-center sm:items-end">
+                  <span>General Registration is open</span>
+                  <Button
+                    rounded
+                    style="secondary"
+                    copy="Register Now"
+                    href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
+                  />
+                </div>
+              </div >
+            </>
+          ))}
+      </div >
+    </>
   );
 };
