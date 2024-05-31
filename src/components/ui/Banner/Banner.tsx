@@ -18,13 +18,13 @@ export const Banner = ({ programName, programType, className }: BannerProps) => 
       <Container maxWidth={MaxWidth.Small} >
         <div className="text-center md:text-left justify-center gap-4 flex flex-col mb-4">
           <Logo color="light" className="mx-auto md:mx-0" />
-          <h2 className="mb-2 font-sant leading-normal font-bold text-xl md:text-2xl lg:text-3xl uppercase">
+          <h2 className="mb-2 font-sant leading-normal font-bold text-xl md:text-2xl lg:text-3xl uppercase text-[#FFCE31]">
             {programName.substring(0, programName.indexOf('-'))}
           </h2>
           <h1 className="font-roboto font-bold text-3xl italic uppercase md:text-6xl lg:text-5xl">{programName.substring(programName.indexOf('-') + 2)}</h1>
           <h2>The program starts in January and runs through March. Open to 3rd - 8th Graders.</h2>
           <div className="flex md:flex-row flex-col uppercase">
-            <h3>now open:</h3>
+            <h3 className="text-[#FFCE31]">now open:</h3>
             <h3>general registration</h3>
           </div>
         </div>
@@ -42,7 +42,7 @@ export const Banner = ({ programName, programType, className }: BannerProps) => 
             href={`https://registration.bluesombrero.com/4384/available-programs`}
           />
         </div>
-      </Container>
-    </div>
+      </Container >
+    </div >
   );
 };
