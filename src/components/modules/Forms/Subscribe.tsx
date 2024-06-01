@@ -4,36 +4,37 @@ import { useState, FormEvent } from "react";
 import classNames from "classnames";
 import { Text, Button } from "@/components/ui";
 import Link from "next/link";
+import { trackEvent } from "@/customerio";
 
 export type SubscribeProps = {
   title: string;
   descriprion: string;
   className?: string;
+  trackingFields?: Record<string, string>;
   variant?: "tight" | "wide" | "modal";
 };
 
-export const Subscribe = ({ title, descriprion, className, variant = "tight" }: SubscribeProps) => {
+export const Subscribe = ({ title, descriprion, className, variant = "tight", trackingFields }: SubscribeProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  async function handleTrackEvent(eventData) {
+    console.log(trackingFields);
+    return trackEvent("Newsletter Signup", { ...eventData, programKey: trackingFields?.slug, lead_score: 1 });
+  }
+
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     setIsLoading(true);
     setErrorMsg(null);
 
     try {
       const formData = new FormData(event.currentTarget);
-      const response = await fetch("/api/submit", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await handleTrackEvent(Object.fromEntries(formData.entries()));
 
-      if (!response.ok) {
+      if (!response) {
         throw new Error("Failed to submit the data. Please try again.");
       }
-
-      const data = await response.json();
     } catch (error) {
       setErrorMsg((error as Error).message);
       console.error(error);
