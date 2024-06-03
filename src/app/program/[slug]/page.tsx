@@ -68,7 +68,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           title="Want news and updates?"
           descriprion="Sign up for our newsletter to stay up to date."
           className="rounded-2xl bg-[#051227]"
-          trackingFields={content.fields}
+          trackingFields={content.fields.slug as string}
         />
       </Container>
 
@@ -92,7 +92,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
             title="Stay Tuned For Updates"
             descriprion="Stay informed about our Flag Football program at Alhambra High School! Subscribe to our offseason newsletter for exclusive updates, thrilling highlights, and insider insights."
             variant="wide"
-            trackingFields={content.fields}
+            trackingFields={content.fields.slug as string}
           />
         </Container>
       </div>

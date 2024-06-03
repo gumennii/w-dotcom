@@ -10,7 +10,7 @@ export type SubscribeProps = {
   title: string;
   descriprion: string;
   className?: string;
-  trackingFields?: Record<string, string>;
+  trackingFields?: string;
   variant?: "tight" | "wide" | "modal";
 };
 
@@ -18,23 +18,19 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  async function handleTrackEvent(eventData) {
-    console.log(trackingFields);
-    return trackEvent("Newsletter Signup", { ...eventData, programKey: trackingFields?.slug, lead_score: 1 });
-  }
-
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
     setErrorMsg(null);
 
     try {
-      const formData = new FormData(event.currentTarget);
-      const response = await handleTrackEvent(Object.fromEntries(formData.entries()));
+      const formData = Object.fromEntries(new FormData(event.currentTarget).entries())
+      const response = await trackEvent("Newsletter Signup", { ...formData, programKey: trackingFields, lead_score: 1 });
 
       if (!response) {
         throw new Error("Failed to submit the data. Please try again.");
       }
+
     } catch (error) {
       setErrorMsg((error as Error).message);
       console.error(error);

@@ -5,6 +5,7 @@ import RegistrationListingCollapse from "./RegistrationListingCollapse";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 
+import { Fragment } from "react";
 // import { RegistrationCard } from "@/components/modules";
 
 export type TDivision = {
@@ -36,7 +37,7 @@ export const RegistrationListing = ({ programName, programType, divisions, price
       <div className="flex flex-col gap-4">
         {
           divisions.map((division, i) => (
-            <>
+            <Fragment key={division.scDivisionId}>
               <div className="border p-4 flex flex-col sm:flex-row justify-between gap-2 rounded-md shadow-sm">
                 <div className="flex flex-col gap-2">
                   <h1 className="font-bold">{division.divisionName}</h1>
@@ -70,7 +71,7 @@ export const RegistrationListing = ({ programName, programType, divisions, price
                   />
                 </div>
               </div >
-            </>
+            </Fragment>
           ))}
       </div >
     </>
