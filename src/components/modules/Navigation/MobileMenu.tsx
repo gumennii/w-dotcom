@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { faAngleDown, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { genereateRandomId } from "@/utils/navigation";
 
 import { menu } from "./menu";
@@ -133,8 +134,8 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
       <div className="flex justify-end w-full px-6 py-4 mt-4 text-left border border-neutral-300 border-r-0 border-b-0 border-l-0">
         <details className="dropdown absolute w-full left-0">
           <summary tabIndex={1} className="flex pl-6 items-center justify-start py-4 hover:cursor-pointer">
-            <FontAwesomeIcon icon={faLocationDot} className="mr-1 w-4 h-4" />
-            <FontAwesomeIcon icon={faAngleDown} color="#818389" className="mt-0.5" />
+            <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-1 w-4 h-4" />
+            <FontAwesomeIcon icon={faAngleDown as IconProp} color="#818389" className="mt-0.5" />
           </summary>
           <ul
             tabIndex={1}

@@ -17,13 +17,13 @@
  * [Full Setup Instructions](https://data.amplitude.com/nextlevelsports/Dotcom/implementation/web)
  */
 
-import * as amplitude from '@amplitude/analytics-browser';
+import * as amplitude from "@amplitude/analytics-browser";
 
-export type Environment = 'production' | 'development';
+export type Environment = "production" | "development";
 
 export const ApiKey: Record<Environment, string> = {
-  production: '83d5b26beeccd837fac77cb4e3a45f9f',
-  development: '3f4d9ae911ff699d0824ea776602efa3'
+  production: "83d5b26beeccd837fac77cb4e3a45f9f",
+  development: "3f4d9ae911ff699d0824ea776602efa3",
 };
 
 /**
@@ -31,24 +31,29 @@ export const ApiKey: Record<Environment, string> = {
  */
 export const DefaultConfiguration: BrowserOptions = {
   plan: {
-    version: '1',
-    branch: 'main',
-    source: 'web',
-    versionId: 'cd3f3830-02d7-4faa-8b54-a2b1bcb157e3'
+    version: "1",
+    branch: "main",
+    source: "web",
+    versionId: "cd3f3830-02d7-4faa-8b54-a2b1bcb157e3",
   },
   ...{
     ingestionMetadata: {
-      sourceName: 'browser-typescript-ampli',
-      sourceVersion: '2.0.0'
-    }
-  }
+      sourceName: "browser-typescript-ampli",
+      sourceVersion: "2.0.0",
+    },
+  },
 };
 
-export interface LoadOptionsBase { disabled?: boolean }
+export interface LoadOptionsBase {
+  disabled?: boolean;
+}
 
-export type LoadOptionsWithEnvironment = LoadOptionsBase & { environment: Environment; client?: { configuration?: BrowserOptions; }; };
-export type LoadOptionsWithApiKey = LoadOptionsBase & { client: { apiKey: string; configuration?: BrowserOptions; } };
-export type LoadOptionsWithClientInstance = LoadOptionsBase & { client: { instance: BrowserClient; } };
+export type LoadOptionsWithEnvironment = LoadOptionsBase & {
+  environment: Environment;
+  client?: { configuration?: BrowserOptions };
+};
+export type LoadOptionsWithApiKey = LoadOptionsBase & { client: { apiKey: string; configuration?: BrowserOptions } };
+export type LoadOptionsWithClientInstance = LoadOptionsBase & { client: { instance: BrowserClient } };
 
 export type LoadOptions = LoadOptionsWithEnvironment | LoadOptionsWithApiKey | LoadOptionsWithClientInstance;
 

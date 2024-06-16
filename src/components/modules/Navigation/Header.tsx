@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faChevronRight, faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { genereateRandomId } from "@/utils/navigation";
 import useWindowSize from "@/hooks/windowResize";
 import { MaxWidth } from "@/utils/styling";
@@ -146,7 +147,9 @@ export const Header = ({ children }: PropsWithChildren) => {
                                             <div className="w-full flex items-center justify-between gap-6">
                                               <div>{item.name}</div>
                                               <div>
-                                                {item.menu && <FontAwesomeIcon icon={faChevronRight} size="xs" />}
+                                                {item.menu && (
+                                                  <FontAwesomeIcon icon={faChevronRight as IconProp} size="xs" />
+                                                )}
                                               </div>
                                             </div>
                                           </Link>
@@ -182,7 +185,10 @@ export const Header = ({ children }: PropsWithChildren) => {
                                                         <div>{subItem.name}</div>
                                                         <div>
                                                           {subItem.menu && (
-                                                            <FontAwesomeIcon icon={faChevronRight} size="xs" />
+                                                            <FontAwesomeIcon
+                                                              icon={faChevronRight as IconProp}
+                                                              size="xs"
+                                                            />
                                                           )}
                                                         </div>
                                                       </div>
@@ -241,8 +247,8 @@ export const Header = ({ children }: PropsWithChildren) => {
               {/* Desktop Locations Dropdown */}
               <details className="dropdown">
                 <summary tabIndex={8} className="flex items-center justify-center p-1 hover:cursor-pointer relative">
-                  <FontAwesomeIcon icon={faLocationDot} className="mr-1 w-4 h-4" />
-                  <FontAwesomeIcon icon={faAngleDown} color="#818389" className="mt-0.5" />
+                  <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-1 w-4 h-4" />
+                  <FontAwesomeIcon icon={faAngleDown as IconProp} color="#818389" className="mt-0.5" />
                 </summary>
                 <ul
                   tabIndex={8}

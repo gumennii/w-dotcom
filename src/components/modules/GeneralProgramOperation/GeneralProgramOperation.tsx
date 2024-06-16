@@ -1,19 +1,38 @@
-import { Video } from "@/components/ui/Video";
-import { Text } from "@/components/ui/Text/Text";
-import { Button } from "@/components/ui/Button/Button";
-import { Container } from "@/components/ui/Container/Container";
+import { Text, Button, VideoModal, Container, Image, VideoPlayBtn } from "@/components/ui";
 import { MaxWidth } from "@/utils/styling";
+import { Asset } from "contentful";
 
 type GeneralProgramOperationProps = {
   coverVideo: string;
+  coverImage?: Asset;
   programType: string;
   slug: string;
 };
 
-export const GeneralProgramOperation = ({ coverVideo, programType, slug }: GeneralProgramOperationProps) => {
+export const GeneralProgramOperation = ({
+  coverVideo,
+  programType,
+  slug,
+  coverImage,
+}: GeneralProgramOperationProps) => {
   return (
     <Container maxWidth={MaxWidth.Small}>
-      <Video url={coverVideo} />
+      <VideoModal maxWidth="2xLarge" url={coverVideo}>
+        {coverImage && Object.keys(coverImage).length && coverImage.fields.file?.url ? (
+          <div className="relative w-full">
+            <Image
+              src={coverImage?.fields?.file?.url as string}
+              alt={`Image ${programType}`}
+              width={900}
+              height={420}
+              borderRadius="large"
+            />
+            <VideoPlayBtn className="absolute top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 text-white duration-500 hover:text-primary" />
+          </div>
+        ) : (
+          <Button rounded style="outline" copy="&#9654; Watch Teaser" />
+        )}
+      </VideoModal>
       <Text type="h2" className="mt-8 mb-4">
         General Program Operation and Additional Information
       </Text>
@@ -24,7 +43,7 @@ export const GeneralProgramOperation = ({ coverVideo, programType, slug }: Gener
         </Text>
         <Button
           href={`/program/${slug}/operations`}
-          style="ghost"
+          style="outline"
           copy="Learn more"
           rounded
           className="border border-solid border-primary hover:border-primary w-full md:w-auto"

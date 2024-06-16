@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import Link from "next/link";
 import cn from "@/utils/cn";
 import { Dropdown } from "@/components/ui";
@@ -9,6 +9,7 @@ import { Dropdown } from "@/components/ui";
 type TProgramNavigationLink = {
   href: string;
   name: string;
+  id: string;
 };
 
 export type ProgramNavigationLinksProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -17,7 +18,12 @@ export type ProgramNavigationLinksProps = React.HTMLAttributes<HTMLDivElement> &
 
 const ProgramNavigationLinks = React.forwardRef<HTMLDivElement, ProgramNavigationLinksProps>(
   ({ className, links, ...props }, ref): JSX.Element => {
-    const pathname = usePathname();
+    const params = useParams();
+    const [hash, setHash] = useState("");
+
+    useEffect(() => {
+      setHash(window.location.hash);
+    }, [params]);
 
     return (
       <div {...props} className={cn("flex items-center justify-start", className)} ref={ref}>
@@ -28,7 +34,7 @@ const ProgramNavigationLinks = React.forwardRef<HTMLDivElement, ProgramNavigatio
             href={link.href}
             className={cn(
               `${
-                link.href === pathname
+                link.id === hash || (index === 0 && hash === "")
                   ? "bg-[#0e2344] font-medium text-white pointer-events-none"
                   : "bg-inherit font-normal text-primary hover:bg-secondary hover:text-white"
               }`,
@@ -48,19 +54,26 @@ type ProgramDropdownProps = {
 };
 
 const ProgramDropdown = ({ links }: ProgramDropdownProps) => {
-  const pathname = usePathname();
+  const params = useParams();
+  const [hash, setHash] = useState("");
+
+  useEffect(() => {
+    setHash(window.location.hash);
+  }, [params]);
 
   return (
     <div className="md:hidden">
       <Dropdown>
         <Dropdown.Toggle>Program menu</Dropdown.Toggle>
         <Dropdown.Menu className="mt-4 w-52 z-50">
-          {links.map(link => (
+          {links.map((link, index) => (
             <Dropdown.Item
               anchor
               href={link.href}
-              key={link.href}
-              className={link.href === pathname ? "bg-[#0e2344] text-white pointer-events-none" : ""}
+              key={link.id}
+              className={
+                link.id === hash || (index === 0 && hash === "") ? "bg-[#0e2344] text-white pointer-events-none" : ""
+              }
             >
               {link.name}
             </Dropdown.Item>

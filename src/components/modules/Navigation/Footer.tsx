@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { getYear } from "date-fns";
 import { MaxWidth } from "@/utils/styling";
 import { Container } from "@/components/ui";
@@ -87,11 +88,11 @@ export const Footer = () => (
             Next Level Sports
           </div>
           <div className="flex items-center justify-start my-2">
-            <FontAwesomeIcon icon={faLocationDot} className="mr-3 w-6 h-6" />
+            <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-3 w-6 h-6" />
             <div className="text-sm lg:text-base">385 1st Avenue, San Mateo, California 94401</div>
           </div>
           <Link href="maito:support@nextlevelsports.com" className="flex items-center justify-start">
-            <FontAwesomeIcon icon={faEnvelope} className="mr-3 w-6 h-6" />
+            <FontAwesomeIcon icon={faEnvelope as IconProp} className="mr-3 w-6 h-6" />
             <div className="text-sm lg:text-base">support@nextlevelsports.com</div>
           </Link>
           <div className="my-4 flex lg:my-8">
