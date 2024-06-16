@@ -4,6 +4,7 @@ import React, { cloneElement, createRef, forwardRef, ReactElement, RefObject, us
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import cn from "@/utils/cn";
 import CarouselItem, { CarouselItemProps, CarouselItemWidth } from "./CarouselItem";
 
@@ -79,7 +80,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
                 <FontAwesomeIcon
                   key={i}
                   onClick={() => scrollToIndex(i)}
-                  icon={faMinus}
+                  icon={faMinus as IconProp}
                   className={cn("w-8 text-white cursor-pointer", { "opacity-50": i !== activeIndex })}
                   size="3x"
                   aria-disabled={i === activeIndex}

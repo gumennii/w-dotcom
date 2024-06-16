@@ -1,9 +1,10 @@
 "use client";
 
 import React, { ReactNode, useCallback, useState } from "react";
-import cn from "@/utils/cn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import cn from "@/utils/cn";
 
 export type MenuDropdownProps = React.HTMLAttributes<HTMLDivElement> & {
   label: ReactNode;
@@ -24,7 +25,7 @@ export const MenuDropdown = React.forwardRef<HTMLDivElement, MenuDropdownProps>(
       <>
         <div {...props} className={classes} onClick={toggleOpen} ref={ref}>
           {label}
-          <FontAwesomeIcon icon={open ? faChevronDown : faChevronRight} size="xs" />
+          <FontAwesomeIcon icon={open ? (faChevronDown as IconProp) : (faChevronRight as IconProp)} size="xs" />
         </div>
         <ul className={cn("menu-dropdown after:none", { "menu-dropdown-show": open })}>{children}</ul>
       </>

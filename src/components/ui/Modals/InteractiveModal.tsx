@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { getModalMaxWidth } from "@/utils/styling";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { hasCookie, setCookie } from "cookies-next";
 
 export type InteractiveModalProps = {
@@ -70,11 +71,6 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
     }
   }, [display, position, scrollPercentage]);
 
-  const testPassed = () => {
-    setShowForm(true);
-    setCookie("showTestingForm", "true", {});
-  };
-
   if (showForm) {
     return null;
   }
@@ -90,7 +86,7 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
       >
         <div className={classNames("modal-box p-0", getModalMaxWidth(maxWidth), className)}>
           <div onClick={onToggleModal} className="btn btn-circle btn-ghost btn-md absolute right-4 top-4 text-white">
-            <FontAwesomeIcon icon={faXmark} size="xl" />
+            <FontAwesomeIcon icon={faXmark as IconProp} size="xl" />
           </div>
           {children}
         </div>

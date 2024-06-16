@@ -4,6 +4,7 @@ import { FC, useCallback, useState } from "react";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 type AccordionItemProps = {
   title: string;
@@ -24,9 +25,9 @@ export const AccordionItem: FC<AccordionItemProps> = ({ title, description, clas
         <p className="text-start text-primary">{title}</p>
         <div className="flex items-center">
           {isOpened ? (
-            <FontAwesomeIcon icon={faAngleUp} color="#d4d4d4" />
+            <FontAwesomeIcon icon={faAngleUp as IconProp} color="#d4d4d4" />
           ) : (
-            <FontAwesomeIcon icon={faAngleDown} color="#d4d4d4" className="mt-1" />
+            <FontAwesomeIcon icon={faAngleDown as IconProp} color="#d4d4d4" className="mt-1" />
           )}
         </div>
       </button>

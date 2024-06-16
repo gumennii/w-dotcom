@@ -1,9 +1,10 @@
 import { MouseEvent, ReactNode } from "react";
 import Link from "next/link";
 import classNames from "classnames";
-import { getButtonAnimationClass, getButtonClass, getButtonSizeClass } from "@/utils/styling";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { getButtonAnimationClass, getButtonClass, getButtonSizeClass } from "@/utils/styling";
 
 export type ButtonProps = {
   href?: string;
@@ -42,7 +43,7 @@ export const Button = ({
   const buttonContent = () => (
     <>
       {copy}
-      {style === "link" && <FontAwesomeIcon icon={faArrowRight} color="" size="2xl" className="mx-2" />}
+      {style === "link" && <FontAwesomeIcon icon={faArrowRight as IconProp} color="" size="2xl" className="mx-2" />}
     </>
   );
 

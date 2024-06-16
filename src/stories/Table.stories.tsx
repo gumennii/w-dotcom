@@ -1,14 +1,5 @@
+import type { Meta, StoryFn as Story } from "@storybook/react";
 import { Table, TableProps } from "@/components/ui";
-import type { Meta, StoryObj } from "@storybook/react";
-
-const meta: Meta<typeof Table> = {
-  title: "Data Display/Table",
-  component: Table,
-};
-
-export default meta;
-
-type Story = StoryObj<typeof Table>;
 
 const BASE_PROPS: TableProps = {
   size: "full",
@@ -70,12 +61,14 @@ const argTypes = {
   textAlign: { control: "select", options: ["left", "center", "right"] },
 };
 
-const renderStory = (args: TableProps) => {
+export default {
+  title: "Data Display/Table",
+  argTypes,
+  component: Table,
+} as Meta;
+
+export const Default: Story<TableProps> = (args: TableProps) => {
   return <Table {...args} />;
 };
 
-export const Default: Story = {
-  args: BASE_PROPS,
-  argTypes,
-  render: renderStory,
-};
+Default.args = BASE_PROPS;

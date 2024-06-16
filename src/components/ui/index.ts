@@ -11,7 +11,7 @@ export { Table, type TableProps };
 export { Select, type SelectProps, SelectOption };
 
 export { Avatar } from "./Avatar";
-export { Banner } from "./Banner";
+export { Hero, type HeroProps } from "./Hero";
 export { Button, type ButtonProps } from "./Button";
 export { DateComponent } from "./DateComponent";
 export { Divider } from "./Divider";
@@ -19,7 +19,14 @@ export { Image, type ImageProps } from "./Image";
 export { Container } from "./Container";
 export { Video, type VideoProps } from "./Video";
 export { Text, type TextProps } from "./Text";
-export { Modal, type ModalProps, InteractiveModal, type InteractiveModalProps } from "./Modals";
-export { Accordion, AccordionItem } from "./Accordion";
-export { AppStoreIcon, BarsMenuIcon, GooglePlayIcon, Logo } from "./Icons";
+export {
+  Modal,
+  type ModalProps,
+  InteractiveModal,
+  type InteractiveModalProps,
+  VideoModal,
+  type VideoModalProps,
+} from "./Modals";
+export { Accordion, AccordionItem, AccordionProgramItem } from "./Accordion";
+export { AppStoreIcon, BarsMenuIcon, GooglePlayIcon, Logo, VideoPlayBtn } from "./Icons";
 export { MenuDropdown, type MenuDropdownProps } from "./Menu";

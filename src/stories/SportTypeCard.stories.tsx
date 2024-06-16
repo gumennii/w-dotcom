@@ -1,17 +1,8 @@
 import React from "react";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryFn as Story } from "@storybook/react";
 import { MaxWidth } from "@/utils/styling";
 import { Container } from "@/components/ui";
 import { SportTypeCard, type SportTypeCardProps } from "@/components/modules";
-
-const meta: Meta<typeof SportTypeCard> = {
-  title: "Data Display/SportTypeCard",
-  component: SportTypeCard,
-};
-
-export default meta;
-
-type Story = StoryObj<typeof SportTypeCard>;
 
 const BASE_PROPS: Omit<SportTypeCardProps, "component"> = {
   path: "/",
@@ -26,7 +17,13 @@ const argTypes = {
   },
 };
 
-const renderStory = (args: SportTypeCardProps) => {
+export default {
+  title: "Data Display/SportTypeCard",
+  argTypes,
+  component: SportTypeCard,
+} as Meta;
+
+export const Default: Story<SportTypeCardProps> = (args: SportTypeCardProps) => {
   return (
     <Container className="flex flex-row justify-center" maxWidth={MaxWidth.Medium}>
       <SportTypeCard {...args} />
@@ -34,23 +31,17 @@ const renderStory = (args: SportTypeCardProps) => {
   );
 };
 
-export const Default: Story = {
-  args: BASE_PROPS,
-  argTypes,
-  render: renderStory,
+Default.args = BASE_PROPS;
+
+export const RowCards: Story<SportTypeCardProps> = (args: SportTypeCardProps) => {
+  return (
+    <Container className="flex flex-row justify-center space-x-4" maxWidth={MaxWidth.Medium}>
+      <SportTypeCard {...args} path="/footbal" icon="footbal" title="FLAG FOOTBALL" />
+      <SportTypeCard {...args} path="/basketball" icon="basketball" title="BASKETBALL" />
+      <SportTypeCard {...args} path="/voleyblal" icon="volleyball" title="VOLLEYBALL" />
+      <SportTypeCard {...args} path="/summer_camp" icon="flag-pennant" title="SUMMER CAMP" />
+    </Container>
+  );
 };
 
-export const RowCards: Story = {
-  args: BASE_PROPS,
-  argTypes,
-  render: (args: SportTypeCardProps) => {
-    return (
-      <Container className="flex flex-row justify-center space-x-4" maxWidth={MaxWidth.Medium}>
-        <SportTypeCard {...args} path="/footbal" icon="footbal" title="FLAG FOOTBALL" />
-        <SportTypeCard {...args} path="/basketball" icon="basketball" title="BASKETBALL" />
-        <SportTypeCard {...args} path="/voleyblal" icon="volleyball" title="VOLLEYBALL" />
-        <SportTypeCard {...args} path="/summer_camp" icon="flag-pennant" title="SUMMER CAMP" />
-      </Container>
-    );
-  },
-};
+RowCards.args = BASE_PROPS;

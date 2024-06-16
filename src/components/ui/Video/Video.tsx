@@ -1,7 +1,8 @@
 "use client";
-import { FC, useCallback, useState, useRef } from "react";
+import { FC, useCallback, useState, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { PlayButton } from "./PlayButon";
+import classNames from "classnames";
 
 export type VideoProps = {
   url: string;
@@ -10,13 +11,24 @@ export type VideoProps = {
   lazyLoad?: boolean;
   placeholderImage?: string;
   muted?: boolean;
+  playVideo?: boolean;
+  className?: string;
 };
 
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const ASPECT_RATION_PADDING = "56.25%";
 
-export const Video: FC<VideoProps> = ({ url, loop, controls = true, lazyLoad, placeholderImage, muted = false }) => {
+export const Video: FC<VideoProps> = ({
+  url,
+  loop,
+  controls = true,
+  lazyLoad,
+  placeholderImage,
+  muted = false,
+  playVideo,
+  className,
+}) => {
   const [playing, setPlaying] = useState(false);
   const playerRef = useRef(null);
 
@@ -24,8 +36,14 @@ export const Video: FC<VideoProps> = ({ url, loop, controls = true, lazyLoad, pl
 
   const onPause = useCallback(() => setPlaying(false), []);
 
+  useEffect(() => {
+    if (playVideo !== undefined) {
+      setPlaying(playVideo);
+    }
+  }, [playVideo]);
+
   return (
-    <div className="group/video relative rounded-2xl border-2 border-white">
+    <div className={classNames("group/video relative rounded-2xl", className)}>
       {url && (
         <div style={{ paddingBottom: ASPECT_RATION_PADDING }}>
           <ReactPlayer
