@@ -1,7 +1,7 @@
 import type { StoryFn as Story, Meta } from "@storybook/react";
 
 import { MaxWidth } from "@/utils/styling";
-import { Subscribe, type SubscribeProps, TestForm, type TestFormProps } from "@/components/modules";
+import { Subscribe, type SubscribeProps } from "@/components/modules";
 import { Container, Modal } from "@/components/ui";
 
 export default {
@@ -55,18 +55,4 @@ ModalForm.args = {
   title: "Stay In The Game",
   descriprion: "Sign up for our offseason newsletter to stay up to date.",
   variant: "modal",
-};
-
-export const TestingForm: Story<TestFormProps> = args => {
-  return (
-    <Container maxWidth={MaxWidth.Small}>
-      <TestForm {...args} />
-    </Container>
-  );
-};
-
-TestingForm.args = {
-  title: "Stay In The Game",
-  descriprion: "Sign up for our Flag Football Program at Alhambra High School Offseason Newsletter to stay up to date.",
-  className: "bg-primary rounded-xl",
 };

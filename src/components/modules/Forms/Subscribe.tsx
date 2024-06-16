@@ -24,13 +24,16 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
     setErrorMsg(null);
 
     try {
-      const formData = Object.fromEntries(new FormData(event.currentTarget).entries())
-      const response = await trackEvent("Newsletter Signup", { ...formData, programKey: trackingFields, lead_score: 1 });
+      const formData = Object.fromEntries(new FormData(event.currentTarget).entries());
+      const response = await trackEvent("Newsletter Signup", {
+        ...formData,
+        programKey: trackingFields,
+        lead_score: 1,
+      });
 
       if (!response) {
         throw new Error("Failed to submit the data. Please try again.");
       }
-
     } catch (error) {
       setErrorMsg((error as Error).message);
       console.error(error);
@@ -49,7 +52,7 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
       )}
     >
       <div className={classNames("w-full", variant === "wide" ? "lg:w-[38%] lg:pl-2 xl:w-[36%]" : "")}>
-        <Text type={variant === "modal" ? "h4" : "h2"} className={variant === "modal" ? "mb-1" : "mb-2 sm:mb-4"}>
+        <Text type="h2" className={variant === "modal" ? "mb-1" : "mb-2 sm:mb-4"}>
           {title}
         </Text>
         <Text type="p">{descriprion}</Text>

@@ -12,7 +12,7 @@ export { CallToAction, type CallToActionProps } from "./CallToAction";
 export { HomePageCarousel } from "./HomePageCarousel";
 export { ProgramCards } from "./ProgramCards";
 export { SportTypeCard, type SportTypeCardProps } from "./SportTypeCard";
-export { TestForm, type TestFormProps, Subscribe, type SubscribeProps } from "./Forms";
+export { Subscribe, type SubscribeProps } from "./Forms";
 export { Profile, type ProfileProps } from "./Profile";
 export { LogoCloud, type LogoCloudProps } from "./LogoCloud";
 export { CookieConsent } from "./CookieConsent";
