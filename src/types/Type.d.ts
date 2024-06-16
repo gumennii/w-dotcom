@@ -1,5 +1,5 @@
 declare namespace Types {
-  type ButtonStyles = "primary" | "secondary" | "accent" | "ghost" | "link" | "outline";
+  type ButtonStyles = "primary" | "secondary" | "accent" | "ghost" | "link" | "outline" | "white";
 
   type ButtonSize = "large" | "regular" | "small";
 

@@ -4,6 +4,7 @@ import { colors } from "./colors";
 export const buttons = {
   ".btn": {
     "text-transform": "uppercase",
+    "font-size": "16px",
   },
   ".btn-primary": {
     "text-transform": "capitalize",
@@ -15,8 +16,16 @@ export const buttons = {
   ".btn-primary[disabled]": {
     "background-color": colors["base-200"],
   },
+  ".btn-white": {
+    "background-color": colors["base-100"],
+    "letter-spacing": "0.5px",
+  },
+  ".btn-white[disabled]": {
+    color: colors["base-200"],
+  },
   ".btn-secondary": {
     "border-radius": theme.borderRadius["3xl"],
+    "font-size": "15px",
   },
   ".btn-secondary[disabled]": {
     "background-color": "#ec612ab3", // [!] color with opacity
@@ -31,6 +40,18 @@ export const buttons = {
   ".btn-outline[disabled]": {
     color: colors["base-200"],
     border: `1px solid ${colors["base-200"]}`,
+  },
+  ".btn-ghost": {
+    "border-radius": theme.borderRadius["3xl"],
+    "letter-spacing": "0.5px",
+  },
+  ".btn-ghost:hover": {
+    color: colors["base-200"],
+    border: `1px solid ${colors["base-300"]}`,
+  },
+  ".btn-ghost[disabled]": {
+    color: colors["base-300"],
+    border: `1px solid ${colors["base-300"]}`,
   },
   ".btn-accent[disabled]": {
     "background-color": "#24a840b3", // [!] color with opacity

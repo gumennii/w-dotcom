@@ -1,7 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Superline";
+  src: url("/font/superline-regular.woff2");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Superline";
+  src: url("/font/superline-italic-regular.woff2");
+  font-style: italic;
+}
+@font-face {
+  font-family: "Superline Outline";
+  src: url("/font/superline-outline-regular.woff2");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Superline Outline";
+  src: url("/font/superline-outline-italic-regular.woff2");
+  font-style: italic;
+}
 /* .footer a {
   text-decoration: underline;
 }
@@ -18,5 +40,3 @@
 @import "./season.css";
 @import "./note.css";
 @import "./menu.css";
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");

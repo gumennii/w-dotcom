@@ -24,3 +24,11 @@ export const colors = {
   warning: "#FFB144" /* Warning */,
   error: "#DC4130" /* Error */,
 };
+
+export const programHighlightColors = {
+  // "Basketball" | "Camps" | "Flag Football" | "Volleyball" highlight colors
+  basketball: "#30B052" /* green */,
+  camps: "#db040c" /* red */,
+  "flag-football": "#EC612A" /* orange */,
+  volleyball: "#FFCE31" /* yellow */,
+};
