@@ -13,7 +13,7 @@ export interface TypeFacilityFields {
 }
 
 export type TypeFacilitySkeleton = EntrySkeletonType<TypeFacilityFields, "facility">;
-export type TypeFacility<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeFacility<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeFacilitySkeleton,
   Modifiers,
   Locales

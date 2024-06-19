@@ -3,6 +3,7 @@ import cn from "@/utils/cn";
 import { ProfileImage, type ProfileImageProps as ImageProps } from "./ProfileImage";
 import { TypePeople } from "@/types/contentful";
 import { Asset } from "contentful";
+import { Markdown } from "@/lib/markdown";
 
 export type ProfileImageProps = ImageProps;
 
@@ -16,21 +17,21 @@ export const Profile = React.forwardRef<HTMLDivElement, ProfileProps>(
   ({ title, contents, className, ...props }, ref): JSX.Element => {
     const { name, biography } = contents.fields;
     const photo = contents.fields.photo as Asset;
-    const imagePath = photo ? (photo.fields.file?.url as string) : "/avatar.jpg";
+    const imagePath = photo ? (photo.fields.file?.url as string) : "/avatar.svg";
     return (
-      <div aria-label="Profile" {...props} className={cn("text-primary w-full lg:max-w-7xl", className)} ref={ref}>
-        <h2 className="font-sant leading-normal font-bold text-xl md:text-2xl lg:text-3xl mb-4">{title}</h2>
+      <div aria-label="Profile" {...props} className={cn("w-full text-primary lg:max-w-7xl", className)} ref={ref}>
+        <h2 className="font-sant mb-4 text-xl font-bold leading-normal md:text-2xl lg:text-3xl">{title}</h2>
 
-        <div className="flex flex-col md:flex-row lg:flex-row gap-x-6">
-          <div className="flex flex-col w-full md:w-40 lg:w-52 shrink-0">
+        <div className="flex flex-col gap-x-6 md:flex-row lg:flex-row">
+          <div className="flex w-full shrink-0 flex-col md:w-36">
             <ProfileImage src={imagePath} alt="Profile Image" />
-            <h3 className="hidden md:block lg:hidden mt-2 text-lg font-semibold">{name ? name : "Person name"}</h3>
+            <h3 className="mt-2 hidden text-lg font-semibold md:block lg:hidden">{name ? name : "Person name"}</h3>
           </div>
           <div className="flex flex-col">
-            <h3 className="pt-4 pb-2 lg:pt-0 md:hidden lg:block font-semibold leading-normal lg:text-lg">
+            <h3 className="pb-2 pt-4 font-semibold leading-normal md:hidden lg:block lg:pt-0 lg:text-lg">
               {name ? name : "Person name"}
             </h3>
-            <p className="text-sm">{biography ? biography : "Person biography"}</p>
+            {biography ? <Markdown content={{ string: biography }} /> : <p className="text-sm">Person biography</p>}
           </div>
         </div>
       </div>

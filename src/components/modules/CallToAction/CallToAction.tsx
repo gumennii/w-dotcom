@@ -34,20 +34,20 @@ export const CallToAction = React.forwardRef<HTMLDivElement, CallToActionProps>(
         role="banner"
         {...props}
         className={cn(
-          `flex flex-col lg:flex-row items-center justify-between gap-6 px-4 py-8 md:py-12 lg:py-12 w-full`,
+          `flex w-full flex-col items-center justify-between gap-6 px-4 py-8 md:py-12 lg:flex-row lg:py-12`,
           className
         )}
         ref={ref}
       >
         {images.length > 0 && (
-          <div className="w-[21rem] md:w-full lg:w-1/2 lg:max-w-[36.5rem] py-8 h-[20.75rem] md:h-[35rem] lg:h-[40.313rem] relative">
+          <div className="relative h-[20.75rem] w-[21rem] py-8 md:h-[35rem] md:w-full lg:h-[40.313rem] lg:w-1/2 lg:max-w-[36.5rem]">
             <Image
               src={firstImage.src}
               alt={firstImage.alt}
               width={384}
               height={512}
               borderRadius="none"
-              className="absolute left-0 bottom-0 lg:bottom-10 w-52 h-64 md:w-[24rem] md:h-[32rem] lg:w-[22rem] lg:h-[28rem]"
+              className="absolute bottom-0 left-0 h-64 w-52 md:h-[32rem] md:w-[24rem] lg:bottom-10 lg:h-[28rem] lg:w-[22rem]"
             />
             <Image
               src={secondImage.src}
@@ -55,22 +55,22 @@ export const CallToAction = React.forwardRef<HTMLDivElement, CallToActionProps>(
               width={384}
               height={512}
               borderRadius="none"
-              className="absolute right-0 top-0 lg:top-10 w-52 h-64 md:w-[24rem] md:h-[32rem] lg:w-[22rem] lg:h-[28rem]"
+              className="absolute right-0 top-0 h-64 w-52 md:h-[32rem] md:w-[24rem] lg:top-10 lg:h-[28rem] lg:w-[22rem]"
             />
           </div>
         )}
         <div
-          className={cn("w-full flex flex-col justify-center items-center gap-y-4", {
+          className={cn("flex w-full flex-col items-center justify-center gap-y-4", {
             "lg:w-1/2": images.length > 0,
           })}
         >
           {introText && (
             <span className={cn("text-sm lg:text-base", { uppercase: images.length > 0 })}>{introText}</span>
           )}
-          <Text type="h1" className="uppercase italic text-center max-w-[61.5rem]">
+          <Text type="h1" className="max-w-[61.5rem] text-center uppercase italic">
             {title}
           </Text>
-          <Text type="p" className="text-center max-w-[61.5rem]">
+          <Text type="p" className="max-w-[61.5rem] text-center">
             {subtitle}
           </Text>
           <Link href={buttonData?.url ?? "#"} target="_blank">

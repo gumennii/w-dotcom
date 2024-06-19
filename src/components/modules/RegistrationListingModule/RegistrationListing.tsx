@@ -32,35 +32,35 @@ export interface RegistrationListingProps {
 export const RegistrationListing = ({ programName, programType, divisions, price }: RegistrationListingProps) => {
   return (
     <>
-      <h4 className="text-sm leading-relaxed font-semibold text-secondary mb-1 md:text-lg">
+      <h4 className="mb-1 text-sm font-semibold leading-relaxed text-secondary md:text-lg">
         General Registration is open from {divisions[0].seasonStart} to {divisions[0].seasonEnd}
       </h4>
-      <p className="texr-sx leading-relaxed mb-6 lg:text-sm">
+      <p className="texr-sx mb-6 leading-relaxed lg:text-sm">
         Limited slots available. Register now to avoid incurring a late registration fee.
       </p>
       <div className="flex flex-col gap-4">
         {divisions.map((division, i) => (
           <Fragment key={division.scDivisionId}>
-            <div className="border p-4 flex flex-col sm:flex-row justify-between gap-2 rounded-md shadow-sm">
+            <div className="flex flex-col justify-between gap-2 rounded-md border p-4 shadow-sm sm:flex-row">
               <div className="flex flex-col gap-2">
                 <h3 className="text-lg font-semibold leading-normal">{division.divisionName}</h3>
                 <span className="text-sm leading-relaxed">
                   Starts on {division.seasonStart} and ends on {division.seasonEnd}
                 </span>
                 <div className="flex flex-row items-center gap-4">
-                  <span className="font-semibold leading-relaxed font-base mr-3">$315.00</span>
+                  <span className="font-base mr-3 font-semibold leading-relaxed">$315.00</span>
                   <span className="text-sx">
-                    <FontAwesomeIcon icon={faUser as IconProp} className="mr-2 w-4 h-4 text-gray-500" />
+                    <FontAwesomeIcon icon={faUser as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
                     {division.divisionMaxPlayers} players
                   </span>
                   <span className="text-sx">
-                    <FontAwesomeIcon icon={faUsers as IconProp} className="mr-2 w-4 h-4 text-gray-500" />
+                    <FontAwesomeIcon icon={faUsers as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
                     {division.divisionTeamCount} teams
                   </span>
                 </div>
               </div>
-              <Divider className="border-dashed sm:hidden block" />
-              <div className="flex flex-row sm:flex-col justify-between items-center sm:items-end">
+              <Divider className="block border-dashed sm:hidden" />
+              <div className="flex flex-row items-center justify-between sm:flex-col sm:items-end">
                 <span className="text-sx leading-normal">General Registration is open</span>
                 <Button
                   rounded

@@ -17,7 +17,7 @@ const SelectInner = (props: SelectProps, ref: React.ForwardedRef<HTMLSelectEleme
       {...rest}
       ref={ref}
       className={cn(
-        "select-focus-btn select select-bordered select-lg bg-white text-base font-medium focus:outline-offset-0 text-primary shadow",
+        "select-focus-btn select select-bordered select-lg bg-white text-base font-medium text-primary shadow focus:outline-offset-0",
         className
       )}
     >

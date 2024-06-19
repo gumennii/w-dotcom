@@ -36,7 +36,7 @@ export const SportTypeCard: FC<SportTypeCardProps> = ({ path, icon, className, t
       {...props}
       href={path}
       className={cn(
-        "flex md:flex-row lg:flex-col items-center justify-center gap-4 rounded-2xl bg-secondary p-4 text-white shadow",
+        "flex items-center justify-center gap-4 rounded-2xl bg-secondary p-4 text-white shadow md:flex-row lg:flex-col",
         className
       )}
     >

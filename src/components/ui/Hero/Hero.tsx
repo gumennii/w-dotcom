@@ -19,20 +19,20 @@ export const Hero = ({ programName, programType, className, urlVideo }: HeroProp
 
   return (
     <div
-      className={classNames("w-full text-white py-20 bg-cover", className)}
+      className={classNames("w-full bg-cover py-20 text-white", className)}
       style={{
         backgroundImage: `${heroBgGradient}, url("/banner.png")`,
       }}
     >
       <Container maxWidth={MaxWidth.Small}>
-        <div className="text-center md:text-left justify-center gap-4 flex flex-col mb-4">
+        <div className="mb-4 flex flex-col justify-center gap-4 text-center md:text-left">
           <Link href="/">
             <Logo color="light" className="mx-auto md:mx-0" />
           </Link>
-          <h1 className="font-superline font-bold text-7xl italic uppercase lg:text-[11.875rem]">
+          <h1 className="font-superline text-7xl font-bold uppercase italic lg:text-[11.875rem]">
             <span
               className={cn(
-                "mb-2 block font-roboto leading-normal font-bold text-xl not-italic md:text-2xl lg:text-3xl uppercase",
+                "mb-2 block font-roboto text-xl font-bold uppercase not-italic leading-normal md:text-2xl lg:text-3xl",
                 textColor
               )}
             >
@@ -40,16 +40,16 @@ export const Hero = ({ programName, programType, className, urlVideo }: HeroProp
             </span>
             {programName.indexOf("-") === -1 ? programName : programName.substring(programName.indexOf("-") + 2)}
           </h1>
-          <h2 className="font-inter text-sm md:text-base lg:text-lg max-w-full lg:max-w-[50%]">
+          <h2 className="max-w-full font-inter text-sm md:text-base lg:max-w-[50%] lg:text-lg">
             The program starts in January and runs through March. Open to 3rd - 8th Graders.
           </h2>
           <div className="h-4" />
-          <div className="flex md:flex-row flex-col uppercase text-lg md:text-xl lg:text-2xl font-roboto font-bold">
+          <div className="flex flex-col font-roboto text-lg font-bold uppercase md:flex-row md:text-xl lg:text-2xl">
             <h3 className={textColor}>now open:&nbsp;</h3>
             <h3>general registration</h3>
           </div>
         </div>
-        <div className="flex flex-row justify-center md:justify-start gap-3">
+        <div className="flex flex-row justify-center gap-3 md:justify-start">
           <Button rounded style="white" copy="Register Now" href={`#registration`} />
           {urlVideo ? (
             <VideoModal maxWidth="2xLarge" url={urlVideo}>

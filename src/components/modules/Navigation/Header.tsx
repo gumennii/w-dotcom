@@ -76,21 +76,21 @@ export const Header = ({ children }: PropsWithChildren) => {
 
   return (
     <Drawer
-      className="rounded overflow-hidden z-20"
+      className="z-20 overflow-hidden rounded"
       contentClassName={visible ? "fixed top-0" : ""}
       open={visible}
       onClickOverlay={toggleShowMobileMenu}
       side={<MobileMenu locations={locationsMenuList} toggleHideSide={toggleHideMobileMenu} />}
       end
     >
-      <div className="border border-solid border-white text-primary lg:px-8 fixed w-full bg-white z-[100]">
+      <div className="fixed z-[100] w-full border border-solid border-white bg-white text-primary lg:px-8">
         <Container maxWidth={MaxWidth.Large}>
-          <div className="navbar p-0 relative">
-            <div className="flex items-center justify-between w-full navbar-menu">
+          <div className="navbar relative p-0">
+            <div className="navbar-menu flex w-full items-center justify-between">
               <Link href={homeButton?.href ? homeButton?.href : "#"} className="mr-1 cursor-pointer">
                 <Logo />
               </Link>
-              <div className="flex-none mobile-menu-button z-30">
+              <div className="mobile-menu-button z-30 flex-none">
                 <label
                   htmlFor="mobile-menu-1"
                   onClick={toggleShowMobileMenu}
@@ -99,20 +99,20 @@ export const Header = ({ children }: PropsWithChildren) => {
                   <BarsMenuIcon className="h-8 w-8" />
                 </label>
               </div>
-              <div className="navbar-links w-full justify-center items-center max-h-16">
-                <ul className="menu menu-horizontal items-center shrink-0 gap-1 p-0 px-1">
+              <div className="navbar-links max-h-16 w-full items-center justify-center">
+                <ul className="menu menu-horizontal shrink-0 items-center gap-1 p-0 px-1">
                   {menu?.length > 0 &&
                     menu.map((menuItem, i) => {
                       const key = genereateRandomId(`${menuItem.name}_${i}`);
                       return (
-                        <li key={key} className="group inline-block z-30">
+                        <li key={key} className="group z-30 inline-block">
                           {menuItem.name !== "Home" && (
                             <>
                               <button
                                 aria-haspopup="true"
                                 aria-controls="menu"
                                 tabIndex={i}
-                                className="outline-none focus:outline-none menu-link lg:px-2 lg:my-3 cursor-pointer"
+                                className="menu-link cursor-pointer outline-none focus:outline-none lg:my-3 lg:px-2"
                                 onKeyDown={e => {
                                   if (e.key === "Enter") {
                                     push(menuItem.href ? menuItem.href : "#");
@@ -127,24 +127,24 @@ export const Header = ({ children }: PropsWithChildren) => {
                                 <ul
                                   id="menu"
                                   aria-hidden="true"
-                                  className="bg-white rounded-lg max-h-[45.25rem] shadow-md transform scale-0 focus-within:scale-100 group-hover:scale-100 absolute mt-2 transition duration-400 ease-in-out origin-top min-w-60 py-2 px-0 z-10"
+                                  className="duration-400 absolute z-10 mt-2 max-h-[45.25rem] min-w-60 origin-top scale-0 transform rounded-lg bg-white px-0 py-2 shadow-md transition ease-in-out focus-within:scale-100 group-hover:scale-100"
                                 >
                                   {menuItem.menu.map((item: MenuItem, j) => {
                                     const key = genereateRandomId(`${item.name}_${j}`);
 
                                     return (
-                                      <li key={key} className="hover:bg-primary hover:text-white rounded-none">
+                                      <li key={key} className="rounded-none hover:bg-primary hover:text-white">
                                         <div
                                           role="button"
                                           aria-haspopup="true"
                                           tabIndex={i}
                                           aria-controls={item.name}
-                                          className={cn("w-full flex outline-none focus:outline-none", {
+                                          className={cn("flex w-full outline-none focus:outline-none", {
                                             "pointer-events-none": !item.href || item.href === "#",
                                           })}
                                         >
                                           <Link href={item.href ? item.href : "#"} className="flex w-full">
-                                            <div className="w-full flex items-center justify-between gap-6">
+                                            <div className="flex w-full items-center justify-between gap-6">
                                               <div>{item.name}</div>
                                               <div>
                                                 {item.menu && (
@@ -158,7 +158,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                           <ul
                                             id={item.name}
                                             aria-hidden="true"
-                                            className="subitem bg-white rounded-lg absolute top-0 right-0 shadow-md transition duration-400 ease-in-out origin-top-left m-0 py-2 px-0 min-w-60 z-20"
+                                            className="subitem duration-400 absolute right-0 top-0 z-20 m-0 min-w-60 origin-top-left rounded-lg bg-white px-0 py-2 shadow-md transition ease-in-out"
                                           >
                                             {item.menu?.map((subItem: MenuItem, idx: number) => {
                                               const key = genereateRandomId(`${subItem.name}_${idx}`);
@@ -166,14 +166,14 @@ export const Header = ({ children }: PropsWithChildren) => {
                                               return (
                                                 <li
                                                   key={key}
-                                                  className="text-primary hover:bg-primary hover:text-white rounded-none"
+                                                  className="rounded-none text-primary hover:bg-primary hover:text-white"
                                                 >
                                                   <div
                                                     role="button"
                                                     aria-haspopup="true"
                                                     tabIndex={i}
                                                     aria-controls={subItem.name}
-                                                    className={cn("w-full flex outline-none focus:outline-none", {
+                                                    className={cn("flex w-full outline-none focus:outline-none", {
                                                       "pointer-events-none": !subItem.href || subItem.href === "#",
                                                     })}
                                                   >
@@ -181,7 +181,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                                       href={subItem.href ? subItem.href : "#"}
                                                       className="flex w-full"
                                                     >
-                                                      <div className="w-full flex items-center justify-between gap-6">
+                                                      <div className="flex w-full items-center justify-between gap-6">
                                                         <div>{subItem.name}</div>
                                                         <div>
                                                           {subItem.menu && (
@@ -198,7 +198,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                                     <ul
                                                       id={subItem.name}
                                                       aria-hidden="true"
-                                                      className="subitem text-primary bg-white rounded-lg absolute top-0 right-0 shadow-md transition duration-400 ease-in-out origin-top-left m-0 py-2 px-0 min-w-60 z-20"
+                                                      className="subitem duration-400 absolute right-0 top-0 z-20 m-0 min-w-60 origin-top-left rounded-lg bg-white px-0 py-2 text-primary shadow-md transition ease-in-out"
                                                     >
                                                       {subItem.menu?.map((el: MenuItem, elIdx: number) => {
                                                         const key = genereateRandomId(`${el.name}_${elIdx}`);
@@ -206,7 +206,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                                           <li
                                                             key={key}
                                                             tabIndex={i}
-                                                            className="text-primary hover:text-white hover:bg-primary"
+                                                            className="text-primary hover:bg-primary hover:text-white"
                                                             onKeyDown={e => {
                                                               if (e.key === "Enter") {
                                                                 push(el.href ? el.href : "#");
@@ -215,7 +215,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                                           >
                                                             <Link
                                                               href={el.href ? el.href : "#"}
-                                                              className="w-full h-full flex items-center gap-6 px-4 py-2 rounded-none"
+                                                              className="flex h-full w-full items-center gap-6 rounded-none px-4 py-2"
                                                             >
                                                               <span>{el.name}</span>
                                                             </Link>
@@ -246,23 +246,23 @@ export const Header = ({ children }: PropsWithChildren) => {
             <div className="navbar-links gap-4">
               {/* Desktop Locations Dropdown */}
               <details className="dropdown">
-                <summary tabIndex={8} className="flex items-center justify-center p-1 hover:cursor-pointer relative">
-                  <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-1 w-4 h-4" />
+                <summary tabIndex={8} className="relative flex items-center justify-center p-1 hover:cursor-pointer">
+                  <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-1 h-4 w-4" />
                   <FontAwesomeIcon icon={faAngleDown as IconProp} color="#818389" className="mt-0.5" />
                 </summary>
                 <ul
                   tabIndex={8}
-                  className="dropdown-content menu menu-compact p-2 bg-white text-primary rounded-lg shadow-md z-10 block gap-y-2 max-h-[26rem] left-auto top-8 right-0 overflow-y-auto"
+                  className="menu-compact menu dropdown-content left-auto right-0 top-8 z-10 block max-h-[26rem] gap-y-2 overflow-y-auto rounded-lg bg-white p-2 text-primary shadow-md"
                 >
                   {locationsMenuList?.length > 0 &&
                     locationsMenuList.map((location: any, locationIdx: number) => {
                       const locationKey = genereateRandomId(`menu-${location.name}_${locationIdx}`);
 
                       return (
-                        <li tabIndex={8} key={locationKey} className="w-[18.6rem] flex flex-col flex-wrap gap-y-1">
+                        <li tabIndex={8} key={locationKey} className="flex w-[18.6rem] flex-col flex-wrap gap-y-1">
                           <MenuDropdown
                             label={<span>{location.name}</span>}
-                            className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                            className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                           >
                             {location.menu?.length > 0 &&
                               location.menu?.map((subItem: any, subItemIdx: number) => {
@@ -272,7 +272,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                   <li tabIndex={8} className="w-full" key={subItemKey}>
                                     <MenuDropdown
                                       label={<Link href={subItem.categoryHref}>{subItem.category}</Link>}
-                                      className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                                      className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                                     >
                                       {subItem.menu?.length > 0 &&
                                         subItem.menu?.map((nestedSubItem: any, nestedSubItemIdx: number) => {
@@ -289,7 +289,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                                       {nestedSubItem.name}
                                                     </Link>
                                                   }
-                                                  className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                                                  className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                                                 >
                                                   <ul>
                                                     {nestedSubItem.menu?.length > 0 &&
@@ -301,7 +301,7 @@ export const Header = ({ children }: PropsWithChildren) => {
                                                             <li
                                                               key={itemKey}
                                                               tabIndex={8}
-                                                              className="hover:bg-primary rounded-md hover:text-white"
+                                                              className="rounded-md hover:bg-primary hover:text-white"
                                                             >
                                                               <Link href={item.href ? item.href : "#"}>
                                                                 {item.name}

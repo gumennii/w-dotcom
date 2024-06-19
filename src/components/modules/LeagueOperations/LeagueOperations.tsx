@@ -35,8 +35,8 @@ type LeagueOperationsProps = {
 export const LeagueOperations = () => {
   return (
     <Container maxWidth={MaxWidth.Small} className="my-10">
-      <h2 className="font-bold text-2xl mb-6 md:text-3xl lg:text-4xl">League Operations</h2>
-      <div className="flex gap-y-8 flex-wrap justify-between items-start">
+      <h2 className="mb-6 text-2xl font-bold md:text-3xl lg:text-4xl">League Operations</h2>
+      <div className="flex flex-wrap items-start justify-between gap-y-8">
         <LeagueOperationsItem title="Season Operations">
           The Next Level Flag Football season at Cal will run with 9 program dates over the program schedule
         </LeagueOperationsItem>

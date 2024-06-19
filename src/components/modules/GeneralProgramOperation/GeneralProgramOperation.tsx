@@ -27,16 +27,16 @@ export const GeneralProgramOperation = ({
               height={420}
               borderRadius="large"
             />
-            <VideoPlayBtn className="absolute top-1/2 left-1/2 -translate-x-2/4 -translate-y-2/4 text-white duration-500 hover:text-primary" />
+            <VideoPlayBtn className="absolute left-1/2 top-1/2 -translate-x-2/4 -translate-y-2/4 text-white duration-500 hover:text-primary" />
           </div>
         ) : (
           <Button rounded style="outline" copy="&#9654; Watch Teaser" />
         )}
       </VideoModal>
-      <Text type="h2" className="mt-8 mb-4">
+      <Text type="h2" className="mb-4 mt-8">
         General Program Operation and Additional Information
       </Text>
-      <div className="flex flex-col justify-between items-center gap-y-4 md:flex-row">
+      <div className="flex flex-col items-center justify-between gap-y-4 md:flex-row">
         <Text type="h6" className="w-full md:w-[70%]">
           {`Review the general program operations, program information and philosophies of the Next Level ${programType}
           program`}
@@ -46,7 +46,7 @@ export const GeneralProgramOperation = ({
           style="outline"
           copy="Learn more"
           rounded
-          className="border border-solid border-primary hover:border-primary w-full md:w-auto"
+          className="w-full border border-solid border-primary hover:border-primary md:w-auto"
         />
       </div>
     </Container>

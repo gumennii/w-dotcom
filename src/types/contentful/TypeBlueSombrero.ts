@@ -28,7 +28,7 @@ export interface TypeBlueSombreroFields {
 }
 
 export type TypeBlueSombreroSkeleton = EntrySkeletonType<TypeBlueSombreroFields, "blueSombrero">;
-export type TypeBlueSombrero<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeBlueSombrero<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeBlueSombreroSkeleton,
   Modifiers,
   Locales

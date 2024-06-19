@@ -34,7 +34,7 @@ const Table = React.forwardRef<HTMLTableElement, TableProps>(
     },
     ref
   ): JSX.Element => (
-    <div className={cn(size === "full" ? "overflow-x-auto border-2 border-solid rounded-lg" : "overflow-x-auto")}>
+    <div className={cn(size === "full" ? "overflow-x-auto rounded-lg border-2 border-solid" : "overflow-x-auto")}>
       <table
         {...props}
         ref={ref}

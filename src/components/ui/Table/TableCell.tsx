@@ -11,7 +11,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, TableCellProps>(
       {isHead ? (
         <th
           {...props}
-          className={cn(className, "text-primary text-base uppercase font-semibold leading-normal lg:text-lg")}
+          className={cn(className, "text-base font-semibold uppercase leading-normal text-primary lg:text-lg")}
           ref={ref}
         >
           {children}

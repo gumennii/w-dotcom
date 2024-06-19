@@ -66,12 +66,12 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
   return (
     <>
-      <InteractiveModal position={50} maxWidth="2xLarge" className="bg-[#051227] rounded-xl">
+      <InteractiveModal position={50} maxWidth="2xLarge" className="rounded-xl bg-[#051227]">
         <Subscribe
           variant="modal"
           title="Stay in The Game"
           descriprion="Sign up for our Flag Football Program at Alhambra High School Offseason Newsletter to stay up to date."
-          className="rounded-2xl bg-[#051227] text-center p-8 text-white"
+          className="rounded-2xl bg-[#051227] p-8 text-center text-white"
           trackingFields={content.fields.slug as string}
         />
       </InteractiveModal>
@@ -91,11 +91,9 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       <Container maxWidth={MaxWidth.Small}>
         <Accordion>
           <AccordionProgramItem id="#overview" isOpen={true}>
-            <div className="prose season mt-10 mb-8">
+            <div className="season prose mb-8 mt-10">
               <Markdown content={{ json: seasonDescription }} />
             </div>
-
-            <Divider className="m-auto max-w-4xl my-4 lg:my-8" />
 
             <GeneralProgramOperation
               coverVideo={content.fields.coverVideo as string}
@@ -104,17 +102,17 @@ export default async function ProgramPage({ params }: { params: { slug: string }
               coverImage={coverImage}
             />
 
-            <Divider className="m-auto max-w-4xl my-4 lg:my-8" />
+            <Divider className="m-auto my-4 max-w-4xl lg:my-8" />
 
             <Subscribe
               title="Want news and updates?"
               descriprion="Sign up for our newsletter to stay up to date."
-              className="rounded-2xl bg-[#051227] mb-8"
+              className="mb-8 rounded-2xl bg-[#051227]"
               trackingFields={content.fields.slug as string}
             />
           </AccordionProgramItem>
           <AccordionProgramItem title="League Operations" id="operations">
-            <div className="prose season">{documentToReactComponents(leagueOperations)}</div>
+            <div className="season prose">{documentToReactComponents(leagueOperations)}</div>
           </AccordionProgramItem>
           <AccordionProgramItem title="Schedule" id="schedule">
             <div>
@@ -124,7 +122,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
               <Table textAlign={"center"} data={gameTimesTableData} />
 
-              <div className="prose note">
+              <div className="note prose">
                 <Markdown content={{ json: content.fields.notes }} />
               </div>
 
@@ -138,7 +136,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
               <Table textAlign={"left"} data={scheduleTableData} equalColumns={false} />
 
-              <div className="prose note">
+              <div className="note prose">
                 <Markdown content={{ json: content.fields.scheduleNotes }} />
               </div>
             </div>
@@ -146,8 +144,8 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         </Accordion>
       </Container>
 
-      <Container maxWidth={MaxWidth.Small} className="flex flex-col my-8">
-        <h2 className="font-sant font-semibold text-xl lg:text-2xl mb-2" id="registration">
+      <Container maxWidth={MaxWidth.Small} className="my-8 flex flex-col">
+        <h2 className="font-sant mb-2 text-xl font-semibold lg:text-2xl" id="registration">
           Registration Listing
         </h2>
         <RegistrationListing
@@ -158,13 +156,13 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         />
       </Container>
 
-      <Divider className="max-w-4xl m-auto mt-4 lg:mt-8" />
+      <Divider className="m-auto mt-4 max-w-4xl lg:mt-8" />
 
-      <Container maxWidth={MaxWidth.Small} className="flex flex-col gap-y-8 my-8">
+      <Container maxWidth={MaxWidth.Small} className="my-8 flex flex-col gap-y-8">
         <Profile title="Site Director" contents={siteDirectorData} />
       </Container>
 
-      <div className="bg-[#0F2344]">
+      <div className="bg-[#0F2344] sm:px-4 md:px-8 2xl:px-2">
         <Container maxWidth={MaxWidth.Footer}>
           <Subscribe
             title="Stay Tuned For Updates"

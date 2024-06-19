@@ -11,7 +11,7 @@ export interface TypeWebsiteHomePageFields {
 }
 
 export type TypeWebsiteHomePageSkeleton = EntrySkeletonType<TypeWebsiteHomePageFields, "websiteHomePage">;
-export type TypeWebsiteHomePage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeWebsiteHomePage<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeWebsiteHomePageSkeleton,
   Modifiers,
   Locales

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
+import { marked } from "marked";
 
 interface Asset {
   sys: {
@@ -15,7 +16,8 @@ interface AssetLink {
 }
 
 interface Content {
-  json: any;
+  json?: any;
+  string?: string;
   links?: {
     assets: AssetLink;
   };
@@ -32,11 +34,15 @@ function RichTextAsset({ id, assets }: { id: string; assets: Asset[] | undefined
 }
 
 export function Markdown({ content }: { content: Content }) {
-  return documentToReactComponents(content.json, {
-    renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (node: any) => (
-        <RichTextAsset id={node.data.target.sys.id} assets={content.links?.assets.block} />
-      ),
-    },
-  });
+  if (content.string) {
+    return <div dangerouslySetInnerHTML={{ __html: marked.parse(content.string) }} className="prose" />;
+  } else {
+    return documentToReactComponents(content.json, {
+      renderNode: {
+        [BLOCKS.EMBEDDED_ASSET]: (node: any) => (
+          <RichTextAsset id={node.data.target.sys.id} assets={content.links?.assets.block} />
+        ),
+      },
+    });
+  }
 }

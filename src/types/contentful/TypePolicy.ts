@@ -6,7 +6,7 @@ export interface TypePolicyFields {
 }
 
 export type TypePolicySkeleton = EntrySkeletonType<TypePolicyFields, "policy">;
-export type TypePolicy<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypePolicy<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypePolicySkeleton,
   Modifiers,
   Locales

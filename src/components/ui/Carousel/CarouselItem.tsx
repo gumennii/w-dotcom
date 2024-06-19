@@ -57,9 +57,9 @@ const CarouselItem = ({
 
     return (
       <>
-        <Button onClick={onPrev} style="ghost" copy="❮" className="rounded-full w-12 h-12" />
+        <Button onClick={onPrev} style="ghost" copy="❮" className="h-12 w-12 rounded-full" />
 
-        <Button onClick={onNext} style="ghost" copy="❯" className="rounded-full w-12 h-12" />
+        <Button onClick={onNext} style="ghost" copy="❯" className="h-12 w-12 rounded-full" />
       </>
     );
   };
@@ -72,7 +72,7 @@ const CarouselItem = ({
         children
       )}
       {hasButtons && (
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
           {renderButtons()}
         </div>
       )}

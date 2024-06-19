@@ -67,7 +67,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
           })}
         </div>
         {display === "dashed" && (
-          <div className="bg-[#0F2344] lg:bg-transparent lg:absolute lg:bottom-0 flex justify-center w-full gap-2 lg:h-16">
+          <div className="flex w-full justify-center gap-2 bg-[#0F2344] lg:absolute lg:bottom-0 lg:h-16 lg:bg-transparent">
             {children.map((_, i) => {
               if (buttonStyle != null) {
                 return cloneElement(buttonStyle((i + 1).toString()), {
@@ -81,7 +81,7 @@ const Carousel = forwardRef<HTMLDivElement, CarouselProps>(
                   key={i}
                   onClick={() => scrollToIndex(i)}
                   icon={faMinus as IconProp}
-                  className={cn("w-8 text-white cursor-pointer", { "opacity-50": i !== activeIndex })}
+                  className={cn("w-8 cursor-pointer text-white", { "opacity-50": i !== activeIndex })}
                   size="3x"
                   aria-disabled={i === activeIndex}
                 />

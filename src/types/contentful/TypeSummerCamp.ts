@@ -13,7 +13,7 @@ export interface TypeSummerCampFields {
 }
 
 export type TypeSummerCampSkeleton = EntrySkeletonType<TypeSummerCampFields, "summerCamp">;
-export type TypeSummerCamp<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeSummerCamp<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeSummerCampSkeleton,
   Modifiers,
   Locales

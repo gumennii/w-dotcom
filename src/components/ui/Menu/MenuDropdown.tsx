@@ -27,7 +27,7 @@ export const MenuDropdown = React.forwardRef<HTMLDivElement, MenuDropdownProps>(
           {label}
           <FontAwesomeIcon icon={open ? (faChevronDown as IconProp) : (faChevronRight as IconProp)} size="xs" />
         </div>
-        <ul className={cn("menu-dropdown after:none", { "menu-dropdown-show": open })}>{children}</ul>
+        <ul className={cn("after:none menu-dropdown", { "menu-dropdown-show": open })}>{children}</ul>
       </>
     );
   }

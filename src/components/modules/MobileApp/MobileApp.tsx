@@ -51,12 +51,12 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
         className={cn(
           `flex ${
             layout === "rightTop" ? "flex-row lg:flex-row-reverse" : "flex-row-reverse lg:flex-row"
-          } items-end justify-center text-white w-full mt-52 md:mt-0 lg:mt-36 md:relative bg-primary gap-4`,
+          } mt-52 w-full items-end justify-center gap-4 bg-primary text-white md:relative md:mt-0 lg:mt-36`,
           className
         )}
         ref={ref}
       >
-        <div className={`w-full md:w-[40%] lg:w-[30rem] absolute md:relative`}>
+        <div className={`absolute w-full md:relative md:w-[40%] lg:w-[30rem]`}>
           <Image
             src={androidSrc}
             alt={androidAlt}
@@ -64,7 +64,7 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
             height={androidHeight}
             borderRadius="none"
             className={cn(
-              "absolute max-[576px]:bottom-56 max-[616px]:bottom-40 max-[768px]:bottom-36 md:bottom-0 max-[440px]:right-[5%] max-[570px]:right-[15%] max-[700px]:right-[22%] max-[768px]:right-[25%] w-[12.5rem] lg:w-64 rounded-t-3xl bg-transparent",
+              "absolute w-[12.5rem] rounded-t-3xl bg-transparent max-[768px]:bottom-36 max-[768px]:right-[25%] max-[700px]:right-[22%] max-[616px]:bottom-40 max-[576px]:bottom-56 max-[570px]:right-[15%] max-[440px]:right-[5%] md:bottom-0 lg:w-64",
               {
                 "md:left-0 lg:right-0": layout === "rightTop",
               },
@@ -78,16 +78,16 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
             height={iPhoneHeight}
             borderRadius="none"
             className={cn(
-              "absolute max-[576px]:bottom-56 max-[616px]:bottom-40 max-[768px]:bottom-36 max-[440px]:left-[5%] max-[570px]:left-[15%] max-[700px]:right-[22%] max-[768px]:left-[25%] md:bottom-0 md:z-10 w-[13rem] lg:w-64 rounded-t-3xl bg-transparent",
+              "absolute w-[13rem] rounded-t-3xl bg-transparent max-[768px]:bottom-36 max-[768px]:left-[25%] max-[700px]:right-[22%] max-[616px]:bottom-40 max-[576px]:bottom-56 max-[570px]:left-[15%] max-[440px]:left-[5%] md:bottom-0 md:z-10 lg:w-64",
               {
                 "md:right-0 lg:left-0": layout === "rightTop",
               },
-              { "md:left-0 lg:right-0 lg:left-auto": layout === "leftTop" }
+              { "md:left-0 lg:left-auto lg:right-0": layout === "leftTop" }
             )}
           />
         </div>
 
-        <div className="w-full md:w-[60%] lg:w-auto flex flex-col py-8 lg:py-12 z-50 bg-primary">
+        <div className="z-50 flex w-full flex-col bg-primary py-8 md:w-[60%] lg:w-auto lg:py-12">
           <Text type="h1" className="uppercase italic">
             {title}
           </Text>
@@ -95,7 +95,7 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
             <Text type="h3" className="py-4">
               {subtitle}
             </Text>
-            <div className={`flex gap-x-4 `}>
+            <div className={`flex gap-x-4`}>
               {appsLinks?.map(link => {
                 const linkIcon = link.key as keyof TStoresIcons;
                 return (

@@ -9,7 +9,7 @@ export interface TypeWebpageFields {
 }
 
 export type TypeWebpageSkeleton = EntrySkeletonType<TypeWebpageFields, "webpage">;
-export type TypeWebpage<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeWebpage<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeWebpageSkeleton,
   Modifiers,
   Locales

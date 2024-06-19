@@ -22,12 +22,12 @@ export const LogoCloud: FC<LogoCloudProps> = ({ title, logos, className, ...prop
       aria-label="Logo Cloud"
       {...props}
       className={cn(
-        "flex flex-col lg:flex-row items-center lg:justify-between gap-x-6 gap-y-8 py-16 text-primary",
+        "flex flex-col items-center gap-x-6 gap-y-8 py-16 text-primary lg:flex-row lg:justify-between",
         className
       )}
     >
       <Text type="h2">{title}</Text>
-      <div className="flex gap-x-4 md:gap-x-8 lg:gap-x-16 items-center">
+      <div className="flex items-center gap-x-4 md:gap-x-8 lg:gap-x-16">
         {logos.map((logo: Logo) => {
           const { linkPath, imagePath, altText } = logo;
 
@@ -38,7 +38,7 @@ export const LogoCloud: FC<LogoCloudProps> = ({ title, logos, className, ...prop
                 alt={altText ?? ""}
                 width={160}
                 height={113}
-                className="h-full w-auto flex shrink-0"
+                className="flex h-full w-auto shrink-0"
               />
             </Link>
           );

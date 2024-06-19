@@ -7,7 +7,7 @@ import { MaxWidth } from "@/utils/styling";
 import { Container } from "@/components/ui";
 
 export const Footer = () => (
-  <div className="bg-primary px-4">
+  <div className="bg-primary sm:px-4 md:px-8 2xl:px-2">
     <Container maxWidth={MaxWidth.Footer}>
       <footer className="footer flex w-full flex-col-reverse justify-between border-info-content py-10 lg:flex-row">
         <div
@@ -16,10 +16,10 @@ export const Footer = () => (
         />
         <div className="flex w-full items-start justify-start lg:w-3/5 xl:justify-between xl:pr-10">
           <div className="mr-6 xl:mr-12">
-            <span className="footer-title font-sant text-lg normal-case text-white opacity-100 xl:text-xl">
+            <span className="font-sant footer-title text-lg normal-case text-white opacity-100 xl:text-xl">
               Company
             </span>
-            <ul className="mt-4 list-none space-y-4 text-white text-sm">
+            <ul className="mt-4 list-none space-y-4 text-sm text-white">
               <li>
                 <Link href="https://store.nextlevelsports.com">Our Story</Link>
               </li>
@@ -36,8 +36,8 @@ export const Footer = () => (
           </div>
           <div className="flex w-full flex-col items-start justify-start md:flex-row">
             <div className="md:mr-6 xl:mr-12">
-              <span className="footer-title font-sant text-lg normal-case text-white opacity-100 xl:text-xl">Help</span>
-              <ul className="mt-4 list-none space-y-4 text-white text-sm">
+              <span className="font-sant footer-title text-lg normal-case text-white opacity-100 xl:text-xl">Help</span>
+              <ul className="mt-4 list-none space-y-4 text-sm text-white">
                 <li>
                   <Link href="https://support.nextlevelsports.com/hc/en-us">FAQ</Link>
                 </li>
@@ -57,8 +57,8 @@ export const Footer = () => (
               </ul>
             </div>
             <div>
-              <span className="footer-title font-sant hidden text-lg text-primary md:block xl:text-xl">La</span>
-              <ul className="mt-4 list-none space-y-4 text-white text-sm">
+              <span className="font-sant footer-title hidden text-lg text-primary md:block xl:text-xl">La</span>
+              <ul className="mt-4 list-none space-y-4 text-sm text-white">
                 <li>
                   <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=870019">Rostering Policy</Link>
                 </li>
@@ -84,15 +84,15 @@ export const Footer = () => (
           </div>
         </div>
         <div className="-mb-8 w-full text-white lg:mb-0 lg:w-2/5">
-          <div className="footer-title font-roboto leading-tight text-3xl font-bold italic text-white opacity-100 mb-2 lg:text-4xl lg:mb-4 xl:text-5xl xl:mb-6">
+          <div className="footer-title mb-2 font-roboto text-3xl font-bold italic leading-tight text-white opacity-100 lg:mb-4 lg:text-4xl xl:mb-6 xl:text-5xl">
             Next Level Sports
           </div>
-          <div className="flex items-center justify-start my-2">
-            <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-3 w-6 h-6" />
+          <div className="my-2 flex items-center justify-start">
+            <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-3 h-6 w-6" />
             <div className="text-sm lg:text-base">385 1st Avenue, San Mateo, California 94401</div>
           </div>
           <Link href="maito:support@nextlevelsports.com" className="flex items-center justify-start">
-            <FontAwesomeIcon icon={faEnvelope as IconProp} className="mr-3 w-6 h-6" />
+            <FontAwesomeIcon icon={faEnvelope as IconProp} className="mr-3 h-6 w-6" />
             <div className="text-sm lg:text-base">support@nextlevelsports.com</div>
           </Link>
           <div className="my-4 flex lg:my-8">

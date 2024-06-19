@@ -17,7 +17,7 @@ export interface TypeLocationsFields {
 }
 
 export type TypeLocationsSkeleton = EntrySkeletonType<TypeLocationsFields, "locations">;
-export type TypeLocations<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeLocations<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeLocationsSkeleton,
   Modifiers,
   Locales

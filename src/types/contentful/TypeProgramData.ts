@@ -19,7 +19,7 @@ export interface TypeProgramDataFields {
   timezone?: EntryFieldTypes.Symbol;
   earlyBird?: EntryFieldTypes.Number;
   season?: EntryFieldTypes.Symbol<"Fall" | "Spring" | "Summer" | "Winter">;
-  programStatus: EntryFieldTypes.Symbol<"Done" | "In Progress" | "In Review" | "Not Started">;
+  programStatus: EntryFieldTypes.Symbol<"Cancelled" | "Done" | "In Progress" | "In Review" | "Not Started">;
   earlyBirdPriceEndDate?: EntryFieldTypes.Date;
   siteDirector?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypePeopleSkeleton>>;
   programLocations?: EntryFieldTypes.Array<EntryFieldTypes.EntryLink<TypeLocationsSkeleton>>;
@@ -29,10 +29,13 @@ export interface TypeProgramDataFields {
   unfrmOptEnrichmentTag?: EntryFieldTypes.Object;
   unfrmOptPersonalizationCriteria?: EntryFieldTypes.Object;
   teamHierarchy?: EntryFieldTypes.Symbol;
+  programLaunchDate?: EntryFieldTypes.Date;
+  departmentKey?: EntryFieldTypes.Symbol;
+  registrationType?: EntryFieldTypes.Symbol;
 }
 
 export type TypeProgramDataSkeleton = EntrySkeletonType<TypeProgramDataFields, "programData">;
-export type TypeProgramData<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeProgramData<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeProgramDataSkeleton,
   Modifiers,
   Locales

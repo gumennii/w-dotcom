@@ -7,7 +7,6 @@ export type DropdownToggleProps = Omit<React.LabelHTMLAttributes<HTMLLabelElemen
   size?: ButtonProps["size"];
   button?: boolean;
   disabled?: boolean;
-  children: string;
 };
 
 const DropdownToggle = ({

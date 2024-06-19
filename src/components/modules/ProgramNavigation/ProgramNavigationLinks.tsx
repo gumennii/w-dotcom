@@ -1,10 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import cn from "@/utils/cn";
 import { Dropdown } from "@/components/ui";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 type TProgramNavigationLink = {
   href: string;
@@ -35,7 +38,7 @@ const ProgramNavigationLinks = React.forwardRef<HTMLDivElement, ProgramNavigatio
             className={cn(
               `${
                 link.id === hash || (index === 0 && hash === "")
-                  ? "bg-[#0e2344] font-medium text-white pointer-events-none"
+                  ? "pointer-events-none bg-[#0e2344] font-medium text-white"
                   : "bg-inherit font-normal text-primary hover:bg-secondary hover:text-white"
               }`,
               "mr-1 hidden h-11 items-center justify-center rounded-lg px-4 text-base md:inline-flex"
@@ -57,25 +60,47 @@ const ProgramDropdown = ({ links }: ProgramDropdownProps) => {
   const params = useParams();
   const [hash, setHash] = useState("");
 
+  // Create a ref array to store refs for each mapped link item
+  const linksRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+
   useEffect(() => {
     setHash(window.location.hash);
   }, [params]);
 
+  const handleClickLink = (index: number) => {
+    const clickedLink = linksRefs.current[index];
+    if (clickedLink) {
+      clickedLink.blur();
+    }
+  };
+
   return (
     <div className="md:hidden">
       <Dropdown>
-        <Dropdown.Toggle>Program menu</Dropdown.Toggle>
-        <Dropdown.Menu className="mt-4 w-52 z-50">
+        <Dropdown.Toggle
+          button={false}
+          className="block cursor-pointer rounded-md bg-base-200 px-4 py-2 font-inter text-sm font-semibold hover:bg-slate-200 focus:bg-slate-200 active:bg-slate-200"
+        >
+          <div className="flex items-center gap-2">
+            <span>Program menu</span>
+            <FontAwesomeIcon icon={faAngleDown as IconProp} />
+          </div>
+        </Dropdown.Toggle>
+        <Dropdown.Menu className="z-50 mt-4 w-52">
           {links.map((link, index) => (
-            <Dropdown.Item
-              anchor
-              href={link.href}
-              key={link.id}
-              className={
-                link.id === hash || (index === 0 && hash === "") ? "bg-[#0e2344] text-white pointer-events-none" : ""
-              }
-            >
-              {link.name}
+            <Dropdown.Item anchor={false} key={link.id}>
+              <Link
+                ref={el => {
+                  linksRefs.current[index] = el;
+                }}
+                href={link.id}
+                className={
+                  link.id === hash || (index === 0 && hash === "") ? "pointer-events-none bg-[#0e2344] text-white" : ""
+                }
+                onClick={() => handleClickLink(index)}
+              >
+                {link.name}
+              </Link>
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>

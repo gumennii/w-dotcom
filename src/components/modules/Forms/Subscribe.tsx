@@ -45,13 +45,13 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
   return (
     <div
       className={classNames(
-        "w-full flex flex-col gap-y-4 justify-between items-center lg:gap-y-6",
-        variant === "wide" ? "lg:flex-row sm:py-16 sm:px-4 md:px-8 lg:px-4 xl:px-0" : "",
-        variant === "modal" ? "text-primary p-0" : "text-white py-8 px-4 sm:p-10",
+        "flex w-full flex-col items-center justify-between gap-y-4 lg:gap-y-6",
+        variant === "wide" ? "px-0 sm:px-0 sm:py-16 md:px-0 lg:flex-row" : "",
+        variant === "modal" ? "p-0 text-primary" : "px-0 py-8 text-white sm:p-10",
         className
       )}
     >
-      <div className={classNames("w-full", variant === "wide" ? "lg:w-[38%] lg:pl-2 xl:w-[36%]" : "")}>
+      <div className={classNames("w-full", variant === "wide" ? "lg:w-[38%] xl:w-[36%]" : "")}>
         <Text type="h2" className={variant === "modal" ? "mb-1" : "mb-2 sm:mb-4"}>
           {title}
         </Text>
@@ -61,24 +61,24 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
         <form
           onSubmit={onSubmit}
           className={classNames(
-            "flex flex-col gap-y-4 justify-between items-center md:gap-4",
+            "flex flex-col items-center justify-between gap-y-4 md:gap-4",
             variant === "modal" ? "md:flex-col" : "md:flex-row"
           )}
         >
           <div
-            className={classNames("flex flex-col gap-4 w-full", variant === "modal" ? "sm:flex-col" : "sm:flex-row")}
+            className={classNames("flex w-full flex-col gap-4", variant === "modal" ? "sm:flex-col" : "sm:flex-row")}
           >
-            <input type="text" name="name" placeholder="Your Name" className="p-4 rounded w-full text-primary shadow" />
+            <input type="text" name="name" placeholder="Your Name" className="w-full rounded p-4 text-primary shadow" />
             <input
               type="email"
               name="email"
               placeholder="Your Email"
-              className="p-4 rounded w-full text-primary shadow"
+              className="w-full rounded p-4 text-primary shadow"
             />
           </div>
           <Button
             style="secondary"
-            copy={isLoading ? "Loading" : "Sign up"}
+            copy={isLoading ? "Loading" : "Subscribe"}
             rounded
             className={classNames(
               isLoading ? "pointer-events-none opacity-50" : "",
@@ -97,7 +97,7 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
               <Link
                 href="https://stacksports.com/legal-privacy"
                 target="_blank"
-                className="font-normal ml-2 text-base lg:text-base underline hover:underline-offset-4"
+                className="ml-2 text-base font-normal underline hover:underline-offset-4 lg:text-base"
               >
                 Privacy Policy.
               </Link>

@@ -41,7 +41,7 @@ export const Modal: FC<ModalProps> = ({
 
   return (
     <div>
-      <div onClick={onToggleModal} className={classNames("text-primary cursor-pointer", triggerClass)}>
+      <div onClick={onToggleModal} className={classNames("cursor-pointer text-primary", triggerClass)}>
         {trigger}
       </div>
       <dialog
@@ -52,7 +52,7 @@ export const Modal: FC<ModalProps> = ({
         onClick={onClickOutside}
       >
         <div className={classNames("modal-box p-8", getModalMaxWidth(maxWidth), className)}>
-          <div onClick={onToggleModal} className="btn btn-circle btn-ghost btn-sm absolute right-2 top-2">
+          <div onClick={onToggleModal} className="btn btn-ghost btn-circle btn-sm absolute right-2 top-2">
             ✕
           </div>
           {children}

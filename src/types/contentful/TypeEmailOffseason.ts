@@ -7,7 +7,7 @@ export interface TypeEmailOffseasonFields {
 }
 
 export type TypeEmailOffseasonSkeleton = EntrySkeletonType<TypeEmailOffseasonFields, "emailOffseason">;
-export type TypeEmailOffseason<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeEmailOffseason<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeEmailOffseasonSkeleton,
   Modifiers,
   Locales

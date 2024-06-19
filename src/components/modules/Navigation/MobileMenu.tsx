@@ -34,17 +34,17 @@ interface MobileMenuProps {
 
 const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
   return (
-    <ul className="menu p-0 w-full min-h-full bg-white text-base-content overflow-y-auto">
+    <ul className="menu min-h-full w-full overflow-y-auto bg-white p-0 text-base-content">
       {menu?.length > 0 &&
         menu.map((menuItem: any, i) => {
           const menuItemKey = genereateRandomId(`${menuItem.name}_${i}`);
 
           return (
-            <li tabIndex={8} key={menuItemKey} className="w-full flex flex-col gap-y-1">
+            <li tabIndex={8} key={menuItemKey} className="flex w-full flex-col gap-y-1">
               {menuItem.name === "Home" && (
                 <div
                   key={menuItemKey}
-                  className="w-full flex items-center justify-between mb-2 text-left border border-neutral-300 border-r-0 border-t-0 border-l-0"
+                  className="mb-2 flex w-full items-center justify-between border border-l-0 border-r-0 border-t-0 border-neutral-300 text-left"
                 >
                   <Link href={menuItem.href ? menuItem.href : "#"}>
                     <Logo />
@@ -62,7 +62,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
               {menuItem.name !== "Home" && menuItem.menu && (
                 <MenuDropdown
                   label={<span>{menuItem.name}</span>}
-                  className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                  className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                 >
                   {menuItem.menu?.map((subItem: any, subItemIdx: number) => {
                     const subItemKey = genereateRandomId(`${subItem.name}_${subItemIdx}`);
@@ -72,7 +72,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
                         {subItem.menu?.length > 0 ? (
                           <MenuDropdown
                             label={<Link href={subItem.href ? subItem.href : "#"}>{subItem.name}</Link>}
-                            className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                            className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                           >
                             {subItem.menu?.map((nestedSubItem: any, nestedSubItemIdx: number) => {
                               return (
@@ -84,7 +84,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
                                           {nestedSubItem.name}
                                         </Link>
                                       }
-                                      className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                                      className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                                     >
                                       <ul>
                                         {nestedSubItem.menu?.length > 0 &&
@@ -92,7 +92,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
                                             (item: { name: string; href: string }, itemIdx: number) => (
                                               <li
                                                 key={genereateRandomId(`${item.name}_${itemIdx}`)}
-                                                className="hover:bg-primary rounded-md hover:text-white"
+                                                className="rounded-md hover:bg-primary hover:text-white"
                                               >
                                                 <Link href={item.href ? item.href : "#"}>{item.name}</Link>
                                               </li>
@@ -131,23 +131,23 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
           );
         })}
 
-      <div className="flex justify-end w-full px-6 py-4 mt-4 text-left border border-neutral-300 border-r-0 border-b-0 border-l-0">
-        <details className="dropdown absolute w-full left-0">
-          <summary tabIndex={1} className="flex pl-6 items-center justify-start py-4 hover:cursor-pointer">
-            <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-1 w-4 h-4" />
+      <div className="mt-4 flex w-full justify-end border border-b-0 border-l-0 border-r-0 border-neutral-300 px-6 py-4 text-left">
+        <details className="dropdown absolute left-0 w-full">
+          <summary tabIndex={1} className="flex items-center justify-start py-4 pl-6 hover:cursor-pointer">
+            <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-1 h-4 w-4" />
             <FontAwesomeIcon icon={faAngleDown as IconProp} color="#818389" className="mt-0.5" />
           </summary>
           <ul
             tabIndex={1}
-            className="dropdown-content bg-white menu menu-compact w-full p-0 pt-2 text-primary grid grid-cols-1 gap-y-1 overflow-y-auto"
+            className="menu-compact menu dropdown-content grid w-full grid-cols-1 gap-y-1 overflow-y-auto bg-white p-0 pt-2 text-primary"
           >
             {locations.map((location: any, locIdx: number) => {
               const locationKey = genereateRandomId(`menu-${location.name}_${locIdx}`);
               return (
-                <li tabIndex={8} key={locationKey} className="w-full lg:w-[18.6rem] flex flex-col gap-y-1">
+                <li tabIndex={8} key={locationKey} className="flex w-full flex-col gap-y-1 lg:w-[18.6rem]">
                   <MenuDropdown
                     label={<span>{location.name}</span>}
-                    className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                    className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                   >
                     {location.menu?.map((subItem: any, subItemIdx: number) => {
                       const subItemKey = genereateRandomId(`${subItem.name}_${subItemIdx}`);
@@ -155,7 +155,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
                         <li className="w-full" key={subItemKey}>
                           <MenuDropdown
                             label={<Link href={subItem.categoryHref}>{subItem.category}</Link>}
-                            className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                            className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                           >
                             {subItem.menu?.map((nestedSubItem: any, nestedSubItemIdx: number) => {
                               return (
@@ -167,7 +167,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
                                           {nestedSubItem.name}
                                         </Link>
                                       }
-                                      className="flex items-center justify-between hover:bg-primary rounded-md hover:text-white"
+                                      className="flex items-center justify-between rounded-md hover:bg-primary hover:text-white"
                                     >
                                       <ul>
                                         {nestedSubItem.menu?.length > 0 &&
@@ -175,7 +175,7 @@ const MobileMenu = ({ locations, toggleHideSide }: MobileMenuProps) => {
                                             (item: { name: string; href: string }, itemIdx: number) => (
                                               <li
                                                 key={genereateRandomId(`${item.name}_${itemIdx}`)}
-                                                className="hover:bg-primary rounded-md hover:text-white"
+                                                className="rounded-md hover:bg-primary hover:text-white"
                                               >
                                                 <Link href={item.href ? item.href : "#"}>{item.name}</Link>
                                               </li>

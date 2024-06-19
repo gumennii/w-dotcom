@@ -21,7 +21,7 @@ export const HomePageCarousel = ({ items }: HomePageCarouselProps) => {
 
         return (
           <Carousel.Item key={item.fields.slug}>
-            <Link className="lg:relative w-full" href={`/program/${item.fields.slug}`}>
+            <Link className="w-full lg:relative" href={`/program/${item.fields.slug}`}>
               <Image
                 src={coverImage?.fields?.file?.url as string}
                 alt={programName}
@@ -31,7 +31,7 @@ export const HomePageCarousel = ({ items }: HomePageCarouselProps) => {
                 className="w-full md:h-[27rem] lg:h-[44.313rem]"
               />
               <Container
-                className="bg-[#0F2344] lg:bg-transparent lg:absolute lg:left-1/2 lg:-translate-x-2/4 lg:bottom-16 text-white w-full flex flex-col items-start md:items-center lg:gap-y-4 pt-4"
+                className="flex w-full flex-col items-start bg-[#0F2344] pt-4 text-white md:items-center lg:absolute lg:bottom-16 lg:left-1/2 lg:-translate-x-2/4 lg:gap-y-4 lg:bg-transparent"
                 maxWidth={MaxWidth.Footer}
               >
                 <Text type="h1" className="uppercase italic">

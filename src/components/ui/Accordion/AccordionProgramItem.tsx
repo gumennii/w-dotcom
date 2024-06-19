@@ -38,9 +38,9 @@ export const AccordionProgramItem: FC<AccordionProgramItemProps> = ({
       {title && (
         <button
           onClick={toggleAccordion}
-          className="flex w-full flex-row items-center justify-between bg-inherit mt-2 pb-1 pr-1 text-lg font-semibold md:mt-4 md:pb-2"
+          className="mt-2 flex w-full flex-row items-center justify-between bg-inherit pb-1 pr-1 text-lg font-semibold md:mt-4 md:pb-2"
         >
-          <h2 className="font-sant font-semibold text-xl lg:text-2xl">{title}</h2>
+          <h2 className="font-sant text-xl font-semibold lg:text-2xl">{title}</h2>
           <div className="flex items-center">
             {isOpened ? (
               <FontAwesomeIcon icon={faAngleUp as IconProp} color="#d4d4d4" />

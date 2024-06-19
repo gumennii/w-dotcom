@@ -47,7 +47,7 @@ export const VideoModal: FC<VideoModalProps> = ({
 
   return (
     <div>
-      <div onClick={onToggleModal} className={classNames("text-primary cursor-pointer", triggerClass)}>
+      <div onClick={onToggleModal} className={classNames("cursor-pointer text-primary", triggerClass)}>
         {children}
       </div>
       <dialog
@@ -57,8 +57,8 @@ export const VideoModal: FC<VideoModalProps> = ({
         })}
         onClick={onClickOutside}
       >
-        <div className={classNames("modal-box p-0 bg-[#0006]", getModalMaxWidth(maxWidth), className)}>
-          <div onClick={onToggleModal} className="btn z-20 btn-circle btn-white btn-sm absolute right-2 top-2">
+        <div className={classNames("modal-box bg-[#0006] p-0", getModalMaxWidth(maxWidth), className)}>
+          <div onClick={onToggleModal} className="btn btn-white btn-circle btn-sm absolute right-2 top-2 z-20">
             ✕
           </div>
           <Video url={url} playVideo={playVideo} controls={false} />

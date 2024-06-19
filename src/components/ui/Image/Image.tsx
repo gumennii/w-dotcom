@@ -28,21 +28,21 @@ export const Image: FC<ImageProps> = ({
       {link ? (
         <Link
           href={link}
-          className={cn("block w-full relative h-max max-w-max", getBorderRadius(borderRadius), className)}
+          className={cn("relative block h-max w-full max-w-max", getBorderRadius(borderRadius), className)}
         >
           <ContentfulImage
             alt={alt ?? "image"}
-            className={cn("object-cover h-full bg-slate-400", getBorderRadius(borderRadius))}
+            className={cn("h-full bg-slate-400 object-cover", getBorderRadius(borderRadius))}
             height={height}
             width={width}
             src={src}
           />
         </Link>
       ) : (
-        <div className={cn("w-full relative h-max max-w-max", getBorderRadius(borderRadius), className)}>
+        <div className={cn("relative h-max w-full max-w-max", getBorderRadius(borderRadius), className)}>
           <ContentfulImage
             alt={alt ?? "image"}
-            className={cn("object-cover h-full", getBorderRadius(borderRadius))}
+            className={cn("h-full object-cover", getBorderRadius(borderRadius))}
             height={height}
             width={width}
             src={src}

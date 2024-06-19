@@ -34,7 +34,7 @@ const Drawer = ({
     <div aria-expanded={open} {...props} className={classes}>
       <input type="checkbox" className={cn("drawer-toggle", toggleClassName)} checked={open} readOnly />
       <div className={cn("drawer-content", contentClassName)}>{children}</div>
-      <div className={cn("drawer-side overflow-x-hidden mobile-menu-button", sideClassName)}>
+      <div className={cn("mobile-menu-button drawer-side overflow-x-hidden", sideClassName)}>
         <label className={cn("drawer-overlay", overlayClassName)} onClick={onClickOverlay}></label>
         {side}
       </div>

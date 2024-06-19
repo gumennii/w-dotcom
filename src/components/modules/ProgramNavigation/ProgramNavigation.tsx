@@ -28,7 +28,7 @@ const ProgramNavigation = React.forwardRef<HTMLDivElement, ProgramNavigationProp
         aria-label="Program Navigation"
         {...props}
         className={cn(
-          "w-full border-b border-solid border-gray-200 bg-white py-2 drop-shadow sticky top-0 z-20",
+          "sticky top-0 z-20 w-full border-b border-solid border-gray-200 bg-white py-2 drop-shadow",
           className
         )}
         ref={ref}

@@ -11,10 +11,10 @@ export const LeagueOperationsItem = ({
   className?: string;
 }) => {
   return (
-    <div className={classNames("w-full order-1 md:w-[47%]", className)}>
-      <h5 className="font-semibold text-lg md:text-xl lg:text-2xl">{title}</h5>
+    <div className={classNames("order-1 w-full md:w-[47%]", className)}>
+      <h5 className="text-lg font-semibold md:text-xl lg:text-2xl">{title}</h5>
       <Divider />
-      <div className="font-normal text-sm lg:text-base">{children}</div>
+      <div className="text-sm font-normal lg:text-base">{children}</div>
     </div>
   );
 };

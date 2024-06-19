@@ -26,10 +26,11 @@ export interface TypeCampFields {
   programContactEmails?: EntryFieldTypes.Text;
   lastUpdatedBy?: EntryFieldTypes.Symbol;
   selectExpeditedProcessingFeeStartDate?: EntryFieldTypes.Symbol;
+  departmentKey?: EntryFieldTypes.Symbol;
 }
 
 export type TypeCampSkeleton = EntrySkeletonType<TypeCampFields, "camp">;
-export type TypeCamp<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeCamp<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeCampSkeleton,
   Modifiers,
   Locales

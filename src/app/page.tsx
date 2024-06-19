@@ -96,7 +96,7 @@ export default async function Page() {
         <Divider className="m-auto max-w-screen-lg" />
 
         <Container className="flex flex-col gap-y-8 py-8 lg:py-16" maxWidth={MaxWidth.Footer}>
-          <Text type="h1" className="uppercase italic text-center  lg:text-start">
+          <Text type="h1" className="text-center uppercase italic lg:text-start">
             2024 Season starts now!
           </Text>
           <Video url={coverVideo} />
@@ -120,9 +120,9 @@ export default async function Page() {
           <LogoCloud {...logoCloudProps} />
         </Container>
 
-        <Divider className="m-auto max-w-screen-lg mb-6" />
+        <Divider className="m-auto mb-6 max-w-screen-lg" />
       </div>
-      <div className="w-full px-5 bg-primary">
+      <div className="w-full bg-primary px-5">
         <Container className="px-0" maxWidth={MaxWidth.Footer}>
           <MobileApp layout="leftTop" />
         </Container>

@@ -23,7 +23,7 @@ export type TypeMarketingPageProgramSkeleton = EntrySkeletonType<
   TypeMarketingPageProgramFields,
   "marketingPageProgram"
 >;
-export type TypeMarketingPageProgram<Modifiers extends ChainModifiers, Locales extends LocaleCode> = Entry<
+export type TypeMarketingPageProgram<Modifiers extends ChainModifiers, Locales extends LocaleCode = LocaleCode> = Entry<
   TypeMarketingPageProgramSkeleton,
   Modifiers,
   Locales

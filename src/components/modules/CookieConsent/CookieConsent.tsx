@@ -32,13 +32,13 @@ export const CookieConsent = ({
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-[99]">
-      <div className="fixed bottom-0 left-0 right-0 px-4 py-6 lg:py-8 bg-white">
+    <div className="fixed inset-0 z-[99] bg-black bg-opacity-50">
+      <div className="fixed bottom-0 left-0 right-0 bg-white px-4 py-6 lg:py-8">
         <Container maxWidth={MaxWidth.Footer} className="flex items-center justify-between">
-          <div className="text-primary mr-8 lg:mr-16 max-w-3xl">
+          <div className="mr-8 max-w-3xl text-primary lg:mr-16">
             <Text type="p">
               {content}{" "}
-              <Link href="https://stacksports.com/legal-privacy" className="underline text-sx md:text-sm">
+              <Link href="https://stacksports.com/legal-privacy" className="text-sx underline md:text-sm">
                 {" "}
                 Privacy Statement.
               </Link>

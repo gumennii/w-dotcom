@@ -85,7 +85,7 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
         onClick={onClickOutside}
       >
         <div className={classNames("modal-box p-0", getModalMaxWidth(maxWidth), className)}>
-          <div onClick={onToggleModal} className="btn btn-circle btn-ghost btn-md absolute right-4 top-4 text-white">
+          <div onClick={onToggleModal} className="btn btn-ghost btn-circle btn-md absolute right-4 top-4 text-white">
             <FontAwesomeIcon icon={faXmark as IconProp} size="xl" />
           </div>
           {children}

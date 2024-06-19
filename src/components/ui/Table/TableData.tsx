@@ -24,12 +24,12 @@ const TableData: FC<Props> = ({ data, size, hideColumns = [], equalColumns }) =>
   return (
     <>
       <thead className={cn(size === "full" ? "border-b-2 border-solid" : "")}>
-        <tr className={cn(equalColumns ? "grid grid-flow-col auto-cols-[minmax(auto,_1fr)]" : "")}>
+        <tr className={cn(equalColumns ? "grid auto-cols-[minmax(auto,_1fr)] grid-flow-col" : "")}>
           {head.map((headCell, i) => {
             if (hideColumns.indexOf(headCell) === -1) {
               return (
                 <th
-                  className="bg-base-200 text-primary text-base uppercase font-semibold leading-normal lg:text-lg"
+                  className="bg-base-200 text-base font-semibold uppercase leading-normal text-primary lg:text-lg"
                   key={`head-${i}-${id}`}
                 >
                   {headCell}
@@ -43,7 +43,7 @@ const TableData: FC<Props> = ({ data, size, hideColumns = [], equalColumns }) =>
         {rows.map((row, i) => (
           <tr
             key={`row-${i}-${id}`}
-            className={cn(equalColumns ? "grid grid-flow-col auto-cols-[minmax(auto,_1fr)]" : "")}
+            className={cn(equalColumns ? "grid auto-cols-[minmax(auto,_1fr)] grid-flow-col" : "")}
           >
             {Object.keys(data[row]).map((cell, j) => {
               if (hideColumns.indexOf(cell) === -1) {
