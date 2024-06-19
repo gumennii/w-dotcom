@@ -33,7 +33,7 @@ export const RegistrationListing = ({ programName, programType, divisions, price
   return (
     <>
       <h4 className="mb-1 text-sm font-semibold leading-relaxed text-secondary md:text-lg">
-        General Registration is open from {divisions[0].seasonStart} to {divisions[0].seasonEnd}
+        General Registration is open on April 15th at 9:00 AM
       </h4>
       <p className="texr-sx mb-6 leading-relaxed lg:text-sm">
         Limited slots available. Register now to avoid incurring a late registration fee.
@@ -45,7 +45,7 @@ export const RegistrationListing = ({ programName, programType, divisions, price
               <div className="flex flex-col gap-2">
                 <h3 className="text-lg font-semibold leading-normal">{division.divisionName}</h3>
                 <span className="text-sm leading-relaxed">
-                  Starts on {division.seasonStart} and ends on {division.seasonEnd}
+                  Season Dates: {division.seasonStart} — {division.seasonEnd}
                 </span>
                 <div className="flex flex-row items-center gap-4">
                   <span className="font-base mr-3 font-semibold leading-relaxed">$315.00</span>
