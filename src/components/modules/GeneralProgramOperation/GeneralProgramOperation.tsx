@@ -16,10 +16,10 @@ export const GeneralProgramOperation = ({
   coverImage,
 }: GeneralProgramOperationProps) => {
   return (
-    <Container maxWidth={MaxWidth.Small}>
+    <div>
       <VideoModal maxWidth="2xLarge" url={coverVideo}>
         {coverImage && Object.keys(coverImage).length && coverImage.fields.file?.url ? (
-          <div className="relative w-full">
+          <div className="relative w-full py-10">
             <Image
               src={coverImage?.fields?.file?.url as string}
               alt={`Image ${programType}`}
@@ -33,22 +33,6 @@ export const GeneralProgramOperation = ({
           <Button rounded style="outline" copy="&#9654; Watch Teaser" />
         )}
       </VideoModal>
-      <Text type="h2" className="mb-4 mt-8">
-        General Program Operation and Additional Information
-      </Text>
-      <div className="flex flex-col items-center justify-between gap-y-4 md:flex-row">
-        <Text type="h6" className="w-full md:w-[70%]">
-          {`Review the general program operations, program information and philosophies of the Next Level ${programType}
-          program`}
-        </Text>
-        <Button
-          href={`/program/${slug}/operations`}
-          style="outline"
-          copy="Learn more"
-          rounded
-          className="w-full border border-solid border-primary hover:border-primary md:w-auto"
-        />
-      </div>
-    </Container>
+    </div>
   );
 };

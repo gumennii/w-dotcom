@@ -20,7 +20,7 @@ export const Profile = React.forwardRef<HTMLDivElement, ProfileProps>(
     const imagePath = photo ? (photo.fields.file?.url as string) : "/avatar.svg";
     return (
       <div aria-label="Profile" {...props} className={cn("w-full text-primary lg:max-w-7xl", className)} ref={ref}>
-        <h2 className="font-sant mb-4 text-xl font-bold leading-normal md:text-2xl lg:text-3xl">{title}</h2>
+        <h2 className="font-sant mb-4 text-xl font-semibold lg:text-2xl">{title}</h2>
 
         <div className="flex flex-col gap-x-6 md:flex-row lg:flex-row">
           <div className="flex w-full shrink-0 flex-col md:w-36">
