@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { GeneralProgramOperation } from "@/components/modules";
+import { VideoContainer } from "@/components/modules";
 
 const meta = {
   title: "Modules/Program Operation Info",
-  component: GeneralProgramOperation,
+  component: VideoContainer,
   parameters: {
     layout: "centered",
   },
-} satisfies Meta<typeof GeneralProgramOperation>;
+} satisfies Meta<typeof VideoContainer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
