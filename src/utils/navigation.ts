@@ -5,12 +5,12 @@ export const getProgramNavigationLinks = (slug: string) => [
     id: "#overview",
   },
   {
-    name: "League Operations",
+    name: "Program Logistics",
     href: `/program/${slug}#operations`,
     id: "#operations",
   },
   {
-    name: "Schedule",
+    name: "Program Date & Time",
     href: `/program/${slug}#schedule`,
     id: "#schedule",
   },
