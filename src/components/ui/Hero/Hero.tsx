@@ -24,7 +24,7 @@ export const Hero = ({ programName, programType, className, urlVideo }: HeroProp
         backgroundImage: `${heroBgGradient}, url("/banner.png")`,
       }}
     >
-      <Container maxWidth={MaxWidth.Small}>
+      <Container maxWidth={MaxWidth.Footer}>
         <div className="mb-4 flex flex-col justify-center gap-4 text-center md:text-left">
           <Link href="/">
             <Logo color="light" className="mx-auto md:mx-0" />
@@ -40,9 +40,11 @@ export const Hero = ({ programName, programType, className, urlVideo }: HeroProp
             </span>
             {programName.indexOf("-") === -1 ? programName : programName.substring(programName.indexOf("-") + 2)}
           </h1>
-          <h2 className="max-w-full font-inter text-sm md:text-base lg:max-w-[50%] lg:text-lg">
-            The program starts in January and runs through March. Open to 3rd - 8th Graders.
-          </h2>
+          <p className="max-w-full font-inter text-sm md:text-base lg:max-w-[50%] lg:text-lg">
+            The program starts in January and runs through March.
+            <br />
+            Open to 5th - 8th Graders.
+          </p>
           <div className="h-4" />
           <div className="flex flex-col font-roboto text-lg font-bold uppercase md:flex-row md:text-xl lg:text-2xl">
             <h3 className={textColor}>now open:&nbsp;</h3>
