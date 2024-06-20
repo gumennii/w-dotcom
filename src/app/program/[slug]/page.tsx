@@ -106,7 +106,14 @@ export default async function ProgramPage({ params }: { params: { slug: string }
               <Text type="p">
                 The Next Level Girls Volleyball program has been developed to provide aspiring volleyball players an
                 opportunity to learn the basic skills and functions of competitive volleyball - at an introductory yet
-                competitive level. Our program is aimed at the youth athlete who has 'some-to-none' exposure/experience with the game of volleyball yet would like to develop the core skills required to participate at a higher level in the future (club, middle school, high school). Our site directors are current high school/club-level volleyball coaches who have taught the game to a wide variety of age groups - both at the more casual level as well as the elite club and elite high school levels. As traditional within Next Level, all teams will be coached with the assistance of a high school student-athlete involved within the game. For our parents, we seek to keep your weekends free of tangled schedules. All Next Level Volleyball program activities will occur at the same time and same day from week to week of our program.
+                competitive level. Our program is aimed at the youth athlete who has some-to-none exposure/experience
+                with the game of volleyball yet would like to develop the core skills required to participate at a
+                higher level in the future (club, middle school, high school). Our site directors are current high
+                school/club-level volleyball coaches who have taught the game to a wide variety of age groups - both at
+                the more casual level as well as the elite club and elite high school levels. As traditional within Next
+                Level, all teams will be coached with the assistance of a high school student-athlete involved within
+                the game. For our parents, we seek to keep your weekends free of tangled schedules. All Next Level
+                Volleyball program activities will occur at the same time and same day from week to week of our program.
               </Text>
               <ul>
                 <li>No prior volleyball experience is required to participate in the Next Level Volleyball Program.</li>
