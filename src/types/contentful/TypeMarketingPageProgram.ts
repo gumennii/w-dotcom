@@ -15,6 +15,7 @@ export interface TypeMarketingPageProgramFields {
   scheduleNotes?: EntryFieldTypes.RichText;
   price?: EntryFieldTypes.Integer;
   siteDirector?: EntryFieldTypes.EntryLink<TypePeopleSkeleton>;
+  programOverview?: EntryFieldTypes.RichText;
   leagueOperations?: EntryFieldTypes.RichText;
   programData: EntryFieldTypes.EntryLink<TypeProgramDataSkeleton>;
 }

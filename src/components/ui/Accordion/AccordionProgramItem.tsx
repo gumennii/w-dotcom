@@ -32,7 +32,10 @@ export const AccordionProgramItem: FC<AccordionProgramItemProps> = ({
 
   return (
     <div
-      className={classNames("card mb-2 rounded-none border-b border-solid border-neutral-300 last:mb-0", className)}
+      className={classNames(
+        "card mb-2 rounded-none border-b border-solid border-neutral-300 pb-4 last:mb-0",
+        className
+      )}
       id={id}
     >
       {title && (

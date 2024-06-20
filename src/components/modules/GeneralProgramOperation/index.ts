@@ -1,1 +1,0 @@
-export { GeneralProgramOperation } from "./GeneralProgramOperation";

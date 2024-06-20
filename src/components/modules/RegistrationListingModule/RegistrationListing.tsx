@@ -7,6 +7,8 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
 import { Fragment } from "react";
 
+import { format as dateFormat } from "date-fns";
+
 export type TDivision = {
   id: number;
   Location: string;
@@ -45,10 +47,11 @@ export const RegistrationListing = ({ programName, programType, divisions, price
               <div className="flex flex-col gap-2">
                 <h3 className="text-lg font-semibold leading-normal">{division.divisionName}</h3>
                 <span className="text-sm leading-relaxed">
-                  Season Dates: {division.seasonStart} — {division.seasonEnd}
+                  Season Dates: {dateFormat(division.seasonStart, "MMM d, y")} —{" "}
+                  {dateFormat(division.seasonEnd, "MMM d, y")}
                 </span>
                 <div className="flex flex-row items-center gap-4">
-                  <span className="font-base mr-3 font-semibold leading-relaxed">$315.00</span>
+                  <span className="font-base mr-3 font-bold leading-relaxed">$315.00</span>
                   <span className="text-sx">
                     <FontAwesomeIcon icon={faUser as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
                     {division.divisionMaxPlayers} players
@@ -59,9 +62,9 @@ export const RegistrationListing = ({ programName, programType, divisions, price
                   </span>
                 </div>
               </div>
-              <Divider className="block border-dashed sm:hidden" />
+              <Divider className="block border sm:hidden" />
               <div className="flex flex-row items-center justify-between sm:flex-col sm:items-end">
-                <span className="text-sx leading-normal">General Registration is open</span>
+                <span className="text-sx leading-normal">Only a few spots left!</span>
                 <Button
                   rounded
                   style="secondary"

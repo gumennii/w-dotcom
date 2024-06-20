@@ -1,20 +1,14 @@
-import { Text, Button, VideoModal, Container, Image, VideoPlayBtn } from "@/components/ui";
-import { MaxWidth } from "@/utils/styling";
+import { Button, VideoModal, Image, VideoPlayBtn } from "@/components/ui";
 import { Asset } from "contentful";
 
-type GeneralProgramOperationProps = {
+type VideoContainerProps = {
   coverVideo: string;
   coverImage?: Asset;
   programType: string;
   slug: string;
 };
 
-export const GeneralProgramOperation = ({
-  coverVideo,
-  programType,
-  slug,
-  coverImage,
-}: GeneralProgramOperationProps) => {
+export const VideoContainer = ({ coverVideo, programType, slug, coverImage }: VideoContainerProps) => {
   return (
     <div>
       <VideoModal maxWidth="2xLarge" url={coverVideo}>

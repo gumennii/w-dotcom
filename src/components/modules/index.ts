@@ -7,7 +7,7 @@ export { MobileApp, type MobileAppProps };
 export { Navigation, menu } from "./Navigation";
 export { LeagueOperations } from "./LeagueOperations";
 export { RegistrationListing, type RegistrationListingProps, type TDivision } from "./RegistrationListingModule";
-export { GeneralProgramOperation } from "./GeneralProgramOperation";
+export { VideoContainer } from "./VideoContainer";
 export { CallToAction, type CallToActionProps } from "./CallToAction";
 export { HomePageCarousel } from "./HomePageCarousel";
 export { ProgramCards } from "./ProgramCards";

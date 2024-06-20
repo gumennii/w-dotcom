@@ -7,18 +7,9 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { Markdown } from "@/lib/markdown";
 import { TypeMarketingPageProgram, TypePeople } from "@/types/contentful";
 import { Asset } from "contentful";
+import { Container, Hero, InteractiveModal, Accordion, AccordionProgramItem, Text, Table } from "@/components/ui";
 import {
-  Container,
-  Hero,
-  Divider,
-  InteractiveModal,
-  Accordion,
-  AccordionProgramItem,
-  Text,
-  Table,
-} from "@/components/ui";
-import {
-  GeneralProgramOperation,
+  VideoContainer,
   ProgramNavigation,
   RegistrationListing,
   Subscribe,
@@ -26,6 +17,7 @@ import {
   Profile,
 } from "@/components/modules";
 import { Footer } from "@/components/modules/Navigation/Footer";
+import { format as dateFormat } from "date-fns";
 
 type Schedule = {
   week: string;
@@ -45,6 +37,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
   const coverImage = content.fields.coverImage as Asset;
   const seasonDescription = content.fields.seasonDescription as Document;
+  const programOverview = content.fields.programOverview as Document;
   const leagueOperations = content.fields.leagueOperations as Document;
   const siteDirectorData = content.fields.siteDirector as TypePeople<undefined, string>;
   const divisionsList = content.fields.divisions as TDivision[];
@@ -60,7 +53,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
   const scheduleTableData = scheduleList?.map(item => {
     return {
       week: item.week,
-      date: item.date,
+      date: dateFormat(item.date, "EEEE, MMMM d"),
     };
   });
 
@@ -70,7 +63,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <Subscribe
           variant="modal"
           title="Stay in The Game"
-          descriprion="Stay informed about our ${content.fields.programName as string} program! Subscribe to our offseason newsletter for exclusive updates."
+          descriprion={`Stay informed about our ${content.fields.programName as string} program! Subscribe to our offseason newsletter for exclusive updates.`}
           className="rounded-2xl bg-[#051227] p-8 text-center text-white"
           trackingFields={content.fields.slug as string}
         />
@@ -93,7 +86,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           <Markdown content={{ json: seasonDescription }} />
         </div>
 
-        <GeneralProgramOperation
+        <VideoContainer
           coverVideo={content.fields.coverVideo as string}
           programType={content.fields.programType as string}
           slug={params.slug as string}
@@ -101,60 +94,33 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         />
 
         <Accordion>
-          <AccordionProgramItem title="Program Overview" id="overview">
-            <div className="season prose">
-              <Text type="p">
-                The Next Level Girls Volleyball program has been developed to provide aspiring volleyball players an
-                opportunity to learn the basic skills and functions of competitive volleyball - at an introductory yet
-                competitive level. Our program is aimed at the youth athlete who has some-to-none exposure/experience
-                with the game of volleyball yet would like to develop the core skills required to participate at a
-                higher level in the future (club, middle school, high school). Our site directors are current high
-                school/club-level volleyball coaches who have taught the game to a wide variety of age groups - both at
-                the more casual level as well as the elite club and elite high school levels. As traditional within Next
-                Level, all teams will be coached with the assistance of a high school student-athlete involved within
-                the game. For our parents, we seek to keep your weekends free of tangled schedules. All Next Level
-                Volleyball program activities will occur at the same time and same day from week to week of our program.
-              </Text>
-              <ul>
-                <li>No prior volleyball experience is required to participate in the Next Level Volleyball Program.</li>
-                <li>It is suggested that all players wear proper athletic shoes and knee pads.</li>
-                <li>All other equipment will be provided.</li>
-                <li>
-                  Uniforms are included in the league registration fees, inclusive of home delivery of your uniform.
-                </li>
-                <li>
-                  Our program is community-based, teams are formalized by schoolmates, buddy lists, and friends where
-                  possible.
-                </li>
-              </ul>
-            </div>
+          <AccordionProgramItem title="Program Overview" id="overview" isOpen={true}>
+            <div className="season prose">{documentToReactComponents(programOverview)}</div>
           </AccordionProgramItem>
-          <AccordionProgramItem title="League Operations" id="operations">
+          <AccordionProgramItem title="Program Logistics" id="operations">
             <div className="season prose">{documentToReactComponents(leagueOperations)}</div>
           </AccordionProgramItem>
-          <AccordionProgramItem title="Schedule" id="schedule" className="border-b-0">
-            <div>
-              <Text type="h3" className="mb-6">
+          <AccordionProgramItem title="Program Date & Time" id="schedule" className="border-b-0">
+            <div className="mb-10">
+              <Text type="h4" className="mb-6 font-extralight">
                 Practice & Game Times
               </Text>
 
               <Table textAlign={"center"} data={gameTimesTableData} />
 
-              <div className="note prose">
+              <div className="note prose mt-6">
                 <Markdown content={{ json: content.fields.notes }} />
               </div>
-
-              <Divider className="my-4 lg:my-8" />
             </div>
 
             <div>
-              <Text type="h3" className="mb-6">
+              <Text type="h4" className="mb-6 font-extralight">
                 Game Schedule
               </Text>
 
               <Table textAlign={"left"} data={scheduleTableData} equalColumns={false} />
 
-              <div className="note prose">
+              <div className="note prose mt-6">
                 <Markdown content={{ json: content.fields.scheduleNotes }} />
               </div>
             </div>
@@ -165,8 +131,8 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       <Container maxWidth={MaxWidth.Small} className="my-8 flex flex-col">
         <Subscribe
           title="Want news and updates?"
-          descriprion="Sign up for our newsletter to stay up to date."
-          className="mb-8 rounded-2xl bg-[#051227]"
+          descriprion="Sign up for our offseason newsletter to stay up to date with our program."
+          className="mb-6 rounded-2xl bg-[#051227]"
           trackingFields={content.fields.slug as string}
         />
       </Container>
