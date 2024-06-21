@@ -79,7 +79,7 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
     <div>
       <dialog
         open={showModal}
-        className={classNames("modal h-full w-full", {
+        className={classNames("modal h-full w-full !bg-[#000000b0] backdrop-blur", {
           "modal-open z-[999]": showModal,
         })}
         onClick={onClickOutside}

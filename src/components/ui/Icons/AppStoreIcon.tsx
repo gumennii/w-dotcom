@@ -1,7 +1,7 @@
 import React, { SVGProps } from "react";
 
 export const AppStoreIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={181} height={53} fill="none" {...props}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={181} height={53} viewBox="0 0 181 53" fill="none" {...props}>
     <path
       fill="#000"
       d="M179.312 46.358c0 2.771-2.291 5.016-5.126 5.016H6.445c-2.833 0-5.133-2.245-5.133-5.016v-40c0-2.77 2.3-5.022 5.133-5.022h167.74c2.836 0 5.126 2.253 5.126 5.023l.001 40Z"

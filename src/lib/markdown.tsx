@@ -16,8 +16,8 @@ interface AssetLink {
 }
 
 interface Content {
-  json?: any;
-  string?: string;
+  json?: any; // EntryFieldTypes.RichText / Rich text
+  string?: string; // EntryFieldTypes.Text / Long text
   links?: {
     assets: AssetLink;
   };

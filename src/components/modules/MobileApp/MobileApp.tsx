@@ -22,8 +22,8 @@ type TStoresIcons = {
 };
 
 const appsLinksIconsMap: TStoresIcons = {
-  appStore: <AppStoreIcon />,
-  googlePlay: <GooglePlayIcon />,
+  appStore: <AppStoreIcon className="w-32 md:w-auto" />,
+  googlePlay: <GooglePlayIcon className="w-32 md:w-auto" />,
 };
 
 const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(

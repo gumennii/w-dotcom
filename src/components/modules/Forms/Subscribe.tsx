@@ -46,7 +46,7 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
     <div
       className={classNames(
         "flex w-full flex-col items-center justify-between gap-y-4 lg:gap-y-6",
-        variant === "wide" ? "px-0 sm:px-0 sm:py-16 md:px-0 lg:flex-row" : "",
+        variant === "wide" ? "px-0 sm:px-0 sm:py-16 md:px-0 lg:flex-row" : "px-4",
         variant === "modal" ? "p-0 text-primary" : "px-0 py-8 text-white sm:p-10",
         className
       )}

@@ -1,7 +1,7 @@
 import React, { SVGProps } from "react";
 
 export const GooglePlayIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={181} height={53} fill="none" {...props}>
+  <svg xmlns="http://www.w3.org/2000/svg" width={181} height={53} viewBox="0 0 181 53" fill="none" {...props}>
     <g clipPath="url(#a)">
       <path
         fill="#191919"
