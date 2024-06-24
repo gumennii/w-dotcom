@@ -20,6 +20,7 @@ export enum MaxWidth {
   Small = "Small",
   Footer = "Footer",
   None = "None",
+  Video = "Video",
 }
 
 export const getBackgroundClass = (background?: BackgroundTypes) => {
@@ -113,6 +114,8 @@ export const getMaxWidth = (width?: MaxWidth) => {
       return "";
     case MaxWidth.Footer:
       return "m-auto max-w-screen-lg";
+    case MaxWidth.Video:
+      return "m-auto max-w-screen-md";
     default:
       return "";
   }
@@ -228,6 +231,8 @@ export const getModalMaxWidth = (maxWidth: Types.AvailableModalMaxWidth) => {
       return "max-w-xl";
     case "2xLarge":
       return "max-w-2xl";
+    case "3xLarge":
+      return "max-w-screen-md";
     default:
       return "max-w-max";
   }

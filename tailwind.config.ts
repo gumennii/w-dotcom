@@ -19,6 +19,7 @@ export default {
         "screen-xl": "1440px",
       },
       maxWidth: {
+        "screen-md": "1086px",
         "screen-lg": "1312px",
       },
       blur: {
@@ -41,6 +42,7 @@ export default {
         "4xl": "2.5rem",
       },
       lineHeight: {
+        snug: "120%",
         normal: "130%",
         relaxed: "140%",
       },

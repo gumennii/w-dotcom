@@ -11,5 +11,5 @@ declare namespace Types {
 
   type TypographyType = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "q";
 
-  type AvailableModalMaxWidth = "none" | "small" | "medium" | "large" | "xLarge" | "2xLarge";
+  type AvailableModalMaxWidth = "none" | "small" | "medium" | "large" | "xLarge" | "2xLarge" | "3xLarge";
 }

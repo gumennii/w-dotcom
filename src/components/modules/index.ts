@@ -16,3 +16,4 @@ export { Subscribe, type SubscribeProps } from "./Forms";
 export { Profile, type ProfileProps } from "./Profile";
 export { LogoCloud, type LogoCloudProps } from "./LogoCloud";
 export { CookieConsent } from "./CookieConsent";
+export { ProgramAccordion } from "./ProgramAccordion";

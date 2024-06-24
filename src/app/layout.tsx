@@ -27,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="min-h-screen">{children}</div>
             </main>
           </section>
+          <div id="dialog-root"></div>
 
           <SpeedInsights />
         </AmplitudeContextProvider>

@@ -19,20 +19,20 @@ export const Hero = ({ programName, programType, className, urlVideo }: HeroProp
 
   return (
     <div
-      className={classNames("w-full bg-cover py-20 text-white", className)}
+      className={classNames("w-full bg-cover py-20 text-white lg:px-6 2xl:px-0", className)}
       style={{
         backgroundImage: `${heroBgGradient}, url("/banner.png")`,
       }}
     >
       <Container maxWidth={MaxWidth.Footer}>
-        <div className="mb-4 flex flex-col justify-center gap-4 text-center md:text-left">
-          <Link href="/">
+        <div className="mb-6 flex flex-col justify-start text-center md:text-left">
+          <Link href="/" className="mb-6">
             <Logo color="light" className="mx-auto md:mx-0" />
           </Link>
-          <h1 className="font-superline text-7xl font-bold uppercase italic lg:text-[11.875rem]">
+          <h1 className="font-superline text-7xl font-bold uppercase italic leading-snug lg:text-[10.75rem]">
             <span
               className={cn(
-                "mb-2 block font-roboto text-xl font-bold uppercase not-italic leading-normal md:text-2xl lg:text-3xl",
+                "block font-roboto text-xl font-bold uppercase not-italic leading-normal md:text-2xl lg:text-3xl",
                 textColor
               )}
             >
@@ -40,13 +40,12 @@ export const Hero = ({ programName, programType, className, urlVideo }: HeroProp
             </span>
             {programName.indexOf("-") === -1 ? programName : programName.substring(programName.indexOf("-") + 2)}
           </h1>
-          <p className="max-w-full font-inter text-sm md:text-base lg:max-w-[50%] lg:text-lg">
+          <p className="mb-12 max-w-full font-inter text-sm leading-normal md:text-base lg:mb-16 lg:max-w-[50%] lg:text-lg">
             The program starts in January and runs through March.
             <br />
             Open to 5th - 8th Graders.
           </p>
-          <div className="h-4" />
-          <div className="flex flex-col font-roboto text-lg font-bold uppercase md:flex-row md:text-xl lg:text-2xl">
+          <div className="flex flex-col font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:text-2xl">
             <h3 className={textColor}>now open:&nbsp;</h3>
             <h3>general registration</h3>
           </div>

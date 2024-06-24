@@ -4,6 +4,7 @@ import React, { FC, useCallback, useState, useEffect } from "react";
 import classNames from "classnames";
 import { getModalMaxWidth } from "@/utils/styling";
 import { Video } from "../Video";
+import PortalModal from "./PortalModal";
 
 export type VideoModalProps = {
   maxWidth: Types.AvailableModalMaxWidth;
@@ -45,25 +46,35 @@ export const VideoModal: FC<VideoModalProps> = ({
     }
   }, [automaticOpenTimeout]);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClickOutside();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClickOutside]);
+
   return (
     <div>
       <div onClick={onToggleModal} className={classNames("cursor-pointer text-primary", triggerClass)}>
         {children}
       </div>
-      <dialog
-        open={showModal}
-        className={classNames("modal h-full w-full !bg-[#000000b0] backdrop-blur", {
-          "modal-open z-[999]": showModal,
-        })}
-        onClick={onClickOutside}
-      >
-        <div className={classNames("modal-box bg-[#0006] p-0", getModalMaxWidth(maxWidth), className)}>
-          <div onClick={onToggleModal} className="btn btn-white btn-circle btn-sm absolute right-2 top-2 z-20">
-            ✕
+      {showModal && (
+        <PortalModal showModal={showModal} onClickOutside={onClickOutside}>
+          <div className={classNames("modal-box bg-[#0006] p-0", getModalMaxWidth(maxWidth), className)}>
+            <div onClick={onToggleModal} className="btn btn-white btn-circle btn-sm absolute right-2 top-2 z-20">
+              ✕
+            </div>
+            <Video url={url} playVideo={playVideo} controls={false} />
           </div>
-          <Video url={url} playVideo={playVideo} controls={false} />
-        </div>
-      </dialog>
+        </PortalModal>
+      )}
     </div>
   );
 };

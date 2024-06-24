@@ -34,10 +34,10 @@ export interface RegistrationListingProps {
 export const RegistrationListing = ({ programName, programType, divisions, price }: RegistrationListingProps) => {
   return (
     <>
-      <h4 className="mb-1 text-sm font-semibold leading-relaxed text-secondary md:text-lg">
+      <h4 className="mb-1 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
         General Registration is open on April 15th at 9:00 AM
       </h4>
-      <p className="texr-sx mb-6 leading-relaxed lg:text-sm">
+      <p className="texr-sx mb-6 font-inter leading-normal lg:text-sm">
         Limited slots available. Register now to avoid incurring a late registration fee.
       </p>
       <div className="flex flex-col gap-4">

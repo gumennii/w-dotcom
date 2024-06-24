@@ -3,11 +3,10 @@ import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
 import { Document } from "@contentful/rich-text-types";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Markdown } from "@/lib/markdown";
 import { TypeMarketingPageProgram, TypePeople } from "@/types/contentful";
 import { Asset } from "contentful";
-import { Container, Hero, InteractiveModal, Accordion, AccordionProgramItem, Text, Table } from "@/components/ui";
+import { Container, Hero, InteractiveModal } from "@/components/ui";
 import {
   VideoContainer,
   ProgramNavigation,
@@ -15,6 +14,7 @@ import {
   Subscribe,
   type TDivision,
   Profile,
+  ProgramAccordion,
 } from "@/components/modules";
 import { Footer } from "@/components/modules/Navigation/Footer";
 import { format as dateFormat } from "date-fns";
@@ -85,47 +85,26 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <div className="season prose mb-8 mt-10">
           <Markdown content={{ json: seasonDescription }} />
         </div>
+      </Container>
 
+      <Container maxWidth={MaxWidth.Video}>
         <VideoContainer
           coverVideo={content.fields.coverVideo as string}
           programType={content.fields.programType as string}
           slug={params.slug as string}
           coverImage={coverImage}
         />
+      </Container>
 
-        <Accordion>
-          <AccordionProgramItem title="Program Overview" id="overview" isOpen={true}>
-            <div className="season prose">{documentToReactComponents(programOverview)}</div>
-          </AccordionProgramItem>
-          <AccordionProgramItem title="Program Logistics" id="operations">
-            <div className="season prose">{documentToReactComponents(leagueOperations)}</div>
-          </AccordionProgramItem>
-          <AccordionProgramItem title="Program Date & Time" id="schedule" className="border-b-0">
-            <div className="mb-10">
-              <Text type="h4" className="mb-6 font-extralight">
-                Practice & Game Times
-              </Text>
-
-              <Table textAlign={"center"} data={gameTimesTableData} />
-
-              <div className="note prose mt-6">
-                <Markdown content={{ json: content.fields.notes }} />
-              </div>
-            </div>
-
-            <div>
-              <Text type="h4" className="mb-6 font-extralight">
-                Game Schedule
-              </Text>
-
-              <Table textAlign={"left"} data={scheduleTableData} equalColumns={false} />
-
-              <div className="note prose mt-6">
-                <Markdown content={{ json: content.fields.scheduleNotes }} />
-              </div>
-            </div>
-          </AccordionProgramItem>
-        </Accordion>
+      <Container maxWidth={MaxWidth.Small}>
+        <ProgramAccordion
+          overview={programOverview}
+          operations={leagueOperations}
+          gameTimesData={gameTimesTableData}
+          scheduleData={scheduleTableData}
+          gameTimesNotes={content.fields.notes}
+          scheduleNotes={content.fields.scheduleNotes}
+        />
       </Container>
 
       <Container maxWidth={MaxWidth.Small} className="my-8 flex flex-col">
@@ -138,7 +117,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       </Container>
 
       <Container maxWidth={MaxWidth.Small} className="my-8 flex flex-col">
-        <h2 className="font-sant mb-2 text-xl font-semibold lg:text-2xl" id="registration">
+        <h2 className="mb-2 font-roboto text-lg font-semibold lg:text-2xl" id="registration">
           Registration Listing
         </h2>
         <RegistrationListing

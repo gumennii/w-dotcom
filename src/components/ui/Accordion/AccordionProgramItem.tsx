@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useCallback, useState, ReactNode, useEffect } from "react";
+import { FC, useCallback, ReactNode, useEffect, useRef, act } from "react";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
@@ -13,6 +13,7 @@ type AccordionProgramItemProps = {
   id: string;
   className?: string;
   isOpen?: boolean;
+  onClick?: (id: string) => void;
 };
 
 export const AccordionProgramItem: FC<AccordionProgramItemProps> = ({
@@ -21,19 +22,41 @@ export const AccordionProgramItem: FC<AccordionProgramItemProps> = ({
   id,
   className,
   isOpen = false,
+  onClick = () => null,
 }) => {
   const params = useParams();
-  const [isOpened, setOpened] = useState(isOpen);
-  const toggleAccordion = useCallback(() => setOpened(isOpened => !isOpened), []);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const toggleAccordion = useCallback(() => {
+    if (onClick) {
+      onClick(id);
+    }
+  }, [onClick, id]);
 
   useEffect(() => {
-    if (window.location.hash === `#${id}`) setOpened(true);
-  }, [params, id]);
+    const timeout = setTimeout(() => {
+      if (window.location.hash) {
+        const activeId = window.location.hash.slice(1);
+        onClick(activeId);
+      }
+    }, 700);
+
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
+
+  useEffect(() => {
+    if (isOpen && contentRef.current) {
+      contentRef.current.style.maxHeight = `${contentRef.current.scrollHeight}px`;
+    } else if (contentRef.current) {
+      contentRef.current.style.maxHeight = "0";
+    }
+  }, [isOpen]);
 
   return (
     <div
       className={classNames(
-        "card mb-2 rounded-none border-b border-solid border-neutral-300 pb-4 last:mb-0",
+        "card mt-4 rounded-none border-b border-solid border-neutral-300 pb-4 last:mb-0 lg:mt-8",
         className
       )}
       id={id}
@@ -41,11 +64,11 @@ export const AccordionProgramItem: FC<AccordionProgramItemProps> = ({
       {title && (
         <button
           onClick={toggleAccordion}
-          className="mt-2 flex w-full flex-row items-center justify-between bg-inherit pb-1 pr-1 text-lg font-semibold md:mt-4 md:pb-2"
+          className="flex w-full flex-row items-center justify-between bg-inherit pr-1 text-lg font-semibold"
         >
-          <h2 className="font-sant text-xl font-semibold lg:text-2xl">{title}</h2>
+          <h2 className="font-roboto text-lg font-semibold lg:text-2xl">{title}</h2>
           <div className="flex items-center">
-            {isOpened ? (
+            {isOpen ? (
               <FontAwesomeIcon icon={faAngleUp as IconProp} color="#d4d4d4" />
             ) : (
               <FontAwesomeIcon icon={faAngleDown as IconProp} color="#d4d4d4" className="mt-1" />
@@ -53,7 +76,16 @@ export const AccordionProgramItem: FC<AccordionProgramItemProps> = ({
           </div>
         </button>
       )}
-      {isOpened && <div className="py-4 text-base text-primary">{children}</div>}
+      <div
+        ref={contentRef}
+        className={classNames("overflow-hidden transition-[max-height] duration-500 ease-in-out", {
+          "max-h-0": !isOpen,
+          "max-h-auto": isOpen,
+        })}
+        style={{ maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : "0" }}
+      >
+        <div className="text-base text-primary">{children}</div>
+      </div>
     </div>
   );
 };

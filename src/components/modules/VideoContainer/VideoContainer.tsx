@@ -11,14 +11,14 @@ type VideoContainerProps = {
 export const VideoContainer = ({ coverVideo, programType, slug, coverImage }: VideoContainerProps) => {
   return (
     <div>
-      <VideoModal maxWidth="2xLarge" url={coverVideo}>
+      <VideoModal maxWidth="3xLarge" url={coverVideo}>
         {coverImage && Object.keys(coverImage).length && coverImage.fields.file?.url ? (
-          <div className="relative w-full py-10">
+          <div className="relative w-full py-10 lg:px-4 xl:px-0">
             <Image
               src={coverImage?.fields?.file?.url as string}
               alt={`Image ${programType}`}
-              width={900}
-              height={420}
+              width={1088}
+              height={612}
               borderRadius="large"
             />
             <VideoPlayBtn className="absolute left-1/2 top-1/2 -translate-x-2/4 -translate-y-2/4 text-white duration-500 hover:text-primary" />
