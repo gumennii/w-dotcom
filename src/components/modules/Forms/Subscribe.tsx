@@ -52,10 +52,15 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
       )}
     >
       <div className={classNames("w-full", variant === "wide" ? "lg:w-[38%] xl:w-[36%]" : "")}>
-        <Text type="h2" className={variant === "modal" ? "mb-1" : "mb-2 sm:mb-4"}>
+        <h2
+          className={classNames(
+            "font-roboto text-3xl font-bold leading-normal",
+            variant === "modal" ? "mb-1" : "mb-2 sm:mb-4"
+          )}
+        >
           {title}
-        </Text>
-        <Text type="p">{descriprion}</Text>
+        </h2>
+        <p className="text-sx font-inter font-normal leading-normal lg:text-base">{descriprion}</p>
       </div>
       <div className={classNames("w-full", variant === "wide" ? "lg:w-[58%] xl:w-[60%]" : "")}>
         <form
@@ -88,20 +93,20 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
         </form>
         <div className="mt-4">
           {errorMsg ? (
-            <Text type="p" className="text-error">
+            <Text type="p" className="font-inter text-error lg:text-sm">
               {errorMsg}
             </Text>
           ) : (
-            <Text type="p">
+            <p className="font-inter text-[0.875rem] font-normal leading-relaxed lg:text-sm">
               We care about the protection of your data. Read our
               <Link
                 href="https://stacksports.com/legal-privacy"
                 target="_blank"
-                className="ml-2 text-base font-normal underline hover:underline-offset-4 lg:text-base"
+                className="ml-2 font-inter text-[0.875rem] font-normal leading-relaxed underline hover:underline-offset-4 lg:text-sm"
               >
                 Privacy Policy.
               </Link>
-            </Text>
+            </p>
           )}
         </div>
       </div>

@@ -32,7 +32,9 @@ export default {
         ...programHighlightColors,
       },
       fontSize: {
-        sx: "0.937rem",
+        xxxs: "0.75rem",
+        xxs: "0.875rem",
+        xs: "0.937rem",
         sm: "1rem",
         base: "1.067rem",
         lg: "1.313rem",

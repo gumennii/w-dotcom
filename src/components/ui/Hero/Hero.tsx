@@ -1,10 +1,9 @@
 import React from "react";
+import Link from "next/link";
 import { MaxWidth, getHeroGradientByProgramType, getTextColorByProgramType } from "@/utils/styling";
-import classNames from "classnames";
+import cn from "@/utils/cn";
 import { Container } from "../Container";
 import { Logo, Button, VideoModal } from "@/components/ui";
-import Link from "next/link";
-import cn from "@/utils/cn";
 
 export type HeroProps = {
   programName: string;
@@ -19,12 +18,13 @@ export const Hero = ({ programName, programType, className, urlVideo }: HeroProp
 
   return (
     <div
-      className={classNames("w-full bg-cover py-20 text-white lg:px-6 2xl:px-0", className)}
+      className={cn("relative w-full bg-cover py-20 text-white lg:px-6 2xl:px-0", className)}
       style={{
-        backgroundImage: `${heroBgGradient}, url("/banner.png")`,
+        backgroundImage: `url("/banner.png")`,
       }}
     >
-      <Container maxWidth={MaxWidth.Footer}>
+      <div className={`absolute inset-0 ${heroBgGradient}`}></div>
+      <Container maxWidth={MaxWidth.Footer} className="relative z-10">
         <div className="mb-6 flex flex-col justify-start text-center md:text-left">
           <Link href="/" className="mb-6">
             <Logo color="light" className="mx-auto md:mx-0" />

@@ -1,10 +1,7 @@
 import Link from "next/link";
-import { faEnvelope, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { getYear } from "date-fns";
 import { MaxWidth } from "@/utils/styling";
-import { Container } from "@/components/ui";
+import { Container, LocationOutlinedIcon, MailOutlinedIcon } from "@/components/ui";
 
 export const Footer = () => (
   <div className="bg-primary sm:px-4 md:px-8 2xl:px-2">
@@ -16,10 +13,10 @@ export const Footer = () => (
         />
         <div className="flex w-full items-start justify-start lg:w-3/5 xl:justify-between xl:pr-10">
           <div className="mr-6 xl:mr-12">
-            <span className="font-sant footer-title text-lg normal-case text-white opacity-100 xl:text-xl">
+            <span className="font-sant footer-title text-lg normal-case text-white opacity-100 xl:text-xl xl:leading-normal">
               Company
             </span>
-            <ul className="mt-4 list-none space-y-4 text-sm text-white">
+            <ul className="mt-4 list-none space-y-4 font-inter text-xxs font-medium text-white xl:text-sm xl:leading-relaxed">
               <li>
                 <Link href="https://store.nextlevelsports.com">Our Story</Link>
               </li>
@@ -36,8 +33,10 @@ export const Footer = () => (
           </div>
           <div className="flex w-full flex-col items-start justify-start md:flex-row">
             <div className="md:mr-6 xl:mr-12">
-              <span className="font-sant footer-title text-lg normal-case text-white opacity-100 xl:text-xl">Help</span>
-              <ul className="mt-4 list-none space-y-4 text-sm text-white">
+              <span className="font-sant footer-title text-lg normal-case text-white opacity-100 xl:text-xl xl:leading-normal">
+                Help
+              </span>
+              <ul className="mt-4 list-none space-y-4 font-inter text-xxs text-white xl:text-sm xl:leading-relaxed">
                 <li>
                   <Link href="https://support.nextlevelsports.com/hc/en-us">FAQ</Link>
                 </li>
@@ -58,7 +57,7 @@ export const Footer = () => (
             </div>
             <div>
               <span className="font-sant footer-title hidden text-lg text-primary md:block xl:text-xl">La</span>
-              <ul className="mt-4 list-none space-y-4 text-sm text-white">
+              <ul className="mt-4 list-none space-y-4 font-inter text-xxs text-white xl:text-sm xl:leading-relaxed">
                 <li>
                   <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=870019">Rostering Policy</Link>
                 </li>
@@ -88,12 +87,16 @@ export const Footer = () => (
             Next Level Sports
           </div>
           <div className="my-2 flex items-center justify-start">
-            <FontAwesomeIcon icon={faLocationDot as IconProp} className="mr-3 h-6 w-6" />
-            <div className="text-sm lg:text-base">385 1st Avenue, San Mateo, California 94401</div>
+            <LocationOutlinedIcon className="mr-3 h-6 w-6" />
+            <div className="font-inter text-xs leading-[1.406rem] lg:text-base lg:leading-relaxed">
+              385 1st Avenue, San Mateo, California 94401
+            </div>
           </div>
           <Link href="maito:support@nextlevelsports.com" className="flex items-center justify-start">
-            <FontAwesomeIcon icon={faEnvelope as IconProp} className="mr-3 h-6 w-6" />
-            <div className="text-sm lg:text-base">support@nextlevelsports.com</div>
+            <MailOutlinedIcon className="mr-3 h-6 w-6" />
+            <div className="font-inter text-xs leading-[1.406rem] lg:text-base lg:leading-relaxed">
+              support@nextlevelsports.com
+            </div>
           </Link>
           <div className="my-4 flex lg:my-8">
             <Link

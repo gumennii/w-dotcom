@@ -28,5 +28,13 @@ export {
   type VideoModalProps,
 } from "./Modals";
 export { Accordion, AccordionItem, AccordionProgramItem } from "./Accordion";
-export { AppStoreIcon, BarsMenuIcon, GooglePlayIcon, Logo, VideoPlayBtn } from "./Icons";
+export {
+  AppStoreIcon,
+  BarsMenuIcon,
+  GooglePlayIcon,
+  Logo,
+  VideoPlayBtn,
+  LocationOutlinedIcon,
+  MailOutlinedIcon,
+} from "./Icons";
 export { MenuDropdown, type MenuDropdownProps } from "./Menu";

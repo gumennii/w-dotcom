@@ -11,9 +11,9 @@ export const ProfileImage = React.forwardRef<HTMLElement, ProfileImageProps>(({ 
           {...props}
           src={props.src ?? "/"}
           alt="Profile Image"
-          height="208"
-          width={208}
-          className="h-16 w-16 rounded-full sm:h-28 sm:w-28 md:h-32 md:w-32"
+          height="64"
+          width={64}
+          className="h-16 w-16 rounded-full"
         />
       </figure>
     </div>

@@ -126,7 +126,7 @@ export const getButtonClass = (style?: Types.ButtonStyles) => {
     case "primary":
       return "btn-primary text-white normal-case text-sm font-roboto";
     case "secondary":
-      return "btn-secondary text-white text-sx font-roboto p-4";
+      return "btn-secondary text-white text-xs font-roboto p-4";
     case "accent":
       return "btn-accent text-sm font-roboto";
     case "ghost":
@@ -211,11 +211,11 @@ export const getTypographyClass = (style?: Types.TypographyType) => {
     case "h6":
       return "font-normal leading-normal text-sm md:text-base lg:text-lg";
     case "p":
-      return "font-normal leading-normal text-sx md:text-sm lg:text-base";
+      return "font-normal leading-normal text-xs md:text-sm lg:text-base";
     case "q":
       return "font-sant leading-normal font-medium text-lg italic md:text-xl lg:text-2xl";
     default:
-      return "font-normal leading-normal text-[0.878rem] md:text-sx lg:text-sm";
+      return "font-normal leading-normal text-[0.878rem] md:text-xs lg:text-sm";
   }
 };
 
@@ -241,29 +241,29 @@ export const getModalMaxWidth = (maxWidth: Types.AvailableModalMaxWidth) => {
 export const getTextColorByProgramType = (type: string) => {
   switch (type) {
     case "Basketball":
-      return "text-basketball";
+      return "text-basketball-secondary";
     case "Camps":
-      return `text-camps`;
+      return `text-camps-secondary`;
     case "Flag Football":
-      return "text-flag-football";
+      return "text-flag-football-secondary";
     case "Volleyball":
-      return "text-volleyball";
+      return "text-volleyball-secondary";
     default:
-      return "text-white";
+      return "text-basketball-secondary";
   }
 };
 
 export const getHeroGradientByProgramType = (type: string) => {
   switch (type) {
     case "Basketball":
-      return `linear-gradient(rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.82) )`;
+      return "bg-basketball-primary/85";
     case "Camps":
-      return `linear-gradient(0deg, rgba(0, 12, 54, 0.85) 0%, rgba(0, 12, 54, 0.85) 100%)`;
+      return "bg-camps-primary/85";
     case "Flag Football":
-      return `linear-gradient(rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.82) )`;
+      return "bg-flag-football-primary/85";
     case "Volleyball":
-      return `linear-gradient(0deg, rgba(0, 12, 54, 0.85) 0%, rgba(0, 12, 54, 0.85) 100%)`;
+      return "bg-volleyball-primary/85";
     default:
-      return `linear-gradient(rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.82) )`;
+      return "bg-basketball-primary/85";
   }
 };

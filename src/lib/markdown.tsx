@@ -35,7 +35,7 @@ function RichTextAsset({ id, assets }: { id: string; assets: Asset[] | undefined
 
 export function Markdown({ content }: { content: Content }) {
   if (content.string) {
-    return <div dangerouslySetInnerHTML={{ __html: marked.parse(content.string) }} className="prose" />;
+    return <div dangerouslySetInnerHTML={{ __html: marked.parse(content.string) }} className="profile prose" />;
   } else {
     return documentToReactComponents(content.json, {
       renderNode: {

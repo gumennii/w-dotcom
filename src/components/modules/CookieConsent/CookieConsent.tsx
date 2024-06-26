@@ -38,7 +38,7 @@ export const CookieConsent = ({
           <div className="mr-8 max-w-3xl text-primary lg:mr-16">
             <Text type="p">
               {content}{" "}
-              <Link href="https://stacksports.com/legal-privacy" className="text-sx underline md:text-sm">
+              <Link href="https://stacksports.com/legal-privacy" className="text-xs underline md:text-sm">
                 {" "}
                 Privacy Statement.
               </Link>

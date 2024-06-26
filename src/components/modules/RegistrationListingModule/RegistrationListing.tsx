@@ -37,7 +37,7 @@ export const RegistrationListing = ({ programName, programType, divisions, price
       <h4 className="mb-1 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
         General Registration is open on April 15th at 9:00 AM
       </h4>
-      <p className="texr-sx mb-6 font-inter leading-normal lg:text-sm">
+      <p className="texr-xs mb-6 font-inter leading-normal lg:text-sm">
         Limited slots available. Register now to avoid incurring a late registration fee.
       </p>
       <div className="flex flex-col gap-4">
@@ -45,32 +45,32 @@ export const RegistrationListing = ({ programName, programType, divisions, price
           <Fragment key={division.scDivisionId}>
             <div className="flex flex-col justify-between gap-2 rounded-md border p-4 shadow-sm sm:flex-row">
               <div className="flex flex-col gap-2">
-                <h3 className="text-lg font-semibold leading-normal">{division.divisionName}</h3>
-                <span className="text-sm leading-relaxed">
+                <h3 className="font-inter text-sm font-semibold leading-normal sm:text-lg">{division.divisionName}</h3>
+                <span className="font-inter text-xs leading-relaxed sm:text-sm">
                   Season Dates: {dateFormat(division.seasonStart, "MMM d, y")} —{" "}
                   {dateFormat(division.seasonEnd, "MMM d, y")}
                 </span>
                 <div className="flex flex-row items-center gap-4">
-                  <span className="font-base mr-3 font-bold leading-relaxed">$315.00</span>
-                  <span className="text-sx">
-                    <FontAwesomeIcon icon={faUser as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
-                    {division.divisionMaxPlayers} players
-                  </span>
-                  <span className="text-sx">
+                  <span className="font-xs mr-3 font-inter font-semibold leading-relaxed sm:text-base">$315.00</span>
+                  <span className="font-inter text-xxxs sm:text-xs">
                     <FontAwesomeIcon icon={faUsers as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
                     {division.divisionTeamCount} teams
+                  </span>
+                  <span className="font-inter text-xxxs sm:text-xs">
+                    <FontAwesomeIcon icon={faUser as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
+                    {division.divisionMaxPlayers} players per team
                   </span>
                 </div>
               </div>
               <Divider className="block border sm:hidden" />
               <div className="flex flex-row items-center justify-between sm:flex-col sm:items-end">
-                <span className="text-sx leading-normal">Only a few spots left!</span>
+                <span className="font-inter text-xxxs leading-relaxed sm:text-xs">Only a few spots left!</span>
                 <Button
                   rounded
                   style="secondary"
                   copy="Register Now"
                   href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
-                  className="text-sx"
+                  className="text-xs"
                 />
               </div>
             </div>

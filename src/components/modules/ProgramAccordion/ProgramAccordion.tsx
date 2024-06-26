@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Accordion, AccordionProgramItem, Table, Text } from "@/components/ui";
+import { Accordion, AccordionProgramItem, Table } from "@/components/ui";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Markdown } from "@/lib/markdown";
 import { Document } from "@contentful/rich-text-types";
@@ -66,9 +66,7 @@ export const ProgramAccordion = ({
         onClick={handleActiveId}
       >
         <div className="mb-6">
-          <Text type="h5" className="my-4 font-inter leading-normal">
-            Practice & Game Times
-          </Text>
+          <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Practice & Game Times</h3>
 
           <Table textAlign={"center"} data={gameTimesData} />
 
@@ -78,9 +76,7 @@ export const ProgramAccordion = ({
         </div>
 
         <div>
-          <Text type="h5" className="my-4 font-inter leading-normal">
-            Game Schedule
-          </Text>
+          <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Game Schedule</h3>
 
           <Table textAlign={"left"} data={scheduleData} equalColumns={false} />
 

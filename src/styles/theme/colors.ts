@@ -27,8 +27,20 @@ export const colors = {
 
 export const programHighlightColors = {
   // "Basketball" | "Camps" | "Flag Football" | "Volleyball" highlight colors
-  basketball: "#30B052" /* green */,
-  camps: "#db040c" /* red */,
-  "flag-football": "#EC612A" /* orange */,
-  volleyball: "#FFCE31" /* yellow */,
+  basketball: {
+    primary: "#081D3C",
+    secondary: "#FF6600",
+  },
+  camps: {
+    primary: "#013088",
+    secondary: "#FF6600",
+  },
+  "flag-football": {
+    primary: "#081D3C",
+    secondary: "#FF6600",
+  },
+  volleyball: {
+    primary: "#000000",
+    secondary: "#CEA139",
+  },
 };

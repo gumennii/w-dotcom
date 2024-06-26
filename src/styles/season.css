@@ -22,7 +22,8 @@
   font-weight: 700;
 }
 
-.prose.season p {
+.prose.season p,
+.profile.prose p {
   font-family: "Inter", sans-serif;
   font-size: 1rem;
   line-height: 140%;
@@ -40,5 +41,8 @@
   .prose.season h2,
   .prose.season h2 b {
     font-size: 1.575rem;
+  }
+  .profile.prose p {
+    font-size: 0.875rem;
   }
 }

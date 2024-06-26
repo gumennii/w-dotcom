@@ -38,10 +38,10 @@ const ProgramNavigationLinks = React.forwardRef<HTMLDivElement, ProgramNavigatio
             className={cn(
               `${
                 link.id === hash || (index === 0 && hash === "")
-                  ? "pointer-events-none bg-[#0e2344] font-medium text-white"
+                  ? "pointer-events-none bg-[#0e2344] font-semibold text-white"
                   : "bg-inherit font-normal text-primary hover:bg-secondary hover:text-white"
               }`,
-              "mr-1 hidden h-11 items-center justify-center rounded-lg px-4 text-base md:inline-flex"
+              "mr-1 hidden h-11 items-center justify-center rounded-md px-4 font-inter text-base leading-relaxed md:inline-flex"
             )}
           >
             {link.name}

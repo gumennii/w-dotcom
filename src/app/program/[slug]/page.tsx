@@ -108,15 +108,6 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       </Container>
 
       <Container maxWidth={MaxWidth.Small} className="my-8 flex flex-col">
-        <Subscribe
-          title="Want news and updates?"
-          descriprion="Sign up for our offseason newsletter to stay up to date with our program."
-          className="mb-6 rounded-2xl bg-[#051227]"
-          trackingFields={content.fields.slug as string}
-        />
-      </Container>
-
-      <Container maxWidth={MaxWidth.Small} className="my-8 flex flex-col">
         <h2 className="mb-2 font-roboto text-lg font-semibold lg:text-2xl" id="registration">
           Registration Listing
         </h2>
