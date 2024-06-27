@@ -23,12 +23,12 @@ export const Default: Story<SubscribeProps> = args => {
 Default.args = {
   title: "Want news and updates?",
   descriprion: "Sign up for our newsletter to stay up to date.",
-  className: "rounded-md bg-primary",
+  className: "rounded-md bg-primary text-white",
 };
 
 export const Wide: Story<SubscribeProps> = args => {
   return (
-    <div className="bg-[#0F2344]">
+    <div className="w-full bg-[#0F2344] text-white">
       <Container maxWidth={MaxWidth.Large}>
         <Subscribe {...args} />
       </Container>

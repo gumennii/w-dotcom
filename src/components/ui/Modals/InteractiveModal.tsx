@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { hasCookie, setCookie } from "cookies-next";
+import cn from "@/utils/cn";
 
 export type InteractiveModalProps = {
   maxWidth: Types.AvailableModalMaxWidth;
@@ -85,7 +86,12 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
         onClick={onClickOutside}
       >
         <div className={classNames("modal-box p-0", getModalMaxWidth(maxWidth), className)}>
-          <div onClick={onToggleModal} className="btn btn-ghost btn-circle btn-md absolute right-4 top-4 text-white">
+          <div
+            onClick={onToggleModal}
+            className={cn("btn btn-ghost btn-circle btn-md absolute right-4 top-4 text-white", {
+              "hidden md:block": closeOnClickOutside,
+            })}
+          >
             <FontAwesomeIcon icon={faXmark as IconProp} size="xl" />
           </div>
           {children}

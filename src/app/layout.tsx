@@ -4,7 +4,7 @@ import { GoogleTagManager } from "@next/third-parties/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import AmplitudeContextProvider from "@/providers/amplitude";
-import { Navigation } from "@/components/modules";
+import { AppContextProvider } from "@/providers/appContext";
 
 export const metadata = {
   title: "Next Level Sport",
@@ -22,14 +22,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={inter.variable} style={{ scrollBehavior: "smooth" }}>
       <body>
         <AmplitudeContextProvider>
-          <section className="min-h-screen">
-            <main>
-              <div className="min-h-screen">{children}</div>
-            </main>
-          </section>
-          <div id="dialog-root"></div>
+          <AppContextProvider>
+            <section className="min-h-screen">
+              <main>
+                <div className="min-h-screen">{children}</div>
+              </main>
+            </section>
+            <div id="dialog-root"></div>
 
-          <SpeedInsights />
+            <SpeedInsights />
+          </AppContextProvider>
         </AmplitudeContextProvider>
       </body>
       <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_GTM_ID ?? ""} />

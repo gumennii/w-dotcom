@@ -59,12 +59,17 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
   return (
     <>
-      <InteractiveModal position={50} maxWidth="2xLarge" className="rounded-xl bg-[#051227]">
+      <InteractiveModal
+        position={50}
+        maxWidth="2xLarge"
+        className="max-w-[40.25rem] rounded-lg bg-[#051227] md:rounded-2xl"
+        closeOnClickOutside
+      >
         <Subscribe
           variant="modal"
           title="Stay in The Game"
-          descriprion={`Stay informed about our ${content.fields.programName as string} program! Subscribe to our offseason newsletter for exclusive updates.`}
-          className="rounded-2xl bg-[#051227] p-8 text-center text-white"
+          descriprion={`Sign up for our ${content.fields.programName as string} to stay up to date.`}
+          className="rounded-2xl bg-[#051227] p-6 text-center text-white lg:p-8"
           trackingFields={content.fields.slug as string}
         />
       </InteractiveModal>
@@ -123,7 +128,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <Profile title="Site Director" contents={siteDirectorData} />
       </Container>
 
-      <div className="bg-[#0F2344] sm:px-4 md:px-8 2xl:px-2">
+      <div className="bg-[#0F2344] text-white sm:px-4 md:px-8 2xl:px-2">
         <Container maxWidth={MaxWidth.Footer}>
           <Subscribe
             title="Stay Tuned For Updates"

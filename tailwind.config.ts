@@ -29,6 +29,8 @@ export default {
         primary: "#081121",
         secondary: "#EC612A",
         accent: "#24A840",
+        "error-foreground": "#FEDFD3",
+        error: "#8F190C",
         ...programHighlightColors,
       },
       fontSize: {
