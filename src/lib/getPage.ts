@@ -24,3 +24,8 @@ export async function getPage(params: GetPageParams) {
   } = await client.getEntries(query);
   return page || null;
 }
+
+export async function getPageById(id: string) {
+  const page = await client.getEntry(id);
+  return page || null;
+}

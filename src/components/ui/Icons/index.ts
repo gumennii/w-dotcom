@@ -5,3 +5,4 @@ export { Logo } from "./Logo";
 export { VideoPlayBtn } from "./VideoPlayBtn";
 export { LocationOutlinedIcon } from "./LocationOutlinedIcon";
 export { MailOutlinedIcon } from "./MailOutlinedIcon";
+export { LogoSlashWhite } from "./LogoSlashWhite";

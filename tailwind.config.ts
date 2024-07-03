@@ -19,6 +19,7 @@ export default {
         "screen-xl": "1440px",
       },
       maxWidth: {
+        "screen-sm": "866px",
         "screen-md": "1086px",
         "screen-lg": "1312px",
       },
@@ -49,6 +50,14 @@ export default {
         snug: "120%",
         normal: "130%",
         relaxed: "140%",
+        loose: "150%",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "none", // Disable `.prose` class `max-width: 65ch` styles property
+          },
+        },
       },
     },
   },

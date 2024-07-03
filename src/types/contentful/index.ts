@@ -1,5 +1,6 @@
 export type { TypeBlueSombrero, TypeBlueSombreroFields, TypeBlueSombreroSkeleton } from "./TypeBlueSombrero";
 export type { TypeCamp, TypeCampFields, TypeCampSkeleton } from "./TypeCamp";
+export type { TypeClinicPage, TypeClinicPageFields, TypeClinicPageSkeleton } from "./TypeClinicPage";
 export type { TypeEmailOffseason, TypeEmailOffseasonFields, TypeEmailOffseasonSkeleton } from "./TypeEmailOffseason";
 export type { TypeFacility, TypeFacilityFields, TypeFacilitySkeleton } from "./TypeFacility";
 export type { TypeLocations, TypeLocationsFields, TypeLocationsSkeleton } from "./TypeLocations";

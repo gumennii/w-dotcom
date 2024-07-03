@@ -4,7 +4,8 @@ import type { TypePeopleSkeleton } from "./TypePeople";
 
 export interface TypeProgramDataFields {
   programName: EntryFieldTypes.Symbol;
-  key?: EntryFieldTypes.Symbol;
+  programKey?: EntryFieldTypes.Symbol;
+  departmentKey?: EntryFieldTypes.Symbol;
   owner?: EntryFieldTypes.Symbol;
   allocator?: EntryFieldTypes.Symbol;
   programType?: EntryFieldTypes.Symbol<"Basketball" | "Camps" | "Flag Football" | "Volleyball">;
@@ -30,7 +31,6 @@ export interface TypeProgramDataFields {
   unfrmOptPersonalizationCriteria?: EntryFieldTypes.Object;
   teamHierarchy?: EntryFieldTypes.Symbol;
   programLaunchDate?: EntryFieldTypes.Date;
-  departmentKey?: EntryFieldTypes.Symbol;
   registrationType?: EntryFieldTypes.Symbol;
 }
 

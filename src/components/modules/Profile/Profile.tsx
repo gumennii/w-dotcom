@@ -3,7 +3,7 @@ import cn from "@/utils/cn";
 import { ProfileImage, type ProfileImageProps as ImageProps } from "./ProfileImage";
 import { TypePeople } from "@/types/contentful";
 import { Asset } from "contentful";
-import { Markdown } from "@/lib/markdown";
+import { Markdown } from "@/components/ui";
 
 export type ProfileImageProps = ImageProps;
 
@@ -30,7 +30,11 @@ export const Profile = React.forwardRef<HTMLDivElement, ProfileProps>(
             <h3 className="pb-2 pt-4 font-inter text-base font-semibold leading-normal md:pt-0 md:text-lg">
               {name ? name : "Person name"}
             </h3>
-            {biography ? <Markdown content={{ string: biography }} /> : <p className="text-sm">Person biography</p>}
+            {biography ? (
+              <Markdown content={biography} className="profile" />
+            ) : (
+              <p className="text-sm">Person biography</p>
+            )}
           </div>
         </div>
       </div>

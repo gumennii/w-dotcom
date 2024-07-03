@@ -292,3 +292,4 @@ In your Contentful space, go to **Settings > Webhooks** and add a new webhook:
 
   ![Content successful request](https://github.com/vercel/next.js/assets/9113740/ed1ffbe9-4dbf-4ec6-9c1f-39c8949c4d38)
 
+

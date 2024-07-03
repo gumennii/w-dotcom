@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Accordion, AccordionProgramItem, Table } from "@/components/ui";
+import { Accordion, AccordionProgramItem, Table, RichText } from "@/components/ui";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Markdown } from "@/lib/markdown";
 import { Document } from "@contentful/rich-text-types";
 
 type GameTimesData = {
@@ -70,9 +69,7 @@ export const ProgramAccordion = ({
 
           <Table textAlign={"center"} data={gameTimesData} />
 
-          <div className="note prose mt-4">
-            <Markdown content={{ json: gameTimesNotes }} />
-          </div>
+          <RichText content={gameTimesNotes as Document} className="note mt-4" />
         </div>
 
         <div>
@@ -80,9 +77,7 @@ export const ProgramAccordion = ({
 
           <Table textAlign={"left"} data={scheduleData} equalColumns={false} />
 
-          <div className="note prose mt-4">
-            <Markdown content={{ json: scheduleNotes }} />
-          </div>
+          <RichText content={scheduleNotes as Document} className="note mt-4" />
         </div>
       </AccordionProgramItem>
     </Accordion>

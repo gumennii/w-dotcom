@@ -37,6 +37,13 @@
   color: #6b6b6b;
 }
 
+@media (min-width: 1024px) {
+  .clip-patch-img {
+    clip-path: polygon(10% 0%, 100% 0, 100% 100%, 0% 100%);
+  }
+}
+
 @import "./season.css";
 @import "./note.css";
 @import "./menu.css";
+@import "./join.css";

@@ -1,104 +1,33 @@
 import Link from "next/link";
 import { getYear } from "date-fns";
 import { MaxWidth } from "@/utils/styling";
-import { Container, LocationOutlinedIcon, MailOutlinedIcon } from "@/components/ui";
+import { Container, LocationOutlinedIcon, MailOutlinedIcon, LogoSlashWhite } from "@/components/ui";
 
-export const Footer = () => (
-  <div className="bg-primary sm:px-4 md:px-8 2xl:px-2">
+export const FooterClinic = () => (
+  <div className="bg-primary">
     <Container maxWidth={MaxWidth.Footer}>
-      <footer className="footer flex w-full flex-col-reverse justify-between border-info-content py-10 lg:flex-row">
-        <div
-          className="text-xs text-white lg:hidden"
-          dangerouslySetInnerHTML={{ __html: `© ${getYear(new Date())} Next Level Sports` }}
-        />
-        <div className="flex w-full items-start justify-start lg:w-3/5 xl:justify-between xl:pr-10">
-          <div className="mr-6 xl:mr-12">
-            <span className="font-sant footer-title text-lg normal-case text-white opacity-100 xl:text-xl xl:leading-normal">
-              Company
-            </span>
-            <ul className="mt-4 list-none space-y-4 font-inter text-xxs font-medium text-white xl:text-sm xl:leading-relaxed">
-              <li>
-                <Link href="https://store.nextlevelsports.com">Our Story</Link>
-              </li>
-              <li>
-                <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=1029458">Careers</Link>
-              </li>
-              <li>
-                <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=335647">Testimonials</Link>
-              </li>
-              <li>
-                <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=605126">Media</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="flex w-full flex-col items-start justify-start md:flex-row">
-            <div className="md:mr-6 xl:mr-12">
-              <span className="font-sant footer-title text-lg normal-case text-white opacity-100 xl:text-xl xl:leading-normal">
-                Help
-              </span>
-              <ul className="mt-4 list-none space-y-4 font-inter text-xxs text-white xl:text-sm xl:leading-relaxed">
-                <li>
-                  <Link href="https://support.nextlevelsports.com/hc/en-us">FAQ</Link>
-                </li>
-                <li>
-                  <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=1004101">
-                    General Flag Football Operation
-                  </Link>
-                </li>
-                <li>
-                  <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=1024394">
-                    General Basketball Operations
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/program/2024-advanced-volleyball-tracy-hs">General Flag Football Program</Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <span className="font-sant footer-title hidden text-lg text-primary md:block xl:text-xl">La</span>
-              <ul className="mt-4 list-none space-y-4 font-inter text-xxs text-white xl:text-sm xl:leading-relaxed">
-                <li>
-                  <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=870019">Rostering Policy</Link>
-                </li>
-                <li>
-                  <Link href="https://www.nextlevelsports.com/Default.aspx?tabid=863953">Refund Policy</Link>
-                </li>
-                <li>
-                  <Link href="https://stacksports.com/legal-privacy">Privacy Statement</Link>
-                </li>
-                <li>
-                  <Link href="https://stacksports.com/stack-sports-system-license-agreement-united-states">
-                    License Agreement
-                  </Link>
-                </li>
-                <li>
-                  <Link href="https://stacksports.com/legal-COPPA">Children’s Privacy Policy</Link>
-                </li>
-                <li>
-                  <Link href="https://stacksports.com/legal-terms">Terms of Use</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
+      <footer className="footer flex w-full flex-col items-start justify-between gap-0 pb-16 pt-12 md:flex-row md:items-center md:pb-12 lg:px-6 2xl:px-0">
+        <div className="mb-8 flex flex-col gap-y-4 md:mb-0">
+          <LogoSlashWhite />
+          <div
+            className="font-inter text-xs font-normal text-white"
+            dangerouslySetInnerHTML={{ __html: `© ${getYear(new Date())} Next Level Sports` }}
+          />
         </div>
-        <div className="-mb-8 w-full text-white lg:mb-0 lg:w-2/5">
-          <div className="footer-title mb-2 font-roboto text-3xl font-bold italic leading-tight text-white opacity-100 lg:mb-4 lg:text-4xl xl:mb-6 xl:text-5xl">
-            Next Level Sports
-          </div>
-          <div className="my-2 flex items-center justify-start">
-            <LocationOutlinedIcon className="mr-3 h-6 w-6" />
-            <div className="font-inter text-xs leading-[1.406rem] lg:text-base lg:leading-relaxed">
+        <div className="text-white">
+          <div className="mb-4 flex items-center justify-start">
+            <LocationOutlinedIcon className="mr-4 h-6 w-6" />
+            <div className="font-inter text-xs leading-loose md:text-base md:leading-relaxed">
               385 1st Avenue, San Mateo, California 94401
             </div>
           </div>
           <Link href="maito:support@nextlevelsports.com" className="flex items-center justify-start">
-            <MailOutlinedIcon className="mr-3 h-6 w-6" />
-            <div className="font-inter text-xs leading-[1.406rem] lg:text-base lg:leading-relaxed">
+            <MailOutlinedIcon className="mr-4 h-6 w-6" />
+            <div className="font-inter text-xs leading-loose md:text-base md:leading-relaxed">
               support@nextlevelsports.com
             </div>
           </Link>
-          <div className="my-4 flex lg:my-8">
+          <div className="mt-8 flex">
             <Link
               href="https://www.facebook.com/nextlevelflagfootball"
               target="_blank"
@@ -114,7 +43,7 @@ export const Footer = () => (
             <Link
               href="https://www.instagram.com/nextlevel_ball"
               target="_blank"
-              className="mr-4 flex h-8 w-8 items-center justify-center rounded-full border border-solid border-white hover:opacity-60"
+              className="mr-4 flex h-8 w-8 items-center justify-center rounded-full border border-solid border-white pt-0.5 hover:opacity-60"
             >
               <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -136,6 +65,18 @@ export const Footer = () => (
               </svg>
             </Link>
             <Link
+              href="https://www.twitter.com/nextlevel_ball"
+              target="_blank"
+              className="mr-4 flex h-8 w-8 items-center justify-center rounded-full border border-solid border-white hover:opacity-60"
+            >
+              <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.3438 9.25C18.3438 9.40625 18.3438 9.53125 18.3438 9.6875C18.3438 14.0312 15.0625 19 9.03125 19C7.15625 19 5.4375 18.4688 4 17.5312C4.25 17.5625 4.5 17.5938 4.78125 17.5938C6.3125 17.5938 7.71875 17.0625 8.84375 16.1875C7.40625 16.1562 6.1875 15.2188 5.78125 13.9062C6 13.9375 6.1875 13.9688 6.40625 13.9688C6.6875 13.9688 7 13.9062 7.25 13.8438C5.75 13.5312 4.625 12.2188 4.625 10.625V10.5938C5.0625 10.8438 5.59375 10.9688 6.125 11C5.21875 10.4062 4.65625 9.40625 4.65625 8.28125C4.65625 7.65625 4.8125 7.09375 5.09375 6.625C6.71875 8.59375 9.15625 9.90625 11.875 10.0625C11.8125 9.8125 11.7812 9.5625 11.7812 9.3125C11.7812 7.5 13.25 6.03125 15.0625 6.03125C16 6.03125 16.8438 6.40625 17.4688 7.0625C18.1875 6.90625 18.9062 6.625 19.5312 6.25C19.2812 7.03125 18.7812 7.65625 18.0938 8.0625C18.75 8 19.4062 7.8125 19.9688 7.5625C19.5312 8.21875 18.9688 8.78125 18.3438 9.25Z"
+                  fill="white"
+                />
+              </svg>
+            </Link>
+            <Link
               href="https://www.linkedin.com/company/nextlevelsports/"
               target="_blank"
               className="mr-4 flex h-8 w-8 items-center justify-center rounded-full border border-solid border-white hover:opacity-60"
@@ -148,10 +89,6 @@ export const Footer = () => (
               </svg>
             </Link>
           </div>
-          <div
-            className="hidden text-sm text-white lg:block"
-            dangerouslySetInnerHTML={{ __html: `© ${getYear(new Date())} Next Level Sports` }}
-          />
         </div>
       </footer>
     </Container>

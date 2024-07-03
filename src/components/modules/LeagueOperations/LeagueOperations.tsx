@@ -60,7 +60,7 @@ export const LeagueOperations = () => {
           </p>
           <Accordion>
             {fakeAccordionData.map((item, i) => {
-              return <AccordionItem key={`key-${i}`} title={item.title} description={item.descr} />;
+              return <AccordionItem key={`key-${i}`} id={`id-${i}`} title={item.title} description={item.descr} />;
             })}
           </Accordion>
         </LeagueOperationsItem>

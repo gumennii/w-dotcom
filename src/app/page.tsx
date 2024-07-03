@@ -4,7 +4,7 @@ import { MaxWidth } from "@/utils/styling";
 import { Asset } from "contentful";
 import { meta } from "./_metadata";
 import { TypeMarketingPageProgram, TypeModuleCTA, TypeWebsiteHomePage } from "@/types/contentful";
-import { Container, Divider, Video, Text } from "@/components/ui";
+import { Container, Divider, Video, Text, Button } from "@/components/ui";
 import {
   CallToAction,
   HomePageCarousel,
@@ -88,6 +88,9 @@ export default async function Page() {
     <>
       <CookieConsent />
       <HomePageCarousel items={heroCarousel} />
+      <div className="mx-auto my-8 max-w-sm text-center">
+        <Button rounded style="white" copy="New Clinic Page" href="/clinic/merced-hs" />
+      </div>
       <div className="container mx-auto px-5">
         <Container className="flex flex-col gap-y-8 py-8 lg:py-16" maxWidth={MaxWidth.Footer}>
           <ProgramCards />

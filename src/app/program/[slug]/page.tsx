@@ -3,10 +3,9 @@ import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
 import { Document } from "@contentful/rich-text-types";
-import { Markdown } from "@/lib/markdown";
 import { TypeMarketingPageProgram, TypePeople } from "@/types/contentful";
 import { Asset } from "contentful";
-import { Container, Hero, InteractiveModal } from "@/components/ui";
+import { Container, Hero, InteractiveModal, RichText } from "@/components/ui";
 import {
   VideoContainer,
   ProgramNavigation,
@@ -87,9 +86,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       </ProgramNavigation>
 
       <Container maxWidth={MaxWidth.Small}>
-        <div className="season prose mb-8 mt-10">
-          <Markdown content={{ json: seasonDescription }} />
-        </div>
+        <RichText content={seasonDescription} className="season mb-8 mt-10" />
       </Container>
 
       <Container maxWidth={MaxWidth.Video}>

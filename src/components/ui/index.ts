@@ -11,7 +11,7 @@ export { Table, type TableProps };
 export { Select, type SelectProps, SelectOption };
 
 export { Avatar } from "./Avatar";
-export { Hero, type HeroProps } from "./Hero";
+export { Hero, HeroClinic, type HeroProps, type HeroClinicProps } from "./Hero";
 export { Button, type ButtonProps } from "./Button";
 export { DateComponent } from "./DateComponent";
 export { Divider } from "./Divider";
@@ -36,5 +36,10 @@ export {
   VideoPlayBtn,
   LocationOutlinedIcon,
   MailOutlinedIcon,
+  LogoSlashWhite,
 } from "./Icons";
 export { MenuDropdown, type MenuDropdownProps } from "./Menu";
+export { Markdown, type MarkdownProps } from "./Markdown";
+export { RichText, type RichTextProps } from "./RichText";
+export { useFormField, Form, FormItem, FormControl, FormDescription, FormMessage, FormField } from "./Form";
+export { Input } from "./Input";

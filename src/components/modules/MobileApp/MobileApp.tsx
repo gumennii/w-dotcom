@@ -4,10 +4,10 @@ import React from "react";
 import Link from "next/link";
 
 import cn from "@/utils/cn";
-import { AppStoreIcon, GooglePlayIcon, Image, Text } from "@/components/ui";
 
 import { AppsLinks, defaultAppsLinks, desktopImages, tabletAndMobileImages } from "./_constants";
 import useWindowSize from "@/hooks/windowResize";
+import { AppStoreIcon, GooglePlayIcon, Image, Text } from "@/components/ui";
 
 export type MobileAppProps = React.HTMLAttributes<HTMLDivElement> & {
   layout?: "leftTop" | "rightTop";
@@ -51,7 +51,11 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
         className={cn(
           `flex ${
             layout === "rightTop" ? "flex-row lg:flex-row-reverse" : "flex-row-reverse lg:flex-row"
-          } mt-52 w-full items-end justify-center gap-4 bg-primary text-white md:relative md:mt-0 lg:mt-36`,
+          } w-full items-end justify-center gap-4 bg-primary text-white md:relative md:mt-0 lg:mt-36`,
+          {
+            "mt-56": width <= 346,
+            "mt-60": width > 346 && width <= 768,
+          },
           className
         )}
         ref={ref}
@@ -63,13 +67,19 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
             width={androidWidth}
             height={androidHeight}
             borderRadius="none"
-            className={cn(
-              "absolute w-[12.5rem] rounded-t-3xl bg-transparent max-[768px]:bottom-36 max-[768px]:right-[25%] max-[700px]:right-[22%] max-[616px]:bottom-40 max-[576px]:bottom-56 max-[570px]:right-[15%] max-[440px]:right-[5%] md:bottom-0 lg:w-64",
-              {
-                "md:left-0 lg:right-0": layout === "rightTop",
-              },
-              { "md:right-0 lg:left-0": layout === "leftTop" }
-            )}
+            className={cn("absolute w-[12.5rem] rounded-t-3xl bg-transparent md:bottom-0 lg:w-64", {
+              "md:left-0 lg:right-0": layout === "rightTop",
+              "md:right-0 lg:left-0": layout === "leftTop",
+              "right-5": width <= 360,
+              "right-8": width > 360 && width <= 440,
+              "right-[15%]": width > 440 && width <= 495,
+              "right-[20%]": width > 495 && width <= 640,
+              "right-[22%]": width > 640 && width <= 700,
+              "right-[25%]": width > 700 && width <= 768,
+              "bottom-48": width <= 345,
+              "bottom-44": width > 345 && width <= 654,
+              "bottom-36": width > 654 && width <= 768,
+            })}
           />
           <Image
             src={iPhoneSrc}
@@ -77,13 +87,19 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
             width={iPhoneWidth}
             height={iPhoneHeight}
             borderRadius="none"
-            className={cn(
-              "absolute w-[13rem] rounded-t-3xl bg-transparent max-[768px]:bottom-36 max-[768px]:left-[25%] max-[700px]:right-[22%] max-[616px]:bottom-40 max-[576px]:bottom-56 max-[570px]:left-[15%] max-[440px]:left-[5%] md:bottom-0 md:z-10 lg:w-64",
-              {
-                "md:right-0 lg:left-0": layout === "rightTop",
-              },
-              { "md:left-0 lg:left-auto lg:right-0": layout === "leftTop" }
-            )}
+            className={cn("absolute w-[13rem] rounded-t-3xl bg-transparent md:bottom-0 md:z-10 lg:w-64", {
+              "md:right-0 lg:left-0": layout === "rightTop",
+              "md:left-0 lg:left-auto lg:right-0": layout === "leftTop",
+              "left-5": width <= 360,
+              "left-8": width > 360 && width <= 440,
+              "left-[15%]": width > 440 && width <= 495,
+              "left-[20%]": width > 495 && width <= 640,
+              "left-[22%]": width > 640 && width <= 700,
+              "left-[25%]": width > 700 && width <= 768,
+              "bottom-48": width <= 345,
+              "bottom-44": width > 345 && width <= 654,
+              "bottom-36": width > 654 && width <= 768,
+            })}
           />
         </div>
 
@@ -91,11 +107,11 @@ const MobileApp = React.forwardRef<HTMLDivElement, MobileAppProps>(
           <Text type="h1" className="uppercase italic">
             {title}
           </Text>
-          <div className={`flex flex-col`}>
+          <div className="flex flex-col">
             <Text type="h3" className="py-4">
               {subtitle}
             </Text>
-            <div className={`flex gap-x-4`}>
+            <div className="flex gap-x-4">
               {appsLinks?.map(link => {
                 const linkIcon = link.key as keyof TStoresIcons;
                 return (

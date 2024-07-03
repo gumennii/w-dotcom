@@ -21,6 +21,7 @@ export enum MaxWidth {
   Footer = "Footer",
   None = "None",
   Video = "Video",
+  XSmall = "XSmall",
 }
 
 export const getBackgroundClass = (background?: BackgroundTypes) => {
@@ -102,6 +103,8 @@ export const getMarginBottomClass = (padding?: PaddingSize) => {
 
 export const getMaxWidth = (width?: MaxWidth) => {
   switch (width) {
+    case MaxWidth.XSmall:
+      return "m-auto max-w-screen-sm";
     case MaxWidth.Small:
       return "m-auto max-w-4xl";
     case MaxWidth.Medium:
