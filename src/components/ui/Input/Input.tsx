@@ -21,7 +21,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={type}
           className={cn(
-            "ring-offset-background focus-visible:ring-ring w-full rounded-lg bg-white p-4 font-inter text-xxs leading-normal text-[#61636B] file:border-0 file:bg-transparent file:text-lg file:font-medium placeholder:font-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 lg:p-6 lg:text-lg",
+            "ring-offset-background focus-visible:ring-ring h-[53px] w-full rounded-lg bg-white p-4 font-inter text-xxs leading-normal text-[#61636B] file:border-0 file:bg-transparent file:text-lg file:font-medium placeholder:font-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 lg:h-[75px] lg:p-6 lg:text-lg",
             {
               "border border-error text-error placeholder:text-error focus-visible:ring-0 focus-visible:ring-offset-0":
                 error,
