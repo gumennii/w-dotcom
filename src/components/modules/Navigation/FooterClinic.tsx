@@ -9,10 +9,6 @@ export const FooterClinic = () => (
       <footer className="footer flex w-full flex-col items-start justify-between gap-0 pb-16 pt-12 md:flex-row md:items-center md:pb-12 lg:px-6 2xl:px-0">
         <div className="mb-8 flex flex-col gap-y-4 md:mb-0">
           <LogoSlashWhite />
-          <div
-            className="font-inter text-xs font-normal text-white"
-            dangerouslySetInnerHTML={{ __html: `© ${getYear(new Date())} Next Level Sports` }}
-          />
         </div>
         <div className="text-white">
           <div className="mb-4 flex items-center justify-start">
@@ -27,7 +23,7 @@ export const FooterClinic = () => (
               support@nextlevelsports.com
             </div>
           </Link>
-          <div className="mt-8 flex">
+          <div className="my-8 flex">
             <Link
               href="https://www.facebook.com/nextlevelflagfootball"
               target="_blank"
@@ -89,6 +85,10 @@ export const FooterClinic = () => (
               </svg>
             </Link>
           </div>
+          <div
+            className="font-inter text-xs font-normal text-white"
+            dangerouslySetInnerHTML={{ __html: `© ${getYear(new Date())} Next Level Sports` }}
+          />
         </div>
       </footer>
     </Container>

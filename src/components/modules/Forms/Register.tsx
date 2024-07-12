@@ -21,6 +21,7 @@ import { z } from "zod";
 interface IParticipantItem {
   firstName: string;
   lastName: string;
+  school: string;
   gradeLevel: string;
   shirtSize: string;
 }
@@ -52,6 +53,17 @@ const ParticipantSchema = z.object({
       message: "First Name must be at least 2 characters.",
     })
     .max(40, {
+      message: "Too many characters.",
+    }),
+  school: z
+    .string({
+      required_error: "Enter a valid school name",
+      invalid_type_error: "Enter a valid school name",
+    })
+    .min(2, {
+      message: "School name must be at least 2 characters.",
+    })
+    .max(120, {
       message: "Too many characters.",
     }),
   gradeLevel: z
@@ -93,6 +105,7 @@ const RegisterSchema = z.object({
 const defaultParticipant: IParticipantItem = {
   firstName: "",
   lastName: "",
+  school: "",
   gradeLevel: "",
   shirtSize: "",
 };
@@ -131,7 +144,7 @@ export const Register = () => {
         <p className="mt-4 font-inter text-xxs leading-loose lg:text-sm">
           {isRegister ? (
             <>
-              You&apos;re registered for the <strong>Flag Football Clinic</strong> at{""}
+              You&apos;re registered for the <strong>Flag Football Clinic</strong> at {""}
               <strong>Merced High School</strong>. You will receive a confirmation email containing the next steps
               shortly. We can’t wait to see you!
             </>
@@ -221,6 +234,22 @@ export const Register = () => {
                           )}
                         />
                       </div>
+                      <FormField
+                        control={form.control}
+                        name={`items.${index}.school`}
+                        render={({ field, fieldState }) => (
+                          <FormItem className="mb-4 w-full lg:mb-6">
+                            <FormControl>
+                              <Input
+                                label="School Name"
+                                placeholder="Enter participant's school"
+                                error={fieldState?.error?.message}
+                                {...field}
+                              />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
                       <div className="flex w-full flex-col items-start justify-start">
                         <label className="mb-2 font-inter text-xs leading-normal lg:text-lg">
                           Grade Level <span className="text-[#DC461D]">*</span>

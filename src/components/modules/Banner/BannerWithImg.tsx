@@ -48,7 +48,7 @@ export const BannerWithImg = React.forwardRef<HTMLDivElement, BannerWithImgProps
         </div>
         <div className="w-full px-6 py-8 lg:w-1/2">
           <div className="mx-auto flex max-w-[33.5rem] flex-col items-center justify-center gap-4 lg:px-1">
-            <h3 className="text-sans text-sm uppercase tracking-wider">ABOUT NEXT LEVEL SPORTS</h3>
+            <h3 className="font-roboto text-sm uppercase tracking-wider">ABOUT NEXT LEVEL SPORTS</h3>
             <h2 className="text-center font-roboto text-3xl font-bold uppercase italic leading-normal lg:text-5xl">
               THE BEST YOUTH SPORTS EXPERIENCE
             </h2>

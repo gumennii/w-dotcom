@@ -1,3 +1,8 @@
+.prose.clinic-hero p {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+}
+
 .join-descr {
   padding: 64px 0;
   font-family: "Inter", sans-serif;
@@ -23,11 +28,25 @@
 }
 .join-descr ul {
   margin: 16px 0;
-  list-style-type: disc;
-  padding-left: 24px;
+  list-style-type: none;
 }
 .join-descr ul li {
-  margin-bottom: 6px;
+  position: relative;
+  padding-left: 8px;
+  text-indent: -0.7em;
+}
+.join-descr ul li::before {
+  position: absolute;
+  left: -6px;
+  content: "• ";
+  color: #0c233f;
+}
+.join-descr ul li p {
+  margin: 0;
+}
+
+.join-descr p {
+  margin: 16px 0;
 }
 
 @media (max-width: 768px) {
@@ -43,8 +62,5 @@
     font-size: 16px;
     line-height: 140%;
     margin: 16px 0;
-  }
-  .join-descr ul li {
-    margin-bottom: 2px;
   }
 }

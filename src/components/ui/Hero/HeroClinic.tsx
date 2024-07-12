@@ -17,7 +17,7 @@ export const HeroClinic = ({ heroTitle, heroDescr, className }: HeroClinicProps)
     <div
       className={cn("relative w-full bg-cover py-20 text-white lg:px-6 2xl:px-0", className)}
       style={{
-        backgroundImage: `url("/banner.png")`,
+        backgroundImage: `url("/team.png")`,
       }}
     >
       <div className="absolute inset-0 bg-[#081D3C] opacity-80"></div>
@@ -34,7 +34,7 @@ export const HeroClinic = ({ heroTitle, heroDescr, className }: HeroClinicProps)
           </h1>
           <RichText
             content={heroDescr}
-            className="mb-12 max-w-full font-inter text-sm leading-normal text-white md:text-base lg:mb-16 lg:max-w-[50%] lg:text-lg"
+            className="clinic-hero mb-12 max-w-full font-inter text-sm leading-normal text-white md:text-base lg:mb-16 lg:max-w-[50%] lg:text-lg"
           />
         </div>
       </Container>
