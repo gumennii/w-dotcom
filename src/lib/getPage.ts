@@ -25,6 +25,20 @@ export async function getPage(params: GetPageParams) {
   return page || null;
 }
 
+export async function getOpsPage(params: GetPageParams) {
+  const query = {
+    limit: 1,
+    include: 10,
+    locale: params.locale,
+    "fields.programKey": params.slug,
+    content_type: params.pageContentType,
+  };
+  const {
+    items: [page],
+  } = await client.getEntries(query);
+  return page || null;
+}
+
 export async function getPageById(id: string) {
   const page = await client.getEntry(id);
   return page || null;

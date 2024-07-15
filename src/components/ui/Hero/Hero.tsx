@@ -10,9 +10,10 @@ export type HeroProps = {
   programType: string;
   className?: string;
   urlVideo?: string;
+  programStatus?: string;
 };
 
-export const Hero = ({ programName, programType, className, urlVideo }: HeroProps) => {
+export const Hero = ({ programName, programType, className, urlVideo, programStatus }: HeroProps) => {
   const textColor = getTextColorByProgramType(programType);
   const heroBgGradient = getHeroGradientByProgramType(programType);
 
@@ -47,7 +48,7 @@ export const Hero = ({ programName, programType, className, urlVideo }: HeroProp
           </p>
           <div className="flex flex-col font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:text-2xl">
             <h3 className={textColor}>now open:&nbsp;</h3>
-            <h3>general registration</h3>
+            <h3>General registration</h3>
           </div>
         </div>
         <div className="flex flex-row justify-center gap-3 md:justify-start">

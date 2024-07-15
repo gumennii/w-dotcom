@@ -51,7 +51,9 @@ export const RegistrationListing = ({ programName, programType, divisions, price
                   {dateFormat(division.seasonEnd, "MMM d, y")}
                 </span>
                 <div className="flex flex-row items-center gap-4">
-                  <span className="font-xs mr-3 font-inter font-semibold leading-relaxed sm:text-base">$315.00</span>
+                  <span className="font-xs mr-3 font-inter font-semibold leading-relaxed sm:text-base">
+                    ${price.toFixed(2)}
+                  </span>
                   <span className="font-inter text-xxxs sm:text-xs">
                     <FontAwesomeIcon icon={faUsers as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
                     {division.divisionTeamCount} teams

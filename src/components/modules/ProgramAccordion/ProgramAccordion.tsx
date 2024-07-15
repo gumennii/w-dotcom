@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Accordion, AccordionProgramItem, Table, RichText } from "@/components/ui";
+import { Accordion, AccordionProgramItem, Table, RichText, Markdown } from "@/components/ui";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 
@@ -13,6 +13,7 @@ type GameTimesData = {
 type ScheduleData = {
   week: string;
   date: string;
+  "event type": string;
 };
 
 interface ProgramAccordionProps {
@@ -20,8 +21,8 @@ interface ProgramAccordionProps {
   operations: Document;
   gameTimesData: GameTimesData[];
   scheduleData: ScheduleData[];
-  gameTimesNotes?: Document;
-  scheduleNotes?: Document;
+  gameTimesNotes?: string;
+  scheduleNotes?: string;
 }
 
 export const ProgramAccordion = ({
@@ -69,7 +70,7 @@ export const ProgramAccordion = ({
 
           <Table textAlign={"center"} data={gameTimesData} />
 
-          <RichText content={gameTimesNotes as Document} className="note mt-4" />
+          <Markdown content={gameTimesNotes as string} className="note mt-4" />
         </div>
 
         <div>
@@ -77,7 +78,7 @@ export const ProgramAccordion = ({
 
           <Table textAlign={"left"} data={scheduleData} equalColumns={false} />
 
-          <RichText content={scheduleNotes as Document} className="note mt-4" />
+          <Markdown content={scheduleNotes as string} className="note mt-4" />
         </div>
       </AccordionProgramItem>
     </Accordion>

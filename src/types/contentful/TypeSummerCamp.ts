@@ -10,6 +10,7 @@ export interface TypeSummerCampFields {
   directorName: EntryFieldTypes.Symbol;
   directorBio: EntryFieldTypes.Text;
   pageUrl?: EntryFieldTypes.Symbol;
+  announcement?: EntryFieldTypes.Text;
 }
 
 export type TypeSummerCampSkeleton = EntrySkeletonType<TypeSummerCampFields, "summerCamp">;

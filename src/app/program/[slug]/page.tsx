@@ -3,7 +3,7 @@ import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
 import { Document } from "@contentful/rich-text-types";
-import { TypeMarketingPageProgram, TypePeople } from "@/types/contentful";
+import { TypeMarketingPageProgram, TypePeople, TypeProgramData } from "@/types/contentful";
 import { Asset } from "contentful";
 import { Container, Hero, InteractiveModal, RichText } from "@/components/ui";
 import {
@@ -19,8 +19,9 @@ import { Footer } from "@/components/modules/Navigation/Footer";
 import { format as dateFormat } from "date-fns";
 
 type Schedule = {
-  week: string;
+  id: string;
   date: string;
+  eventType: string;
 };
 
 export default async function ProgramPage({ params }: { params: { slug: string } }) {
@@ -34,25 +35,27 @@ export default async function ProgramPage({ params }: { params: { slug: string }
     return notFound();
   }
 
+  const programData = content.fields.programData as TypeProgramData<undefined, string>;
   const coverImage = content.fields.coverImage as Asset;
   const seasonDescription = content.fields.seasonDescription as Document;
   const programOverview = content.fields.programOverview as Document;
   const leagueOperations = content.fields.leagueOperations as Document;
-  const siteDirectorData = content.fields.siteDirector as TypePeople<undefined, string>;
-  const divisionsList = content.fields.divisions as TDivision[];
-  const scheduleList = content.fields.schedule as Schedule[];
+  const siteDirectorData = programData.fields.siteDirector as TypePeople<undefined, string>[];
+  const divisionsList = programData.fields.divisions as TDivision[];
+  const scheduleList = programData.fields.schedule as Schedule[];
 
   const gameTimesTableData = divisionsList?.map(item => {
     return {
       "grade level": item.divisionName,
-      practice: item.divisionPracticeTime,
-      game: item.divisionGameTime,
+      practice: item.divisionPracticeTime.slice(0, 8),
+      game: item.divisionGameTime.slice(0, 8),
     };
   });
   const scheduleTableData = scheduleList?.map(item => {
     return {
-      week: item.week,
+      week: item.id,
       date: dateFormat(item.date, "EEEE, MMMM d"),
+      "event type": item.eventType,
     };
   });
 
@@ -76,6 +79,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         programName={content.fields.programName as string}
         programType={content.fields.programType as string}
         urlVideo={content.fields.coverVideo}
+        programStatus={programData.fields.programStatus as string}
       />
 
       <ProgramNavigation>
@@ -104,8 +108,8 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           operations={leagueOperations}
           gameTimesData={gameTimesTableData}
           scheduleData={scheduleTableData}
-          gameTimesNotes={content.fields.notes}
-          scheduleNotes={content.fields.scheduleNotes}
+          gameTimesNotes={programData.fields.notes}
+          scheduleNotes={programData.fields.scheduleNotes}
         />
       </Container>
 
@@ -117,12 +121,12 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           programName={content.fields.programName as string}
           programType={content.fields.programType as string}
           divisions={content.fields.divisions as TDivision[]}
-          price={content.fields.price as number}
+          price={programData.fields.programCost as number}
         />
       </Container>
 
       <Container maxWidth={MaxWidth.Small} className="my-8 flex flex-col gap-y-8">
-        <Profile title="Site Director" contents={siteDirectorData} />
+        <Profile title="Site Director" contents={siteDirectorData[0]} />
       </Container>
 
       <div className="bg-[#0F2344] text-white sm:px-4 md:px-8 2xl:px-2">
