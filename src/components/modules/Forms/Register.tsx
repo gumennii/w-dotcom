@@ -17,6 +17,9 @@ import { Button } from "@/components/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { trackEvent } from "@/customerio";
 
 interface IParticipantItem {
   firstName: string;
@@ -27,7 +30,7 @@ interface IParticipantItem {
 }
 
 interface IRegister {
-  fullName: string;
+  name: string;
   email: string;
   items: IParticipantItem[];
 }
@@ -114,9 +117,10 @@ export const Register = () => {
   const [participant, setParticipant] = useState<IParticipantItem[]>([defaultParticipant]);
   const [isRegister, setIsRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>("Failed to submit the data. Please try again.");
 
   const defaultRegister: IRegister = {
-    fullName: "",
+    name: "",
     email: "",
     items: participant,
   };
@@ -128,11 +132,24 @@ export const Register = () => {
 
   const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
     setIsLoading(true);
-    console.log(data);
-    setTimeout(() => {
-      setIsRegister(true);
+    setErrorMsg(null);
+
+    try {
+      const response = trackEvent("Clinic Registered", {
+        ...data,
+        lead_score: 1,
+      });
+
+      if (!response) {
+        throw new Error("Failed to submit the data. Please try again.");
+      }
+    } catch (error) {
+      setErrorMsg((error as Error).message);
+      console.error(error);
+    } finally {
       setIsLoading(false);
-    }, 1000);
+      setIsRegister(true);
+    }
   };
 
   return (
@@ -156,7 +173,7 @@ export const Register = () => {
           <>
             <Divider className="my-6 lg:mb-8 lg:mt-12" />
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="register">
+              <form onSubmit={form.handleSubmit(onSubmit)} id="Clinic_Registered" className="register">
                 <div className="flex w-full flex-col">
                   <h4 className="mb-4 font-roboto text-base font-semibold leading-relaxed lg:mb-6 lg:text-xl">
                     Your Information
@@ -332,6 +349,14 @@ export const Register = () => {
                       className="w-full lg:max-w-[48%]"
                       disable={isLoading}
                     />
+                  </div>
+                  <div className="mt-4 flex flex-col items-center">
+                    {errorMsg && (
+                      <div className="flex items-center gap-4 rounded bg-error-foreground p-4 text-error">
+                        <FontAwesomeIcon icon={faTriangleExclamation} />
+                        <p className="font-inter text-[0.75rem] leading-normal lg:leading-5">{errorMsg}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </form>

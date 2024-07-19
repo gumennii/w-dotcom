@@ -17,21 +17,23 @@ export type TDivision = {
   divisionGameTime: string;
   divisionTeamSize: number;
   divisionTeamCount: number;
-  divisionMaxPlayers: number;
   divisionPracticeTime: string;
-  registrationEnd: string;
-  seasonStart: string;
-  seasonEnd: string;
 };
 
-export interface RegistrationListingProps {
-  programName: string;
-  programType: string;
-  divisions: TDivision[];
-  price: number;
+export interface ISeasonDates {
+  start: string;
+  end: string;
 }
 
-export const RegistrationListing = ({ programName, programType, divisions, price }: RegistrationListingProps) => {
+export interface RegistrationListingProps {
+  programName?: string;
+  programType?: string;
+  divisions: TDivision[];
+  price: number;
+  seasonDates: ISeasonDates;
+}
+
+export const RegistrationListing = ({ divisions, price, seasonDates }: RegistrationListingProps) => {
   return (
     <>
       <h4 className="mb-1 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
@@ -47,8 +49,8 @@ export const RegistrationListing = ({ programName, programType, divisions, price
               <div className="flex flex-col gap-2">
                 <h3 className="font-inter text-sm font-semibold leading-normal sm:text-lg">{division.divisionName}</h3>
                 <span className="font-inter text-xs leading-relaxed sm:text-sm">
-                  Season Dates: {dateFormat(division.seasonStart, "MMM d, y")} —{" "}
-                  {dateFormat(division.seasonEnd, "MMM d, y")}
+                  Season Dates: {dateFormat(seasonDates.start, "MMM d, y")} — {""}
+                  {dateFormat(seasonDates.end, "MMM d, y")}
                 </span>
                 <div className="flex flex-row items-center gap-4">
                   <span className="font-xs mr-3 font-inter font-semibold leading-relaxed sm:text-base">
@@ -60,7 +62,7 @@ export const RegistrationListing = ({ programName, programType, divisions, price
                   </span>
                   <span className="font-inter text-xxxs sm:text-xs">
                     <FontAwesomeIcon icon={faUser as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
-                    {division.divisionMaxPlayers} players per team
+                    {division.divisionTeamSize} players per team
                   </span>
                 </div>
               </div>

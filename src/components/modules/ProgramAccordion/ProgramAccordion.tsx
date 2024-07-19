@@ -76,7 +76,7 @@ export const ProgramAccordion = ({
         <div>
           <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Game Schedule</h3>
 
-          <Table textAlign={"left"} data={scheduleData} equalColumns={false} />
+          <Table textAlign={"left"} data={scheduleData} />
 
           <Markdown content={scheduleNotes as string} className="note mt-4" />
         </div>

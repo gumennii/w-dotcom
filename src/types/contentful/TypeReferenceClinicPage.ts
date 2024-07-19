@@ -1,7 +1,13 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 
 export interface TypeReferenceClinicPageFields {
-  referentName: EntryFieldTypes.Symbol;
+  internalName?: EntryFieldTypes.Symbol;
+  seoTitle: EntryFieldTypes.Symbol;
+  seoDescription: EntryFieldTypes.Symbol;
+  canonicalUrl?: EntryFieldTypes.Symbol;
+  featuredImage?: EntryFieldTypes.AssetLink;
+  hidePageSearchEngines?: EntryFieldTypes.Boolean;
+  excludeLinksFromSearchRankings?: EntryFieldTypes.Boolean;
 }
 
 export type TypeReferenceClinicPageSkeleton = EntrySkeletonType<TypeReferenceClinicPageFields, "referenceClinicPage">;

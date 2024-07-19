@@ -20,7 +20,7 @@ export const HeroClinic = ({ heroTitle, heroDescr, className }: HeroClinicProps)
         backgroundImage: `url("/team.png")`,
       }}
     >
-      <div className="absolute inset-0 bg-[#081D3C] opacity-80"></div>
+      <div className="absolute inset-0 bg-[#000C36] opacity-85"></div>
       <Container maxWidth={MaxWidth.Footer} className="relative z-10">
         <div className="mb-6 flex flex-col justify-start text-center md:text-left">
           <Link href="/" className="mb-6">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TDivision } from "./RegistrationListing";
+import { TDivision, ISeasonDates } from "./RegistrationListing";
 import { Collapse } from "@/components/ui";
 
 interface RegistrationListingCollapseProps {
@@ -7,6 +7,8 @@ interface RegistrationListingCollapseProps {
   programName: string;
   programType: string;
   open: boolean;
+  seasonDates: ISeasonDates;
+  registrationEnd: string;
 }
 
 const RegistrationListingCollapse = ({
@@ -14,6 +16,8 @@ const RegistrationListingCollapse = ({
   programName,
   programType,
   open,
+  seasonDates,
+  registrationEnd,
 }: RegistrationListingCollapseProps) => {
   const [toggleText, setToggleText] = useState(open ? "See Less" : "See More");
 
@@ -28,11 +32,9 @@ const RegistrationListingCollapse = ({
     <Collapse open={open} onOpen={onOpen} onClose={onClose}>
       <Collapse.Title className="cursor-pointer text-sm font-semibold leading-normal lg:text-base">
         {programType} {division.Location} • {division.divisionName}
+        <p className="text-xs font-normal leading-normal lg:text-sm">Registration closes on: {registrationEnd}</p>
         <p className="text-xs font-normal leading-normal lg:text-sm">
-          Registration closes on: {division.registrationEnd}
-        </p>
-        <p className="text-xs font-normal leading-normal lg:text-sm">
-          Season dates: {division.seasonStart} to {division.seasonEnd}
+          Season dates: {seasonDates.start} to {seasonDates.end}
         </p>
         <p className="text-xs font-normal leading-normal underline lg:text-sm">{toggleText}</p>
       </Collapse.Title>
@@ -45,8 +47,7 @@ const RegistrationListingCollapse = ({
             {division.divisionName} - {programName}
           </li>
           <li className="text-xs leading-normal lg:text-sm">
-            Maximum of {division.divisionMaxPlayers} players ({division.divisionTeamCount} Teams,{" "}
-            {division.divisionTeamSize} players per team)
+            Teams of division - ({division.divisionTeamCount}, {""} {division.divisionTeamSize} players per team)
           </li>
         </ul>
       </Collapse.Content>

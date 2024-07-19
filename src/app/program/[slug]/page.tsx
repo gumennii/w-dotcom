@@ -14,6 +14,7 @@ import {
   type TDivision,
   Profile,
   ProgramAccordion,
+  type ISeasonDates,
 } from "@/components/modules";
 import { Footer } from "@/components/modules/Navigation/Footer";
 import { format as dateFormat } from "date-fns";
@@ -22,6 +23,7 @@ type Schedule = {
   id: string;
   date: string;
   eventType: string;
+  specialNote?: string;
 };
 
 export default async function ProgramPage({ params }: { params: { slug: string } }) {
@@ -56,8 +58,14 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       week: item.id,
       date: dateFormat(item.date, "EEEE, MMMM d"),
       "event type": item.eventType,
+      note: item.specialNote || "-",
     };
   });
+
+  const seasonDates: ISeasonDates = {
+    start: scheduleList.slice(0)[0].date,
+    end: scheduleList.slice(-1)[0].date,
+  };
 
   return (
     <>
@@ -77,7 +85,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       </InteractiveModal>
       <Hero
         programName={content.fields.programName as string}
-        programType={content.fields.programType as string}
+        programType={programData.fields.programType as string}
         urlVideo={content.fields.coverVideo}
         programStatus={programData.fields.programStatus as string}
       />
@@ -96,7 +104,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       <Container maxWidth={MaxWidth.Video}>
         <VideoContainer
           coverVideo={content.fields.coverVideo as string}
-          programType={content.fields.programType as string}
+          programType={programData.fields.programType as string}
           slug={params.slug as string}
           coverImage={coverImage}
         />
@@ -118,10 +126,9 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           Registration Listing
         </h2>
         <RegistrationListing
-          programName={content.fields.programName as string}
-          programType={content.fields.programType as string}
-          divisions={content.fields.divisions as TDivision[]}
+          divisions={programData.fields.divisions as TDivision[]}
           price={programData.fields.programCost as number}
+          seasonDates={seasonDates}
         />
       </Container>
 

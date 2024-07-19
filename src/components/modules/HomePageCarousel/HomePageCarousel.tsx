@@ -17,7 +17,6 @@ export const HomePageCarousel = ({ items }: HomePageCarouselProps) => {
       {items.map(item => {
         const coverImage = item.fields.coverImage as Asset;
         const programName = item.fields.programName as string;
-        const programType = item.fields.programType as string;
 
         return (
           <Carousel.Item key={item.fields.slug}>
@@ -35,7 +34,7 @@ export const HomePageCarousel = ({ items }: HomePageCarouselProps) => {
                 maxWidth={MaxWidth.Footer}
               >
                 <Text type="h1" className="uppercase italic">
-                  Next Level {programType}
+                  Next Level Sports
                 </Text>
                 <Text type="h4">{programName}</Text>
               </Container>

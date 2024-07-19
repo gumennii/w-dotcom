@@ -1,1 +1,6 @@
-export { RegistrationListing, type RegistrationListingProps, type TDivision } from "./RegistrationListing";
+export {
+  RegistrationListing,
+  type RegistrationListingProps,
+  type TDivision,
+  type ISeasonDates,
+} from "./RegistrationListing";
