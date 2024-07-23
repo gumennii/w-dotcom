@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 import Link from "next/link";
 import { trackEvent } from "@/customerio";
 import cn from "@/utils/cn";
@@ -9,6 +9,8 @@ import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { useAppContext } from "@/providers/appContext";
 import { Button } from "@/components/ui";
+import { useUtmContext } from "@/providers/utmContext";
+import { useSearchParams } from "next/navigation";
 
 export type SubscribeProps = {
   title: string;
@@ -19,6 +21,15 @@ export type SubscribeProps = {
 };
 
 export const Subscribe = ({ title, descriprion, className, variant = "tight", trackingFields }: SubscribeProps) => {
+  const searchParams = useSearchParams();
+  const { utmParams, setUtmParams } = useUtmContext();
+
+  useEffect(() => {
+    if (searchParams && Object.keys(Object.fromEntries(new URLSearchParams(searchParams))).length !== 0) {
+      setUtmParams(Object.fromEntries(new URLSearchParams(searchParams)));
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const { isUserSubscribed, setIsUserSubscribed } = useAppContext();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -34,6 +45,7 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
         ...formData,
         programKey: trackingFields,
         lead_score: 1,
+        utm: utmParams,
       });
 
       if (!response) {

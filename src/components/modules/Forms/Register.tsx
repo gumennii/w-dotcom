@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MaxWidth } from "@/utils/styling";
 import {
   Container,
@@ -15,11 +15,13 @@ import {
 } from "@/components/ui";
 import { Button } from "@/components/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { trackEvent } from "@/customerio";
+import { useUtmContext } from "@/providers/utmContext";
+import { useSearchParams } from "next/navigation";
 
 interface IParticipantItem {
   firstName: string;
@@ -33,6 +35,7 @@ interface IRegister {
   name: string;
   email: string;
   items: IParticipantItem[];
+  utmParams?: any;
 }
 
 const ParticipantSchema = z.object({
@@ -114,10 +117,19 @@ const defaultParticipant: IParticipantItem = {
 };
 
 export const Register = () => {
+  const searchParams = useSearchParams();
+  const { utmParams, setUtmParams } = useUtmContext();
+
+  useEffect(() => {
+    if (searchParams && Object.keys(Object.fromEntries(new URLSearchParams(searchParams))).length !== 0) {
+      setUtmParams(Object.fromEntries(new URLSearchParams(searchParams)));
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const [participant, setParticipant] = useState<IParticipantItem[]>([defaultParticipant]);
   const [isRegister, setIsRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>("Failed to submit the data. Please try again.");
+  const [errorMsg, setErrorMsg] = useState<string | null>();
 
   const defaultRegister: IRegister = {
     name: "",
@@ -137,10 +149,12 @@ export const Register = () => {
     try {
       const response = trackEvent("Clinic Registered", {
         ...data,
+        utm: utmParams,
         lead_score: 1,
       });
 
       if (!response) {
+        setErrorMsg("Failed to submit the data. Please try again.");
         throw new Error("Failed to submit the data. Please try again.");
       }
     } catch (error) {
