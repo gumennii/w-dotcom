@@ -5,6 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import AmplitudeContextProvider from "@/providers/amplitude";
 import { AppContextProvider } from "@/providers/appContext";
+import { UtmContextProvider } from "@/providers/utmContext";
 
 export const metadata = {
   title: "Next Level Sport",
@@ -23,14 +24,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <AmplitudeContextProvider>
           <AppContextProvider>
-            <section className="min-h-screen">
-              <main>
-                <div className="min-h-screen">{children}</div>
-              </main>
-            </section>
-            <div id="dialog-root"></div>
+            <UtmContextProvider>
+              <section className="min-h-screen">
+                <main>
+                  <div className="min-h-screen">{children}</div>
+                </main>
+              </section>
+              <div id="dialog-root"></div>
 
-            <SpeedInsights />
+              <SpeedInsights />
+            </UtmContextProvider>
           </AppContextProvider>
         </AmplitudeContextProvider>
       </body>
