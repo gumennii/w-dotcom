@@ -11,7 +11,7 @@ type VideoContainerProps = {
 export const VideoContainer = ({ coverVideo, programType, slug, coverImage }: VideoContainerProps) => {
   return (
     <div>
-      <VideoModal maxWidth="3xLarge" url={coverVideo}>
+      <VideoModal maxWidth="3xLarge" url={coverVideo} trackShowVideo>
         {coverImage && Object.keys(coverImage).length && coverImage.fields.file?.url ? (
           <div className="relative w-full py-10 lg:px-4 xl:px-0">
             <Image

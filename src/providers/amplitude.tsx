@@ -4,7 +4,7 @@ import { init, track } from "@amplitude/analytics-browser";
 
 const AMPLITUDE_API_KEY = process.env.NEXT_PUBLIC_AMPLITUDE_API_KEY as string;
 
-export const AmplitudeContext = createContext({});
+export const AmplitudeContext = createContext<any>({});
 
 const AmplitudeContextProvider = ({ children }: PropsWithChildren) => {
   useEffect(() => {

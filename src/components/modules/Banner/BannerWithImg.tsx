@@ -1,8 +1,6 @@
 import React from "react";
-import Link from "next/link";
-
 import cn from "@/utils/cn";
-import { Button, Image } from "@/components/ui";
+import { Image } from "@/components/ui";
 
 interface BannerImage {
   src: string;
@@ -48,14 +46,11 @@ export const BannerWithImg = React.forwardRef<HTMLDivElement, BannerWithImgProps
         </div>
         <div className="w-full px-6 py-8 lg:w-1/2">
           <div className="mx-auto flex max-w-[33.5rem] flex-col items-center justify-center gap-4 lg:px-1">
-            <h3 className="font-roboto text-sm uppercase tracking-wider">ABOUT NEXT LEVEL SPORTS</h3>
+            <h3 className="font-roboto text-sm uppercase tracking-wider">{subTitle}</h3>
             <h2 className="text-center font-roboto text-3xl font-bold uppercase italic leading-normal lg:text-5xl">
-              THE BEST YOUTH SPORTS EXPERIENCE
+              {title}
             </h2>
-            <p className="text-center font-inter text-sm leading-relaxed lg:text-lg lg:leading-normal">
-              Next Level Sports provides Flag Football, Basketball, and Volleyball programs to more than 50,000
-              participants across 14 states!
-            </p>
+            <p className="text-center font-inter text-sm leading-relaxed lg:text-lg lg:leading-normal">{descr}</p>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
 import { Document } from "@contentful/rich-text-types";
-import { TypeMarketingPageProgram, TypePeople, TypeProgramData } from "@/types/contentful";
+import { TypeMarketingPageProgram, TypePeople, TypeProgramData, TypeWebsiteModuleContacts } from "@/types/contentful";
 import { Asset } from "contentful";
 import { Container, Hero, InteractiveModal, RichText } from "@/components/ui";
 import {
@@ -15,6 +15,7 @@ import {
   Profile,
   ProgramAccordion,
   type ISeasonDates,
+  ProgramNavigationTrack,
 } from "@/components/modules";
 import { Footer } from "@/components/modules/Navigation/Footer";
 import { format as dateFormat } from "date-fns";
@@ -39,12 +40,14 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
   const programData = content.fields.programData as TypeProgramData<undefined, string>;
   const coverImage = content.fields.coverImage as Asset;
+  const heroImage = content.fields.heroImage as Asset;
   const seasonDescription = content.fields.seasonDescription as Document;
   const programOverview = content.fields.programOverview as Document;
   const leagueOperations = content.fields.leagueOperations as Document;
   const siteDirectorData = programData.fields.siteDirector as TypePeople<undefined, string>[];
   const divisionsList = programData.fields.divisions as TDivision[];
   const scheduleList = programData.fields.schedule as Schedule[];
+  const contacts = content.fields.contacts as TypeWebsiteModuleContacts<undefined, string>;
 
   const gameTimesTableData = divisionsList?.map(item => {
     return {
@@ -78,22 +81,27 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <Subscribe
           variant="modal"
           title="Stay in The Game"
-          descriprion={`Sign up for our ${content.fields.programName as string} to stay up to date.`}
+          descriprion={`Sign up for our ${programData.fields.programName as string} to stay up to date.`}
           className="rounded-2xl bg-[#051227] p-6 text-center text-white lg:p-8"
           trackingFields={content.fields.slug as string}
+          trackingName="Modal"
         />
       </InteractiveModal>
       <Hero
         programName={content.fields.programName as string}
         programType={programData.fields.programType as string}
+        heroDescr={content.fields.heroDescription}
         urlVideo={content.fields.coverVideo}
         programStatus={programData.fields.programStatus as string}
+        programRegistrationStatus={content.fields.programRegistrationStatus}
+        backgroundImage={heroImage}
       />
 
       <ProgramNavigation>
         <ProgramNavigation.Body>
           <ProgramNavigation.Links links={getProgramNavigationLinks(params?.slug)} />
-          <ProgramNavigation.Actions />
+          {/* <ProgramNavigation.Actions /> */}
+          <ProgramNavigationTrack />
         </ProgramNavigation.Body>
       </ProgramNavigation>
 
@@ -129,6 +137,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           divisions={programData.fields.divisions as TDivision[]}
           price={programData.fields.programCost as number}
           seasonDates={seasonDates}
+          registrationStatus={content.fields.programRegistrationStatus}
         />
       </Container>
 
@@ -140,13 +149,14 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <Container maxWidth={MaxWidth.Footer}>
           <Subscribe
             title="Stay Tuned For Updates"
-            descriprion={`Stay informed about our ${content.fields.programName as string} program! Subscribe to our offseason newsletter for exclusive updates, thrilling highlights, and insider insights.`}
+            descriprion={`Stay informed about our ${programData.fields.programName as string} program! Subscribe to our offseason newsletter for exclusive updates, thrilling highlights, and insider insights.`}
             variant="wide"
             trackingFields={content.fields.slug as string}
+            trackingName="Footer"
           />
         </Container>
       </div>
-      <Footer />
+      <Footer contacts={contacts} />
     </>
   );
 }

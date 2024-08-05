@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import { getPage } from "@/lib/getPage";
-import { TypeClinicPage } from "@/types/contentful";
+import { TypeClinicPage, TypeWebsiteModuleFaQs, TypeWebsiteModuleContacts } from "@/types/contentful";
 import { HeroClinic, Container, RichText } from "@/components/ui";
 import { FooterClinic, Register, BannerWithImg, FAQ } from "@/components/modules";
 import { Document } from "@contentful/rich-text-types";
 import { MaxWidth } from "@/utils/styling";
+import { Asset } from "contentful";
 
 export default async function ClinicPage({ params }: { params: { slug: string } }) {
   const content = (await getPage({
@@ -19,11 +20,14 @@ export default async function ClinicPage({ params }: { params: { slug: string } 
 
   const heroTitle = content.fields.title as string;
   const heroDescr = content.fields.description as Document;
+  const heroImage = content.fields.heroImage as Asset;
   const joinContent = content.fields.info as Document;
+  const clinicFAQs = content.fields.faQs as TypeWebsiteModuleFaQs<undefined, string>;
+  const contacts = content.fields.contacts as TypeWebsiteModuleContacts<undefined, string>;
 
   return (
     <>
-      <HeroClinic heroTitle={heroTitle} heroDescr={heroDescr} />
+      <HeroClinic heroTitle={heroTitle} heroDescr={heroDescr} backgroundImage={heroImage} />
 
       <Container maxWidth={MaxWidth.XSmall}>
         <RichText content={joinContent} className="join-descr" />
@@ -33,9 +37,9 @@ export default async function ClinicPage({ params }: { params: { slug: string } 
 
       <BannerWithImg />
 
-      <FAQ />
+      {clinicFAQs ? <FAQ content={clinicFAQs} location="[Accordion] - FAQs Clinic Page" /> : null}
 
-      <FooterClinic />
+      <FooterClinic contacts={contacts} />
     </>
   );
 }

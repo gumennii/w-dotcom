@@ -1,9 +1,14 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { MaxWidth, getHeroGradientByProgramType, getTextColorByProgramType } from "@/utils/styling";
 import cn from "@/utils/cn";
 import { Container } from "../Container";
-import { Logo, Button, VideoModal } from "@/components/ui";
+import { Logo, Button, VideoModal, RichText } from "@/components/ui";
+import { Document } from "@contentful/rich-text-types";
+import { Asset } from "contentful";
+import useAmplitudeContext from "@/hooks/amplitude";
 
 export type HeroProps = {
   programName: string;
@@ -11,17 +16,46 @@ export type HeroProps = {
   className?: string;
   urlVideo?: string;
   programStatus?: string;
+  heroDescr: Document;
+  programRegistrationStatus?: string;
+  backgroundImage: Asset;
 };
 
-export const Hero = ({ programName, programType, className, urlVideo, programStatus }: HeroProps) => {
+export const Hero = ({
+  programName,
+  programType,
+  className,
+  urlVideo,
+  programStatus,
+  programRegistrationStatus,
+  heroDescr,
+  backgroundImage,
+}: HeroProps) => {
   const textColor = getTextColorByProgramType(programType);
   const heroBgGradient = getHeroGradientByProgramType(programType);
+  const heroImage = backgroundImage?.fields?.file?.url || "";
+
+  const { trackAmplitudeEvent } = useAmplitudeContext();
+
+  const clickHandlerRegister = () => {
+    trackAmplitudeEvent("click", {
+      button: "register now",
+      location: "hero block",
+    });
+  };
+
+  const clickHandlerVideo = () => {
+    trackAmplitudeEvent("click", {
+      button: "watch teaser",
+      location: "hero block",
+    });
+  };
 
   return (
     <div
-      className={cn("relative w-full bg-cover py-20 text-white lg:px-6 2xl:px-0", className)}
+      className={cn("relative w-full bg-[#081D3C] bg-cover py-20 text-white lg:px-6 2xl:px-0", className)}
       style={{
-        backgroundImage: `url("/banner.png")`,
+        backgroundImage: `url("${heroImage}")`,
       }}
     >
       <div className={`absolute inset-0 ${heroBgGradient}`}></div>
@@ -41,26 +75,34 @@ export const Hero = ({ programName, programType, className, urlVideo, programSta
             </span>
             {programName.indexOf("-") === -1 ? programName : programName.substring(programName.indexOf("-") + 2)}
           </h1>
-          <p className="mb-12 max-w-full font-inter text-sm leading-normal md:text-base lg:mb-16 lg:max-w-[50%] lg:text-lg">
-            The program starts in January and runs through March.
-            <br />
-            Open to 5th - 8th Graders.
-          </p>
-          <div className="flex flex-col font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:text-2xl">
-            <h3 className={textColor}>now open:&nbsp;</h3>
-            <h3>General registration</h3>
-          </div>
+          <RichText
+            content={heroDescr}
+            className="clinic-hero mb-12 max-w-full font-inter text-sm leading-normal text-white md:text-base lg:mb-16 lg:max-w-[50%] lg:text-lg"
+          />
+          {programRegistrationStatus && programRegistrationStatus !== "Close" ? (
+            <div className="flex flex-col font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:text-2xl">
+              <h3 className={textColor}>now open:&nbsp;</h3>
+              <h3>{programRegistrationStatus}</h3>
+            </div>
+          ) : programRegistrationStatus === "Close" ? (
+            <div className="flex flex-col font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:text-2xl">
+              <h3 className={textColor}>Registration is closed</h3>
+            </div>
+          ) : null}
         </div>
         <div className="flex flex-row justify-center gap-3 md:justify-start">
-          <Button rounded style="white" copy="Register Now" href={`#registration`} />
+          {programRegistrationStatus && programRegistrationStatus !== "Close" ? (
+            <Link
+              href="#registration"
+              className="btn btn-white rounded-full p-4 font-roboto text-sm text-primary lg:px-6"
+              onClick={() => clickHandlerRegister()}
+            >
+              Register Now
+            </Link>
+          ) : null}
           {urlVideo ? (
             <VideoModal maxWidth="2xLarge" url={urlVideo}>
-              <Button
-                rounded
-                style="ghost"
-                copy="&#9654; Watch Teaser"
-                // href={`https://registration.bluesombrero.com/4384/available-programs`}
-              />
+              <Button rounded style="ghost" copy="&#9654; Watch Teaser" onClick={() => clickHandlerVideo()} />
             </VideoModal>
           ) : null}
         </div>

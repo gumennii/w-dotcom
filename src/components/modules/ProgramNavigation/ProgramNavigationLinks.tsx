@@ -8,6 +8,7 @@ import { Dropdown } from "@/components/ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import useAmplitudeContext from "@/hooks/amplitude";
 
 type TProgramNavigationLink = {
   href: string;
@@ -23,6 +24,15 @@ const ProgramNavigationLinks = React.forwardRef<HTMLDivElement, ProgramNavigatio
   ({ className, links, ...props }, ref): JSX.Element => {
     const params = useParams();
     const [hash, setHash] = useState("");
+
+    const { trackAmplitudeEvent } = useAmplitudeContext();
+
+    const clickHandler = (name: string) => {
+      trackAmplitudeEvent("click", {
+        button: name,
+        location: "[Navigation] - Program Navigation",
+      });
+    };
 
     useEffect(() => {
       setHash(window.location.hash);
@@ -43,6 +53,7 @@ const ProgramNavigationLinks = React.forwardRef<HTMLDivElement, ProgramNavigatio
               }`,
               "mr-1 hidden h-11 items-center justify-center rounded-md px-4 font-inter text-base leading-relaxed md:inline-flex"
             )}
+            onClick={() => clickHandler(link.name)}
           >
             {link.name}
           </Link>
@@ -59,6 +70,15 @@ type ProgramDropdownProps = {
 const ProgramDropdown = ({ links }: ProgramDropdownProps) => {
   const params = useParams();
   const [hash, setHash] = useState("");
+
+  const { trackAmplitudeEvent } = useAmplitudeContext();
+
+  const clickHandler = (name: string) => {
+    trackAmplitudeEvent("click", {
+      button: name,
+      location: "[Navigation] - Program Navigation (mobile)",
+    });
+  };
 
   // Create a ref array to store refs for each mapped link item
   const linksRefs = useRef<(HTMLAnchorElement | null)[]>([]);
@@ -97,7 +117,10 @@ const ProgramDropdown = ({ links }: ProgramDropdownProps) => {
                 className={
                   link.id === hash || (index === 0 && hash === "") ? "pointer-events-none bg-[#0e2344] text-white" : ""
                 }
-                onClick={() => handleClickLink(index)}
+                onClick={() => {
+                  handleClickLink(index);
+                  clickHandler(link.name);
+                }}
               >
                 {link.name}
               </Link>

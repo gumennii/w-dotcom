@@ -19,9 +19,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { trackEvent } from "@/customerio";
+import { trackEvent, associateEvent } from "@/customerio";
 import { useUtmContext } from "@/providers/utmContext";
 import { useSearchParams } from "next/navigation";
+import useAmplitudeContext from "@/hooks/amplitude";
 
 interface IParticipantItem {
   firstName: string;
@@ -32,7 +33,7 @@ interface IParticipantItem {
 }
 
 interface IRegister {
-  name: string;
+  first_name: string;
   email: string;
   items: IParticipantItem[];
   utmParams?: any;
@@ -87,7 +88,7 @@ const ParticipantSchema = z.object({
 });
 
 const RegisterSchema = z.object({
-  fullName: z
+  first_name: z
     .string({
       required_error: "Enter a valid full name",
       invalid_type_error: "Enter a valid full name",
@@ -120,6 +121,22 @@ export const Register = () => {
   const searchParams = useSearchParams();
   const { utmParams, setUtmParams } = useUtmContext();
 
+  const { trackAmplitudeEvent } = useAmplitudeContext();
+
+  const trakingRegistration = (action: string) => {
+    trackAmplitudeEvent(action, {
+      button: "[Form] - Register Form",
+      location: "Clinic Page",
+    });
+  };
+
+  const clickHandler = () => {
+    trackAmplitudeEvent("click", {
+      button: "Add Participant",
+      location: "[Form] - Register Form",
+    });
+  };
+
   useEffect(() => {
     if (searchParams && Object.keys(Object.fromEntries(new URLSearchParams(searchParams))).length !== 0) {
       setUtmParams(Object.fromEntries(new URLSearchParams(searchParams)));
@@ -132,7 +149,7 @@ export const Register = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>();
 
   const defaultRegister: IRegister = {
-    name: "",
+    first_name: "",
     email: "",
     items: participant,
   };
@@ -142,23 +159,33 @@ export const Register = () => {
     defaultValues: defaultRegister,
   });
 
-  const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
     setIsLoading(true);
     setErrorMsg(null);
 
     try {
-      const response = trackEvent("Clinic Registered", {
+      const response = await trackEvent("Registered Clinic", {
         ...data,
         utm: utmParams,
+        clinicName: "Clinic Registered",
         lead_score: 1,
       });
 
       if (!response) {
         setErrorMsg("Failed to submit the data. Please try again.");
         throw new Error("Failed to submit the data. Please try again.");
+      } else {
+        const anonymous = await associateEvent({
+          ...data,
+          anonymous_id: data.email,
+          created_at: Math.floor(Date.now() / 1000).toString(),
+        });
+        trakingRegistration("[Form] Submitted");
+        console.log("Associate Event:", anonymous);
       }
     } catch (error) {
       setErrorMsg((error as Error).message);
+      trakingRegistration("[Form] Failed");
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -194,7 +221,7 @@ export const Register = () => {
                   </h4>
                   <FormField
                     control={form.control}
-                    name="fullName"
+                    name="first_name"
                     render={({ field, fieldState }) => (
                       <FormItem>
                         <FormControl>
@@ -351,6 +378,7 @@ export const Register = () => {
                       onClick={e => {
                         e?.preventDefault();
                         setParticipant([...participant, defaultParticipant]);
+                        clickHandler();
                       }}
                       className="w-full lg:max-w-[48%]"
                       disable={isLoading}

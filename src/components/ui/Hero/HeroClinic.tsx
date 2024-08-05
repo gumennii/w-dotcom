@@ -5,19 +5,23 @@ import cn from "@/utils/cn";
 import { Container } from "../Container";
 import { Logo, RichText } from "@/components/ui";
 import { Document } from "@contentful/rich-text-types";
+import { Asset } from "contentful";
 
 export type HeroClinicProps = {
   heroTitle: string;
   heroDescr: Document;
   className?: string;
+  backgroundImage: Asset;
 };
 
-export const HeroClinic = ({ heroTitle, heroDescr, className }: HeroClinicProps) => {
+export const HeroClinic = ({ heroTitle, heroDescr, className, backgroundImage }: HeroClinicProps) => {
+  const heroImage = backgroundImage?.fields?.file?.url || "";
+
   return (
     <div
-      className={cn("relative w-full bg-cover py-20 text-white lg:px-6 2xl:px-0", className)}
+      className={cn("relative w-full bg-[#081D3C] bg-cover py-20 text-white lg:px-6 2xl:px-0", className)}
       style={{
-        backgroundImage: `url("/team.png")`,
+        backgroundImage: `url("${heroImage}")`,
       }}
     >
       <div className="absolute inset-0 bg-[#000C36] opacity-85"></div>
