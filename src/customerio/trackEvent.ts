@@ -1,9 +1,3 @@
-interface TrackEventPayload {
-  email: string;
-  name: string;
-  program: string;
-}
-
 export const trackEvent = async (eventName: string, eventData: any) => {
   const SITE_ID = process.env.NEXT_PUBLIC_CUSTOMER_IO_SITE_ID;
   const API_KEY = process.env.NEXT_PUBLIC_CUSTOMER_IO_API_KEY;
@@ -15,29 +9,22 @@ export const trackEvent = async (eventName: string, eventData: any) => {
     console.log("Customer.io load");
   }
 
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Basic ${btoa(`${SITE_ID}:${API_KEY}`)}`,
-  };
-
-  try {
-    const response = await fetch(`https://track.customer.io/api/v1/customers/${eventData.email}/events`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        name: eventName,
-        data: eventData,
-      }),
+  const response = await fetch("/api/trackEvent", {
+    method: "POST",
+    body: JSON.stringify({
+      name: eventName,
+      data: eventData,
+    }),
+  })
+    .then(response => response.json())
+    .then(res => ({ success: true }))
+    .catch(error => {
+      console.error("Error tracking event:", error);
+      return {
+        success: false,
+        error: error,
+      };
     });
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-
-    const responseData = await response.json();
-    console.log("Event tracked:", responseData);
-    return responseData;
-  } catch (error) {
-    console.error("Error tracking event:", error);
-  }
+  return response;
 };

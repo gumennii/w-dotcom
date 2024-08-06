@@ -73,7 +73,7 @@ export const Subscribe = ({
         utm: utmParams,
       });
 
-      if (!response) {
+      if (!response?.success) {
         setErrorMsg("Failed to submit the data. Please try again.");
         throw new Error("Failed to submit the data. Please try again.");
       } else {

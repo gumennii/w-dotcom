@@ -9,25 +9,35 @@ export const associateEvent = async (eventData: any) => {
     console.log("AssociateEvent load");
   }
 
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Basic ${btoa(`${SITE_ID}:${API_KEY}`)}`,
-  };
-
-  try {
-    const response = await fetch(`https://track.customer.io/api/v1/customers/${eventData.email}`, {
-      method: "PUT",
-      headers,
-      body: JSON.stringify({ ...eventData }),
+  const response = await fetch("/api/associateEvent", {
+    method: "PUT",
+    body: JSON.stringify({ ...eventData }),
+  })
+    .then(response => response.json())
+    .then(res => ({ success: true }))
+    .catch(error => {
+      console.error("Error associate event:", error);
+      return {
+        success: false,
+        error: error,
+      };
     });
 
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
+  return response;
 
-    const responseData = await response.json();
-    return responseData;
-  } catch (error) {
-    console.error("Error tracking event:", error);
-  }
+  // try {
+  //   const response = await fetch(`https://track.customer.io/api/v1/customers/${eventData.email}`, {
+  //     method: "PUT",
+  //     body: JSON.stringify({ ...eventData }),
+  //   });
+
+  //   if (!response.ok) {
+  //     throw new Error("Network response was not ok");
+  //   }
+
+  //   const responseData = await response.json();
+  //   return responseData;
+  // } catch (error) {
+  //   console.error("Error tracking event:", error);
+  // }
 };

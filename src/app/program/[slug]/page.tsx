@@ -3,7 +3,7 @@ import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
 import { Document } from "@contentful/rich-text-types";
-import { TypeMarketingPageProgram, TypePeople, TypeProgramData, TypeWebsiteModuleContacts } from "@/types/contentful";
+import { TypeMarketingPageProgram, TypePeople, TypeProgramData } from "@/types/contentful";
 import { Asset } from "contentful";
 import { Container, Hero, InteractiveModal, RichText } from "@/components/ui";
 import {
@@ -47,7 +47,6 @@ export default async function ProgramPage({ params }: { params: { slug: string }
   const siteDirectorData = programData.fields.siteDirector as TypePeople<undefined, string>[];
   const divisionsList = programData.fields.divisions as TDivision[];
   const scheduleList = programData.fields.schedule as Schedule[];
-  const contacts = content.fields.contacts as TypeWebsiteModuleContacts<undefined, string>;
 
   const gameTimesTableData = divisionsList?.map(item => {
     return {
@@ -156,7 +155,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           />
         </Container>
       </div>
-      <Footer contacts={contacts} />
+      <Footer />
     </>
   );
 }

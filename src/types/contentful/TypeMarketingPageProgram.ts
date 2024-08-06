@@ -1,6 +1,5 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
 import type { TypeProgramDataSkeleton } from "./TypeProgramData";
-import type { TypeWebsiteModuleContactsSkeleton } from "./TypeWebsiteModuleContacts";
 
 export interface TypeMarketingPageProgramFields {
   programName: EntryFieldTypes.Symbol;
@@ -14,7 +13,6 @@ export interface TypeMarketingPageProgramFields {
   programOverview?: EntryFieldTypes.RichText;
   leagueOperations?: EntryFieldTypes.RichText;
   programData: EntryFieldTypes.EntryLink<TypeProgramDataSkeleton>;
-  contacts: EntryFieldTypes.EntryLink<TypeWebsiteModuleContactsSkeleton>;
 }
 
 export type TypeMarketingPageProgramSkeleton = EntrySkeletonType<

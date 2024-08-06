@@ -1,5 +1,4 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
-import type { TypeWebsiteModuleContactsSkeleton } from "./TypeWebsiteModuleContacts";
 import type { TypeWebsiteModuleFaQsSkeleton } from "./TypeWebsiteModuleFaQs";
 
 export interface TypeClinicPageFields {
@@ -10,7 +9,6 @@ export interface TypeClinicPageFields {
   heroImage: EntryFieldTypes.AssetLink;
   info?: EntryFieldTypes.RichText;
   faQs?: EntryFieldTypes.EntryLink<TypeWebsiteModuleFaQsSkeleton>;
-  contacts: EntryFieldTypes.EntryLink<TypeWebsiteModuleContactsSkeleton>;
 }
 
 export type TypeClinicPageSkeleton = EntrySkeletonType<TypeClinicPageFields, "clinicPage">;
