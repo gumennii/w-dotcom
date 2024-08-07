@@ -2,7 +2,6 @@
 
 import { useState, FormEvent, useEffect } from "react";
 import Link from "next/link";
-import { trackEvent, associateEvent } from "@/customerio";
 import cn from "@/utils/cn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
@@ -64,35 +63,56 @@ export const Subscribe = ({
     setIsLoading(true);
     setErrorMsg(null);
 
-    try {
-      const formData = Object.fromEntries(new FormData(event.currentTarget).entries());
-      const response = await trackEvent("Signed Up Newsletter", {
-        ...formData,
-        programKey: trackingFields,
-        lead_score: 1,
-        utm: utmParams,
-      });
+    const formData = Object.fromEntries(new FormData(event.currentTarget).entries());
 
-      if (!response?.success) {
-        setErrorMsg("Failed to submit the data. Please try again.");
-        throw new Error("Failed to submit the data. Please try again.");
-      } else {
-        const anonymous = await associateEvent({
+    fetch("/api/customer-io", {
+      method: "POST",
+      body: JSON.stringify({
+        metod: "POST",
+        eventName: "Signed Up Newsletter",
+        data: {
           ...formData,
-          anonymous_id: formData.email,
-          created_at: Math.floor(Date.now() / 1000).toString(),
-        });
-        console.log("Associate Event:", anonymous);
+          programKey: trackingFields,
+          lead_score: 1,
+          utm: utmParams,
+        },
+      }),
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log("Event tracked:", res);
         if (trackingName) trakingSubscribe("[Form] Submitted", trackingName);
-      }
-    } catch (error) {
-      setErrorMsg((error as Error).message);
-      if (trackingName) trakingSubscribe("[Form] Failed", trackingName);
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-      setIsUserSubscribed(true);
-    }
+        fetch("/api/customer-io", {
+          method: "POST",
+          body: JSON.stringify({
+            metod: "PUT",
+            data: {
+              ...formData,
+              anonymous_id: formData.email,
+              created_at: Math.floor(Date.now() / 1000).toString(),
+            },
+          }),
+        })
+          .then(response => response.json())
+          .then(data => console.log("User data was updated:", data))
+          .catch(error => console.log("Failed to update user data:", error));
+      })
+      .catch(error => {
+        setErrorMsg("Failed to submit the data. Please try again.");
+        if (trackingName) trakingSubscribe("[Form] Failed", trackingName);
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsUserSubscribed(true);
+        fetch(
+          "/api/subscriber?" +
+            new URLSearchParams({ userName: formData.first_name as string, userEmail: formData.email as string })
+        )
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => console.log(error));
+      });
   }
 
   return (

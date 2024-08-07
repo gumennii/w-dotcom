@@ -60,14 +60,14 @@ export const Hero = ({
     >
       <div className={`absolute inset-0 ${heroBgGradient}`}></div>
       <Container maxWidth={MaxWidth.Footer} className="relative z-10">
-        <div className="mb-6 flex flex-col justify-start text-center md:text-left">
+        <div className="mb-6 flex flex-col justify-start text-center lg:text-left">
           <Link href="/" className="mb-6">
-            <Logo color="light" className="mx-auto md:mx-0" />
+            <Logo color="light" className="mx-auto lg:mx-0" />
           </Link>
-          <h1 className="font-superline text-7xl font-bold uppercase italic leading-snug lg:text-[10.75rem]">
+          <h1 className="font-superline text-7xl font-bold uppercase italic leading-snug tracking-[0.07rem] lg:text-[10.75rem] lg:tracking-normal">
             <span
               className={cn(
-                "block font-roboto text-xl font-bold uppercase not-italic leading-normal md:text-2xl lg:text-3xl",
+                "block font-roboto text-xl font-bold uppercase not-italic leading-normal tracking-normal md:text-2xl lg:text-3xl",
                 textColor
               )}
             >
@@ -80,17 +80,17 @@ export const Hero = ({
             className="clinic-hero mb-12 max-w-full font-inter text-sm leading-normal text-white md:text-base lg:mb-16 lg:max-w-[50%] lg:text-lg"
           />
           {programRegistrationStatus && programRegistrationStatus !== "Close" ? (
-            <div className="flex flex-col font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:text-2xl">
+            <div className="flex flex-col items-center justify-center font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:justify-start lg:text-2xl">
               <h3 className={textColor}>now open:&nbsp;</h3>
               <h3>{programRegistrationStatus}</h3>
             </div>
           ) : programRegistrationStatus === "Close" ? (
-            <div className="flex flex-col font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:text-2xl">
+            <div className="flex flex-col items-center justify-center font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:justify-start lg:text-2xl">
               <h3 className={textColor}>Registration is closed</h3>
             </div>
           ) : null}
         </div>
-        <div className="flex flex-row justify-center gap-3 md:justify-start">
+        <div className="flex flex-row justify-center gap-3 lg:justify-start">
           {programRegistrationStatus && programRegistrationStatus !== "Close" ? (
             <Link
               href="#registration"

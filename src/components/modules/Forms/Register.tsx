@@ -19,7 +19,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { trackEvent, associateEvent } from "@/customerio";
 import { useUtmContext } from "@/providers/utmContext";
 import { useSearchParams } from "next/navigation";
 import useAmplitudeContext from "@/hooks/amplitude";
@@ -117,7 +116,12 @@ const defaultParticipant: IParticipantItem = {
   shirtSize: "",
 };
 
-export const Register = () => {
+type RegisterProps = {
+  pageSlug: string;
+  pageName: string;
+};
+
+export const Register = ({ pageSlug, pageName }: RegisterProps) => {
   const searchParams = useSearchParams();
   const { utmParams, setUtmParams } = useUtmContext();
 
@@ -163,34 +167,52 @@ export const Register = () => {
     setIsLoading(true);
     setErrorMsg(null);
 
-    try {
-      const response = await trackEvent("Registered Clinic", {
-        ...data,
-        utm: utmParams,
-        clinicName: "Clinic Registered",
-        lead_score: 1,
-      });
-
-      if (!response?.success) {
-        setErrorMsg("Failed to submit the data. Please try again.");
-        throw new Error("Failed to submit the data. Please try again.");
-      } else {
-        const anonymous = await associateEvent({
+    fetch("/api/customer-io", {
+      method: "POST",
+      body: JSON.stringify({
+        metod: "POST",
+        eventName: "Registered Clinic",
+        data: {
           ...data,
-          anonymous_id: data.email,
-          created_at: Math.floor(Date.now() / 1000).toString(),
-        });
+          utm: utmParams,
+          pageSlug: pageSlug,
+          clinicName: pageName,
+          lead_score: 1,
+        },
+      }),
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log("Event tracked:", res);
         trakingRegistration("[Form] Submitted");
-        console.log("Associate Event:", anonymous);
-      }
-    } catch (error) {
-      setErrorMsg((error as Error).message);
-      trakingRegistration("[Form] Failed");
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-      setIsRegister(true);
-    }
+        fetch("/api/customer-io", {
+          method: "POST",
+          body: JSON.stringify({
+            metod: "PUT",
+            data: {
+              ...data,
+              anonymous_id: data.email,
+              created_at: Math.floor(Date.now() / 1000).toString(),
+            },
+          }),
+        })
+          .then(response => response.json())
+          .then(data => console.log("User data was updated:", data))
+          .catch(error => console.log("Failed to update user data:", error));
+      })
+      .catch(error => {
+        setErrorMsg("Failed to submit the data. Please try again.");
+        trakingRegistration("[Form] Failed");
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsRegister(true);
+        fetch("/api/lead?" + new URLSearchParams({ userName: data.first_name, userEmail: data.email }))
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => console.log(error));
+      });
   };
 
   return (

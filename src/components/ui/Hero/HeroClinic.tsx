@@ -26,12 +26,12 @@ export const HeroClinic = ({ heroTitle, heroDescr, className, backgroundImage }:
     >
       <div className="absolute inset-0 bg-[#000C36] opacity-85"></div>
       <Container maxWidth={MaxWidth.Footer} className="relative z-10">
-        <div className="mb-6 flex flex-col justify-start text-center md:text-left">
+        <div className="mb-6 flex flex-col justify-start text-center lg:text-left">
           <Link href="/" className="mb-6">
-            <Logo color="light" className="mx-auto md:mx-0" />
+            <Logo color="light" className="mx-auto lg:mx-0" />
           </Link>
-          <h1 className="font-superline text-7xl font-bold uppercase italic leading-snug lg:text-[10.75rem]">
-            <span className="block font-roboto text-xl font-bold uppercase not-italic leading-normal text-[#EC612A] md:text-2xl lg:text-3xl">
+          <h1 className="font-superline text-7xl font-bold uppercase italic leading-snug tracking-[0.07rem] lg:text-[10.75rem] lg:tracking-normal">
+            <span className="block font-roboto text-xl font-bold uppercase not-italic leading-normal tracking-normal text-[#EC612A] lg:text-3xl">
               {heroTitle.substring(0, heroTitle.indexOf("-"))}
             </span>
             {heroTitle.indexOf("-") === -1 ? heroTitle : heroTitle.substring(heroTitle.indexOf("-") + 2)}

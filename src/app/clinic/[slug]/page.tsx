@@ -32,7 +32,7 @@ export default async function ClinicPage({ params }: { params: { slug: string } 
         <RichText content={joinContent} className="join-descr" />
       </Container>
 
-      <Register />
+      <Register pageSlug={content.fields.slug} pageName={content.fields.title as string} />
 
       <BannerWithImg />
 
