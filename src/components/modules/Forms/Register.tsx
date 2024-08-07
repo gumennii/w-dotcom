@@ -350,8 +350,15 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                                   <SelectOption value="" disabled>
                                     Select participant&apos;s grade level
                                   </SelectOption>
-                                  <SelectOption value="Low">Low</SelectOption>
-                                  <SelectOption value="High">High</SelectOption>
+                                  <SelectOption value="Kindergarten">Kindergarten</SelectOption>
+                                  <SelectOption value="1st Grade">1st Grade</SelectOption>
+                                  <SelectOption value="2nd Grade">2nd Grade</SelectOption>
+                                  <SelectOption value="3rd Grade">3rd Grade</SelectOption>
+                                  <SelectOption value="4th Grade">4th Grade</SelectOption>
+                                  <SelectOption value="5th Grade">5th Grade</SelectOption>
+                                  <SelectOption value="6th Grade">6th Grade</SelectOption>
+                                  <SelectOption value="7th Grade">7th Grade</SelectOption>
+                                  <SelectOption value="8th Grade">8th Grade</SelectOption>
                                 </Select>
                               </FormControl>
                             </FormItem>
