@@ -32,6 +32,7 @@ export interface TypeProgramDataFields {
   teamHierarchy?: EntryFieldTypes.Symbol;
   programLaunchDate?: EntryFieldTypes.Date;
   registrationType?: EntryFieldTypes.Symbol;
+  teams?: EntryFieldTypes.Array<EntryFieldTypes.Symbol>;
 }
 
 export type TypeProgramDataSkeleton = EntrySkeletonType<TypeProgramDataFields, "programData">;

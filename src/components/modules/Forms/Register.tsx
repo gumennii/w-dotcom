@@ -19,9 +19,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
-import { trackEvent } from "@/customerio";
 import { useUtmContext } from "@/providers/utmContext";
 import { useSearchParams } from "next/navigation";
+import useAmplitudeContext from "@/hooks/amplitude";
 
 interface IParticipantItem {
   firstName: string;
@@ -32,7 +32,7 @@ interface IParticipantItem {
 }
 
 interface IRegister {
-  name: string;
+  first_name: string;
   email: string;
   items: IParticipantItem[];
   utmParams?: any;
@@ -87,7 +87,7 @@ const ParticipantSchema = z.object({
 });
 
 const RegisterSchema = z.object({
-  fullName: z
+  first_name: z
     .string({
       required_error: "Enter a valid full name",
       invalid_type_error: "Enter a valid full name",
@@ -116,9 +116,30 @@ const defaultParticipant: IParticipantItem = {
   shirtSize: "",
 };
 
-export const Register = () => {
+type RegisterProps = {
+  pageSlug: string;
+  pageName: string;
+};
+
+export const Register = ({ pageSlug, pageName }: RegisterProps) => {
   const searchParams = useSearchParams();
   const { utmParams, setUtmParams } = useUtmContext();
+
+  const { trackAmplitudeEvent } = useAmplitudeContext();
+
+  const trakingRegistration = (action: string) => {
+    trackAmplitudeEvent(action, {
+      button: "[Form] - Register Form",
+      location: "Clinic Page",
+    });
+  };
+
+  const clickHandler = () => {
+    trackAmplitudeEvent("click", {
+      button: "Add Participant",
+      location: "[Form] - Register Form",
+    });
+  };
 
   useEffect(() => {
     if (searchParams && Object.keys(Object.fromEntries(new URLSearchParams(searchParams))).length !== 0) {
@@ -132,7 +153,7 @@ export const Register = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>();
 
   const defaultRegister: IRegister = {
-    name: "",
+    first_name: "",
     email: "",
     items: participant,
   };
@@ -142,28 +163,56 @@ export const Register = () => {
     defaultValues: defaultRegister,
   });
 
-  const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
     setIsLoading(true);
     setErrorMsg(null);
 
-    try {
-      const response = trackEvent("Clinic Registered", {
-        ...data,
-        utm: utmParams,
-        lead_score: 1,
-      });
-
-      if (!response) {
+    fetch("/api/customer-io", {
+      method: "POST",
+      body: JSON.stringify({
+        metod: "POST",
+        eventName: "Registered Clinic",
+        data: {
+          ...data,
+          utm: utmParams,
+          pageSlug: pageSlug,
+          clinicName: pageName,
+          lead_score: 1,
+        },
+      }),
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log("Event tracked:", res);
+        trakingRegistration("[Form] Submitted");
+        fetch("/api/customer-io", {
+          method: "POST",
+          body: JSON.stringify({
+            metod: "PUT",
+            data: {
+              ...data,
+              anonymous_id: data.email,
+              created_at: Math.floor(Date.now() / 1000).toString(),
+            },
+          }),
+        })
+          .then(response => response.json())
+          .then(data => console.log("User data was updated:", data))
+          .catch(error => console.log("Failed to update user data:", error));
+      })
+      .catch(error => {
         setErrorMsg("Failed to submit the data. Please try again.");
-        throw new Error("Failed to submit the data. Please try again.");
-      }
-    } catch (error) {
-      setErrorMsg((error as Error).message);
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-      setIsRegister(true);
-    }
+        trakingRegistration("[Form] Failed");
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsRegister(true);
+        fetch("/api/lead?" + new URLSearchParams({ userName: data.first_name, userEmail: data.email }))
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => console.log(error));
+      });
   };
 
   return (
@@ -194,7 +243,7 @@ export const Register = () => {
                   </h4>
                   <FormField
                     control={form.control}
-                    name="fullName"
+                    name="first_name"
                     render={({ field, fieldState }) => (
                       <FormItem>
                         <FormControl>
@@ -301,8 +350,15 @@ export const Register = () => {
                                   <SelectOption value="" disabled>
                                     Select participant&apos;s grade level
                                   </SelectOption>
-                                  <SelectOption value="Low">Low</SelectOption>
-                                  <SelectOption value="High">High</SelectOption>
+                                  <SelectOption value="Kindergarten">Kindergarten</SelectOption>
+                                  <SelectOption value="1st Grade">1st Grade</SelectOption>
+                                  <SelectOption value="2nd Grade">2nd Grade</SelectOption>
+                                  <SelectOption value="3rd Grade">3rd Grade</SelectOption>
+                                  <SelectOption value="4th Grade">4th Grade</SelectOption>
+                                  <SelectOption value="5th Grade">5th Grade</SelectOption>
+                                  <SelectOption value="6th Grade">6th Grade</SelectOption>
+                                  <SelectOption value="7th Grade">7th Grade</SelectOption>
+                                  <SelectOption value="8th Grade">8th Grade</SelectOption>
                                 </Select>
                               </FormControl>
                             </FormItem>
@@ -351,6 +407,7 @@ export const Register = () => {
                       onClick={e => {
                         e?.preventDefault();
                         setParticipant([...participant, defaultParticipant]);
+                        clickHandler();
                       }}
                       className="w-full lg:max-w-[48%]"
                       disable={isLoading}

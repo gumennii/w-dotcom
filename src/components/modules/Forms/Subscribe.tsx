@@ -2,7 +2,6 @@
 
 import { useState, FormEvent, useEffect } from "react";
 import Link from "next/link";
-import { trackEvent } from "@/customerio";
 import cn from "@/utils/cn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +10,7 @@ import { useAppContext } from "@/providers/appContext";
 import { Button } from "@/components/ui";
 import { useUtmContext } from "@/providers/utmContext";
 import { useSearchParams } from "next/navigation";
+import useAmplitudeContext from "@/hooks/amplitude";
 
 export type SubscribeProps = {
   title: string;
@@ -18,11 +18,35 @@ export type SubscribeProps = {
   className?: string;
   trackingFields?: string;
   variant?: "tight" | "wide" | "modal";
+  trackingName?: string;
 };
 
-export const Subscribe = ({ title, descriprion, className, variant = "tight", trackingFields }: SubscribeProps) => {
+export const Subscribe = ({
+  title,
+  descriprion,
+  className,
+  variant = "tight",
+  trackingFields,
+  trackingName,
+}: SubscribeProps) => {
   const searchParams = useSearchParams();
   const { utmParams, setUtmParams } = useUtmContext();
+
+  const { trackAmplitudeEvent } = useAmplitudeContext();
+
+  const clickPolicy = () => {
+    trackAmplitudeEvent("click", {
+      button: "Privacy Policy",
+      location: "[Form] - Subscribe Form",
+    });
+  };
+
+  const trakingSubscribe = (action: string, location: string) => {
+    trackAmplitudeEvent(action, {
+      button: "[Form] - Subscribe Form",
+      location: location,
+    });
+  };
 
   useEffect(() => {
     if (searchParams && Object.keys(Object.fromEntries(new URLSearchParams(searchParams))).length !== 0) {
@@ -39,25 +63,56 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
     setIsLoading(true);
     setErrorMsg(null);
 
-    try {
-      const formData = Object.fromEntries(new FormData(event.currentTarget).entries());
-      const response = await trackEvent("Newsletter Signup", {
-        ...formData,
-        programKey: trackingFields,
-        lead_score: 1,
-        utm: utmParams,
-      });
+    const formData = Object.fromEntries(new FormData(event.currentTarget).entries());
 
-      if (!response) {
-        throw new Error("Failed to submit the data. Please try again.");
-      }
-    } catch (error) {
-      setErrorMsg((error as Error).message);
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-      setIsUserSubscribed(true);
-    }
+    fetch("/api/customer-io", {
+      method: "POST",
+      body: JSON.stringify({
+        metod: "POST",
+        eventName: "Signed Up Newsletter",
+        data: {
+          ...formData,
+          programKey: trackingFields,
+          lead_score: 1,
+          utm: utmParams,
+        },
+      }),
+    })
+      .then(response => response.json())
+      .then(res => {
+        console.log("Event tracked:", res);
+        if (trackingName) trakingSubscribe("[Form] Submitted", trackingName);
+        fetch("/api/customer-io", {
+          method: "POST",
+          body: JSON.stringify({
+            metod: "PUT",
+            data: {
+              ...formData,
+              anonymous_id: formData.email,
+              created_at: Math.floor(Date.now() / 1000).toString(),
+            },
+          }),
+        })
+          .then(response => response.json())
+          .then(data => console.log("User data was updated:", data))
+          .catch(error => console.log("Failed to update user data:", error));
+      })
+      .catch(error => {
+        setErrorMsg("Failed to submit the data. Please try again.");
+        if (trackingName) trakingSubscribe("[Form] Failed", trackingName);
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsUserSubscribed(true);
+        fetch(
+          "/api/subscriber?" +
+            new URLSearchParams({ userName: formData.first_name as string, userEmail: formData.email as string })
+        )
+          .then(res => res.json())
+          .then(data => console.log(data))
+          .catch(error => console.log(error));
+      });
   }
 
   return (
@@ -113,7 +168,7 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
               >
                 <input
                   type="text"
-                  name="name"
+                  name="first_name"
                   placeholder="Your Name"
                   className={cn("mb-4 w-full rounded p-4 text-primary shadow md:mb-0", {
                     "md:mb-4 lg:p-6 lg:text-sm lg:leading-[1.375rem]": variant === "modal",
@@ -163,6 +218,7 @@ export const Subscribe = ({ title, descriprion, className, variant = "tight", tr
                       "lg:font-semibold": variant === "modal",
                     }
                   )}
+                  onClick={clickPolicy}
                 >
                   Privacy Policy.
                 </Link>

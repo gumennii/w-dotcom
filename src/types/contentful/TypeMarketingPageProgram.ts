@@ -4,6 +4,9 @@ import type { TypeProgramDataSkeleton } from "./TypeProgramData";
 export interface TypeMarketingPageProgramFields {
   programName: EntryFieldTypes.Symbol;
   slug: EntryFieldTypes.Symbol;
+  heroDescription: EntryFieldTypes.RichText;
+  heroImage: EntryFieldTypes.AssetLink;
+  programRegistrationStatus?: EntryFieldTypes.Symbol;
   seasonDescription?: EntryFieldTypes.RichText;
   coverImage?: EntryFieldTypes.AssetLink;
   coverVideo?: EntryFieldTypes.Symbol;

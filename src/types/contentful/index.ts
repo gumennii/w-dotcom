@@ -9,6 +9,12 @@ export type {
   TypeMarketingPageProgramFields,
   TypeMarketingPageProgramSkeleton,
 } from "./TypeMarketingPageProgram";
+export type { TypeModelFaq, TypeModelFaqFields, TypeModelFaqSkeleton } from "./TypeModelFaq";
+export type {
+  TypeModelSocialItem,
+  TypeModelSocialItemFields,
+  TypeModelSocialItemSkeleton,
+} from "./TypeModelSocialItem";
 export type { TypeModuleCTA, TypeModuleCTAFields, TypeModuleCTASkeleton } from "./TypeModuleCTA";
 export type { TypePeople, TypePeopleFields, TypePeopleSkeleton } from "./TypePeople";
 export type { TypePolicy, TypePolicyFields, TypePolicySkeleton } from "./TypePolicy";
@@ -25,3 +31,13 @@ export type {
   TypeWebsiteHomePageFields,
   TypeWebsiteHomePageSkeleton,
 } from "./TypeWebsiteHomePage";
+export type {
+  TypeWebsiteModuleContacts,
+  TypeWebsiteModuleContactsFields,
+  TypeWebsiteModuleContactsSkeleton,
+} from "./TypeWebsiteModuleContacts";
+export type {
+  TypeWebsiteModuleFaQs,
+  TypeWebsiteModuleFaQsFields,
+  TypeWebsiteModuleFaQsSkeleton,
+} from "./TypeWebsiteModuleFaQs";

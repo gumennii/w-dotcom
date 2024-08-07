@@ -2,3 +2,4 @@ import ProgramNavigation, { type ProgramNavigationProps } from "./ProgramNavigat
 
 export { type ProgramNavigationProps };
 export default ProgramNavigation;
+export { ProgramNavigationTrack } from "./ProgramNavigationTrack";

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import ContentfulImage from "@/lib/contentful-image";
-import classNames from "classnames";
 import Link from "next/link";
 import cn from "@/utils/cn";
 

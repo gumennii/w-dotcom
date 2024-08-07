@@ -1,11 +1,14 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
+import type { TypeWebsiteModuleFaQsSkeleton } from "./TypeWebsiteModuleFaQs";
 
 export interface TypeClinicPageFields {
   slug: EntryFieldTypes.Symbol;
   referentName?: EntryFieldTypes.EntryLink<EntrySkeletonType>;
   title?: EntryFieldTypes.Symbol;
   description?: EntryFieldTypes.RichText;
+  heroImage: EntryFieldTypes.AssetLink;
   info?: EntryFieldTypes.RichText;
+  faQs?: EntryFieldTypes.EntryLink<TypeWebsiteModuleFaQsSkeleton>;
 }
 
 export type TypeClinicPageSkeleton = EntrySkeletonType<TypeClinicPageFields, "clinicPage">;

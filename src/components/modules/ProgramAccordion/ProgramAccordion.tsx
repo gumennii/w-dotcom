@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Accordion, AccordionProgramItem, Table, RichText, Markdown } from "@/components/ui";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
+import useAmplitudeContext from "@/hooks/amplitude";
 
 type GameTimesData = {
   "grade level": string;
@@ -33,6 +34,15 @@ export const ProgramAccordion = ({
   gameTimesNotes,
   scheduleNotes,
 }: ProgramAccordionProps) => {
+  const { trackAmplitudeEvent } = useAmplitudeContext();
+
+  const clickHandler = (name: string) => {
+    trackAmplitudeEvent("click", {
+      button: name,
+      location: "[Accordion] - Program Page",
+    });
+  };
+
   const [activeId, setActiveId] = useState<string | null>("overview");
 
   const handleActiveId = (id: string) => {
@@ -45,7 +55,10 @@ export const ProgramAccordion = ({
         title="Program Overview"
         id="overview"
         isOpen={activeId === "overview"}
-        onClick={handleActiveId}
+        onClick={() => {
+          handleActiveId("overview");
+          clickHandler("[Open/Close] - Program Overview");
+        }}
       >
         <div className="season prose pt-4">{documentToReactComponents(overview)}</div>
       </AccordionProgramItem>
@@ -54,7 +67,10 @@ export const ProgramAccordion = ({
         title="Program Logistics"
         id="operations"
         isOpen={activeId === "operations"}
-        onClick={handleActiveId}
+        onClick={() => {
+          handleActiveId("operations");
+          clickHandler("[Open/Close] - Program Logistics");
+        }}
       >
         <div className="season prose">{documentToReactComponents(operations)}</div>
       </AccordionProgramItem>
@@ -63,7 +79,10 @@ export const ProgramAccordion = ({
         id="schedule"
         isOpen={activeId === "schedule"}
         className="border-b-0"
-        onClick={handleActiveId}
+        onClick={() => {
+          handleActiveId("schedule");
+          clickHandler("[Open/Close] - Program Date & Time");
+        }}
       >
         <div className="mb-6">
           <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Practice & Game Times</h3>

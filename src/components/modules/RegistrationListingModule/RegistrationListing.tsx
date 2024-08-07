@@ -4,10 +4,11 @@ import { Button, Divider } from "@/components/ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-
 import { Fragment } from "react";
-
 import { format as dateFormat } from "date-fns";
+import useAmplitudeContext from "@/hooks/amplitude";
+import Link from "next/link";
+import cn from "@/utils/cn";
 
 export type TDivision = {
   id: number;
@@ -31,17 +32,40 @@ export interface RegistrationListingProps {
   divisions: TDivision[];
   price: number;
   seasonDates: ISeasonDates;
+  registrationStatus?: string;
 }
 
-export const RegistrationListing = ({ divisions, price, seasonDates }: RegistrationListingProps) => {
+export const RegistrationListing = ({
+  divisions,
+  price,
+  seasonDates,
+  registrationStatus,
+}: RegistrationListingProps) => {
+  const { trackAmplitudeEvent } = useAmplitudeContext();
+
+  const clickHandler = () => {
+    trackAmplitudeEvent("click", {
+      button: "register now",
+      location: "program registration",
+    });
+  };
+
   return (
     <>
-      <h4 className="mb-1 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
-        General Registration is open on April 15th at 9:00 AM
-      </h4>
-      <p className="texr-xs mb-6 font-inter leading-normal lg:text-sm">
-        Limited slots available. Register now to avoid incurring a late registration fee.
-      </p>
+      {registrationStatus && registrationStatus !== "Close" ? (
+        <>
+          <h4 className="mb-1 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
+            {registrationStatus} is open on April 15th at 9:00 AM
+          </h4>
+          <p className="texr-xs mb-6 font-inter leading-normal lg:text-sm">
+            Limited slots available. Register now to avoid incurring a late registration fee.
+          </p>
+        </>
+      ) : registrationStatus === "Close" ? (
+        <h4 className="mb-6 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
+          Registration is closed.
+        </h4>
+      ) : null}
       <div className="flex flex-col gap-4">
         {divisions.map((division, i) => (
           <Fragment key={division.scDivisionId}>
@@ -69,13 +93,24 @@ export const RegistrationListing = ({ divisions, price, seasonDates }: Registrat
               <Divider className="block border sm:hidden" />
               <div className="flex flex-row items-center justify-between sm:flex-col sm:items-end">
                 <span className="font-inter text-xxxs leading-relaxed sm:text-xs">Only a few spots left!</span>
-                <Button
+                {/* <Button
                   rounded
                   style="secondary"
                   copy="Register Now"
                   href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
                   className="text-xs"
-                />
+                  disable={!registrationStatus}
+                  onClick={clickHandler}
+                /> */}
+                <Link
+                  href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
+                  onClick={() => clickHandler()}
+                  className={cn("btn btn-secondary rounded-full p-4 font-roboto text-xs text-white", {
+                    "btn-disabled": !registrationStatus,
+                  })}
+                >
+                  Register now
+                </Link>
               </div>
             </div>
           </Fragment>

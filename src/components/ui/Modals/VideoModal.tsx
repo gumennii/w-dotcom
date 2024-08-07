@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { getModalMaxWidth } from "@/utils/styling";
 import { Video } from "../Video";
 import PortalModal from "./PortalModal";
+import useAmplitudeContext from "@/hooks/amplitude";
 
 export type VideoModalProps = {
   maxWidth: Types.AvailableModalMaxWidth;
@@ -14,6 +15,7 @@ export type VideoModalProps = {
   className?: string;
   triggerClass?: string;
   url: string;
+  trackShowVideo?: boolean;
 };
 
 export const VideoModal: FC<VideoModalProps> = ({
@@ -24,9 +26,26 @@ export const VideoModal: FC<VideoModalProps> = ({
   className,
   triggerClass,
   url,
+  trackShowVideo = false,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const [playVideo, setPlayVideo] = useState(false);
+
+  const { trackAmplitudeEvent } = useAmplitudeContext();
+
+  const clickHideVideo = () => {
+    trackAmplitudeEvent("[Modal] Closed", {
+      button: "Close Button/ESC/Overlay",
+      location: "[Modal] - Modal Video",
+    });
+  };
+
+  const clickShowVideo = () => {
+    trackAmplitudeEvent("[Modal] Opened", {
+      button: "Show Video/Play",
+      location: "[Modal] - Modal Video",
+    });
+  };
 
   const onToggleModal = useCallback(() => {
     setShowModal(prev => !prev);
@@ -37,7 +56,9 @@ export const VideoModal: FC<VideoModalProps> = ({
     if (closeOnClickOutside) {
       setPlayVideo(false);
       setShowModal(false);
+      clickHideVideo();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [closeOnClickOutside]);
 
   useEffect(() => {
@@ -62,13 +83,25 @@ export const VideoModal: FC<VideoModalProps> = ({
 
   return (
     <div>
-      <div onClick={onToggleModal} className={classNames("cursor-pointer text-primary", triggerClass)}>
+      <div
+        onClick={() => {
+          onToggleModal();
+          if (trackShowVideo) clickShowVideo();
+        }}
+        className={classNames("cursor-pointer text-primary", triggerClass)}
+      >
         {children}
       </div>
       {showModal && (
         <PortalModal showModal={showModal} onClickOutside={onClickOutside}>
           <div className={classNames("modal-box bg-[#0006] p-0", getModalMaxWidth(maxWidth), className)}>
-            <div onClick={onToggleModal} className="btn btn-white btn-circle btn-sm absolute right-2 top-2 z-20">
+            <div
+              onClick={() => {
+                onToggleModal();
+                clickHideVideo();
+              }}
+              className="btn btn-white btn-circle btn-sm absolute right-2 top-2 z-20"
+            >
               ✕
             </div>
             <Video url={url} playVideo={playVideo} controls={false} />

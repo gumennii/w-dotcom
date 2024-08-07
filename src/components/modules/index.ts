@@ -1,7 +1,7 @@
-import ProgramNavigation, { type ProgramNavigationProps } from "./ProgramNavigation";
+import ProgramNavigation, { ProgramNavigationTrack, type ProgramNavigationProps } from "./ProgramNavigation";
 import MobileApp, { type MobileAppProps } from "./MobileApp";
 
-export { ProgramNavigation, type ProgramNavigationProps };
+export { ProgramNavigation, type ProgramNavigationProps, ProgramNavigationTrack };
 export { MobileApp, type MobileAppProps };
 
 export { Navigation, menu, FooterClinic } from "./Navigation";
