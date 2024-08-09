@@ -110,7 +110,13 @@ export const Subscribe = ({
             new URLSearchParams({ userName: formData.first_name as string, userEmail: formData.email as string })
         )
           .then(res => res.json())
-          .then(data => console.log(data))
+          .then(data => {
+            if (data.status === 200) {
+              console.log("Subscriber has been added:", data.status);
+            } else {
+              console.log("Error:", data);
+            }
+          })
           .catch(error => console.log(error));
       });
   }
@@ -173,6 +179,7 @@ export const Subscribe = ({
                   className={cn("mb-4 w-full rounded p-4 text-primary shadow md:mb-0", {
                     "md:mb-4 lg:p-6 lg:text-sm lg:leading-[1.375rem]": variant === "modal",
                   })}
+                  required
                 />
                 <input
                   type="email"
@@ -181,6 +188,7 @@ export const Subscribe = ({
                   className={cn("mb-2 w-full rounded p-4 text-primary shadow md:mb-0", {
                     "md:mb-2 lg:p-6 lg:text-sm lg:leading-[1.375rem]": variant === "modal",
                   })}
+                  required
                 />
                 <span className={cn("sm:invisible")}></span>
                 <div className="flex flex-col gap-2">

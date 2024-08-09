@@ -24,6 +24,7 @@ export type {
   TypeReferenceClinicPageFields,
   TypeReferenceClinicPageSkeleton,
 } from "./TypeReferenceClinicPage";
+export type { TypeSeoMetadata, TypeSeoMetadataFields, TypeSeoMetadataSkeleton } from "./TypeSeoMetadata";
 export type { TypeSummerCamp, TypeSummerCampFields, TypeSummerCampSkeleton } from "./TypeSummerCamp";
 export type { TypeWebpage, TypeWebpageFields, TypeWebpageSkeleton } from "./TypeWebpage";
 export type {

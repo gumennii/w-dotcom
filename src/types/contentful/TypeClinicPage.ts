@@ -1,9 +1,10 @@
 import type { ChainModifiers, Entry, EntryFieldTypes, EntrySkeletonType, LocaleCode } from "contentful";
+import type { TypeSeoMetadataSkeleton } from "./TypeSeoMetadata";
 import type { TypeWebsiteModuleFaQsSkeleton } from "./TypeWebsiteModuleFaQs";
 
 export interface TypeClinicPageFields {
   slug: EntryFieldTypes.Symbol;
-  referentName?: EntryFieldTypes.EntryLink<EntrySkeletonType>;
+  seoMetadata: EntryFieldTypes.EntryLink<TypeSeoMetadataSkeleton>;
   title?: EntryFieldTypes.Symbol;
   description?: EntryFieldTypes.RichText;
   heroImage: EntryFieldTypes.AssetLink;

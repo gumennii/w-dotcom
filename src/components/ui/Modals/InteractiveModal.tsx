@@ -16,6 +16,9 @@ export type InteractiveModalProps = {
   closeOnClickOutside?: boolean;
   position: number;
   className?: string;
+  trakingLocation?: string;
+  trakingTriger?: string;
+  cookieValue: string;
 };
 
 export const InteractiveModal: FC<InteractiveModalProps> = ({
@@ -24,18 +27,22 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
   closeOnClickOutside = false,
   position,
   className,
+  trakingTriger,
+  trakingLocation,
+  cookieValue,
 }) => {
   const [showForm, setShowForm] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [display, setDisplay] = useState(true);
+  const [isContent, setIsContent] = useState(false);
 
   const { trackAmplitudeEvent } = useAmplitudeContext();
 
   const modalHandler = (action: string) => {
     trackAmplitudeEvent(action, {
-      button: "[Modal] - Subscribe Form",
-      location: "[Modal] - Program Page Subscribe",
+      button: trakingTriger,
+      location: trakingLocation,
     });
   };
 
@@ -44,16 +51,23 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
   }, []);
 
   useEffect(() => {
-    setDisplay(!hasCookie("displayForm"));
-  }, []);
+    setDisplay(!hasCookie(cookieValue));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onToggleModal = useCallback(() => {
     setShowModal(prev => !prev);
   }, []);
 
   const onClickOutside = useCallback(() => {
-    if (closeOnClickOutside) setShowModal(false);
-  }, [closeOnClickOutside]);
+    if (!isContent && closeOnClickOutside) setShowModal(false);
+  }, [closeOnClickOutside, isContent]);
+
+  const onClickContent = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!isContent) e.stopPropagation();
+    },
+    [isContent]
+  );
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,10 +90,10 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
     if (scrollPercentage >= position && display) {
       setShowModal(true);
       setDisplay(false);
-      setCookie("displayForm", "true", {
+      setCookie(cookieValue, "true", {
         maxAge: 60 * 60 * 24,
       });
-      modalHandler("[Modal] Opened");
+      if (trakingLocation && trakingTriger) modalHandler("[Modal] Opened");
     }
   }, [display, position, scrollPercentage]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -96,14 +110,17 @@ export const InteractiveModal: FC<InteractiveModalProps> = ({
         })}
         onClick={() => {
           onClickOutside();
-          modalHandler("[Modal] Closed");
+          if (trakingLocation && trakingTriger) modalHandler("[Modal] Closed");
         }}
       >
-        <div className={classNames("modal-box p-0", getModalMaxWidth(maxWidth), className)}>
+        <div
+          onClick={e => onClickContent(e)}
+          className={classNames("modal-box p-0", getModalMaxWidth(maxWidth), className)}
+        >
           <div
             onClick={() => {
               onToggleModal();
-              modalHandler("[Modal] Closed");
+              if (trakingLocation && trakingTriger) modalHandler("[Modal] Closed");
             }}
             className={cn(
               "btn btn-ghost btn-circle btn-md absolute right-2 top-2 flex items-center justify-center text-white",
