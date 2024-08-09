@@ -14,6 +14,7 @@ export default {
         roboto: ["Roboto Condensed", "sans-serif"],
         superline: ["Superline", "sans-serif"],
         superout: ["Superline Outline", "sans-serif"],
+        line: ["Superline Line", "sans-serif"],
       },
       width: {
         "screen-xl": "1440px",
