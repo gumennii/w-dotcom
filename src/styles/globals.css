@@ -25,6 +25,16 @@
   src: url("/font/superline-outline-italic-regular.woff2");
   font-style: italic;
 }
+@font-face {
+  font-family: "Superline Line";
+  src: url("/font/superline-line.ttf");
+  font-style: normal;
+}
+@font-face {
+  font-family: "Superline Line";
+  src: url("/font/superline-line-italic.ttf");
+  font-style: italic;
+}
 /* .footer a {
   text-decoration: underline;
 }

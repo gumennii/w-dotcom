@@ -3,7 +3,7 @@ import { getPage } from "@/lib/getPage";
 import { getProgramNavigationLinks } from "@/utils/navigation";
 import { MaxWidth } from "@/utils/styling";
 import { Document } from "@contentful/rich-text-types";
-import { TypeMarketingPageProgram, TypePeople, TypeProgramData } from "@/types/contentful";
+import { TypeMarketingPageProgram, TypePeople, TypeProgramData, TypeSeoMetadata } from "@/types/contentful";
 import { Asset } from "contentful";
 import { Container, Hero, InteractiveModal, RichText } from "@/components/ui";
 import {
@@ -19,6 +19,33 @@ import {
 } from "@/components/modules";
 import { Footer } from "@/components/modules/Navigation/Footer";
 import { format as dateFormat } from "date-fns";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const content = (await getPage({
+    pageContentType: "marketingPageProgram",
+    slug: params.slug,
+    locale: "en-US",
+  })) as TypeMarketingPageProgram<undefined, string>;
+
+  if (!content || !content.fields) {
+    return notFound();
+  }
+
+  const metaData = content.fields.seoMetadata as TypeSeoMetadata<undefined, string>;
+  const openGraph = metaData.fields.featuredImage as Asset;
+
+  return {
+    title: metaData && metaData.fields.seoTitle ? metaData.fields.seoTitle : content.fields.programName,
+    description:
+      metaData && metaData.fields.seoDescription
+        ? metaData.fields.seoDescription
+        : `Next Level Sports - ${content.fields.programName}`,
+    alternates: metaData && metaData.fields.canonicalUrl ? { canonical: metaData.fields.canonicalUrl } : null,
+    robots: metaData && metaData.fields.hidePageSearchEngines ? "noindex,nofollow" : "index,follow",
+    openGraph: openGraph ? { images: openGraph.fields.file?.url } : null,
+  };
+}
 
 type Schedule = {
   id: string;
@@ -76,6 +103,9 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         maxWidth="2xLarge"
         className="max-w-[40.25rem] rounded-lg bg-[#051227] md:rounded-2xl"
         closeOnClickOutside
+        trakingLocation="[Modal] - Program Page Subscribe"
+        trakingTriger="[Modal] - Subscribe Form"
+        cookieValue="displayForm"
       >
         <Subscribe
           variant="modal"

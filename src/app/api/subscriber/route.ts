@@ -10,11 +10,13 @@ export async function GET(request: Request) {
 
   try {
     if (!name || !email) throw new Error("Name and Email required");
-    await sql`INSERT INTO subscribers (Name, Email, Date) VALUES (${name}, ${email}, ${dateCreation});`;
+    await sql`
+      INSERT INTO subscribers (Name, Email, Date)
+      VALUES (${name}, ${email}, ${dateCreation})
+      ON CONFLICT (Email) DO NOTHING;
+    `;
+    return NextResponse.json({ status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }
-
-  const subscribers = await sql`SELECT * FROM subscribers;`;
-  return NextResponse.json({ subscribers }, { status: 200 });
 }
