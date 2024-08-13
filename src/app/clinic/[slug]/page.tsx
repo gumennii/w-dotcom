@@ -55,9 +55,11 @@ export default async function ClinicPage({ params }: { params: { slug: string } 
     <>
       <HeroClinic heroTitle={heroTitle} heroDescr={heroDescr} backgroundImage={heroImage} />
 
-      <Container maxWidth={MaxWidth.XSmall}>
-        <RichText content={joinContent} className="join-descr" />
-      </Container>
+      {joinContent ? (
+        <Container maxWidth={MaxWidth.XSmall}>
+          <RichText content={joinContent} className="join-descr" />
+        </Container>
+      ) : null}
 
       <Register pageSlug={content.fields.slug} pageName={content.fields.title as string} />
 

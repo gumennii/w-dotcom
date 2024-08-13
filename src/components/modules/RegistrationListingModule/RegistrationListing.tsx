@@ -12,7 +12,7 @@ import cn from "@/utils/cn";
 
 export type TDivision = {
   id: number;
-  Location: string;
+  Location: string[];
   divisionName: string;
   scDivisionId: string;
   divisionGameTime: string;
@@ -67,8 +67,8 @@ export const RegistrationListing = ({
         </h4>
       ) : null}
       <div className="flex flex-col gap-4">
-        {divisions.map((division, i) => (
-          <Fragment key={division.scDivisionId}>
+        {divisions.map(division => (
+          <Fragment key={`division-${division.id}`}>
             <div className="flex flex-col justify-between gap-2 rounded-md border p-4 shadow-sm sm:flex-row">
               <div className="flex flex-col gap-2">
                 <h3 className="font-inter text-sm font-semibold leading-normal sm:text-lg">{division.divisionName}</h3>

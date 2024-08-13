@@ -26,7 +26,7 @@ Default.args = {
   divisions: [
     {
       id: 1,
-      Location: "Tracy HS",
+      Location: ["Tracy HS"],
       divisionName: "1st Grade Division/Kindergarten",
       scDivisionId: "41282348",
       divisionTeamSize: 48,
@@ -36,7 +36,7 @@ Default.args = {
     },
     {
       id: 2,
-      Location: "Tracy HS",
+      Location: ["Tracy HS"],
       divisionName: "2nd Grade Division",
       scDivisionId: "41282349",
       divisionTeamSize: 48,
@@ -46,7 +46,7 @@ Default.args = {
     },
     {
       id: 4,
-      Location: "Tracy HS",
+      Location: ["Tracy HS"],
       divisionName: "4th Grade Division",
       scDivisionId: "41282351",
       divisionTeamSize: 48,
@@ -56,7 +56,7 @@ Default.args = {
     },
     {
       id: 5,
-      Location: "Tracy HS",
+      Location: ["Tracy HS"],
       divisionName: "5th Grade Division",
       scDivisionId: "41282352",
       divisionTeamSize: 48,
@@ -66,7 +66,7 @@ Default.args = {
     },
     {
       id: 6,
-      Location: "Tracy HS",
+      Location: ["Tracy HS"],
       divisionName: "6th Grade Division",
       scDivisionId: "41282353",
       divisionTeamSize: 48,
@@ -76,7 +76,7 @@ Default.args = {
     },
     {
       id: 7,
-      Location: "Tracy HS",
+      Location: ["Tracy HS"],
       divisionName: "7th Grade Division",
       scDivisionId: "41282354",
       divisionTeamSize: 48,

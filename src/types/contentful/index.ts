@@ -19,11 +19,6 @@ export type { TypeModuleCTA, TypeModuleCTAFields, TypeModuleCTASkeleton } from "
 export type { TypePeople, TypePeopleFields, TypePeopleSkeleton } from "./TypePeople";
 export type { TypePolicy, TypePolicyFields, TypePolicySkeleton } from "./TypePolicy";
 export type { TypeProgramData, TypeProgramDataFields, TypeProgramDataSkeleton } from "./TypeProgramData";
-export type {
-  TypeReferenceClinicPage,
-  TypeReferenceClinicPageFields,
-  TypeReferenceClinicPageSkeleton,
-} from "./TypeReferenceClinicPage";
 export type { TypeSeoMetadata, TypeSeoMetadataFields, TypeSeoMetadataSkeleton } from "./TypeSeoMetadata";
 export type { TypeSummerCamp, TypeSummerCampFields, TypeSummerCampSkeleton } from "./TypeSummerCamp";
 export type { TypeWebpage, TypeWebpageFields, TypeWebpageSkeleton } from "./TypeWebpage";

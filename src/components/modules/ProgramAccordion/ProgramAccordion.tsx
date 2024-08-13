@@ -5,6 +5,7 @@ import { Accordion, AccordionProgramItem, Table, RichText, Markdown } from "@/co
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Document } from "@contentful/rich-text-types";
 import useAmplitudeContext from "@/hooks/amplitude";
+import cn from "@/utils/cn";
 
 type GameTimesData = {
   "grade level": string;
@@ -59,6 +60,7 @@ export const ProgramAccordion = ({
           handleActiveId("overview");
           clickHandler("[Open/Close] - Program Overview");
         }}
+        className={cn({ "pointer-events-none cursor-default opacity-35": !overview })}
       >
         <div className="season prose pt-4">{documentToReactComponents(overview)}</div>
       </AccordionProgramItem>
@@ -71,6 +73,7 @@ export const ProgramAccordion = ({
           handleActiveId("operations");
           clickHandler("[Open/Close] - Program Logistics");
         }}
+        className={cn({ "pointer-events-none cursor-default opacity-35": !operations })}
       >
         <div className="season prose">{documentToReactComponents(operations)}</div>
       </AccordionProgramItem>
@@ -78,27 +81,34 @@ export const ProgramAccordion = ({
         title="Program Date & Time"
         id="schedule"
         isOpen={activeId === "schedule"}
-        className="border-b-0"
+        className={cn("border-b-0", {
+          "pointer-events-none cursor-default opacity-35":
+            !gameTimesData && !gameTimesNotes && !scheduleData && !scheduleNotes,
+        })}
         onClick={() => {
           handleActiveId("schedule");
           clickHandler("[Open/Close] - Program Date & Time");
         }}
       >
-        <div className="mb-6">
-          <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Practice & Game Times</h3>
+        {gameTimesData || gameTimesNotes ? (
+          <div className="mb-6">
+            <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Practice & Game Times</h3>
 
-          <Table textAlign={"center"} data={gameTimesData} />
+            <Table textAlign={"center"} data={gameTimesData} />
 
-          <Markdown content={gameTimesNotes as string} className="note mt-4" />
-        </div>
+            <Markdown content={gameTimesNotes as string} className="note mt-4" />
+          </div>
+        ) : null}
 
-        <div>
-          <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Game Schedule</h3>
+        {scheduleData || scheduleNotes ? (
+          <div>
+            <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Game Schedule</h3>
 
-          <Table textAlign={"left"} data={scheduleData} />
+            <Table textAlign={"left"} data={scheduleData} />
 
-          <Markdown content={scheduleNotes as string} className="note mt-4" />
-        </div>
+            <Markdown content={scheduleNotes as string} className="note mt-4" />
+          </div>
+        ) : null}
       </AccordionProgramItem>
     </Accordion>
   );
