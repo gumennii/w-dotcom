@@ -292,5 +292,100 @@ In your Contentful space, go to **Settings > Webhooks** and add a new webhook:
 
   ![Content successful request](https://github.com/vercel/next.js/assets/9113740/ed1ffbe9-4dbf-4ec6-9c1f-39c8949c4d38)
 
+## Vercel Postgres
 
+### 1.Create a Postgres database
 
+First, create a database in Vercel if you don't have one or want to use a new one.
+
+### 2.Preparing your local project
+
+You will need to move the environment variables to your local environment to access your Postgres database.
+
+Your `.env.local` file should look like this:
+
+```bash
+POSTGRES_URL=...
+POSTGRES_PRISMA_URL=...
+POSTGRES_URL_NON_POOLING=...
+POSTGRES_USER=...
+POSTGRES_HOST=...
+POSTGRES_PASSWORD=...
+POSTGRES_DATABASE=...
+```
+
+In your terminal, run:
+
+```bash
+vercel env pull .env.development.local
+```
+
+### 3.Create a table in your database
+
+In the `app/api` directory, open `createNewTable/route.ts` and edit the file depending on the required table. 
+Add the table name and required columns:
+
+```bash
+const result = await sql`CREATE TABLE <<NEW TABLE NAME>> ( User varchar(255) );`;
+```
+
+Then, create your New table by visiting the API route:
+1. Run next dev to start your app locally
+2. Visit the route's path in your app: http://localhost:3000/api/create-new-table
+
+You should see something like this in your browser:
+
+```bash
+{
+  "result": {
+    "command": "CREATE",
+    "fields": [],
+    "rowAsArray": false,
+    "rowCount": null,
+    "rows": [],
+    "viaNeonFetch": true
+  }
+};
+```
+
+You can see the table in your Vercel dashboard as well. In your project's **Storage** tab, select your database, then select **Data** on the next page. Search for your table name and select it in the dropdown list. It should be empty.
+
+### 4.Add data to your table
+
+Add a new API route that will fetch data from the [query string](https://en.wikipedia.org/wiki/Query_string) and adds a new row to your PostgreSQL database.
+
+To send data to your database, you must visit your new route:
+
+1. Run `next dev` to start your app locally
+2. Add data to the query params when you visit your route. Here's an example URL that adds a user named `John` to your database:
+- http://localhost:3000/api/add-user?userName=John
+
+You should see something like this in your browser:
+
+```bash
+{
+  users: {
+    command: "SELECT",
+    fields: [
+      {
+        columnID: 1,
+        dataTypeID: 1043,
+        dataTypeModifier: 259,
+        dataTypeSize: -1,
+        format: "text",
+        name: "name",
+        tableID: 12345,
+      },
+    ],
+    rowCount: 1,
+    rows: [
+      {
+        name: "John",
+      },
+    ],
+    viaNeonFetch: true,
+  },
+};
+```
+
+And in your dashboard, under the `Data` tab when you view your database, you can search for the Users table to see the users you've added.

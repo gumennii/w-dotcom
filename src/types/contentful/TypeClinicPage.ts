@@ -5,7 +5,7 @@ import type { TypeWebsiteModuleFaQsSkeleton } from "./TypeWebsiteModuleFaQs";
 export interface TypeClinicPageFields {
   slug: EntryFieldTypes.Symbol;
   seoMetadata: EntryFieldTypes.EntryLink<TypeSeoMetadataSkeleton>;
-  title?: EntryFieldTypes.Symbol;
+  title: EntryFieldTypes.Symbol;
   description?: EntryFieldTypes.RichText;
   heroImage: EntryFieldTypes.AssetLink;
   info?: EntryFieldTypes.RichText;

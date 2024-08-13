@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { MaxWidth } from "@/utils/styling";
 import {
   Container,
@@ -147,6 +147,11 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const contentRef = useRef<null | HTMLDivElement>(null);
+  const scrollToForm = () => {
+    contentRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const [participant, setParticipant] = useState<IParticipantItem[]>([defaultParticipant]);
   const [isRegister, setIsRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -193,6 +198,8 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
               ...data,
               anonymous_id: data.email,
               created_at: Math.floor(Date.now() / 1000).toString(),
+              page_slug: pageSlug,
+              clinic_name: pageName,
             },
           }),
         })
@@ -208,6 +215,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
       .finally(() => {
         setIsLoading(false);
         setIsRegister(true);
+        scrollToForm();
         fetch("/api/lead?" + new URLSearchParams({ userName: data.first_name, userEmail: data.email }))
           .then(res => res.json())
           .then(data => {
@@ -222,7 +230,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
   };
 
   return (
-    <div className="bg-[#F3F5F8] py-8 lg:py-16">
+    <div className="bg-[#F3F5F8] py-8 lg:py-16" ref={contentRef}>
       <Container maxWidth={MaxWidth.XSmall}>
         <h2 className="font-roboto text-3xl font-bold uppercase italic leading-normal lg:text-5xl">
           {isRegister ? <>YOu&apos;re in!</> : "REGISTER TODAY"}
@@ -353,9 +361,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                                   className="w-full border-none shadow-none"
                                   error={fieldState.error?.message}
                                 >
-                                  <SelectOption value="" disabled>
-                                    Select participant&apos;s grade level
-                                  </SelectOption>
+                                  <SelectOption value="">Select participant&apos;s grade level</SelectOption>
                                   <SelectOption value="Kindergarten">Kindergarten</SelectOption>
                                   <SelectOption value="1st Grade">1st Grade</SelectOption>
                                   <SelectOption value="2nd Grade">2nd Grade</SelectOption>
@@ -388,9 +394,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                                   className="w-full border-none shadow-none"
                                   error={fieldState.error?.message}
                                 >
-                                  <SelectOption value="" disabled>
-                                    Select a shirt size
-                                  </SelectOption>
+                                  <SelectOption value="">Select a shirt size</SelectOption>
                                   <SelectOption value="XS">Extra Small</SelectOption>
                                   <SelectOption value="S">Small</SelectOption>
                                   <SelectOption value="M">Medium</SelectOption>

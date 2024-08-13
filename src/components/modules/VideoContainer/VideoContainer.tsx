@@ -23,9 +23,7 @@ export const VideoContainer = ({ coverVideo, programType, slug, coverImage }: Vi
             />
             <VideoPlayBtn className="absolute left-1/2 top-1/2 -translate-x-2/4 -translate-y-2/4 text-white duration-500 hover:text-primary" />
           </div>
-        ) : (
-          <Button rounded style="outline" copy="&#9654; Watch Teaser" />
-        )}
+        ) : null}
       </VideoModal>
     </div>
   );
