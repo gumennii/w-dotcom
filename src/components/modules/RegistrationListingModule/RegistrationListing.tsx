@@ -33,6 +33,8 @@ export interface RegistrationListingProps {
   price: number;
   seasonDates: ISeasonDates;
   registrationStatus?: string;
+  registrationType?: string;
+  startRegistration?: string;
 }
 
 export const RegistrationListing = ({
@@ -40,6 +42,8 @@ export const RegistrationListing = ({
   price,
   seasonDates,
   registrationStatus,
+  registrationType,
+  startRegistration,
 }: RegistrationListingProps) => {
   const { trackAmplitudeEvent } = useAmplitudeContext();
 
@@ -52,18 +56,18 @@ export const RegistrationListing = ({
 
   return (
     <>
-      {registrationStatus && registrationStatus !== "Close" ? (
+      {registrationStatus && registrationType && startRegistration ? (
         <>
           <h4 className="mb-1 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
-            {registrationStatus} is open on April 15th at 9:00 AM
+            {registrationType} is open on {dateFormat(startRegistration, "MMMM do")} at 9:00 AM
           </h4>
           <p className="texr-xs mb-6 font-inter leading-normal lg:text-sm">
             Limited slots available. Register now to avoid incurring a late registration fee.
           </p>
         </>
-      ) : registrationStatus === "Close" ? (
+      ) : registrationStatus && (!registrationType || !startRegistration) ? (
         <h4 className="mb-6 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
-          Registration is closed.
+          {registrationStatus}
         </h4>
       ) : null}
       <div className="flex flex-col gap-4">
@@ -106,7 +110,7 @@ export const RegistrationListing = ({
                   href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
                   onClick={() => clickHandler()}
                   className={cn("btn btn-secondary rounded-full p-4 font-roboto text-xs text-white", {
-                    "btn-disabled": !registrationStatus,
+                    "btn-disabled": !registrationStatus || !registrationType || !startRegistration,
                   })}
                 >
                   Register now

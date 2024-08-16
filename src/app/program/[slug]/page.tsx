@@ -112,8 +112,9 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           title="Stay in The Game"
           descriprion={`Sign up for our ${programData.fields.programName as string} to stay up to date.`}
           className="rounded-2xl bg-[#051227] p-6 text-center text-white lg:p-8"
-          trackingFields={content.fields.slug as string}
+          trackingFields={content.fields.slug}
           trackingName="Modal"
+          programName={content.fields.programName}
         />
       </InteractiveModal>
       <Hero
@@ -121,8 +122,8 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         programType={programData.fields.programType as string}
         heroDescr={content.fields.heroDescription}
         urlVideo={content.fields.coverVideo}
-        programStatus={programData.fields.programStatus as string}
-        programRegistrationStatus={content.fields.programRegistrationStatus}
+        registrationStatus={content.fields.programRegistrationStatus}
+        registrationType={content.fields.programRegistrationType}
         backgroundImage={heroImage}
       />
 
@@ -130,7 +131,11 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <ProgramNavigation.Body>
           <ProgramNavigation.Links links={getProgramNavigationLinks(params?.slug)} />
           {/* <ProgramNavigation.Actions /> */}
-          <ProgramNavigationTrack />
+          <ProgramNavigationTrack
+            className={
+              content.fields.programRegistrationStatus && content.fields.programRegistrationType ? "" : "btn-disabled"
+            }
+          />
         </ProgramNavigation.Body>
       </ProgramNavigation>
 
@@ -167,6 +172,8 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           price={programData.fields.programCost as number}
           seasonDates={seasonDates}
           registrationStatus={content.fields.programRegistrationStatus}
+          registrationType={content.fields.programRegistrationType}
+          startRegistration={content.fields.registrationStartDate}
         />
       </Container>
 
@@ -180,8 +187,9 @@ export default async function ProgramPage({ params }: { params: { slug: string }
             title="Stay Tuned For Updates"
             descriprion={`Stay informed about our ${programData.fields.programName as string} program! Subscribe to our offseason newsletter for exclusive updates, thrilling highlights, and insider insights.`}
             variant="wide"
-            trackingFields={content.fields.slug as string}
+            trackingFields={content.fields.slug}
             trackingName="Footer"
+            programName={content.fields.programName}
           />
         </Container>
       </div>

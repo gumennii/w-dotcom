@@ -9,6 +9,8 @@ export interface TypeMarketingPageProgramFields {
   heroDescription: EntryFieldTypes.RichText;
   heroImage: EntryFieldTypes.AssetLink;
   programRegistrationStatus?: EntryFieldTypes.Symbol;
+  programRegistrationType?: EntryFieldTypes.Symbol;
+  registrationStartDate?: EntryFieldTypes.Date;
   seasonDescription?: EntryFieldTypes.RichText;
   coverImage?: EntryFieldTypes.AssetLink;
   coverVideo?: EntryFieldTypes.Symbol;

@@ -15,9 +15,9 @@ export type HeroProps = {
   programType: string;
   className?: string;
   urlVideo?: string;
-  programStatus?: string;
   heroDescr: Document;
-  programRegistrationStatus?: string;
+  registrationStatus?: string;
+  registrationType?: string;
   backgroundImage: Asset;
 };
 
@@ -26,8 +26,8 @@ export const Hero = ({
   programType,
   className,
   urlVideo,
-  programStatus,
-  programRegistrationStatus,
+  registrationStatus,
+  registrationType,
   heroDescr,
   backgroundImage,
 }: HeroProps) => {
@@ -79,19 +79,13 @@ export const Hero = ({
             content={heroDescr}
             className="clinic-hero mb-12 max-w-full font-inter text-sm leading-normal text-white md:text-base lg:mb-16 lg:max-w-[50%] lg:text-lg"
           />
-          {programRegistrationStatus && programRegistrationStatus !== "Close" ? (
-            <div className="flex flex-col items-center justify-center font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:justify-start lg:text-2xl">
-              <h3 className={textColor}>now open:&nbsp;</h3>
-              <h3>{programRegistrationStatus}</h3>
-            </div>
-          ) : programRegistrationStatus === "Close" ? (
-            <div className="flex flex-col items-center justify-center font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:justify-start lg:text-2xl">
-              <h3 className={textColor}>Registration is closed</h3>
-            </div>
-          ) : null}
+          <div className="flex flex-col items-center justify-center font-roboto text-lg font-bold uppercase leading-normal md:flex-row md:text-xl lg:justify-start lg:text-2xl">
+            {registrationStatus ? <h3 className={textColor}>now open:&nbsp;</h3> : null}
+            {registrationStatus && registrationType ? <h3>{registrationType}</h3> : null}
+          </div>
         </div>
         <div className="flex flex-row justify-center gap-3 lg:justify-start">
-          {programRegistrationStatus && programRegistrationStatus !== "Close" ? (
+          {registrationStatus && registrationType ? (
             <Link
               href="#registration"
               className="btn btn-white rounded-full p-4 font-roboto text-sm text-primary lg:px-6"

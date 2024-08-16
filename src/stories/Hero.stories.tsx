@@ -37,6 +37,8 @@ const BASE_PROPS: Omit<HeroProps, "component"> = {
     "https://player.vimeo.com/video/906084642?title=0&byline=0&portrait=0&playsinline=0&autopause=0&controls=0&app_id=122963",
   heroDescr: document as Document,
   backgroundImage: {} as Asset,
+  registrationStatus: "open now:",
+  registrationType: "General registration",
 };
 
 const argTypes = {

@@ -16,9 +16,10 @@ export type SubscribeProps = {
   title: string;
   descriprion: string;
   className?: string;
-  trackingFields?: string;
+  trackingFields: string;
   variant?: "tight" | "wide" | "modal";
   trackingName?: string;
+  programName: string;
 };
 
 export const Subscribe = ({
@@ -28,6 +29,7 @@ export const Subscribe = ({
   variant = "tight",
   trackingFields,
   trackingName,
+  programName,
 }: SubscribeProps) => {
   const searchParams = useSearchParams();
   const { utmParams, setUtmParams } = useUtmContext();
@@ -107,7 +109,12 @@ export const Subscribe = ({
         setIsUserSubscribed(true);
         fetch(
           "/api/subscriber?" +
-            new URLSearchParams({ userName: formData.first_name as string, userEmail: formData.email as string })
+            new URLSearchParams({
+              userName: formData.first_name as string,
+              userEmail: formData.email as string,
+              programName: programName,
+              pageSlug: trackingFields,
+            })
         )
           .then(res => res.json())
           .then(data => {
