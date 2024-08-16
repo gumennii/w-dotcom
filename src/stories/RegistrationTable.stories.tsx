@@ -23,6 +23,9 @@ export const Default: Story<RegistrationListingProps> = args => {
 Default.args = {
   programName: "2024 Advanced Volleyball - Tracy HS",
   programType: "Volleyball",
+  registrationStatus: "open",
+  registrationType: "General registration",
+  startRegistration: "2024-09-24",
   divisions: [
     {
       id: 1,

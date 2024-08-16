@@ -216,8 +216,15 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
         setIsLoading(false);
         setIsRegister(true);
         scrollToForm();
-        fetch("/api/lead?" + new URLSearchParams({ userName: data.first_name, userEmail: data.email }))
-          .then(res => res.json())
+        fetch("/api/lead", {
+          method: "POST",
+          body: JSON.stringify({
+            ...data,
+            page_slug: pageSlug,
+            clinic_name: pageName,
+          }),
+        })
+          .then(response => response.json())
           .then(data => {
             if (data.status === 200) {
               console.log("A new lead has been added or updated:", data.status);

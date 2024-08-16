@@ -3,8 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import useAmplitudeContext from "@/hooks/amplitude";
+import cn from "@/utils/cn";
 
-export const ProgramNavigationTrack = () => {
+export const ProgramNavigationTrack = ({ className }: { className?: string }) => {
   const { trackAmplitudeEvent } = useAmplitudeContext();
 
   const clickHandler = () => {
@@ -18,7 +19,7 @@ export const ProgramNavigationTrack = () => {
       <Link
         href="#registration"
         onClick={() => clickHandler()}
-        className="btn btn-secondary rounded-full p-4 font-roboto text-xs text-white"
+        className={cn("btn btn-secondary rounded-full p-4 font-roboto text-xs text-white", className)}
       >
         Register now
       </Link>
