@@ -15,15 +15,17 @@ import {
 } from "@/components/ui";
 import { Button } from "@/components/ui";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { useUtmContext } from "@/providers/utmContext";
 import { useSearchParams } from "next/navigation";
 import useAmplitudeContext from "@/hooks/amplitude";
+import { v4 as uuidv4 } from "uuid";
 
 interface IParticipantItem {
+  id: string;
   firstName: string;
   lastName: string;
   school: string;
@@ -39,6 +41,7 @@ interface IRegister {
 }
 
 const ParticipantSchema = z.object({
+  id: z.string().min(1),
   firstName: z
     .string({
       required_error: "Enter a valid first name",
@@ -109,6 +112,7 @@ const RegisterSchema = z.object({
 });
 
 const defaultParticipant: IParticipantItem = {
+  id: uuidv4(),
   firstName: "",
   lastName: "",
   school: "",
@@ -167,6 +171,33 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     resolver: zodResolver(RegisterSchema),
     defaultValues: defaultRegister,
   });
+
+  const { control } = form;
+  const { append, remove } = useFieldArray({
+    control,
+    name: "items",
+  });
+
+  const addParticipant = () => {
+    const newParticipant = {
+      id: uuidv4(),
+      firstName: "",
+      lastName: "",
+      school: "",
+      gradeLevel: "",
+      shirtSize: "",
+    };
+    append(newParticipant);
+    setParticipant([...participant, newParticipant]);
+    clickHandler();
+  };
+
+  const removeParticipant = (i: number) => {
+    remove(i);
+    let newParticipants = [...participant];
+    newParticipants.splice(i, 1);
+    setParticipant(newParticipants);
+  };
 
   const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
     setIsLoading(true);
@@ -296,14 +327,29 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                     )}
                   />
                   <Divider className="my-6 lg:my-8" />
-                  {participant.map((field, index) => (
-                    <div key={`participant-${index}`}>
-                      <h5 className="mb-4 font-roboto text-base font-semibold leading-relaxed lg:mb-6 lg:text-xl">
-                        Participant {index + 1}
-                      </h5>
+                  {participant.map((item, index) => (
+                    <div key={item.id}>
+                      <div className="mb-4 flex w-full flex-col items-center justify-between gap-y-4 lg:mb-6 lg:flex-row lg:gap-x-8 lg:gap-y-0">
+                        <h5 className="font-roboto text-base font-semibold leading-relaxed lg:text-xl">
+                          Participant {index + 1}
+                        </h5>
+                        {participant.length > 1 ? (
+                          <Button
+                            rounded
+                            style="outline"
+                            copy={`- REMOVE PARTICIPANT #${index + 1}`}
+                            onClick={e => {
+                              e?.preventDefault();
+                              removeParticipant(index);
+                            }}
+                            className="lg:max-w-[33%]"
+                            disable={isLoading}
+                          />
+                        ) : null}
+                      </div>
                       <div className="mb-4 flex w-full flex-col gap-y-4 lg:mb-6 lg:flex-row lg:gap-x-8 lg:gap-y-0">
                         <FormField
-                          control={form.control}
+                          control={control}
                           name={`items.${index}.firstName`}
                           render={({ field, fieldState }) => (
                             <FormItem className="w-full">
@@ -319,7 +365,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                           )}
                         />
                         <FormField
-                          control={form.control}
+                          control={control}
                           name={`items.${index}.lastName`}
                           render={({ field, fieldState }) => (
                             <FormItem className="w-full">
@@ -336,7 +382,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                         />
                       </div>
                       <FormField
-                        control={form.control}
+                        control={control}
                         name={`items.${index}.school`}
                         render={({ field, fieldState }) => (
                           <FormItem className="mb-4 w-full lg:mb-6">
@@ -356,7 +402,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                           Grade Level <span className="text-[#DC461D]">*</span>
                         </label>
                         <FormField
-                          control={form.control}
+                          control={control}
                           name={`items.${index}.gradeLevel`}
                           render={({ field, fieldState }) => (
                             <FormItem className="mb-4 w-full lg:mb-6">
@@ -389,7 +435,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                           Shirt Size <span className="text-[#DC461D]">*</span>
                         </label>
                         <FormField
-                          control={form.control}
+                          control={control}
                           name={`items.${index}.shirtSize`}
                           render={({ field, fieldState }) => (
                             <FormItem className="mb-4 w-full lg:mb-6">
@@ -423,8 +469,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                       copy="+ ADD PARTICIPANT"
                       onClick={e => {
                         e?.preventDefault();
-                        setParticipant([...participant, defaultParticipant]);
-                        clickHandler();
+                        addParticipant();
                       }}
                       className="w-full lg:max-w-[48%]"
                       disable={isLoading}
@@ -433,7 +478,6 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                       rounded
                       style="secondary"
                       copy={isLoading ? "Sending..." : "Register"}
-                      onClick={() => {}}
                       className="w-full lg:max-w-[48%]"
                       disable={isLoading}
                     />

@@ -1,6 +1,6 @@
 import { sql } from "@vercel/postgres";
 import { NextResponse } from "next/server";
-import { format } from "date-fns";
+import { v4 as uuidv4 } from "uuid";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,13 +8,14 @@ export async function GET(request: Request) {
   const email = searchParams.get("userEmail");
   const programName = searchParams.get("programName");
   const pageSlug = searchParams.get("pageSlug");
-  const dateCreation = format(new Date(), "MMM d, y");
+  const created_at = new Date().toISOString();
+  const id = uuidv4();
 
   try {
     if (!name || !email) throw new Error("Name and Email required");
     await sql`
-      INSERT INTO subscribers (Name, Email, Date, program_name, page_slug)
-      VALUES (${name}, ${email}, ${dateCreation}, ${programName}, ${pageSlug})
+      INSERT INTO subscribers (Name, Email, program_name, page_slug, id, created_at)
+      VALUES (${name}, ${email}, ${programName}, ${pageSlug}, ${id}, ${created_at})
       ON CONFLICT (Email) DO NOTHING;
     `;
     return NextResponse.json({ status: 200 });
