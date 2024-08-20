@@ -277,9 +277,8 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
         <p className="mt-4 font-inter text-xxs leading-loose lg:text-sm">
           {isRegister ? (
             <>
-              You&apos;re registered for the <strong>Flag Football Clinic</strong> at {""}
-              <strong>Merced High School</strong>. You will receive a confirmation email containing the next steps
-              shortly. We can’t wait to see you!
+              You&apos;re registered for the <strong>{pageName}</strong>. You will receive a confirmation email
+              containing the next steps shortly. We can’t wait to see you!
             </>
           ) : (
             "Complete the form below for each participant prior to attending."
