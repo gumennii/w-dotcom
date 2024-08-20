@@ -8,15 +8,15 @@ export async function GET(request: Request) {
   const email = searchParams.get("userEmail");
   const programName = searchParams.get("programName");
   const pageSlug = searchParams.get("pageSlug");
+  const utm = JSON.stringify(searchParams.get("utmParams"));
   const created_at = new Date().toISOString();
   const id = uuidv4();
 
   try {
     if (!name || !email) throw new Error("Name and Email required");
     await sql`
-      INSERT INTO subscribers (Name, Email, program_name, page_slug, id, created_at)
-      VALUES (${name}, ${email}, ${programName}, ${pageSlug}, ${id}, ${created_at})
-      ON CONFLICT (Email) DO NOTHING;
+      INSERT INTO subscribers (Name, Email, program_name, page_slug, id, created_at, utm)
+      VALUES (${name}, ${email}, ${programName}, ${pageSlug}, ${id}, ${created_at}, ${utm});
     `;
     return NextResponse.json({ status: 200 });
   } catch (error) {
