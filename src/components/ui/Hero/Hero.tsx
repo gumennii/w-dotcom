@@ -61,9 +61,7 @@ export const Hero = ({
       <div className={`absolute inset-0 ${heroBgGradient}`}></div>
       <Container maxWidth={MaxWidth.Footer} className="relative z-10">
         <div className="mb-6 flex flex-col justify-start text-center lg:text-left">
-          <Link href="/" className="mb-6">
-            <Logo color="light" className="mx-auto lg:mx-0" />
-          </Link>
+          <Logo color="light" className="mx-auto lg:mx-0" />
           <h1 className="font-superline text-7xl font-bold uppercase italic leading-snug tracking-[0.07rem] lg:text-[10.75rem] lg:tracking-normal">
             <span
               className={cn(
