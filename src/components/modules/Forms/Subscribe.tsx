@@ -51,7 +51,7 @@ export const Subscribe = ({
   };
 
   useEffect(() => {
-    if (searchParams && Object.keys(Object.fromEntries(new URLSearchParams(searchParams))).length !== 0) {
+    if (searchParams.size > 0 && Object.keys(Object.fromEntries(new URLSearchParams(searchParams))).length !== 0) {
       setUtmParams(Object.fromEntries(new URLSearchParams(searchParams)));
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -114,6 +114,7 @@ export const Subscribe = ({
               userEmail: formData.email as string,
               programName: programName,
               pageSlug: trackingFields,
+              utmParams: JSON.stringify(utmParams),
             })
         )
           .then(res => res.json())
