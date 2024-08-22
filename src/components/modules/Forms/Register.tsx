@@ -448,7 +448,6 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                                   error={fieldState.error?.message}
                                 >
                                   <SelectOption value="">Select a shirt size</SelectOption>
-                                  <SelectOption value="YXS">Youth Extra Small</SelectOption>
                                   <SelectOption value="YS">Youth Small</SelectOption>
                                   <SelectOption value="YM">Youth Medium</SelectOption>
                                   <SelectOption value="YL">Youth Large</SelectOption>
