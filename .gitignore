@@ -39,3 +39,6 @@ package-lock.json
 
 # storybook
 storybook-static
+
+# vscode
+.vscode
