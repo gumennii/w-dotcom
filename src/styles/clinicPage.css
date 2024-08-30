@@ -18,7 +18,9 @@
   font-weight: 700;
   line-height: 130%;
 }
-.join-descr h6 {
+.join-descr h6,
+.join-descr h4,
+.join-descr p i {
   font-size: 21px;
   font-style: normal;
   font-weight: 600;
@@ -26,7 +28,8 @@
   color: #ec612a;
   margin: 16px 0 32px 0;
 }
-.join-descr h6 b {
+.join-descr h6 b,
+.join-descr h4 b {
   font-size: 21px;
   font-weight: 600;
   line-height: 130%;
@@ -63,12 +66,15 @@
   .join-descr h3 {
     font-size: 25px;
   }
-  .join-descr h6 {
+  .join-descr h6,
+  .join-descr h4,
+  .join-descr p i {
     font-size: 16px;
     line-height: 140%;
     margin: 16px 0;
   }
-  .join-descr h6 b {
+  .join-descr h6 b,
+  .join-descr h4 b {
     font-size: 16px;
     line-height: 140%;
   }
