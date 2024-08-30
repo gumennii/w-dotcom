@@ -23,6 +23,7 @@ import { useUtmContext } from "@/providers/utmContext";
 import { useSearchParams } from "next/navigation";
 import useAmplitudeContext from "@/hooks/amplitude";
 import { v4 as uuidv4 } from "uuid";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 interface IParticipantItem {
   id: string;
@@ -138,9 +139,9 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     });
   };
 
-  const clickHandler = () => {
+  const clickHandler = (name: string) => {
     trackAmplitudeEvent("click", {
-      button: "Add Participant",
+      button: name,
       location: "[Form] - Register Form",
     });
   };
@@ -189,7 +190,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     };
     append(newParticipant);
     setParticipant([...participant, newParticipant]);
-    clickHandler();
+    clickHandler("Add Participant");
   };
 
   const removeParticipant = (i: number) => {
@@ -197,6 +198,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     let newParticipants = [...participant];
     newParticipants.splice(i, 1);
     setParticipant(newParticipants);
+    clickHandler("Remove Participant");
   };
 
   const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
@@ -338,11 +340,11 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                             rounded
                             style="ghost"
                             size="small"
-                            className="!border-0 py-1 !text-[#61636B] shadow-none duration-200 hover:bg-[#081d3c33]"
+                            className="remove-participant !border-0 py-1 !text-[#61636B] shadow-none duration-200 hover:bg-[#081d3c33]"
                             copy={
-                              <div className="flex items-center gap-2">
+                              <div className="remove-participant flex items-center gap-2">
                                 <FontAwesomeIcon icon={faXmark} />
-                                <span>REMOVE PARTICIPANT</span>
+                                <span className="remove-participant">REMOVE PARTICIPANT</span>
                               </div>
                             }
                             onClick={e => {
@@ -476,7 +478,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                         e?.preventDefault();
                         addParticipant();
                       }}
-                      className="w-full lg:max-w-[48%]"
+                      className="add-participant w-full lg:max-w-[48%]"
                       disable={isLoading}
                     />
                     <Button
