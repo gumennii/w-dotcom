@@ -87,7 +87,6 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       week: item.id,
       date: dateFormat(item.date, "EEEE, MMMM d"),
       "event type": item.eventType,
-      note: item.specialNote || "-",
     };
   });
 
@@ -158,8 +157,6 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           operations={leagueOperations}
           gameTimesData={gameTimesTableData}
           scheduleData={scheduleTableData}
-          gameTimesNotes={programData.fields.notes}
-          scheduleNotes={programData.fields.scheduleNotes}
         />
       </Container>
 
