@@ -23,18 +23,9 @@ interface ProgramAccordionProps {
   operations: Document;
   gameTimesData: GameTimesData[];
   scheduleData: ScheduleData[];
-  gameTimesNotes?: string;
-  scheduleNotes?: string;
 }
 
-export const ProgramAccordion = ({
-  overview,
-  operations,
-  gameTimesData,
-  scheduleData,
-  gameTimesNotes,
-  scheduleNotes,
-}: ProgramAccordionProps) => {
+export const ProgramAccordion = ({ overview, operations, gameTimesData, scheduleData }: ProgramAccordionProps) => {
   const { trackAmplitudeEvent } = useAmplitudeContext();
 
   const clickHandler = (name: string) => {
@@ -82,31 +73,26 @@ export const ProgramAccordion = ({
         id="schedule"
         isOpen={activeId === "schedule"}
         className={cn("border-b-0", {
-          "pointer-events-none cursor-default opacity-35":
-            !gameTimesData && !gameTimesNotes && !scheduleData && !scheduleNotes,
+          "pointer-events-none cursor-default opacity-35": !gameTimesData && !scheduleData,
         })}
         onClick={() => {
           handleActiveId("schedule");
           clickHandler("[Open/Close] - Program Date & Time");
         }}
       >
-        {gameTimesData || gameTimesNotes ? (
+        {gameTimesData ? (
           <div className="mb-6">
             <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Practice & Game Times</h3>
 
             <Table textAlign={"center"} data={gameTimesData} />
-
-            <Markdown content={gameTimesNotes as string} className="note mt-4" />
           </div>
         ) : null}
 
-        {scheduleData || scheduleNotes ? (
+        {scheduleData ? (
           <div>
             <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Game Schedule</h3>
 
             <Table textAlign={"left"} data={scheduleData} />
-
-            <Markdown content={scheduleNotes as string} className="note mt-4" />
           </div>
         ) : null}
       </AccordionProgramItem>

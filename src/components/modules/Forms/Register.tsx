@@ -18,11 +18,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, useFieldArray } from "react-hook-form";
 import { z } from "zod";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { faTriangleExclamation, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useUtmContext } from "@/providers/utmContext";
 import { useSearchParams } from "next/navigation";
 import useAmplitudeContext from "@/hooks/amplitude";
 import { v4 as uuidv4 } from "uuid";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 interface IParticipantItem {
   id: string;
@@ -138,9 +139,9 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     });
   };
 
-  const clickHandler = () => {
+  const clickHandler = (name: string) => {
     trackAmplitudeEvent("click", {
-      button: "Add Participant",
+      button: name,
       location: "[Form] - Register Form",
     });
   };
@@ -189,7 +190,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     };
     append(newParticipant);
     setParticipant([...participant, newParticipant]);
-    clickHandler();
+    clickHandler("Add Participant");
   };
 
   const removeParticipant = (i: number) => {
@@ -197,6 +198,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     let newParticipants = [...participant];
     newParticipants.splice(i, 1);
     setParticipant(newParticipants);
+    clickHandler("Remove Participant");
   };
 
   const onSubmit = async (data: z.infer<typeof RegisterSchema>) => {
@@ -333,19 +335,24 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                         <h5 className="font-roboto text-base font-semibold leading-relaxed lg:text-xl">
                           Participant {index + 1}
                         </h5>
-                        {participant.length > 1 ? (
+                        {participant.length > 1 && (
                           <Button
                             rounded
-                            style="outline"
-                            copy={`- REMOVE PARTICIPANT #${index + 1}`}
+                            style="ghost"
+                            size="small"
+                            className="remove-participant !border-0 py-1 !text-[#61636B] shadow-none duration-200 hover:bg-[#081d3c33]"
+                            copy={
+                              <div className="remove-participant flex items-center gap-2">
+                                <FontAwesomeIcon icon={faXmark} />
+                                <span className="remove-participant">REMOVE PARTICIPANT</span>
+                              </div>
+                            }
                             onClick={e => {
                               e?.preventDefault();
                               removeParticipant(index);
                             }}
-                            className="lg:max-w-[33%]"
-                            disable={isLoading}
                           />
-                        ) : null}
+                        )}
                       </div>
                       <div className="mb-4 flex w-full flex-col gap-y-4 lg:mb-6 lg:flex-row lg:gap-x-8 lg:gap-y-0">
                         <FormField
@@ -448,14 +455,11 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                                   error={fieldState.error?.message}
                                 >
                                   <SelectOption value="">Select a shirt size</SelectOption>
-                                  <SelectOption value="YS">Youth Small</SelectOption>
-                                  <SelectOption value="YM">Youth Medium</SelectOption>
-                                  <SelectOption value="YL">Youth Large</SelectOption>
-                                  <SelectOption value="YXL">Youth Extra Large</SelectOption>
-                                  <SelectOption value="AS">Adult Small</SelectOption>
-                                  <SelectOption value="AM">Adult Medium</SelectOption>
-                                  <SelectOption value="AL">Adult Large</SelectOption>
-                                  <SelectOption value="AXL">Adult Extra Large</SelectOption>
+                                  <SelectOption value="XS">Extra Small</SelectOption>
+                                  <SelectOption value="S">Small</SelectOption>
+                                  <SelectOption value="M">Medium</SelectOption>
+                                  <SelectOption value="L">Large</SelectOption>
+                                  <SelectOption value="XL">Extra Large</SelectOption>
                                 </Select>
                               </FormControl>
                             </FormItem>
@@ -474,7 +478,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
                         e?.preventDefault();
                         addParticipant();
                       }}
-                      className="w-full lg:max-w-[48%]"
+                      className="add-participant w-full lg:max-w-[48%]"
                       disable={isLoading}
                     />
                     <Button

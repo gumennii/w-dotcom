@@ -4,6 +4,7 @@ import { MaxWidth } from "@/utils/styling";
 import { Container, Accordion, AccordionItem } from "@/components/ui";
 import { TypeWebsiteModuleFaQs, TypeModelFaq } from "@/types/contentful";
 import useAmplitudeContext from "@/hooks/amplitude";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 type FAQProps = {
   content: TypeWebsiteModuleFaQs<undefined, string>;
@@ -19,6 +20,10 @@ export const FAQ = ({ content, location }: FAQProps) => {
     trackAmplitudeEvent("click", {
       button: `[Open/Close] - ${title}`,
       location: location,
+    });
+    sendGTMEvent({
+      event: "clicked_accordion",
+      value: { value: `[Open/Close] - ${title}`, location: location },
     });
   };
 
