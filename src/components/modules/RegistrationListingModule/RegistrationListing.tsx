@@ -90,7 +90,7 @@ export const RegistrationListing = ({
                   </span>
                   <span className="font-inter text-xxxs sm:text-xs">
                     <FontAwesomeIcon icon={faUser as IconProp} className="mr-2 h-4 w-4 text-gray-500" />
-                    {division.divisionTeamSize} players per team
+                    {Number(division.divisionTeamSize / division.divisionTeamCount)} players per team
                   </span>
                 </div>
               </div>
