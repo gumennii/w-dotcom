@@ -15,7 +15,7 @@ type GameTimesData = {
 type ScheduleData = {
   week: string;
   date: string;
-  "event type": string;
+  "event type"?: string;
 };
 
 interface ProgramAccordionProps {

@@ -18,7 +18,7 @@ import {
   ProgramNavigationTrack,
 } from "@/components/modules";
 import { Footer } from "@/components/modules/Navigation/Footer";
-import { format as dateFormat } from "date-fns";
+import { format as dateFormat, parse } from "date-fns";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -33,16 +33,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   const metaData = content.fields.seoMetadata as TypeSeoMetadata<undefined, string>;
-  const openGraph = metaData.fields.featuredImage as Asset;
+  const openGraph = metaData && metaData.fields?.featuredImage ? (metaData.fields.featuredImage as Asset) : null;
 
   return {
-    title: metaData && metaData.fields.seoTitle ? metaData.fields.seoTitle : content.fields.programName,
+    title: metaData && metaData.fields?.seoTitle ? metaData.fields.seoTitle : content.fields.programName,
     description:
-      metaData && metaData.fields.seoDescription
+      metaData && metaData.fields?.seoDescription
         ? metaData.fields.seoDescription
         : `Next Level Sports - ${content.fields.programName}`,
-    alternates: metaData && metaData.fields.canonicalUrl ? { canonical: metaData.fields.canonicalUrl } : null,
-    robots: metaData && metaData.fields.hidePageSearchEngines ? "noindex,nofollow" : "index,follow",
+    alternates: metaData && metaData.fields?.canonicalUrl ? { canonical: metaData.fields.canonicalUrl } : null,
+    robots: metaData && metaData.fields?.hidePageSearchEngines ? "noindex,nofollow" : "index,follow",
     openGraph: openGraph ? { images: openGraph.fields.file?.url } : null,
   };
 }
@@ -78,16 +78,29 @@ export default async function ProgramPage({ params }: { params: { slug: string }
   const gameTimesTableData = divisionsList?.map(item => {
     return {
       "grade level": item.divisionName,
-      practice: item.divisionPracticeTime.slice(0, 8),
-      game: item.divisionGameTime.slice(0, 8),
+      practice:
+        item.divisionPracticeTime.indexOf("M") === -1
+          ? dateFormat(parse(item.divisionPracticeTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
+          : item.divisionPracticeTime.slice(0, 8),
+      game:
+        item.divisionGameTime.indexOf("M") === -1
+          ? dateFormat(parse(item.divisionGameTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
+          : item.divisionGameTime.slice(0, 8),
     };
   });
   const scheduleTableData = scheduleList?.map(item => {
-    return {
-      week: item.id,
-      date: dateFormat(item.date, "EEEE, MMMM d"),
-      "event type": item.eventType,
-    };
+    if (programData.fields.programType && programData.fields.programType === "Volleyball") {
+      return {
+        week: item.id,
+        date: dateFormat(item.date, "EEEE, MMMM d"),
+      };
+    } else {
+      return {
+        week: item.id,
+        date: dateFormat(item.date, "EEEE, MMMM d"),
+        "event type": item.eventType,
+      };
+    }
   });
 
   const seasonDates: ISeasonDates = {
