@@ -81,11 +81,15 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       practice:
         item.divisionPracticeTime.indexOf("M") === -1
           ? dateFormat(parse(item.divisionPracticeTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
-          : item.divisionPracticeTime.slice(0, 8),
+          : item.divisionPracticeTime.slice(0, 1) === "0"
+            ? item.divisionPracticeTime.slice(1, 8)
+            : item.divisionPracticeTime.slice(0, 8),
       game:
         item.divisionGameTime.indexOf("M") === -1
           ? dateFormat(parse(item.divisionGameTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
-          : item.divisionGameTime.slice(0, 8),
+          : item.divisionGameTime.slice(0, 1) === "0"
+            ? item.divisionGameTime.slice(1, 8)
+            : item.divisionGameTime.slice(0, 8),
     };
   });
   const scheduleTableData = scheduleList?.map(item => {
@@ -183,7 +187,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           seasonDates={seasonDates}
           registrationStatus={content.fields.programRegistrationStatus}
           registrationType={content.fields.programRegistrationType}
-          startRegistration={content.fields.registrationStartDate}
+          startRegistration={programData.fields.programLaunchDate}
         />
       </Container>
 
