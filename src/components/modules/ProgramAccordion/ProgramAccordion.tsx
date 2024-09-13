@@ -9,8 +9,10 @@ import cn from "@/utils/cn";
 
 type GameTimesData = {
   "grade level": string;
-  practice: string;
-  game: string;
+  practice?: string;
+  game?: string;
+  start?: string;
+  end?: string;
 };
 type ScheduleData = {
   week: string;
@@ -23,9 +25,16 @@ interface ProgramAccordionProps {
   operations: Document;
   gameTimesData: GameTimesData[];
   scheduleData: ScheduleData[];
+  programType: string;
 }
 
-export const ProgramAccordion = ({ overview, operations, gameTimesData, scheduleData }: ProgramAccordionProps) => {
+export const ProgramAccordion = ({
+  overview,
+  operations,
+  gameTimesData,
+  scheduleData,
+  programType,
+}: ProgramAccordionProps) => {
   const { trackAmplitudeEvent } = useAmplitudeContext();
 
   const clickHandler = (name: string) => {
@@ -82,9 +91,11 @@ export const ProgramAccordion = ({ overview, operations, gameTimesData, schedule
       >
         {gameTimesData ? (
           <div className="mb-6">
-            <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Practice & Game Times</h3>
+            <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">
+              {programType === "Volleyball" ? "Activity Times" : "Practice & Game Times"}
+            </h3>
 
-            <Table textAlign={"center"} data={gameTimesData} />
+            <Table textAlign={"left"} data={gameTimesData} />
           </div>
         ) : null}
 
