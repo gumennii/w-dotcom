@@ -18,7 +18,7 @@ import {
   ProgramNavigationTrack,
 } from "@/components/modules";
 import { Footer } from "@/components/modules/Navigation/Footer";
-import { format as dateFormat, parse } from "date-fns";
+import { format as dateFormat, parse, parseISO, add } from "date-fns";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -74,34 +74,47 @@ export default async function ProgramPage({ params }: { params: { slug: string }
   const siteDirectorData = programData.fields.siteDirector as TypePeople<undefined, string>[];
   const divisionsList = programData.fields.divisions as TDivision[];
   const scheduleList = programData.fields.schedule as Schedule[];
+  const programType = programData.fields.programType;
 
   const gameTimesTableData = divisionsList?.map(item => {
-    return {
-      "grade level": item.divisionName,
-      practice:
+    if (programType && programType === "Volleyball") {
+      const startTime =
         item.divisionPracticeTime.indexOf("M") === -1
           ? dateFormat(parse(item.divisionPracticeTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
-          : item.divisionPracticeTime.slice(0, 1) === "0"
-            ? item.divisionPracticeTime.slice(1, 8)
-            : item.divisionPracticeTime.slice(0, 8),
-      game:
-        item.divisionGameTime.indexOf("M") === -1
-          ? dateFormat(parse(item.divisionGameTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
-          : item.divisionGameTime.slice(0, 1) === "0"
-            ? item.divisionGameTime.slice(1, 8)
-            : item.divisionGameTime.slice(0, 8),
-    };
+          : dateFormat(parse(item.divisionPracticeTime.slice(0, 8), "hh:mm a", new Date()), "h:mm a");
+      return {
+        "grade level": item.divisionName,
+        start: startTime,
+        end: dateFormat(add(parse(startTime, "hh:mm a", new Date()), { hours: 1, minutes: 30 }), "h:mm a"),
+      };
+    } else {
+      return {
+        "grade level": item.divisionName,
+        practice:
+          item.divisionPracticeTime.indexOf("M") === -1
+            ? dateFormat(parse(item.divisionPracticeTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
+            : item.divisionPracticeTime.slice(0, 1) === "0"
+              ? item.divisionPracticeTime.slice(1, 8)
+              : item.divisionPracticeTime.slice(0, 8),
+        game:
+          item.divisionGameTime.indexOf("M") === -1
+            ? dateFormat(parse(item.divisionGameTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
+            : item.divisionGameTime.slice(0, 1) === "0"
+              ? item.divisionGameTime.slice(1, 8)
+              : item.divisionGameTime.slice(0, 8),
+      };
+    }
   });
   const scheduleTableData = scheduleList?.map(item => {
-    if (programData.fields.programType && programData.fields.programType === "Volleyball") {
+    if (programType && programType === "Volleyball") {
       return {
         week: item.id,
-        date: dateFormat(item.date, "EEEE, MMMM d"),
+        date: dateFormat(parseISO(item.date), "EEEE, MMMM do"),
       };
     } else {
       return {
         week: item.id,
-        date: dateFormat(item.date, "EEEE, MMMM d"),
+        date: dateFormat(parseISO(item.date), "EEEE, MMMM do"),
         "event type": item.eventType,
       };
     }
@@ -135,7 +148,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       </InteractiveModal>
       <Hero
         programName={content.fields.programName as string}
-        programType={programData.fields.programType as string}
+        programType={programType as string}
         heroDescr={content.fields.heroDescription}
         urlVideo={content.fields.coverVideo}
         registrationStatus={content.fields.programRegistrationStatus}
@@ -162,7 +175,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       <Container maxWidth={MaxWidth.Video}>
         <VideoContainer
           coverVideo={content.fields.coverVideo as string}
-          programType={programData.fields.programType as string}
+          programType={programType as string}
           slug={params.slug as string}
           coverImage={coverImage}
         />
@@ -170,6 +183,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
       <Container maxWidth={MaxWidth.Small}>
         <ProgramAccordion
+          programType={programType as string}
           overview={programOverview}
           operations={leagueOperations}
           gameTimesData={gameTimesTableData}
