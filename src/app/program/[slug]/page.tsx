@@ -139,7 +139,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <Subscribe
           variant="modal"
           title="Stay in The Game"
-          descriprion={`Sign up for our ${programData.fields.programName as string} to stay up to date.`}
+          descriprion={`Sign up for our ${programData.fields.programName as string} newsletter for new program updates.`}
           className="rounded-2xl bg-[#051227] p-6 text-center text-white lg:p-8"
           trackingFields={content.fields.slug}
           trackingName="Modal"
