@@ -101,7 +101,7 @@ export const ProgramAccordion = ({
 
         {scheduleData ? (
           <div>
-            <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Game Schedule</h3>
+            <h3 className="my-4 font-inter text-sm font-semibold leading-normal lg:text-lg">Activity Schedule</h3>
 
             <Table textAlign={"left"} data={scheduleData} />
           </div>
