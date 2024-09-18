@@ -54,6 +54,8 @@ export const RegistrationListing = ({
     });
   };
 
+  console.log("divisions", divisions);
+
   return (
     <>
       {registrationStatus && registrationType && startRegistration ? (
@@ -112,8 +114,9 @@ export const RegistrationListing = ({
                   disable={!registrationStatus}
                   onClick={clickHandler}
                 /> */}
+                {/* Use ID for now from content full. Will be update to use sportsConnect ID later */}
                 <Link
-                  href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
+                  href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.id}`}
                   onClick={() => clickHandler()}
                   className={cn("btn btn-secondary rounded-full p-4 font-roboto text-xs text-white", {
                     "btn-disabled": !registrationStatus || !registrationType || !startRegistration,
