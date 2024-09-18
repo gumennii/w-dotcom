@@ -1,11 +1,10 @@
 "use client";
 
-import { FC, useCallback, ReactNode, useEffect, useRef, act } from "react";
+import { FC, useCallback, ReactNode, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { useParams } from "next/navigation";
 
 type AccordionProgramItemProps = {
   title?: string;
@@ -24,7 +23,6 @@ export const AccordionProgramItem: FC<AccordionProgramItemProps> = ({
   isOpen = false,
   onClick = () => null,
 }) => {
-  const params = useParams();
   const contentRef = useRef<HTMLDivElement>(null);
 
   const toggleAccordion = useCallback(() => {
@@ -32,18 +30,6 @@ export const AccordionProgramItem: FC<AccordionProgramItemProps> = ({
       onClick(id);
     }
   }, [onClick, id]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      if (window.location.hash) {
-        const activeId = window.location.hash.slice(1);
-        onClick(activeId);
-      }
-    }, 700);
-
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params]);
 
   useEffect(() => {
     if (isOpen && contentRef.current) {

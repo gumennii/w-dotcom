@@ -95,8 +95,14 @@ export const RegistrationListing = ({
                 </div>
               </div>
               <Divider className="block border sm:hidden" />
-              <div className="flex flex-row items-center justify-between sm:flex-col sm:items-end">
-                <span className="font-inter text-xxxs leading-relaxed sm:text-xs">Only a few spots left!</span>
+              <div
+                className={cn("flex flex-row items-center justify-between sm:flex-col sm:items-end", {
+                  "justify-center": !registrationStatus || !registrationType || !startRegistration,
+                })}
+              >
+                {registrationStatus && registrationType && startRegistration ? (
+                  <span className="font-inter text-xxxs leading-relaxed sm:text-xs">Only a few spots left!</span>
+                ) : null}
                 {/* <Button
                   rounded
                   style="secondary"
