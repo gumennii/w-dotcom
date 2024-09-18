@@ -54,6 +54,8 @@ export const RegistrationListing = ({
     });
   };
 
+  console.log("divisions", divisions);
+
   return (
     <>
       {registrationStatus && registrationType && startRegistration ? (
@@ -95,8 +97,14 @@ export const RegistrationListing = ({
                 </div>
               </div>
               <Divider className="block border sm:hidden" />
-              <div className="flex flex-row items-center justify-between sm:flex-col sm:items-end">
-                <span className="font-inter text-xxxs leading-relaxed sm:text-xs">Only a few spots left!</span>
+              <div
+                className={cn("flex flex-row items-center justify-between sm:flex-col sm:items-end", {
+                  "justify-center": !registrationStatus || !registrationType || !startRegistration,
+                })}
+              >
+                {registrationStatus && registrationType && startRegistration ? (
+                  <span className="font-inter text-xxxs leading-relaxed sm:text-xs">Only a few spots left!</span>
+                ) : null}
                 {/* <Button
                   rounded
                   style="secondary"
@@ -106,8 +114,9 @@ export const RegistrationListing = ({
                   disable={!registrationStatus}
                   onClick={clickHandler}
                 /> */}
+                {/* Use ID for now from content full. Will be update to use sportsConnect ID later */}
                 <Link
-                  href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
+                  href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.id}`}
                   onClick={() => clickHandler()}
                   className={cn("btn btn-secondary rounded-full p-4 font-roboto text-xs text-white", {
                     "btn-disabled": !registrationStatus || !registrationType || !startRegistration,
