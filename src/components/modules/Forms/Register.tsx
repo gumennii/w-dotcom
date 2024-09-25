@@ -136,6 +136,7 @@ export const Register = ({ pageSlug, pageName }: RegisterProps) => {
     trackAmplitudeEvent(action, {
       button: "[Form] - Register Form",
       location: "Clinic Page",
+      idForm: "Clinic_Registered",
     });
   };
 

@@ -47,6 +47,7 @@ export const Subscribe = ({
     trackAmplitudeEvent(action, {
       button: "[Form] - Subscribe Form",
       location: location,
+      idForm: "Program_Subscribe",
     });
   };
 
@@ -169,6 +170,7 @@ export const Subscribe = ({
           <div className={cn("w-full", variant === "wide" ? "lg:w-[58%] xl:w-[60%]" : "")}>
             <form
               onSubmit={onSubmit}
+              id="Program_Subscribe"
               className={cn(
                 "flex flex-col justify-between gap-y-4 md:gap-4",
                 variant === "modal" ? "md:flex-col" : "md:flex-row"
