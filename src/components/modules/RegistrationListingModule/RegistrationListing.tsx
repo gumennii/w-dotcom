@@ -1,11 +1,11 @@
 "use client";
 
-import { Button, Divider } from "@/components/ui";
+import { Divider } from "@/components/ui";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUsers } from "@fortawesome/free-solid-svg-icons";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { Fragment } from "react";
-import { format as dateFormat } from "date-fns";
+import { format as dateFormat, parseISO } from "date-fns";
 import useAmplitudeContext from "@/hooks/amplitude";
 import Link from "next/link";
 import cn from "@/utils/cn";
@@ -54,20 +54,22 @@ export const RegistrationListing = ({
     });
   };
 
+  console.log("divisions", divisions);
+
   return (
     <>
       {registrationStatus && registrationType && startRegistration ? (
         <>
           <h4 className="mb-1 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
-            {registrationType} is open on {dateFormat(startRegistration, "MMMM do")} at 9:00 AM
+            {registrationType} is open on {dateFormat(parseISO(startRegistration), "MMMM do")} at 9:00 AM
           </h4>
           <p className="texr-xs mb-6 font-inter leading-normal lg:text-sm">
             Limited slots available. Register now to avoid incurring a late registration fee.
           </p>
         </>
-      ) : registrationStatus && (!registrationType || !startRegistration) ? (
+      ) : registrationType && (!registrationStatus || !startRegistration) ? (
         <h4 className="mb-6 font-inter text-sm font-semibold leading-normal text-secondary md:text-lg">
-          {registrationStatus}
+          {registrationType}
         </h4>
       ) : null}
       <div className="flex flex-col gap-4">
@@ -77,8 +79,8 @@ export const RegistrationListing = ({
               <div className="flex flex-col gap-2">
                 <h3 className="font-inter text-sm font-semibold leading-normal sm:text-lg">{division.divisionName}</h3>
                 <span className="font-inter text-xs leading-relaxed sm:text-sm">
-                  Season Dates: {dateFormat(seasonDates.start, "MMM d, y")} — {""}
-                  {dateFormat(seasonDates.end, "MMM d, y")}
+                  Season Dates: {dateFormat(parseISO(seasonDates.start), "MMM d, y")} — {""}
+                  {dateFormat(parseISO(seasonDates.end), "MMM d, y")}
                 </span>
                 <div className="flex flex-row items-center gap-4">
                   <span className="font-xs mr-3 font-inter font-semibold leading-relaxed sm:text-base">
@@ -95,8 +97,14 @@ export const RegistrationListing = ({
                 </div>
               </div>
               <Divider className="block border sm:hidden" />
-              <div className="flex flex-row items-center justify-between sm:flex-col sm:items-end">
-                <span className="font-inter text-xxxs leading-relaxed sm:text-xs">Only a few spots left!</span>
+              <div
+                className={cn("flex flex-row items-center justify-between sm:flex-col sm:items-end", {
+                  "justify-center": !registrationStatus || !registrationType || !startRegistration,
+                })}
+              >
+                {registrationStatus && registrationType && startRegistration ? (
+                  <span className="font-inter text-xxxs leading-relaxed sm:text-xs">Only a few spots left!</span>
+                ) : null}
                 {/* <Button
                   rounded
                   style="secondary"
@@ -106,8 +114,9 @@ export const RegistrationListing = ({
                   disable={!registrationStatus}
                   onClick={clickHandler}
                 /> */}
+                {/* Use ID for now from content full. Will be update to use sportsConnect ID later */}
                 <Link
-                  href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.scDivisionId}`}
+                  href={`https://registration.bluesombrero.com/4384/available-programs?divisionId=${division.id}`}
                   onClick={() => clickHandler()}
                   className={cn("btn btn-secondary rounded-full p-4 font-roboto text-xs text-white", {
                     "btn-disabled": !registrationStatus || !registrationType || !startRegistration,

@@ -12,6 +12,9 @@ const AmplitudeContextProvider = ({ children }: PropsWithChildren) => {
       defaultTracking: {
         sessions: true,
       },
+      autocapture: {
+        elementInteractions: true,
+      },
     });
   }, []);
 

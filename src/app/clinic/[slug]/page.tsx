@@ -20,16 +20,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   const metaData = content.fields.seoMetadata as TypeSeoMetadata<undefined, string>;
-  const openGraph = metaData.fields.featuredImage as Asset;
+  const openGraph = metaData && metaData.fields?.featuredImage ? (metaData.fields.featuredImage as Asset) : null;
 
   return {
-    title: metaData && metaData.fields.seoTitle ? metaData.fields.seoTitle : content.fields.title,
+    title: metaData && metaData.fields?.seoTitle ? metaData.fields.seoTitle : content.fields.title,
     description:
-      metaData && metaData.fields.seoDescription
+      metaData && metaData.fields?.seoDescription
         ? metaData.fields.seoDescription
         : `Next Level Sports - ${content.fields.title}`,
-    alternates: metaData && metaData.fields.canonicalUrl ? { canonical: metaData.fields.canonicalUrl } : null,
-    robots: metaData && metaData.fields.hidePageSearchEngines ? "noindex,nofollow" : "index,follow",
+    alternates: metaData && metaData.fields?.canonicalUrl ? { canonical: metaData.fields.canonicalUrl } : null,
+    robots: metaData && metaData.fields?.hidePageSearchEngines ? "noindex,nofollow" : "index,follow",
     openGraph: openGraph ? { images: openGraph.fields.file?.url } : null,
   };
 }

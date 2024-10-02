@@ -18,7 +18,7 @@ import {
   ProgramNavigationTrack,
 } from "@/components/modules";
 import { Footer } from "@/components/modules/Navigation/Footer";
-import { format as dateFormat } from "date-fns";
+import { format as dateFormat, parse, parseISO, add } from "date-fns";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -33,16 +33,16 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   const metaData = content.fields.seoMetadata as TypeSeoMetadata<undefined, string>;
-  const openGraph = metaData.fields.featuredImage as Asset;
+  const openGraph = metaData && metaData.fields?.featuredImage ? (metaData.fields.featuredImage as Asset) : null;
 
   return {
-    title: metaData && metaData.fields.seoTitle ? metaData.fields.seoTitle : content.fields.programName,
+    title: metaData && metaData.fields?.seoTitle ? metaData.fields.seoTitle : content.fields.programName,
     description:
-      metaData && metaData.fields.seoDescription
+      metaData && metaData.fields?.seoDescription
         ? metaData.fields.seoDescription
         : `Next Level Sports - ${content.fields.programName}`,
-    alternates: metaData && metaData.fields.canonicalUrl ? { canonical: metaData.fields.canonicalUrl } : null,
-    robots: metaData && metaData.fields.hidePageSearchEngines ? "noindex,nofollow" : "index,follow",
+    alternates: metaData && metaData.fields?.canonicalUrl ? { canonical: metaData.fields.canonicalUrl } : null,
+    robots: metaData && metaData.fields?.hidePageSearchEngines ? "noindex,nofollow" : "index,follow",
     openGraph: openGraph ? { images: openGraph.fields.file?.url } : null,
   };
 }
@@ -74,20 +74,50 @@ export default async function ProgramPage({ params }: { params: { slug: string }
   const siteDirectorData = programData.fields.siteDirector as TypePeople<undefined, string>[];
   const divisionsList = programData.fields.divisions as TDivision[];
   const scheduleList = programData.fields.schedule as Schedule[];
+  const programType = programData.fields.programType;
 
   const gameTimesTableData = divisionsList?.map(item => {
-    return {
-      "grade level": item.divisionName,
-      practice: item.divisionPracticeTime.slice(0, 8),
-      game: item.divisionGameTime.slice(0, 8),
-    };
+    if (programType && programType === "Volleyball") {
+      const startTime =
+        item.divisionPracticeTime.indexOf("M") === -1
+          ? dateFormat(parse(item.divisionPracticeTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
+          : dateFormat(parse(item.divisionPracticeTime.slice(0, 8), "hh:mm a", new Date()), "h:mm a");
+      return {
+        "grade level": item.divisionName,
+        start: startTime,
+        end: dateFormat(add(parse(startTime, "hh:mm a", new Date()), { hours: 1, minutes: 30 }), "h:mm a"),
+      };
+    } else {
+      return {
+        "grade level": item.divisionName,
+        practice:
+          item.divisionPracticeTime.indexOf("M") === -1
+            ? dateFormat(parse(item.divisionPracticeTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
+            : item.divisionPracticeTime.slice(0, 1) === "0"
+              ? item.divisionPracticeTime.slice(1, 8)
+              : item.divisionPracticeTime.slice(0, 8),
+        game:
+          item.divisionGameTime.indexOf("M") === -1
+            ? dateFormat(parse(item.divisionGameTime.slice(0, 8), "HH:mm:ss", new Date()), "h:mm a")
+            : item.divisionGameTime.slice(0, 1) === "0"
+              ? item.divisionGameTime.slice(1, 8)
+              : item.divisionGameTime.slice(0, 8),
+      };
+    }
   });
   const scheduleTableData = scheduleList?.map(item => {
-    return {
-      week: item.id,
-      date: dateFormat(item.date, "EEEE, MMMM d"),
-      "event type": item.eventType,
-    };
+    if (programType && programType === "Volleyball") {
+      return {
+        week: item.id,
+        date: dateFormat(parseISO(item.date), "EEEE, MMMM do"),
+      };
+    } else {
+      return {
+        week: item.id,
+        date: dateFormat(parseISO(item.date), "EEEE, MMMM do"),
+        "event type": item.eventType,
+      };
+    }
   });
 
   const seasonDates: ISeasonDates = {
@@ -109,7 +139,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
         <Subscribe
           variant="modal"
           title="Stay in The Game"
-          descriprion={`Sign up for our ${programData.fields.programName as string} to stay up to date.`}
+          descriprion={`Sign up for our ${programData.fields.programName as string} newsletter for new program updates.`}
           className="rounded-2xl bg-[#051227] p-6 text-center text-white lg:p-8"
           trackingFields={content.fields.slug}
           trackingName="Modal"
@@ -118,7 +148,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       </InteractiveModal>
       <Hero
         programName={content.fields.programName as string}
-        programType={programData.fields.programType as string}
+        programType={programType as string}
         heroDescr={content.fields.heroDescription}
         urlVideo={content.fields.coverVideo}
         registrationStatus={content.fields.programRegistrationStatus}
@@ -145,7 +175,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
       <Container maxWidth={MaxWidth.Video}>
         <VideoContainer
           coverVideo={content.fields.coverVideo as string}
-          programType={programData.fields.programType as string}
+          programType={programType as string}
           slug={params.slug as string}
           coverImage={coverImage}
         />
@@ -153,6 +183,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
 
       <Container maxWidth={MaxWidth.Small}>
         <ProgramAccordion
+          programType={programType as string}
           overview={programOverview}
           operations={leagueOperations}
           gameTimesData={gameTimesTableData}
@@ -170,7 +201,7 @@ export default async function ProgramPage({ params }: { params: { slug: string }
           seasonDates={seasonDates}
           registrationStatus={content.fields.programRegistrationStatus}
           registrationType={content.fields.programRegistrationType}
-          startRegistration={content.fields.registrationStartDate}
+          startRegistration={programData.fields.programLaunchDate}
         />
       </Container>
 
